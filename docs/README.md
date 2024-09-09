@@ -88,15 +88,13 @@ Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, co
    npm install
    ```
 
-2. **Configure o arquivo `.env`** com suas variáveis de ambiente.
-
-3. **Inicie o servidor**:
+2. **Inicie o servidor**:
    ```bash
    node backend/server.js
    ```
 
-4. Acesse a aplicação pelo navegador em `http://localhost:8081`.
-
+3. Acesse a aplicação pelo navegador em `http://localhost:8081`.
+   
 ---
 
 Essa estrutura e explicação devem ajudar a manter o projeto organizado e compreensível para todos os membros da equipe.
