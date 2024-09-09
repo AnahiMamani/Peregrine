@@ -1,6 +1,8 @@
+# Sobre Peregrine
+
 # Estrutura do Projeto
 
-Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, composta por designers, desenvolvedores de front-end e back-end. Abaixo está a descrição detalhada da estrutura de arquivos do projeto para facilitar o entendimento de todos os membros do grupo.
+Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, composta por designers, desenvolvedores de front-end e back-end. Para facilitar o compreendimento, abaixo está a descrição detalhada da estrutura de arquivos do projeto:
 
 ## Estrutura de Diretórios
 
@@ -97,4 +99,4 @@ Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, co
    
 ---
 
-Essa estrutura e explicação devem ajudar a manter o projeto organizado e compreensível para todos os membros da equipe.
+
