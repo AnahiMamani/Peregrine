@@ -4,5 +4,8 @@ module.exports = {
     },
     renderLogin: (req, res) => {
         res.render("pages/loginPage");
+    },
+    renderCadastro: (req, res) => {
+        res.render("pages/cadastro");
     }
 }
