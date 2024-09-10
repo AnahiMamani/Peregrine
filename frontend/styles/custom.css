@@ -1,0 +1,14 @@
+/* custom.css */
+
+/* Customizando a cor do botão Bootstrap */
+.btn-primary {
+    background-color: #4CAF50; /* Altere para a cor desejada */
+    border-color: #4CAF50; /* Altere para a cor desejada */
+}
+
+/* Preservando o hover e o foco do botão */
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #45a049; /* Cor para hover e foco */
+    border-color: #45a049;
+}
