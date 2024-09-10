@@ -5,6 +5,7 @@
 Error ma utilização de indexPage.js para main.handlebars caminho correto mas não injeta function
 - BACKEND 
 Tela nao aceita a adição de parametro chamado patch proveniente do node, ao utilizalo tela insistem em ficar em modo Quirks Mode mesmo estando com o codigo '<!DOCTYPE html>' na primeira linha do main.handlebars.
+https://pt.stackoverflow.com/questions/370741/abrir-javascript-no-handlebars
 
 ## DUVIDAS
 ### SCRIPT E ARQUIVOS CSS SERAO INJETADAS DIRETAMENTE NA MAIN.HANDLEBARS?

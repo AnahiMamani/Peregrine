@@ -14,6 +14,8 @@ app.engine("handlebars", exphbs ({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
 app.set("views", __dirname + "/views");
 
+app.use(express.static('../frontend'))
+
 // ** Configuração para servir arquivos estáticos **
 // app.use(express.static(path.join(__dirname, "../frontend/public"))); // Servindo arquivos da pasta public
 // app.use('/scripts', express.static(path.join(__dirname, '../frontend/scripts'))); // Servindo scripts da pasta scripts
