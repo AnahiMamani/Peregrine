@@ -85,7 +85,20 @@ Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, co
 
 ### Como Rodar o Projeto
 
-1. **Instale as dependências**:
+**Atenção não é necessario criar um novo arquivo para o repositorio.**
+**Atenção para fazer o manuseio do projeto necesario installar o xammp, npm e git**
+
+1. **Abra o prompt de comando e tenha certeza que esta dentro de c:\xampp\htdocs> e faça o clone** :
+   ```bash
+   git clone https://github.com/Debora-Carvalho/Peregrine.git
+   ```
+
+2. **Entre dentro da pasta Peregrine**:
+   ```bash
+   cd Peregrine
+   ```
+
+2. **Instale as dependências**:
    ```bash
    npm install
    ```
@@ -95,7 +108,7 @@ Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, co
    node backend/server.js
    ```
 
-3. Acesse a aplicação pelo navegador em `http://localhost:8081`.
+3. Acesse a aplicação pelo navegador em `http://localhost:8021`.
    
 ---
 
