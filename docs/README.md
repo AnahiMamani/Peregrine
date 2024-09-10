@@ -109,7 +109,13 @@ Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, co
    ```
 
 3. Acesse a aplicação pelo navegador em `http://localhost:8021`.
-   
+
+### Como Commit o Projeto
+
+git pull origin master
+git add .
+git commit -m "commit"
+git push origin master
 ---
 
 
