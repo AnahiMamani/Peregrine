@@ -1,14 +1,62 @@
 /* custom.css */
 
-/* Customizando a cor do botão Bootstrap */
 .btn-primary {
-    background-color: #4CAF50; /* Altere para a cor desejada */
-    border-color: #4CAF50; /* Altere para a cor desejada */
+    background-color: #99067E; /* Altere para a cor desejada */
+    border-color: #99067E; /* Altere para a cor desejada */
 }
 
 /* Preservando o hover e o foco do botão */
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #45a049; /* Cor para hover e foco */
-    border-color: #45a049;
+    background-color: #cf70be; /* Cor para hover e foco */
+    border-color: #cf70be;
+}
+
+.p-3 #setaVoltar {
+   text-decoration: none; 
+   font-size: 3rem;
+   color: #99067E;
+}
+
+.p-3 h1 {
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: #99067E;
+}
+
+.p-3 img {
+    height: 96vh;
+    width: auto;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.mb-3 input {
+    background-color: #D9D9D966;
+    border: none;
+    border-radius: 20px;
+    height: 3rem;
+    padding-left: 2rem;
+}
+
+.form-check-input{
+    border-color: #99067E;
+}
+
+.btn {
+    font-size: 1.5rem;
+    width: 33.5rem;
+    height: 4rem;
+    margin-top: 2rem;
+    left: 72px;
+    gap: 0px;
+    border-radius: 50px;
+    border: none;
+
+}
+
+
+#linkRecuperarSenha {
+    font-size: 1rem;
+    color: #99067E;
 }
