@@ -60,3 +60,58 @@
     font-size: 1rem;
     color: #99067E;
 }
+
+
+.col-6 h1 {
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: #fff;
+}
+
+.col-6 p {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+
+/* indexPage estilização  */
+#bodyindexPage {
+    background-image: url('../public/images/img-telaInicial.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    margin: 0;
+    padding: 0;
+}
+
+/* Deixar a navbar transparente */
+.navbar {
+    background-color: transparent !important;
+    border: none;
+}
+
+#btnPlanejarViagem {
+    background-color: #99067E;
+    font-size: 1.5rem;
+    color: #fff;
+    width: 16rem;
+    height: 2.5rem;
+    left: 72px;
+    right: 72px;
+    gap: 0px;
+    border-radius: 50px;
+    border: none;
+}
+
+#btnPesquisarViagem {
+    background-color: #fff;
+    font-size: 1.5rem;
+    color: #99067E;
+    width: 16rem;
+    height: 2.5rem;
+    left: 72px;
+    right: 72px;
+    gap: 0px;
+    border-radius: 50px;
+    border: none;
+}
