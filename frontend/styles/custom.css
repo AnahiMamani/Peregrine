@@ -90,6 +90,10 @@
     border: none;
 }
 
+.nav-link {
+    color: #99067E;
+}
+
 #btnPlanejarViagem {
     background-color: #99067E;
     font-size: 1.5rem;
