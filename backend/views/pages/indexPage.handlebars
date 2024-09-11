@@ -1,18 +1,30 @@
 <div>
     <h1>Login</h1>
-    <form>
+    <form action="/cadastro" method="post">
         <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        </div>
-        <div>
-            <!-- Botão com classe Bootstrap que pode ser customizada no CSS -->
-            <button type="submit" class="btn btn-primary">Login</button>
-        </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">Nome:</label>
+                <input type="name" name="nome" class="form-control" id="nome">
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">email:</label>
+                <input type="name" name="email" class="form-control" id="nome">
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">celular:</label>
+                <input type="name" name="celular" class="form-control" id="nome">
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">senha:</label>
+                <input type="name" name="senha" class="form-control" id="nome">
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label">confirmar senha:</label>
+                <input type="name" name="confirmarSenha" class="form-control" id="nome">
+            </div>
+            <div class="mb-3 text-start">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
     </form>
 </div>
 

@@ -112,7 +112,7 @@ Este projeto é uma aplicação web desenvolvida por uma equipe de 6 pessoas, co
 
 ### Como Commit o Projeto
 
-git pull origin master
+git pull origin master]
 git add .
 git commit -m "commit"
 git push origin master

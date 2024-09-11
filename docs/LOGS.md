@@ -10,6 +10,8 @@ https://pt.stackoverflow.com/questions/370741/abrir-javascript-no-handlebars
 ## DUVIDAS
 ### SCRIPT E ARQUIVOS CSS SERAO INJETADAS DIRETAMENTE NA MAIN.HANDLEBARS?
 Minha pagina tendo mais de 5 telas fica o meu questinamento sobre o carregamento da tela, ja que se linkarmos 10 arquivos con configuraçoes diferentes no main.handlebars não o deixara lento? Eu poderia atribuir a cada page o seus devidos links e scripts? de que forma? 
+### PORQUE QUANDO EU CRIO UMA TABELA PELO SEQUELIZE ELE ACRESCENTA UM S NO NOME DA TABELA?
+Apos criarmos uma tabela identificamos que o campo que nomeamos como o nome da tabela ao ser iniciado com o node dados.js lhe é acrecentado um 's' no final
 
 ## SOLUÇÃO ENCONTRADA
 ### CUSTOMIZAÇÃO DE BOOTSTAP COM CSS

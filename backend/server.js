@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const exphbs  = require("express-handlebars").engine
 const bodyParser = require("body-parser") 
-const indexRoutes = require("./routes/indexRoutes"); // Importando as rotas
+const indexRoutes = require("./routes/Routes"); // Importando as rotas
 
 // Middleware para parsing do corpo da requisição
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -23,15 +23,3 @@ app.use("/", indexRoutes);
 app.listen(8021, function () {
     console.log("Servidor ativo na porta 8021!");
 });
-
-// Verificação da atividade do banco de dados
-app.indexRoutes("/cadastro", function(req,res) {
-    indexRoutes.create({
-        nome: req.body.nome
-    }).then(function(){
-        console.log("Dados cadastrados com sucesso!")
-        res.send("Dados cadastrados com sucesso!")
-    }).catch(function(){
-        console.log("Erro ao gravar os dados na entidade")
-    })
-})
