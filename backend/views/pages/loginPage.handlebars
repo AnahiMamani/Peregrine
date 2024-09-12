@@ -1,9 +1,54 @@
-<div>
-    <h1>Login Page</h1>
-    <form>
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+<div class="container px-4 text-center">
+    <div class="row gx-5">
+        <div class="col">
+            <div class="p-3">
+                <a href="#" id="setaVoltar">←</a>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <h1>Embarque na sua próxima aventura</h1>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <form action="/verificandoLogin" method="post" style="text-align: start;">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">E-mail:</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                            aria-describedby="emailHelp" placeholder="ex.: peregrina@outlook.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Senha:</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="senha"
+                            placeholder="informe sua senha de acesso">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </form>
+                <p id="recuperarSenha">Ops!
+                    <a href="/recuperarSenha" id="linkRecuperarSenha">Esqueci minha senha</a>
+                </p>
+                <p id="recuperarSenha">Ops!
+                    <a href="/cadastro" id="linkRecuperarSenha">Não tenho cadastro</a>
+                </p>
+            </div>
         </div>
-    </form>
+        <div class="col text-center">
+            <div class="p-3">
+                <img src="../public/images/img-loginPage.png" alt="Duas amigas caminham pela estrada">
+            </div>
+        </div>
+    </div>
 </div>
