@@ -1,20 +1,27 @@
-const express = require("express")
-const app = express()
-const exphbs  = require("express-handlebars").engine
-const bodyParser = require("body-parser") 
-const indexRoutes = require("./routes/Routes"); // Importando as rotas
+const express = require("express");
+const app = express();
+const exphbs = require("express-handlebars").engine;
+const bodyParser = require("body-parser");
+const indexRoutes = require("./Routes/routes"); // Importando as rotas
+const path = require('path');
 
 // Middleware para parsing do corpo da requisição
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Configuração do Handlebars como engine de template
-app.engine("handlebars", exphbs ({ defaultLayout: "main" }))
-app.set("view engine", "handlebars")
-app.set("views", __dirname + "/views");
+app.engine("handlebars", exphbs({
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: path.join(__dirname, 'views/partials'),
+    extname: '.handlebars' 
+}));
 
-// ** Configuração para servir arquivos estáticos **
-app.use(express.static('../frontend'))
+app.set("view engine", "handlebars");
+app.set('views', path.join(__dirname, 'views'));
+
+// Configuração para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Configuração das rotas
 app.use("/", indexRoutes);
