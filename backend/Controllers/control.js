@@ -9,6 +9,12 @@ module.exports = {
         });
     },
 
+    renderAdmin: (req, res) => {
+        res.render('pages/adminInitialPage', {
+            title: 'Administrador - Página Inicial',
+        });
+    },
+
     renderRecuperarSenha: (req, res) => {
         res.render("pages/recuperarSenhaPage", {
             title:'Recuperar Senha'
