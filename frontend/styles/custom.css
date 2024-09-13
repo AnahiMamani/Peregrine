@@ -27,8 +27,8 @@
 }
 
 /* Preservando o hover e o foco do botão */
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-secondary:hover,
+.btn-secondary:focus {
     background-color: #d9d9d9da; /* Cor para hover e foco */
     border-color: #d9d9d9da;
     color: #D9D9D966;
