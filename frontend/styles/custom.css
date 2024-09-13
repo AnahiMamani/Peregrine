@@ -1,6 +1,7 @@
 .bodyindexPage {
     background-image: url('../public/images/img-telaInicial.png'); 
     background-size: cover; 
+    mask-repeat: no-repeat;
     background-position: center; 
     background-attachment: scroll; 
     margin: 0;
@@ -18,6 +19,19 @@
 .btn-primary:focus {
     background-color: #cf70be; /* Cor para hover e foco */
     border-color: #cf70be;
+}
+
+.btn-secondary {
+    background-color: #D9D9D966; 
+    border-color: #D9D9D966; 
+}
+
+/* Preservando o hover e o foco do botão */
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #d9d9d9da; /* Cor para hover e foco */
+    border-color: #d9d9d9da;
+    color: #D9D9D966;
 }
 
 .p-3 #setaVoltar {

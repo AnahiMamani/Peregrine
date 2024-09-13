@@ -5,6 +5,9 @@ const Controller = require("../Controllers/control");
 // Rota para renderizar o Index
 router.get("/", Controller.renderIndex);
 
+// Rota para renderizar a Página Inicial do Admin
+router.get("/administrador", Controller.renderAdmin);
+
 // Rota para renderizar a página de login
 router.get("/login", Controller.renderLogin);
 
