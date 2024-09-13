@@ -121,3 +121,19 @@
     border: none;
     
 }
+#login{
+    font-size: 1rem;
+    color: #99067E;
+}
+
+
+.col-6 h1 {
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: #fff;
+}
+
+.col-6 p {
+    font-size: 1.5rem;
+    color: #fff;
+}
