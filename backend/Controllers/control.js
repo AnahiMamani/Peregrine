@@ -5,21 +5,26 @@ const saltRounds = 10; // Define o número de salt rounds para o hash da senha
 module.exports = {
     renderIndex: (req, res) => {
         res.render('pages/indexPage', {
-            title: 'Página Inicial',
-            bodyClass: 'bodyindexPage'
+            title: 'Página Inicial'
         });
     },
 
     renderRecuperarSenha: (req, res) => {
-        res.render("pages/recuperarSenhaPage");
+        res.render("pages/recuperarSenhaPage", {
+            title:'Recuperar Senha'
+        });
     },
 
     renderLogin: (req, res) => {
-        res.render("pages/loginPage");
+        res.render("pages/loginPage", {
+            title: 'Login'
+        });
     },
 
     renderCadastro: (req, res) => {
-        res.render("pages/cadastroPage");
+        res.render("pages/cadastroPage", {
+            title: 'Cadastro'
+        });
     },
 
     renderCadastroSucesso: (req, res) => {
