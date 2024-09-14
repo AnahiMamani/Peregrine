@@ -1,0 +1,20 @@
+<form action="/atualizarSenha" method="POST">
+    <div>
+        <label for="novaSenha">Digite sua nova senha:</label>
+        <input type="password" id="novaSenha" name="novaSenha" required>
+    </div>
+
+    <div>
+        <label for="confirmarSenha">Confirme sua nova senha:</label>
+        <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+    </div>
+
+    {{#if senhaError}}
+        <p style="color:red;">{{senhaError}}</p>
+    {{/if}}
+    {{#if senhaSuccess}}
+        <p style="color:green;">{{senhaSuccess}}</p>
+    {{/if}}
+
+    <button type="submit">Redefinir Senha</button>
+</form>

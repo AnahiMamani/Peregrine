@@ -4,23 +4,23 @@
       <a href="/" id="setaVoltar">←</a>
       <h1>Crie sua conta</h1>
 
-      <form style="text-align: start;" id="registrationForm">
+      <form action="/cadastrarUsuario" method="post" style="text-align: start;" id="registrationForm">
         <div class="mb-3">
           <label for="exampleInputText1" class="form-label">Nome:</label>
-          <input type="text" class="form-control" id="exampleInputText1" placeholder="insira seu nome completo">
+          <input name="nome" type="text" class="form-control" id="exampleInputText1" placeholder="insira seu nome completo">
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">E-mail:</label>
-          <input type="email" class="form-control" id="exampleInputEmail1"
+          <input name="email" type="email" class="form-control" id="exampleInputEmail1"
             placeholder="informe o e-mail que você mais utiliza">
         </div>
         <div class="mb-3">
           <label for="exampleInputPhone1" class="form-label">Celular:</label>
-          <input type="tel" class="form-control" id="exampleInputPhone1"  placeholder="ex.: (11) 91234-7891">
+          <input name="celular" type="tel" class="form-control" id="exampleInputPhone1"  placeholder="ex.: (11) 91234-7891">
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Senha:</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="crie uma senha" required>
+          <input name="senha" type="password" class="form-control" id="password" name="password" placeholder="crie uma senha" required>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword2" class="form-label">Confirme a senha:</label>
