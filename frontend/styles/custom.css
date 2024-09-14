@@ -9,9 +9,9 @@
 .btn {
     font-size: 20px;
     font-weight: 400;
-    width: 16rem;
+    width: 32rem;
     height: 3rem;
-    margin-top: 2rem;
+    margin: 1rem 0 1rem 0;
     border-radius: 50px;
     border: none;
     justify-content: center;
@@ -20,12 +20,20 @@
 .btnPlanejarViagem {
     background-color: #99067E;
     color: #fff;
+    width: 16rem;
 }
 
 .btnPesquisarViagem {
     background-color: #fff;
     color: #99067E;
+    width: 16rem;
 }
+
+.btn-primary{
+    background-color: #99067E;
+    color: #fff;
+}
+
 .btn:hover
  {
     background-color: #cf70be; /* Cor para hover e foco */
@@ -33,8 +41,20 @@
     transition: ease-in 0.4s;
 }
 
+.recuperarSenha a {
+    text-decoration: none;
+    font-family: "Montserrat",sans-serif;
+    color: #99067E;
+}
+
+.recuperarSenha a:hover {
+    font-size: 1.05rem;
+    transition: ease-in 0.3s;
+}
 
 .p-3 #setaVoltar {
+    display: flex;
+    align-items: flex-start;
    text-decoration: none; 
    font-size: 3rem;
    color: #99067E;
@@ -109,5 +129,10 @@
     transition: ease-in 0.4s;
 }
 
+.recuperarSenha p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
