@@ -15,8 +15,9 @@
 
 <body>
 
-    <div class="container px-4 text-center">
-        <div class="row gx-5">
+    <div class="container-fluid">
+        <div class="row">
+            <!--Primeira Coluna -->
             <div class="col">
                 <div class="p-3">
                     <a href="#" id="setaVoltar">←</a>
@@ -30,40 +31,46 @@
                             &nbsp;
                         </div>
                     </div>
-                    <h1>Embarque na sua próxima aventura</h1>
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
+                <main> <!--Formulário-->
+                        <h1 style="color: #99067E">Embarque na sua próxima aventura</h1>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
                         </div>
-                    </div>
-                    <form style="text-align: start;">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">E-mail:</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" placeholder="ex.: peregrina@outlook.com">
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">E-mail:</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="ex.: peregrina@outlook.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Senha:</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="informe sua senha de acesso">
+                            </div>
+                        </form>
+                        <div class="recuperarSenha" , style="text-align: center">
+                            <button type="submit" class="btn btnRoxo">Entrar</button>
+                            <!-- Ajuste Técnico, ajuste fino-->
+                            <br>
+                            <a href="#" class="linkRecuperarSenha">Esqueci minha senha</a>
+                            <br>
+                            <a href="#" class="linkcadastro">Não tem conta? Cadastre-se agora</a>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Senha:</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                placeholder="informe sua senha de acesso">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Entrar</button>
-                    </form>
-                    <p id="recuperarSenha">Ops!
-                        <a href="#" id="linkRecuperarSenha">Esqueci minha senha</a>
-                    </p>
                 </div>
+                </main>
             </div>
-            <div class="col text-center">
-                <div class="p-3">
-                    <img src="../public/images/img-loginPage.png" alt="Duas amigas caminham pela estrada">
-                </div>
-            </div>
+            <!--Coluna (Imagem)-->
+            <aside class="col-6 p-0">
+                <img src="../public/images/img-loginPage.png" alt="Duas amigas caminham pela estrada"
+                    class="img-fluid img-full-height w-100">
+            </aside>
         </div>
     </div>
 </body>
