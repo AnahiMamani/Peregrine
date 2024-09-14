@@ -1,0 +1,34 @@
+.img-full-height {
+    height: 100vh;
+    object-fit: cover;
+}
+/* centralizar o conteúdo na primeira coluna */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+/* Estilo para a seta */
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    color: #99067E;
+    text-decoration: none;
+}
+/* Personalização do botão */
+.btn-custom {
+    background-color: #99067E;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+.btn-custom:hover {
+    background-color: #cf70be;
+}
