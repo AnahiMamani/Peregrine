@@ -45,7 +45,6 @@ module.exports = {
 
     cadastrarUsuario: (req, res) => {
         const { nome, email, celular, senha } = req.body;
-
         // Gera o hash da senha antes de salvar no banco de dados
         bcrypt.hash(senha, saltRounds)
             .then((hashedPassword) => {
@@ -156,15 +155,14 @@ module.exports = {
         if (!novaSenha || !confirmarSenha) {
             return res.render('pages/redefinirSenhaPage', { senhaError: 'Preencha todos os campos.' });
         }
-    
         if (novaSenha !== confirmarSenha) {
             return res.render('pages/redefinirSenhaPage', { senhaError: 'As senhas não coincidem.' });
         }
-    
         try {
-            // Atualizar a senha no banco de dados
-            await cadastro.update({ senha: novaSenha }, { where: { email } });
-    
+            // Gerar o hash da nova senha
+            const hashedPassword = await bcrypt.hash(novaSenha, saltRounds);
+            // Atualizar a senha no banco de dados com o hash gerado
+            await cadastro.update({ senha: hashedPassword }, { where: { email } });
             // Redefinição de senha bem-sucedida
             req.session.emailRecuperacao = null; // Limpar o e-mail da sessão
             res.render('pages/loginPage', { senhaSuccess: 'Senha redefinida com sucesso!' });

@@ -34,9 +34,6 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // Configuração das rotas
 app.use("/", indexRoutes);
 
-console.log('Email:', process.env.EMAIL_USER);
-console.log('Senha:', process.env.EMAIL_PASS);
-
 // Inicialização do servidor na porta 8021
 app.listen(8021, function () {
     console.log("Servidor ativo na porta 8021!");
