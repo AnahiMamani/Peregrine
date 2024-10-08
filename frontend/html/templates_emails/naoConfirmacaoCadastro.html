@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Não foi possível confirmar seu cadastro</title>
+</head>
+<body>
+    <h1 style="color: #99067E; text-align: center;">Infelizmente, não podemos confirmar seu cadastro</h1>
+    <p style="text-align: justify;">Olá!</p>
+    <p style="text-align: justify;">Após análise cuidadosa dos seus documentos, não conseguimos confirmar seu cadastro em <strong>Peregrine</strong>. Isso pode ter ocorrido pelos seguintes motivos:</p>
+    <ul style="text-align: justify;">
+        <li>A selfie enviada não corresponde com a imagem do seu documento de identidade;</li>
+        <li>Os dados pessoais informados não coincidem com as informações presentes no seu documento.</li>
+    </ul>
+    <p style="text-align: justify;">Entendemos que isso pode ser frustrante, mas essas medidas são essenciais para garantir que nossa plataforma seja um espaço seguro e confiável, dedicado exclusivamente a mulheres. Respeitamos rigorosamente nossas políticas de verificação para proteger nossa comunidade e assegurar uma experiência confiável para todas as usuárias.</p>
+    <p style="text-align: justify;">Se você acredita que houve um engano, por favor, entre em contato conosco e ficaremos felizes em ajudá-la a revisar sua documentação.</p>
+    <p style="text-align: justify;">Agradecemos a sua compreensão e o seu interesse em fazer parte de <strong>Peregrine</strong>.</p>
+    <p style="text-align: justify;">Atenciosamente,</p>
+    <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
+    <br><br><hr>
+    <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
+    <h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>
+
+    <script>
+        await transport.sendMail({
+            from: 'Peregrine<peregrine.planoviagem@gmail.com>',
+            to: email,
+            subject: 'Não foi possível confirmar seu cadastro',
+            html: '<h1 style="color: #99067E; text-align: center;">Infelizmente, não podemos confirmar seu cadastro</h1><p style="text-align: justify;">Olá!</p><p style="text-align: justify;">Após análise cuidadosa dos seus documentos, não conseguimos confirmar seu cadastro em <strong>Peregrine</strong>. Isso pode ter ocorrido pelos seguintes motivos:</p><ul style="text-align: justify;"><li>A selfie enviada não corresponde com a imagem do seu documento de identidade;</li><li>Os dados pessoais informados não coincidem com as informações presentes no seu documento.</li></ul><p style="text-align: justify;">Entendemos que isso pode ser frustrante, mas essas medidas são essenciais para garantir que nossa plataforma seja um espaço seguro e confiável, dedicado exclusivamente a mulheres. Respeitamos rigorosamente nossas políticas de verificação para proteger nossa comunidade e assegurar uma experiência confiável para todas as usuárias.</p><p style="text-align: justify;">Se você acredita que houve um engano, por favor, entre em contato conosco e ficaremos felizes em ajudá-la a revisar sua documentação.</p><p style="text-align: justify;">Agradecemos a sua compreensão e o seu interesse em fazer parte de <strong>Peregrine</strong>.</p><p style="text-align: justify;">Atenciosamente,</p><p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p><br><br><hr><h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4><h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>',
+            text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
+        });
+    </script>
+</body>
+</html>

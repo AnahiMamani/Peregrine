@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denúncia Analisada</title>
+</head>
+<body>
+    <h1 style="color: #99067E; text-align: center;">Sua denúncia foi analisada</h1>
+    <p style="text-align: justify;">Olá Peregrina!</p>
+    <p style="text-align: justify;">Queremos agradecer por ter reportado sua preocupação e por confiar em <strong>Peregrine</strong> para manter um ambiente seguro e respeitoso para todas as mulheres. Levamos cada denúncia muito a sério, e após uma análise detalhada da situação que você relatou, concluímos que o comportamento da usuária denunciada não viola nossas políticas de uso.</p>
+    <p style="text-align: justify;">Entendemos que situações como essa podem ser delicadas, mas é importante garantir que todas as decisões sejam baseadas em nossa política de conduta, que visa proteger a integridade e a segurança de toda a comunidade.</p>
+    <p style="text-align: justify;">Reforçamos que, apesar desta denúncia não resultar em ação contra a usuária, continuamos comprometidos em manter um espaço confiável para todas e estamos sempre disponíveis para reavaliar qualquer situação ou atender suas dúvidas.</p>
+    <p style="text-align: justify;">Se precisar de mais esclarecimentos ou desejar discutir a decisão, por favor, entre em contato com nossa equipe de suporte.</p>
+    <p style="text-align: justify;">Obrigado por fazer parte do <strong>Peregrine</strong> e por nos ajudar a criar um ambiente cada vez mais seguro e acolhedor.</p>
+    <p style="text-align: justify;">Com carinho,</p>
+    <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
+    <br><br><hr>
+    <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
+    <h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>
+
+    <script>
+        await transport.sendMail({
+            from: 'Peregrine<peregrine.planoviagem@gmail.com>',
+            to: email,
+            subject: 'Denúncia recusada',
+            html: '<h1 style="color: #99067E; text-align: center;">Sua denúncia foi analisada</h1><p style="text-align: justify;">Olá Peregrina!</p><p style="text-align: justify;">Queremos agradecer por ter reportado sua preocupação e por confiar em <strong>Peregrine</strong> para manter um ambiente seguro e respeitoso para todas as mulheres. Levamos cada denúncia muito a sério, e após uma análise detalhada da situação que você relatou, concluímos que o comportamento da usuária denunciada não viola nossas políticas de uso.</p><p style="text-align: justify;">Entendemos que situações como essa podem ser delicadas, mas é importante garantir que todas as decisões sejam baseadas em nossa política de conduta, que visa proteger a integridade e a segurança de toda a comunidade.</p><p style="text-align: justify;">Reforçamos que, apesar desta denúncia não resultar em ação contra a usuária, continuamos comprometidos em manter um espaço confiável para todas e estamos sempre disponíveis para reavaliar qualquer situação ou atender suas dúvidas.</p><p style="text-align: justify;">Se precisar de mais esclarecimentos ou desejar discutir a decisão, por favor, entre em contato com nossa equipe de suporte.</p><p style="text-align: justify;">Obrigado por fazer parte do <strong>Peregrine</strong> e por nos ajudar a criar um ambiente cada vez mais seguro e acolhedor.</p><p style="text-align: justify;">Com carinho,</p><p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p><br><br><hr><h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4><h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>',
+            text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
+        });
+    </script>
+</body>
+</html>

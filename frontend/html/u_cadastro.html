@@ -16,13 +16,14 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!--Primeira Coluna -->
+            <!--primeira coluna com conteúdo e forms -->
             <div class="col">
                 <div class="p-3">
-                    <a href="#" id="setaVoltar">←</a>
-                    <main>
+                    <a href="#" class="back-arrow">←</a>
+                    <main class="container mx-5">
                         <h1 style="color: #99067E">Crie sua conta</h1>
-                        <form style="text-align: start;">
+                        <br>
+                        <form>
                             <div class="mb-3">
                                 <label for="exampleInputText1" class="form-label">Nome:</label>
                                 <input type="name" class="form-control" id="exampleInputText1"
@@ -53,16 +54,17 @@
                                 <label class="form-check-label" for="exampleCheck1">Concordo com os termos e
                                     condições</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary w-5">Cadastrar</button>
                         </form>
                     </main>
                 </div>
             </div>
-            <aside class="col-6 p-0">
+            <!--segunda coluna com a imagem principal -->
+            <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
                 <img src="../public/images/img-cadastroPage.png" alt="Duas amigas tiram uma selfie ao ar livre"
-                    class="img-fluid img-full-height w-100">
+                    class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
             </aside>
-    </div>
+        </div>
     </div>
 </body>
 

@@ -70,7 +70,7 @@ ul {
 .btn {
     font-size: 20px;
     font-weight: 400;
-    width: 32rem;
+    width: 30rem;
     height: 3rem;
     margin: 1rem 0 1rem 0;
     border-radius: 50px;
@@ -113,15 +113,6 @@ ul {
     font-size: 1.05rem;
     transition: ease-in 0.3s;
 }
-
-.p-3 #setaVoltar {
-    display: flex;
-    align-items: flex-start;
-   text-decoration: none; 
-   font-size: 3rem;
-   color: #99067E;
-}
-
 
 .titulo-principal-roxo {
     font-size: 3rem;
