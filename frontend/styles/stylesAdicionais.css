@@ -11,12 +11,19 @@
     align-items: center;
     height: 100vh;
 }
-/* Estilo para a seta */
+/* Estilo para a seta voltar*/
 .back-arrow {
     display: flex;
     align-items: flex-start;
     text-decoration: none; 
     font-size: 3rem;
+    color: #99067E;
+}
+
+/* Estilo para a seta prosseguir*/
+.proceed-arrow {
+    text-decoration: none; 
+    font-size: 1.5rem;
     color: #99067E;
 }
 
