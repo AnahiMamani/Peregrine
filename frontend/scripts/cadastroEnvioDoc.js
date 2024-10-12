@@ -27,7 +27,7 @@ function checkUploads() {
 function validateAndProceed(event) {
     if (fileInput1.files.length === 0 || fileInput2.files.length === 0) {
         event.preventDefault();
-        alert("É necessário que você anexe as duas fotos para que prossiga para a próxima página.");
+        alert("É necessário que você anexe as duas fotos para que prossiga para a próxima página :/");
     } else {
         // se ambos os inputs estiverem preenchidos, redirecionar para a próxima página
         window.location.href = "#"; 
@@ -38,3 +38,6 @@ function validateAndProceed(event) {
 fileInput1.addEventListener('change', checkUploads);
 fileInput2.addEventListener('change', checkUploads);
 proceedArrow.addEventListener('click', validateAndProceed);
+
+
+
