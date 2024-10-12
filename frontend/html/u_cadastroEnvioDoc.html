@@ -44,13 +44,13 @@
                         <!-- upload frente do documento -->
                         <div class="row d-flex align-items-center text-center rounded-4 border border-2 border-dark container" style="min-height: 125px;">
                             <div class="col-6 col-md-4 text-start">
-                                <img class="img-fluid h-70" src="../public/images/icon-arquivoUpload.png" alt="ícone de arquivo para upload"><span class="fs-5"> Documento pessoal (<strong>Frente</strong>)</span>
+                                <img id="uploadIcon1" class="img-fluid h-70" src="../public/images/icon-arquivoUpload.png" alt="ícone de arquivo para upload"><span class="fs-5"> Documento pessoal (<strong>Frente</strong>)</span>
                             </div>
                             <div class="col-6 col-md-4 text-start"></div>
                             <div class="col-6 col-md-4">
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label"></label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input id="formFile1" type="file" class="form-control flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium">
                                 </div>
                             </div>
                         </div>
@@ -58,13 +58,13 @@
                         <!-- upload verso do documento -->
                         <div class="row d-flex align-items-center text-center rounded-4 border border-2 border-dark container" style="min-height: 125px;">
                             <div class="col-6 col-md-4 text-start">
-                                <img class="img-fluid h-70" src="../public/images/icon-arquivoUpload.png" alt="ícone de arquivo para upload"><span class="fs-5"> Documento pessoal (<strong>Verso</strong>)</span>
+                                <img id="uploadIcon2" class="img-fluid h-70" src="../public/images/icon-arquivoUpload.png" alt="ícone de arquivo para upload"><span class="fs-5"> Documento pessoal (<strong>Verso</strong>)</span>
                             </div>
                             <div class="col-6 col-md-4 text-start"></div>
                             <div class="col-6 col-md-4">
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label"></label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input id="formFile2" type="file" class="form-control flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
 
                         <!-- seta para ir para a próxima etapa de upload -->
                         <div class="d-flex align-items-end justify-content-end">
-                            <a href="#" class="proceed-arrow">Próximo <span class="fs-1">→</span></a>
+                            <a id="proceedArrow" class="proceed-arrow" href="#">Próximo <span class="fs-1">→</span></a>
                         </div>
                     </main>
 
@@ -90,6 +90,7 @@
             </div>
         </div>
     </div>
-</body>
 
+    <script src="../scripts/cadastroEnvioDoc.js"></script>
+</body>
 </html>
