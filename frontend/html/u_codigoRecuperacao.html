@@ -13,41 +13,68 @@
     <title>Código de Recuperação</title>
 </head>
 
-<body style="margin: 0; padding: 0; height: 100vh;">
+<body>
     <div class="container-fluid center">
-        <div class="row h-100">
+        <div class="row">
             <div class="col">
                 <div class="p-3">
                     <a href="#" class="back-arrow">←</a>
                 </div>    
-                <main class="content-area mx-5" style="height: 70%; display: flex; flex-direction: column; justify-content: center; margin-top: 10px;">
-                    <h1 class="titulo-principal-roxo" style="color: #99067E;">Verifique seu email</h1>
-                    <h6 class="text-muted"; >Verifique sua caixa de email e digite abaixo o código de recuperação recebido
-                    </h6>
-                    <br>
-                    <form>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Código de Verificação</label>
-                            <input type="number" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="verificationNumber" placeholder="ex.: 1431" style="height: 40px; width: 400px;">
+
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <main class="container mx-5">
+                    <h1 class="text-center" style="color: #99067E;">Verifique seu email</h1>
+
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
                         </div>
-                        <button type="button" class="btn btn-primary text-center" style="background-color: #99067E; color: white; border: none; width: 80%; height: 50px; margin-top: 20px; border-radius: 50px; display: block; margin-left: auto; margin-right: auto;">Verificar</button>
+                    </div>
+
+                    <p class="text-center" style="font-size: 1.3rem;">Verifique sua caixa de email e digite abaixo o código de recuperação recebido.</p>
+                    <br>
+
+                    <!-- campo para inserir o codigo de verificacao recebido por email -->
+                    <form class="text-center">
+                        <div class="mb-3 text-start">
+                            <label for="exampleInputEmail1" class="form-label">Código de Verificação</label>
+                            <input type="number" class="form-control" id="verificationInput"
+                                aria-describedby="verificationNumber" placeholder="ex.: 1431">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-centerviar">Verificar</button>
 
                     </form>
+
                     <br>
-                    <p id="code-fail" class="text-muted">Não recebeu o código?
-                        <a href="#" Class="login" style="color: #99067E">Reenviar</a>
+                    <p class="text-muted text-center">Não recebeu o código?
+                        <a href="#" style="color: #99067E">Reenviar</a>
                     </p>
                 </main>
-
             </div>
-            <!-- Coluna (imagem) -->
+
+            <!--segunda coluna com a imagem principal -->
             <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
                 <img src="../public/images/img-codEmailPage.png" alt="Mulher admirando a paisagem"
                 class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
             </aside>
         </div>
     </div>
-</body>
 
+    <script src="../scripts/codigoRecuperacao.js"></script>
+</body>
 </html>
