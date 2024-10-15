@@ -5,6 +5,9 @@ const Controller = require("../Controllers/control");
 // Rota para renderizar o Index
 router.get("/", Controller.renderIndex);
 
+// Rota para renderizar o perfil
+router.get("/perfil", Controller.renderPerfil);
+
 // Rota para renderizar a Página Inicial do Admin
 router.get("/administrador", Controller.renderAdmin);
 
@@ -23,6 +26,10 @@ router.get('/cadastro-sucesso', Controller.renderCadastroSucesso);
 // Rota para renderizar a página de Redefinir Senha
 router.get("/redefinirSenhaPage", Controller.renderRedefinirSenha);
 
+
+
+// Rota para fazer logout, pq nao é post? pois é "tipico" que se deixe o logout com o get
+router.get('/logout', Controller.logout);
 
 // Metodo do Controler para retornar uma resposta para o cliente
 router.post("/cadastrarUsuario", Controller.cadastrarUsuario);
