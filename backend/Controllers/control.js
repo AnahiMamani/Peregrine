@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const cadastro = require("../models/dados")
 const saltRounds = 10; // Define o número de salt rounds para o hash da senha
 require('dotenv').config(); // Para usar variáveis de ambiente do arquivo .env
+const crypto = require('crypto'); // Para gerar o código de verificação
 const nodemailer = require('nodemailer');
 
 module.exports = {
@@ -137,8 +138,8 @@ module.exports = {
             port: 465,
             secure: true,
             auth: {
-                user: process.env.EMAIL_USER, // Usuário de e-mail vindo do .env
-                pass: process.env.EMAIL_PASS, // Senha de aplicativo do .env
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
             }
         });
 
@@ -147,25 +148,26 @@ module.exports = {
         }
 
         try {
-            const user = await cadastro.findOne({ where: { email } });
+            const user = await cadastro.findOne({ where: { A01_EMAIL: email } });
 
             if (user) {
-                // Envia o e-mail com o código de verificação
+                const verificationCode = crypto.randomInt(100000, 999999);
+                req.session.verificationCode = verificationCode;
+                req.session.emailRecuperacao = email;
+
                 await transport.sendMail({
-                    from: 'Peregrine<narielanahi@gmail.com>',
+                    from: 'Peregrine <peregrine.planoviagem@gmail.com>',
                     to: email,
                     subject: 'Código para recuperação de senha',
-                    html: '<h1>Seu código de verificação!</h1><p>Para recuperar sua senha, utilize o seguinte código na sua verificação: </p><h2>12345</h2>',
-                    text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
+                    html: `<h1>Seu código de verificação!</h1><p>Utilize o código abaixo para recuperar sua senha:</p><h2>${verificationCode}</h2>`,
+                    text: `Seu código de verificação é: ${verificationCode}`,
                 });
 
                 console.log('E-mail enviado com sucesso');
-                
-                // Renderiza a página com o campo de código e mantém o e-mail no formulário oculto
-                res.render('pages/recuperarSenhaPage', { 
-                    success: 'Código enviado no seu e-mail. Insira o código aqui:', 
-                    showCodeField: true, 
-                    email 
+                res.render('pages/recuperarSenhaPage', {
+                    success: 'Código enviado no seu e-mail. Insira o código aqui:',
+                    showCodeField: true,
+                    email
                 });
             } else {
                 res.render('pages/recuperarSenhaPage', { error: 'Email não encontrado!' });
@@ -179,12 +181,11 @@ module.exports = {
 
     validaCodigo: (req, res) => {
         const { codigo, email } = req.body;
-        const codigoEnviado = "12345"; // Código fixo para a validação
-    
-        if (codigo === codigoEnviado) {
-            // Armazenar o e-mail na sessão
+        const codigoEnviado = req.session.verificationCode;
+
+        if (codigo === String(codigoEnviado)) {
+            req.session.verificationCode = null;
             req.session.emailRecuperacao = email;
-            // Redirecionar para a página de redefinição de senha
             res.redirect('/redefinirSenhaPage');
         } else {
             res.render('pages/recuperarSenhaPage', {
@@ -197,8 +198,8 @@ module.exports = {
 
     atualizarSenha: async (req, res) => {
         const { novaSenha, confirmarSenha } = req.body;
-        const email = req.session.emailRecuperacao; // Recuperar o e-mail armazenado na sessão
-    
+        const email = req.session.emailRecuperacao;
+
         if (!novaSenha || !confirmarSenha) {
             return res.render('pages/redefinirSenhaPage', { senhaError: 'Preencha todos os campos.' });
         }
@@ -206,12 +207,12 @@ module.exports = {
             return res.render('pages/redefinirSenhaPage', { senhaError: 'As senhas não coincidem.' });
         }
         try {
-            // Gerar o hash da nova senha
             const hashedPassword = await bcrypt.hash(novaSenha, saltRounds);
-            // Atualizar a senha no banco de dados com o hash gerado
-            await cadastro.update({ senha: hashedPassword }, { where: { email } });
-            // Redefinição de senha bem-sucedida
-            req.session.emailRecuperacao = null; // Limpar o e-mail da sessão
+            await cadastro.update({ A01_SENHA: hashedPassword }, { where: { A01_EMAIL: email } });
+
+            req.session.verificationCode = null;
+            req.session.emailRecuperacao = null;
+
             res.render('pages/loginPage', { senhaSuccess: 'Senha redefinida com sucesso!' });
         } catch (error) {
             console.error('Erro ao atualizar a senha:', error);
