@@ -15,13 +15,13 @@ module.exports = {
     renderPerfil: (req, res) => {
         res.render('pages/perfilPage', {
             title: 'perfil',
-            user: req.session.user // Passa os dados do usuário logado
+            user: req.session.user 
         });
     },
     renderAdmin: (req, res) => {
         res.render('pages/adminPage', {
             title: 'Administrador - Página Inicial',
-            user: req.session.user // Passa os dados do usuário logado
+            user: req.session.user 
         });
     },
 
@@ -156,10 +156,28 @@ module.exports = {
                 req.session.emailRecuperacao = email;
 
                 await transport.sendMail({
-                    from: 'Peregrine <peregrine.planoviagem@gmail.com>',
+                    from: 'Peregrine<peregrine.planoviagem@gmail.com>',
                     to: email,
-                    subject: 'Código para recuperação de senha',
-                    html: `<h1>Seu código de verificação!</h1><p>Utilize o código abaixo para recuperar sua senha:</p><h2>${verificationCode}</h2>`,
+                    subject: 'Recuperação de senha - Peregrine',
+                    html: `
+                        <h1 style="color: #99067E; text-align: center;">Recuperação de senha</h1>
+                        <p style="text-align: justify;">Olá Peregrina,</p>
+                        <p style="text-align: justify;">
+                            Recebemos uma solicitação para redefinir a senha da sua conta no <strong>Peregrine</strong>.
+                            Se você fez essa solicitação, use o código abaixo para concluir o processo de recuperação:
+                        </p>
+                        <h2 style="color: #FF5733; text-align: center;">${verificationCode}</h2>
+                        <p style="text-align: justify;">
+                            Caso você não tenha solicitado a recuperação, por favor ignore este e-mail.
+                        </p>
+                        <p style="text-align: justify;">Estamos à disposição para ajudá-la em caso de dúvidas.</p>
+                        <br>
+                        <p style="text-align: justify;">Atenciosamente,</p>
+                        <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
+                        <br><br><hr>
+                        <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
+                        <h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque solicitou a recuperação de senha no <strong>Peregrine</strong>.</h4>
+                    `,
                     text: `Seu código de verificação é: ${verificationCode}`,
                 });
 
