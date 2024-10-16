@@ -1,5 +1,6 @@
+/* centralizar a imagem principal da segunda coluna */
 .img-full-height {
-    height: 100vh;
+    height: 98vh;
     object-fit: cover;
 }
 /* centralizar o conteúdo na primeira coluna */
@@ -10,15 +11,22 @@
     align-items: center;
     height: 100vh;
 }
-/* Estilo para a seta */
+/* Estilo para a seta voltar*/
 .back-arrow {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 2rem;
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none; 
+    font-size: 3rem;
     color: #99067E;
-    text-decoration: none;
 }
+
+/* Estilo para a seta prosseguir*/
+.proceed-arrow {
+    text-decoration: none; 
+    font-size: 1.5rem;
+    color: #99067E;
+}
+
 /* Personalização do botão */
 .btn-custom {
     background-color: #99067E;
@@ -29,6 +37,19 @@
     font-size: 1.2rem;
     margin-top: 1rem;
 }
+
 .btn-custom:hover {
     background-color: #cf70be;
 }
+
+.mb-3 input {
+    background-color: #D9D9D966;
+    border: none;
+    border-radius: 20px;
+    height: 3rem;
+    padding-left: 2rem;
+}
+
+
+
+

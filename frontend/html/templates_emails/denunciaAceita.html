@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denúncia aceita</title>
+</head>
+<body>
+    <h1 style="color: #99067E; text-align: center;">Sua denúncia foi aceita</h1>
+    <p style="text-align: justify;">Olá Peregrina!</p>
+    <p style="text-align: justify;">Informamos que sua denúncia foi analisada e consideramos que o comportamento da usuária denunciada violou as políticas de uso do <strong>Peregrine</strong>. Para a análise, consideramos como violações:</p>
+    <ul style="text-align: justify;">
+        <li>Mau comportamento durante uma viagem;</li>
+        <li>Uso inadequado da plataforma;</li>
+        <li>Identidade fradulenta;</li>
+        <li>Prática de condutas ofensivas ou preconceituosas.</li>
+    </ul>
+    <p style="text-align: justify;">Com base nisso, tomamos as medidas cabíveis e a usuária denunciada foi banida da nossa plataforma. Nosso compromisso é manter um ambiente seguro, acolhedor e respeitoso para todas as mulheres.</p>
+    <p style="text-align: justify;">Queremos agradecer por sua responsabilidade e por contribuir para que nossa comunidade seja protegida e confiável. É através de ações como a sua que conseguimos garantir que nossa plataforma continue a ser um espaço de respeito e apoio mútuo.</p>
+    <p style="text-align: justify;">Com carinho,</p>
+    <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
+    <br><br><hr>
+    <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
+    <h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>
+
+    <script>
+        await transport.sendMail({
+            from: 'Peregrine<peregrine.planoviagem@gmail.com>',
+            to: email,
+            subject: 'Denúncia aceita',
+            html: '<h1 style="color: #99067E; text-align: center;">Sua denúncia foi aceita</h1><p style="text-align: justify;">Olá Peregrina!</p><p style="text-align: justify;">Informamos que sua denúncia foi analisada e consideramos que o comportamento da usuária denunciada violou as políticas de uso do <strong>Peregrine</strong>. Para a análise, consideramos como violações:</p><ul style="text-align: justify;"><li>Mau comportamento durante uma viagem;</li><li>Uso inadequado da plataforma;</li><li>Identidade fraudulenta;</li><li>Prática de condutas ofensivas ou preconceituosas.</li></ul><p style="text-align: justify;">Com base nisso, tomamos as medidas cabíveis e a usuária denunciada foi banida da nossa plataforma. Nosso compromisso é manter um ambiente seguro, acolhedor e respeitoso para todas as mulheres.</p><p style="text-align: justify;">Queremos agradecer por sua responsabilidade e por contribuir para que nossa comunidade seja protegida e confiável. É através de ações como a sua que conseguimos garantir que nossa plataforma continue a ser um espaço de respeito e apoio mútuo.</p><p style="text-align: justify;">Com carinho,</p><p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p><br><br><hr><h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4><h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>',
+            text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
+        });
+    </script>
+</body>
+</html>

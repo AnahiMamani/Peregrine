@@ -1,3 +1,5 @@
+//pagina index usuaria
+
 document.addEventListener('DOMContentLoaded', function() {
     const button = document.getElementById('a');
     if (button) {
@@ -6,3 +8,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+

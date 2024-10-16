@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta banida</title>
+</head>
+<body>
+    <h1 style="color: #99067E; text-align: center;">Infelizmente, sua conta foi banida</h1>
+    <p style="text-align: justify;">Olá!</p>
+    <p style="text-align: justify;">Após análise de uma denúncia recebida, informamos que sua conta foi banida do site <strong>Peregrine</strong> por infringir nossas políticas de uso. Esta ação foi tomada por atender pelo menos um dos seguintes motivos:</p>
+    <ul style="text-align: justify;">
+        <li>Denúncia de mau comportamento durante uma viagem.</li>
+        <li>Uso inadequado da plataforma.</li>
+        <li>Identidade Fraudulenta.</li>
+        <li>Prática de condutas ofensivas ou preconceituosas.</li>
+    </ul>
+    <p style="text-align: justify;">Entendemos que essa situação pode ser desconfortável, mas essa medida é necessária para garantir que <strong>Peregrine</strong> continue sendo um ambiente seguro e acolhedor para todas as mulheres. Respeitar nossas políticas, que você aceitou no momento do cadastro, é essencial para preservar a confiança e a segurança da nossa comunidade.</p>
+    <p style="text-align: justify;">Caso você acredite que essa decisão foi tomada de forma equivocada ou deseje maiores esclarecimentos, entre em contato conosco e analisaremos o seu caso.</p>
+    <p style="text-align: justify;">Nosso objetivo é proteger as usuárias e assegurar que o site permaneça sendo um espaço de respeito, apoio e confiança para todas.</p><br>
+    <p style="text-align: justify;">Atenciosamente,</p>
+    <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
+    <br><br><hr>
+    <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
+    <h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>
+
+    <script>
+        await transport.sendMail({
+            from: 'Peregrine<peregrine.planoviagem@gmail.com>',
+            to: email,
+            subject: 'Conta banida',
+            html: '<h1 style="color: #99067E; text-align: center;">Infelizmente, sua conta foi banida</h1><p style="text-align: justify;">Olá!</p><p style="text-align: justify;">Após análise de uma denúncia recebida, informamos que sua conta foi banida do site <strong>Peregrine</strong> por infringir nossas políticas de uso. Esta ação foi tomada por atender pelo menos um dos seguintes motivos:</p><ul style="text-align: justify;"><li>Denúncia de mau comportamento durante uma viagem.</li><li>Uso inadequado da plataforma.</li><li>Identidade Fraudulenta.</li><li>Prática de condutas ofensivas ou preconceituosas.</li></ul><p style="text-align: justify;">Entendemos que essa situação pode ser desconfortável, mas essa medida é necessária para garantir que <strong>Peregrine</strong> continue sendo um ambiente seguro e acolhedor para todas as mulheres. Respeitar nossas políticas, que você aceitou no momento do cadastro, é essencial para preservar a confiança e a segurança da nossa comunidade.</p><p style="text-align: justify;">Caso você acredite que essa decisão foi tomada de forma equivocada ou deseje maiores esclarecimentos, entre em contato conosco e analisaremos o seu caso.</p><p style="text-align: justify;">Nosso objetivo é proteger as usuárias e assegurar que o site permaneça sendo um espaço de respeito, apoio e confiança para todas.</p><br><p style="text-align: justify;">Atenciosamente,</p><p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p><br><br><hr><h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4><h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>',
+            text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
+        });
+    </script>
+</body>
+</html>
