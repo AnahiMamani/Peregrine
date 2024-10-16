@@ -22,25 +22,25 @@
                     <main class="container mx-5">
                         <h1 style="color: #99067E">Crie sua conta</h1>
                         <br>
-                        <form>
+                        <form action="/cadastrarUsuario" method="post">
                             <div class="mb-3">
                                 <label for="exampleInputText1" class="form-label">Nome completo</label>
-                                <input type="name" class="form-control" id="inputName"
+                                <input name="nome" type="name" class="form-control" id="inputName"
                                     placeholder="Insira seu nome completo">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="inputEmail"
+                                <input name="email" type="email" class="form-control" id="inputEmail"
                                     placeholder="Informe o e-mail que você mais utiliza">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPhone1" class="form-label">Celular</label>
-                                <input type="tel" class="form-control" id="inputPhone"
+                                <input name="celular" type="tel" class="form-control" id="inputPhone"
                                     placeholder="Ex.: (00) 00000-0000">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="inputPassword"
+                                <input name="senha" type="password" class="form-control" id="inputPassword"
                                     placeholder="Crie uma senha">
                             </div>
                             <div class="mb-3">

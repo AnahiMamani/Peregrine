@@ -14,25 +14,33 @@ router.get("/administrador", Controller.renderAdmin);
 // Rota para renderizar a página de login
 router.get("/login", Controller.renderLogin);
 
-// Rota para renderizar a página de cadastro
-router.get("/cadastro", Controller.renderCadastro);
+            // Rota para renderizar a página de cadastro
+            router.get("/cadastro", Controller.renderCadastro);
 
+            // Rota para renderizar a página de cadastro
+            router.get("/CadastroEnvioDocs", Controller.renderCadastroEnvioDocs);
+
+            // Rota para renderizar a página de cadastro
+            router.get("/CadastroVerificaIdentidade", Controller.renderCadastroVerificaIdentidade);
+
+            // Rota para a página de sucesso do cadastro
+            router.get('/cadastroEnvioConcluido', Controller.renderCadastroEnvioConcluido);
+            
 // Rota para renderizar a página de  recuperar senha
 router.get("/recuperarSenha", Controller.renderRecuperarSenha);
-
-// Rota para a página de sucesso do cadastro
-router.get('/cadastro-sucesso', Controller.renderCadastroSucesso);
 
 // Rota para renderizar a página de Redefinir Senha
 router.get("/redefinirSenhaPage", Controller.renderRedefinirSenha);
 
 
+                // Rota para primeira etapa
+                router.post('/cadastrarUsuarioEtapa1', Controller.cadastrarUsuarioEtapa1);
 
-// Rota para fazer logout, pq nao é post? pois é "tipico" que se deixe o logout com o get
-router.get('/logout', Controller.logout);
+                // Rota para upload de documentos (segunda tela)
+                router.post('/uploadDocumentos', Controller.uploadDocumentos);
 
-// Metodo do Controler para retornar uma resposta para o cliente
-router.post("/cadastrarUsuario", Controller.cadastrarUsuario);
+                // Rota para verificação de identidade (terceira tela)
+                router.post('/verificaIdentidade', Controller.verificaIdentidade);
 
 // Metodo do Controler para retornar uma resposta para o cliente
 router.post("/verificandoLogin", Controller.login);
@@ -45,5 +53,8 @@ router.post("/funRecuperarSenha", Controller.funRecuperarSenha);
 
 // Rota para validar o código
 router.post("/validaCodigo", Controller.validaCodigo);
+
+// Rota para fazer logout, pq nao é post? pois é "tipico" que se deixe o logout com o get
+router.get('/logout', Controller.logout);
 
 module.exports = router;

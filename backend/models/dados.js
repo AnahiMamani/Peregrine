@@ -1,7 +1,7 @@
 const db = require("../../config/bd")
 
 //Dados acrescentados de acordo com o diagrama de classe e a modelagem de dados
-const cadastro = db.sequelize.define("01_USUARIO", {
+const cadastro = db.sequelize.define("USUARIA_01", {
     A01_ID: {
         type: db.Sequelize.INTEGER,
         primaryKey: true,
@@ -18,7 +18,7 @@ const cadastro = db.sequelize.define("01_USUARIO", {
     },
     A01_CELULAR: {
         type: db.Sequelize.STRING(11),
-        allowNull: true
+        allowNull: false
     },
     A01_SENHA: {
         type: db.Sequelize.STRING(100),
@@ -26,18 +26,18 @@ const cadastro = db.sequelize.define("01_USUARIO", {
     },
     A01_CPF: {
         type: db.Sequelize.STRING(11),
-        allowNull: true,
+        allowNull: false,
         unique: true
     },
     A01_DATA_NASCIMENTO: {
         type: db.Sequelize.DATE,
-        allowNull: true
+        allowNull: false
     },
     A01_DESCRICAO: {
         type: db.Sequelize.STRING(150),
         allowNull: true
     },
-    A01_IsADMIN: {
+    A01_ISADMIN: {
         type: db.Sequelize.BOOLEAN,
         defaultValue: false
     },

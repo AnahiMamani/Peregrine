@@ -13,6 +13,9 @@ app.use(session({
     cookie: { secure: false } // Para ambiente de desenvolvimento, setar como false
 }));
 
+// Servir arquivos estáticos do diretório /frontend/public
+app.use(express.static(path.join(__dirname, '../frontend/public')));
+
 // Middleware para parsing do corpo da requisição
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

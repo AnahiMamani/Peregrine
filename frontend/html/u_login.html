@@ -18,7 +18,7 @@
             <!--primeira coluna com conteúdo e forms -->
             <div class="col">
                 <div class="p-3">
-                    <a href="#" class="back-arrow">←</a>
+                    <a href="/" class="back-arrow">←</a>
                         <div class="row">
                             <div class="col">
                                 &nbsp;
@@ -53,15 +53,15 @@
                         </div>
 
                         <!-- formulário de login -->
-                        <form class="text-center">
+                        <form action="/verificandoLogin" method="post" class="text-center">
                             <div class="mb-3 text-start">
                                 <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="inputEmail"
+                                <input name="email" type="email" class="form-control" id="inputEmail"
                                     aria-describedby="emailHelp" placeholder="Ex.: peregrina@outlook.com">
                             </div>
                             <div class="mb-3 text-start">
                                 <label for="exampleInputEmail1" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="inputPassword"
+                                <input name="senha" type="password" class="form-control" id="inputPassword"
                                     aria-describedby="emailHelp" placeholder="Informe a senha que criou no cadastro">
                             </div>
                             <button type="submit" class="btn btn-primary text-centerviar email">Entrar</button>
@@ -81,9 +81,9 @@
                         <div class="text-center">
                             <!-- links para cadastro ou esqueci minha senha -->
                             <br>
-                            <a href="#" style="color: #99067E;">Esqueci minha senha</a>
+                            <a href="/recuperarSenha" style="color: #99067E;">Esqueci minha senha</a>
                             <br>
-                            <p class="text-muted">Não tem conta? <a href="#" class="linkcadastro" style="color: #99067E;">Cadastre-se agora</a></p>
+                            <p class="text-muted">Não tem conta? <a href="/cadastro" class="linkcadastro" style="color: #99067E;">Cadastre-se agora</a></p>
                         </div>
                     </main>
                 </div>

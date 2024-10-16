@@ -1,59 +1,63 @@
-<div class="row gx-5">
-  <div class="col">
-    <div class="p-3">
-      <a href="/" id="setaVoltar">←</a>
-      <h1>Crie sua conta</h1>
-
-      <form action="/cadastrarUsuario" method="post" style="text-align: start;" id="registrationForm">
-        <div class="mb-3">
-          <label for="exampleInputText1" class="form-label">Nome:</label>
-          <input name="nome" type="text" class="form-control" id="exampleInputText1" placeholder="insira seu nome completo">
+<div class="container-fluid">
+    <div class="row">
+        <!--primeira coluna com conteúdo e forms -->
+        <div class="col">
+            <div class="p-3">
+                <a href="/login" class="back-arrow">←</a>
+                <main class="container mx-5">
+                    <h1 style="color: #99067E">Crie sua conta</h1>
+                    <br>
+                    <form action="/cadastrarUsuarioEtapa1" method="post">
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Nome completo</label>
+                            <input name="nome" type="text" class="form-control" id="inputName"
+                                placeholder="Insira seu nome completo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">E-mail</label>
+                            <input name="email" type="email" class="form-control" id="inputEmail"
+                                placeholder="Informe o e-mail que você mais utiliza">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputCPF" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="inputCPF" name="cpf"
+                                placeholder="Ex: 0000000000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputBirthDate" class="form-label">Data de nascimento</label>
+                            <input type="date" class="form-control" id="inputBirthDate" name="dataNascimento"
+                                placeholder="dd/mm/aaaa">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPhone" class="form-label">Celular</label>
+                            <input name="celular" type="tel" class="form-control" id="inputPhone"
+                                placeholder="Ex.: (00) 00000-0000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Senha</label>
+                            <input name="senha" type="password" class="form-control" id="inputPassword"
+                                placeholder="Crie uma senha">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputConfirmPassword" class="form-label">Confirme a senha</label>
+                            <input type="password" class="form-control" id="inputConfirmPassword" name="confirmSenha"
+                                placeholder="Insira a mesma senha que criou acima">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="termos">
+                            <label class="form-check-label" for="exampleCheck1">Concordo com os termos e
+                                condições</label>
+                        </div>
+                            <button type="submit" class="btn btn-primary">Próximo</button>
+                    </form>
+                </main>
+            </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">E-mail:</label>
-          <input name="email" type="email" class="form-control" id="exampleInputEmail1"
-            placeholder="informe o e-mail que você mais utiliza">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPhone1" class="form-label">Celular:</label>
-          <input name="celular" type="tel" class="form-control" id="exampleInputPhone1"  placeholder="ex.: (11) 91234-7891">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Senha:</label>
-          <input name="senha" type="password" class="form-control" id="password" name="password" placeholder="crie uma senha" required>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword2" class="form-label">Confirme a senha:</label>
-          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-            placeholder="insira a mesma senha que criou acima" required>
-        </div>
-
-
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Concordo com os termos e condições</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-      </form>
-
+        <!--segunda coluna com a imagem principal -->
+        <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
+            <img src="/images/img-cadastroPage.png" alt="Duas amigas tiram uma selfie ao ar livre"
+                class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
+        </aside>
     </div>
-  </div>
-  <div class="col text-center">
-    <div class="p-3">
-      <img src="../public/images/img-cadastroPage.png" alt="Duas amigas tiram uma selfie ao ar livre">
-    </div>
-  </div>
 </div>
-
-<script>
-  document.getElementById('registrationForm').addEventListener('submit', function(event) {
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
-
-  if (password !== confirmPassword) {
-    alert('As senhas não coincidem. Por favor, tente novamente.');
-    event.preventDefault(); 
-  }
-  console.log('o script está funcionando')
-});
-</script>
+<script src="/scripts/cadastro.js"></script>

@@ -1,0 +1,92 @@
+<div class="container-fluid center">
+    <div class="row">
+        <!--pagina inicial do upload de documentos-->
+        <div class="col">
+            <div class="p-3">
+                <!-- seta para voltar -->
+                <a href="/cadastro" class="back-arrow">←</a>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <main class="container">
+                    <h1 style="color: #99067E">Envio de documentos</h1>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <p style="font-size: 1.3rem; text-align: justify;">Envie seu documento pessoal <strong>com
+                            foto</strong> (frente e verso) para verificar o seu perfil. As imagens devem ser legíveis e
+                        apresentar o documento inteiro, sem cortes.</p><br>
+                    <p style="font-size: 1.3rem; text-align: justify;">Serão aceitos arquivos nos formatos PNG, JPG e
+                        PDF, de até 50 MB.</p>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <br>
+                    <!-- campos para upload dos documentos -->
+                    <form action="/uploadDocumentos" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="userId" value="<%= userId %>"> <!-- Inclua o userId aqui -->
+                        <!-- upload frente do documento -->
+                        <div class="row d-flex align-items-center text-center rounded-4 border border-2 border-dark container"
+                            style="min-height: 125px;">
+                            <div class="col-6 col-md-4 text-start">
+                                <img id="uploadIcon1" class="img-fluid h-70" src="/public/images/icon-arquivoUpload.png"
+                                    alt="ícone de arquivo para upload"><span class="fs-5"> Documento pessoal
+                                    (<strong>Frente</strong>)</span>
+                            </div>
+                            <div class="col-6 col-md-4 text-start"></div>
+                            <div class="col-6 col-md-4">
+                                <div class="mb-3">
+                                    <label for="formFile1" class="form-label"></label>
+                                    <input id="formFile1" type="file" name="frenteDoc"
+                                        class="form-control flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- upload verso do documento -->
+                        <div class="row d-flex align-items-center text-center rounded-4 border border-2 border-dark container"
+                            style="min-height: 125px;">
+                            <div class="col-6 col-md-4 text-start">
+                                <img id="uploadIcon2" class="img-fluid h-70" src="/public/images/icon-arquivoUpload.png"
+                                    alt="ícone de arquivo para upload"><span class="fs-5"> Documento pessoal
+                                    (<strong>Verso</strong>)</span>
+                            </div>
+                            <div class="col-6 col-md-4 text-start"></div>
+                            <div class="col-6 col-md-4">
+                                <div class="mb-3">
+                                    <label for="formFile2" class="form-label"></label>
+                                    <input id="formFile2" type="file" name="versoDoc"
+                                        class="form-control flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <!-- seta para ir para a próxima etapa de upload -->
+                        <div class="d-flex align-items-end justify-content-end">
+                            <button type="submit" class="btn btn-primary">Próximo</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/cadastroEnvioDoc.js"></script>
