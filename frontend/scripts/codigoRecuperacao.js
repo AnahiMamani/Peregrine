@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // exibe mensagem se o código contiver caracteres inválidos
         if (!/^\d*$/.test(codeValue)) {
             showError(verificationInput, "O código é formado por 4 números. Não utilize letras.");
-        } else if (codeValue.length > 4) {
+        } else if (codeValue.length > 6) {
             showError(verificationInput, "O código deve ter exatamente 4 números.");
         }
     });
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clearErrorMessages();
 
         // verifica se o código tem exatamente 4 números
-        if (!/^\d{4}$/.test(codeValue)) {
+        if (!/^\d{6}$/.test(codeValue)) {
             showError(verificationInput, "O código é formado por 4 números.");
             valid = false;
         }

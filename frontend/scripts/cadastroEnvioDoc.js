@@ -1,8 +1,12 @@
 //pagina: u_cadastroEnvioDoc
 const fileInput1 = document.getElementById('formFile1');
 const fileInput2 = document.getElementById('formFile2');
+const fileInput3 = document.getElementById('formFile3');
+
 const uploadIcon1 = document.getElementById('uploadIcon1');
 const uploadIcon2 = document.getElementById('uploadIcon2');
+const uploadIcon3 = document.getElementById('uploadIcon3');
+
 const proceedArrow = document.getElementById('proceedArrow');
 
 const defaultIconSrc = '../public/images/icon-arquivoUpload.png';
@@ -21,13 +25,19 @@ function checkUploads() {
     } else {
         uploadIcon2.src = defaultIconSrc;
     }
+
+    if (fileInput3.files.length > 0) {
+        uploadIcon3.src = doneIconSrc;
+    } else {
+        uploadIcon3.src = defaultIconSrc;
+    }
 }
 
 // função para verificar se ambos os arquivos estão anexados antes de prosseguir
 function validateAndProceed(event) {
-    if (fileInput1.files.length === 0 || fileInput2.files.length === 0) {
+    if (fileInput1.files.length === 0 || fileInput2.files.length === 0 || fileInput3.files.length === 0) {
         event.preventDefault();
-        alert("É necessário que você anexe as duas fotos para que prossiga para a próxima página :/");
+        alert("É necessário que você anexe todos os documentos para efetuar envio. :/");
     } else {
         // se ambos os inputs estiverem preenchidos, redirecionar para a próxima página
         window.location.href = "#"; 
@@ -37,6 +47,8 @@ function validateAndProceed(event) {
 // adicionando listeners para cada input
 fileInput1.addEventListener('change', checkUploads);
 fileInput2.addEventListener('change', checkUploads);
+fileInput3.addEventListener('change', checkUploads);
+
 proceedArrow.addEventListener('click', validateAndProceed);
 
 

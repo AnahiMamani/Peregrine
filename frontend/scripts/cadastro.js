@@ -106,13 +106,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Validação da Data de Nascimento
+    // validação da data de nascimento
     inputBirthDate.addEventListener('change', function () {
-        if (!inputBirthDate.value) {
-            birthDateErrorMessage.textContent = 'Por favor, selecione uma data de nascimento';
-            birthDateErrorMessage.style.display = 'block';
+        const birthDateValue = new Date(inputBirthDate.value);
+        const today = new Date();
+        
+        // calcula a idade
+        let age = today.getFullYear() - birthDateValue.getFullYear();
+        const m = today.getMonth() - birthDateValue.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDateValue.getDate())) {
+            age--;
+        }
+
+        // verifica se a idade é inferior a 18 anos
+        if (age < 18) {
+            ageErrorMessage.textContent = 'Você deve ser maior de idade para se cadastrar';
+            ageErrorMessage.style.display = 'block';
         } else {
-            birthDateErrorMessage.style.display = 'none';
+            ageErrorMessage.style.display = 'none';
         }
     });
 

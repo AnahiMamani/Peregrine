@@ -1,16 +1,5 @@
 //pagina u_cadastroVerificaIdentidade
 document.addEventListener('DOMContentLoaded', function () {
-    const uploadIcon3 = document.getElementById('uploadIcon3');
-    const formFile3 = document.getElementById('formFile3');
-
-    //altera a imagem do ícone quando um arquivo é selecionado ou removido
-    formFile3.addEventListener('change', function () {
-        if (formFile3.files.length > 0) {
-            uploadIcon3.src = '../public/images/icon-arquivoUploadFeito.png'; 
-        } else {
-            uploadIcon3.src = '../public/images/icon-arquivoUpload.png'; // Retorna à imagem padrão
-        }
-    });
 
     const inputName = document.getElementById('inputName');
     const inputCPF = document.getElementById('inputCPF');
