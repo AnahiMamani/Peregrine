@@ -20,17 +20,21 @@ router.get("/login", Controller.renderLogin);
             // Rota para renderizar a página de cadastro
             router.get("/CadastroEnvioDocs", Controller.renderCadastroEnvioDocs);
 
-            // Rota para renderizar a página de cadastro
-            router.get("/CadastroVerificaIdentidade", Controller.renderCadastroVerificaIdentidade);
-
             // Rota para a página de sucesso do cadastro
             router.get('/cadastroEnvioConcluido', Controller.renderCadastroEnvioConcluido);
             
 // Rota para renderizar a página de  recuperar senha
-router.get("/recuperarSenha", Controller.renderRecuperarSenha);
+router.get("/senhaRecuperar", Controller.renderSenhaRecuperar);
 
 // Rota para renderizar a página de Redefinir Senha
-router.get("/redefinirSenhaPage", Controller.renderRedefinirSenha);
+router.get("/senhaCriarNova", Controller.renderSenhaCriarNova);
+
+// Rota para renderizar a página de Redefinir Senha
+router.get("/senhaCodigoRecuperacao", Controller.renderSenhaCodigoRecuperacao);
+
+// Rota para renderizar a página de Redefinir Senha
+router.get("/senhaAlteradaSucesso", Controller.renderSenhaAlteradaSucesso);
+
 
 
                 // Rota para primeira etapa
@@ -38,9 +42,6 @@ router.get("/redefinirSenhaPage", Controller.renderRedefinirSenha);
 
                 // Rota para upload de documentos (segunda tela)
                 router.post('/uploadDocumentos', Controller.uploadDocumentos);
-
-                // Rota para verificação de identidade (terceira tela)
-                router.post('/verificaIdentidade', Controller.verificaIdentidade);
 
 // Metodo do Controler para retornar uma resposta para o cliente
 router.post("/verificandoLogin", Controller.login);

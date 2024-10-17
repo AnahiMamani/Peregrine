@@ -43,12 +43,6 @@ module.exports = {
         });
     },
 
-    renderRecuperarSenha: (req, res) => {
-        res.render("pages/recuperarSenhaPage", {
-            title: 'Recuperar Senha'
-        });
-    },
-
     renderLogin: (req, res) => {
         res.render("pages/loginPage", {
             title: 'Login'
@@ -67,20 +61,34 @@ module.exports = {
         });
     },
 
-    renderCadastroVerificaIdentidade: (req, res) => {
-        res.render("pages/cadastroVerificaIdentidade", {
-            title: 'Cadastro'
-        });
-    },
-
     renderCadastroEnvioConcluido: (req, res) => {
         res.render("pages/cadastroEnvioConcluido", {
             title: 'Cadastro'
         });
     },
 
-    renderRedefinirSenha: (req, res) => {
-        res.render("pages/redefinirSenhaPage");
+    renderSenhaAlteradaSucesso: (req, res) => {
+        res.render("pages/senhaAlteradaSucesso", {
+            title: 'Senha Alterada'
+        });
+    },
+
+    renderSenhaCodigoRecuperacao: (req, res) => {
+        res.render("pages/senhaCodigoRecuperacao", {
+            title: 'Codigo de Recuperação'
+        });
+    },
+
+    renderSenhaCriarNova: (req, res) => {
+        res.render("pages/senhaCriarNova", {
+            title: 'Criando nova Senha'
+        });
+    },
+
+    renderSenhaRecuperar: (req, res) => {
+        res.render("pages/senhaRecuperar", {
+            title: 'Esqueci minha senha'
+        });
     },
 
     cadastrarUsuarioEtapa1: (req, res) => {
@@ -122,38 +130,37 @@ module.exports = {
                 res.render('pages/cadastroPage', { error: 'Erro ao cadastrar. Tente novamente.' });
             });
     },
+
     uploadDocumentos: (req, res) => {
         const userId = req.session.userId; // Pegue o userId da sessão
-
         // Verifique se o userId está definido
         if (!userId) {
             return res.status(400).send("User ID não fornecido.");
         }
-
         const userDir = path.join(__dirname, '../../uploads', userId.toString());
-
         fs.mkdir(userDir, { recursive: true }, (err) => {
             if (err) {
                 console.log("Erro ao criar diretório do usuário:", err);
                 return res.status(500).send("Erro ao criar diretório.");
             }
-
-            upload.fields([{ name: 'frenteDoc', maxCount: 1 }, { name: 'versoDoc', maxCount: 1 }])(req, res, (err) => {
+            upload.fields([{ name: 'frenteDoc', maxCount: 1 }, { name: 'versoDoc', maxCount: 1 }, { name: 'selfieDoc', maxCount: 1 }])(req, res, (err) => {
                 if (err) {
                     console.log("Erro no upload:", err);
                     return res.status(500).send("Erro ao fazer upload.");
                 }
-
                 const frontDoc = req.files['frenteDoc'] ? req.files['frenteDoc'][0] : null;
                 const backDoc = req.files['versoDoc'] ? req.files['versoDoc'][0] : null;
+                const selfieDoc = req.files['selfieDoc'] ? req.files['selfieDoc'][0] : null;
 
-                if (!frontDoc || !backDoc) {
+                if (!frontDoc || !backDoc || !selfieDoc) {
                     return res.status(400).send("Documentos não enviados.");
                 }
 
+                const newFileNameSelfie = `selfie_${userId}${path.extname(selfieDoc.originalname)}`;
+                const selfieDocPath = path.join(userDir, newFileNameSelfie);
+
                 const newFileNameBack = `backDoc_${userId}${path.extname(backDoc.originalname)}`;
                 const backDocPath = path.join(userDir, newFileNameBack);
-
 
                 // Renomeia o arquivo da selfie para "frontDoc<userId>"
                 const newFileNameFront = `frontDoc_${userId}${path.extname(frontDoc.originalname)}`;
@@ -165,6 +172,13 @@ module.exports = {
                         return res.status(500).send("Erro ao mover o documento da frente.");
                     }
 
+                    fs.rename(selfieDoc.path, selfieDocPath, (err) => {
+                        if (err) {
+                            console.log("Erro ao mover o documento de selfie:", err);
+                            return res.status(500).send("Erro ao mover o documento de selfie.");
+                        }
+                    })
+
                     fs.rename(backDoc.path, backDocPath, (err) => {
                         if (err) {
                             console.log("Erro ao mover o documento do verso:", err);
@@ -172,46 +186,8 @@ module.exports = {
                         }
 
                         console.log("Upload de documentos realizado com sucesso!");
-                        res.render('pages/cadastroVerificaIdentidade', { userId });
+                        res.redirect('/cadastroEnvioConcluido');
                     });
-                });
-            });
-        });
-    },
-
-
-    // Controlador para verificação de identidade (terceira etapa)
-    verificaIdentidade: (req, res) => {
-        const userId = req.session.userId; // Agora pegando o userId da sessão    
-        // Cria o diretório novamente para a selfie, se não existir
-        const userDir = path.join(__dirname, '../../uploads', userId.toString());
-
-        fs.mkdir(userDir, { recursive: true }, (err) => {
-            if (err) {
-                console.log("Erro ao criar diretório do usuário:", err);
-                return res.status(500).send("Erro ao criar diretório.");
-            }
-
-            upload.single('selfieDoc')(req, res, (err) => {
-                if (err) {
-                    console.log("Erro no upload da selfie:", err);
-                    return res.status(500).send("Erro ao fazer upload.");
-                }
-
-                const selfieDoc = req.file;
-
-                // Renomeia o arquivo da selfie para "selfie<userId>"
-                const newFileName = `selfie_${userId}${path.extname(selfieDoc.originalname)}`;
-                const selfieDocPath = path.join(userDir, newFileName); // Caminho com o novo nome
-
-                fs.rename(selfieDoc.path, selfieDocPath, (err) => {
-                    if (err) {
-                        console.log("Erro ao mover a selfie:", err);
-                        return res.status(500).send("Erro ao mover a selfie.");
-                    }
-
-                    console.log("Upload da selfie realizado com sucesso!");
-                    res.redirect('/cadastroEnvioConcluido');
                 });
             });
         });
@@ -284,7 +260,7 @@ module.exports = {
         });
 
         if (!email) {
-            return res.render('pages/recuperarSenhaPage', { error: 'O campo de e-mail está vazio.' });
+            return res.render('pages/senhaRecuperar', { error: 'O campo de e-mail está vazio.' });
         }
 
         try {
@@ -293,7 +269,7 @@ module.exports = {
             if (user) {
                 const verificationCode = crypto.randomInt(100000, 999999);
                 req.session.verificationCode = verificationCode;
-                req.session.emailRecuperacao = email;
+                req.session.emailRecuperacao = email; // Armazenar o email na sessão
 
                 await transport.sendMail({
                     from: 'Peregrine<peregrine.planoviagem@gmail.com>',
@@ -322,18 +298,18 @@ module.exports = {
                 });
 
                 console.log('E-mail enviado com sucesso');
-                res.render('pages/recuperarSenhaPage', {
+                res.render('pages/senhaCodigoRecuperacao', {
                     success: 'Código enviado no seu e-mail. Insira o código aqui:',
                     showCodeField: true,
                     email
                 });
             } else {
-                res.render('pages/recuperarSenhaPage', { error: 'Email não encontrado!' });
+                res.render('pages/senhaRecuperar', { error: 'Email não encontrado!' });
             }
 
         } catch (error) {
             console.error('Erro ao recuperar senha:', error);
-            res.render('pages/recuperarSenhaPage', { error: 'Erro ao tentar enviar o e-mail. Tente novamente.' });
+            res.render('pages/senhaRecuperar', { error: 'Erro ao tentar enviar o e-mail. Tente novamente.' });
         }
     },
 
@@ -343,13 +319,12 @@ module.exports = {
 
         if (codigo === String(codigoEnviado)) {
             req.session.verificationCode = null;
-            req.session.emailRecuperacao = email;
-            res.redirect('/redefinirSenhaPage');
+            res.redirect('/senhaCriarNova');
         } else {
-            res.render('pages/recuperarSenhaPage', {
+            res.render('pages/senhaCodigoRecuperacao', {
                 codigoError: 'Código inválido. Tente novamente.',
                 showCodeField: true,
-                email
+                email: req.session.emailRecuperacao // Passa o email para a renderização da página
             });
         }
     },
@@ -359,10 +334,10 @@ module.exports = {
         const email = req.session.emailRecuperacao;
 
         if (!novaSenha || !confirmarSenha) {
-            return res.render('pages/redefinirSenhaPage', { senhaError: 'Preencha todos os campos.' });
+            return res.render('pages/senhaCriarNova', { senhaError: 'Preencha todos os campos.' });
         }
         if (novaSenha !== confirmarSenha) {
-            return res.render('pages/redefinirSenhaPage', { senhaError: 'As senhas não coincidem.' });
+            return res.render('pages/senhaCriarNova', { senhaError: 'As senhas não coincidem.' });
         }
         try {
             const hashedPassword = await bcrypt.hash(novaSenha, saltRounds);
@@ -371,10 +346,10 @@ module.exports = {
             req.session.verificationCode = null;
             req.session.emailRecuperacao = null;
 
-            res.render('pages/loginPage', { senhaSuccess: 'Senha redefinida com sucesso!' });
+            res.render('pages/senhaAlteradaSucesso', { senhaSuccess: 'Senha redefinida com sucesso!' });
         } catch (error) {
             console.error('Erro ao atualizar a senha:', error);
-            res.render('pages/redefinirSenhaPage', { senhaError: 'Erro ao atualizar a senha. Tente novamente.' });
+            res.render('pages/senhaCriarNova', { senhaError: 'Erro ao atualizar a senha. Tente novamente.' });
         }
     }
 }

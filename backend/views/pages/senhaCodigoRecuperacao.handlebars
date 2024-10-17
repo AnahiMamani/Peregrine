@@ -1,0 +1,62 @@
+<div class="container-fluid center">
+    <div class="row">
+        <div class="col">
+            <div class="p-3">
+                <a href="/senhaRecuperar" class="back-arrow">←</a>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    &nbsp;
+                </div>
+            </div>
+
+            <main class="container mx-5">
+                <h1 class="text-center" style="color: #99067E;">Verifique seu email</h1>
+
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <p class="text-center" style="font-size: 1.3rem;">Verifique sua caixa de email e digite abaixo o código
+                    de recuperação recebido.</p>
+                <br>
+
+                <!-- campo para inserir o codigo de verificacao recebido por email -->
+                <form action="/validaCodigo" method="POST" class="text-center">
+                    <div class="mb-3 text-start">
+                        <label for="exampleInputEmail1" class="form-label">Código de Verificação</label>
+                        <input name="codigo" type="number" class="form-control" id="verificationInput"
+                            aria-describedby="verificationNumber" placeholder="ex.: 1431">
+                    </div>
+                    <button type="submit" class="btn btn-primary text-centerviar">Verificar</button>
+                </form>
+
+                <br>
+                <p class="text-muted text-center">Não recebeu o código?  Reenvie seu email novamente.
+                    <a href="/senhaRecuperar" style="color: #99067E">Reenviar</a>
+                </p>
+            </main>
+        </div>
+
+        <!--segunda coluna com a imagem principal -->
+        <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
+            <img src="../public/images/img-codEmailPage.png" alt="Mulher admirando a paisagem"
+                class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
+        </aside>
+    </div>
+</div>
+
+<script src="../scripts/codigoRecuperacao.js"></script>

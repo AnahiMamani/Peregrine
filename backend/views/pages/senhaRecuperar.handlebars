@@ -1,0 +1,71 @@
+<div class="container-fluid center">
+    <div class="row">
+        <!--primeira coluna com conteúdo e forms -->
+        <div class="col">
+            <div class="p-3">
+                <a href="/login" class="back-arrow">←</a>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <main class="container mx-5">
+                    <h1 style="color: #99067E" class="text-center">Esqueci minha senha</h1>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <p class="text-center" style="font-size: 1.3rem;">Confirme o email usado nessa conta <br> e receba
+                        um código de validação para recuperar sua senha</p>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <form action="/funRecuperarSenha" method="POST" class="text-center">
+                        <div class="mb-3 text-start">
+                            <label for="exampleInputEmail1" class="form-label">E-mail:</label>
+                            <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp"
+                                placeholder="Ex.: peregrina@outlook.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-centerviar email">Enviar e-mail</button>
+                    </form>
+                    <div class="recuperarSenha text-center">
+                        <!-- link para voltar ao login -->
+                        <br><br>
+                        Lembrou sua senha?<a href="/login" class="linkcadastro"> Voltar para login</a>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!--segunda coluna com a imagem principal -->
+        <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
+            <img src="../public/images/img-esqueciSenhaPage.png" alt="Mulher nas montanhas"
+                class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
+        </aside>
+    </div>
+</div>
+
+<script src="../scripts/esqueciSenha.js"></script>
