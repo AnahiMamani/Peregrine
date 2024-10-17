@@ -1,15 +1,17 @@
+//pagina u_cadastro.html
+
 document.addEventListener('DOMContentLoaded', function () {
-    const inputName = document.getElementById('inputName'); // Campo de nome
+    const inputName = document.getElementById('inputName'); // campo de nome
     const inputEmail = document.getElementById('inputEmail');
     const inputPassword = document.getElementById('inputPassword');
     const inputConfirmPassword = document.getElementById('inputConfirmPassword');
     const inputPhone = document.getElementById('inputPhone');
-    const inputCPF = document.getElementById('inputCPF'); // Campo de CPF
-    const inputBirthDate = document.getElementById('inputBirthDate'); // Campo de Data de Nascimento
-    const termsCheckbox = document.getElementById('exampleCheck1'); // Checkbox dos termos e condições
+    const inputCPF = document.getElementById('inputCPF'); // campo de CPF
+    const inputBirthDate = document.getElementById('inputBirthDate'); // campo de Data de Nascimento
+    const termsCheckbox = document.getElementById('exampleCheck1'); // checkbox dos termos e condições
     const submitButton = document.querySelector('button[type="submit"]');
 
-    // Mensagens de erro
+    // mensagens de erro
     const nameErrorMessage = document.createElement('div');
     nameErrorMessage.className = 'text-danger';
     nameErrorMessage.style.display = 'none';
@@ -67,89 +69,122 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Validação da senha e confirmação de senha
-    inputConfirmPassword.addEventListener('input', function () {
+    // Validação da senha e confirmação de senha (mínimo 8 caracteres, uma letra e um caractere especial)
+    function validatePassword() {
         const passwordValue = inputPassword.value;
         const confirmPasswordValue = inputConfirmPassword.value;
-        if (passwordValue !== confirmPasswordValue) {
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/;
+
+        if (!passwordPattern.test(passwordValue)) {
+            passwordErrorMessage.textContent = 'A senha deve conter no mínimo 8 dígitos, uma letra e um caractere especial';
+            passwordErrorMessage.style.display = 'block';
+        } else if (passwordValue !== confirmPasswordValue) {
             passwordErrorMessage.textContent = 'As senhas não conferem';
             passwordErrorMessage.style.display = 'block';
         } else {
             passwordErrorMessage.style.display = 'none';
         }
-    });
+    }
 
-    // Validação do telefone (formato: (00) 00000-0000)
+    inputPassword.addEventListener('input', validatePassword);
+    inputConfirmPassword.addEventListener('input', validatePassword);
+
+    // Máscara e validação do telefone (formato: (00) 00000-0000)
     inputPhone.addEventListener('input', function () {
-        const phoneValue = inputPhone.value;
-        const phonePattern = /^\(\d{2}\) \d{5}-\d{4}$/;
+        let phoneValue = inputPhone.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+        phoneValue = phoneValue.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+        inputPhone.value = phoneValue;
 
-        if (/[^0-9\s()-]/.test(phoneValue)) {
-            phoneErrorMessage.textContent = 'Por favor, insira um telefone válido';
-            phoneErrorMessage.style.display = 'block';
-        } else if (!phonePattern.test(phoneValue)) {
-            phoneErrorMessage.textContent = 'Por favor, preencha no formato (00) 00000-0000';
+        if (phoneValue.length !== 11) {
+            phoneErrorMessage.textContent = 'Por favor, insira um telefone válido com 11 algarismos (DDD + telefone)';
             phoneErrorMessage.style.display = 'block';
         } else {
             phoneErrorMessage.style.display = 'none';
         }
     });
 
-    // Validação do CPF (apenas exemplo básico, pode ser expandido)
+    // Máscara e validação do CPF (formato: 000.000.000-00)
     inputCPF.addEventListener('input', function () {
-        const cpfValue = inputCPF.value;
-        if (/[^0-9]/.test(cpfValue) || cpfValue.length !== 11) {
-            cpfErrorMessage.textContent = 'Por favor, insira um CPF válido (somente números)';
+        let cpfValue = inputCPF.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+        cpfValue = cpfValue.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+        inputCPF.value = cpfValue;
+
+        if (cpfValue.length !== 11) {
+            cpfErrorMessage.textContent = 'Por favor, insira um CPF válido com 11 algarismos. Se conter letra, substitua por 0';
             cpfErrorMessage.style.display = 'block';
         } else {
             cpfErrorMessage.style.display = 'none';
         }
     });
 
-    // validação da data de nascimento
+    // Validação da data de nascimento (usuário deve ser maior de idade)
     inputBirthDate.addEventListener('change', function () {
         const birthDateValue = new Date(inputBirthDate.value);
         const today = new Date();
-        
-        // calcula a idade
         let age = today.getFullYear() - birthDateValue.getFullYear();
         const m = today.getMonth() - birthDateValue.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < birthDateValue.getDate())) {
             age--;
         }
 
-        // verifica se a idade é inferior a 18 anos
         if (age < 18) {
-            ageErrorMessage.textContent = 'Você deve ser maior de idade para se cadastrar';
-            ageErrorMessage.style.display = 'block';
+            birthDateErrorMessage.textContent = 'Você deve ser maior de idade para se cadastrar';
+            birthDateErrorMessage.style.display = 'block';
         } else {
-            ageErrorMessage.style.display = 'none';
+            birthDateErrorMessage.style.display = 'none';
         }
     });
 
+    // Verificação de todos os campos antes do envio
     submitButton.addEventListener('click', function (event) {
-        const allInputsFilled = inputEmail.value && inputPassword.value && inputConfirmPassword.value && inputPhone.value && inputName.value && inputCPF.value && inputBirthDate.value;
-        const phonePattern = /^\(\d{2}\) \d{5}-\d{4}$/;
-        const termsChecked = termsCheckbox.checked; // Verifica se o checkbox está marcado
+        event.preventDefault(); // Impede o envio do formulário inicialmente
 
-        // Verifica se todos os campos estão preenchidos corretamente e se o checkbox está marcado
-        if (!allInputsFilled ||
-            emailErrorMessage.style.display === 'block' ||
-            passwordErrorMessage.style.display === 'block' ||
-            phoneErrorMessage.style.display === 'block' ||
-            cpfErrorMessage.style.display === 'block' ||
-            birthDateErrorMessage.style.display === 'block' ||
-            !phonePattern.test(inputPhone.value) ||
-            !termsChecked) {
+        // Limpar mensagens de erro antes da validação
+        nameErrorMessage.style.display = 'none';
+        emailErrorMessage.style.display = 'none';
+        passwordErrorMessage.style.display = 'none';
+        phoneErrorMessage.style.display = 'none';
+        cpfErrorMessage.style.display = 'none';
+        birthDateErrorMessage.style.display = 'none';
+        termsErrorMessage.style.display = 'none';
 
-            event.preventDefault(); // Impede o envio do formulário
+        // Verifica se os campos estão preenchidos
+        if (!inputName.value) {
+            nameErrorMessage.textContent = 'Preencha seu nome para continuar';
+            nameErrorMessage.style.display = 'block';
+        }
+        if (!inputEmail.value) {
+            emailErrorMessage.textContent = 'Preencha seu e-mail para continuar';
+            emailErrorMessage.style.display = 'block';
+        }
+        if (!inputPassword.value) {
+            passwordErrorMessage.textContent = 'Preencha sua senha para continuar';
+            passwordErrorMessage.style.display = 'block';
+        }
+        if (!inputConfirmPassword.value) {
+            passwordErrorMessage.textContent = 'Preencha os dois campos de senha para continuar';
+            passwordErrorMessage.style.display = 'block';
+        }
+        if (!inputPhone.value) {
+            phoneErrorMessage.textContent = 'Preencha seu telefone para continuar';
+            phoneErrorMessage.style.display = 'block';
+        }
+        if (!inputCPF.value) {
+            cpfErrorMessage.textContent = 'Preencha seu CPF para continuar';
+            cpfErrorMessage.style.display = 'block';
+        }
+        if (!inputBirthDate.value) {
+            birthDateErrorMessage.textContent = 'Preencha sua data de nascimento para continuar';
+            birthDateErrorMessage.style.display = 'block';
+        }
+        if (!termsCheckbox.checked) {
+            termsErrorMessage.textContent = 'Você deve concordar com os termos e condições';
+            termsErrorMessage.style.display = 'block';
+        }
 
-            if (!termsChecked) {
-                termsErrorMessage.textContent = 'Você deve concordar com os termos e condições';
-                termsErrorMessage.style.display = 'block';
-            }
-
-            alert('Você precisa preencher todos os campos e aceitar os termos para se cadastrar :/');
+        // Se não houver erros, envia o formulário
+        if (inputName.value && inputEmail.value && inputPassword.value && inputConfirmPassword.value && inputPhone.value && inputCPF.value && inputBirthDate.value && termsCheckbox.checked) {
+            event.target.form.submit(); // Envia o formulário se todas as validações forem bem-sucedidas
         }
     });
 });
