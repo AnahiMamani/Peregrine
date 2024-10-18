@@ -18,11 +18,14 @@ router.get("/login", Controller.renderLogin);
             router.get("/cadastro", Controller.renderCadastro);
 
             // Rota para renderizar a página de cadastro
-            router.get("/CadastroEnvioDocs", Controller.renderCadastroEnvioDocs);
+            router.get("/cadastroEnvioDocs", Controller.renderCadastroEnvioDocs);
 
             // Rota para a página de sucesso do cadastro
             router.get('/cadastroEnvioConcluido', Controller.renderCadastroEnvioConcluido);
-            
+
+            // Rota para renderizar a página de Termor e condições
+            router.get("/termosCondicoes", Controller.renderCadastroTermos);
+
 // Rota para renderizar a página de  recuperar senha
 router.get("/senhaRecuperar", Controller.renderSenhaRecuperar);
 

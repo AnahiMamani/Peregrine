@@ -67,6 +67,12 @@ module.exports = {
         });
     },
 
+    renderCadastroTermos: (req, res) => {
+        res.render("pages/cadastroTermos", {
+            title: 'Termos e Condições'
+        });
+    },
+
     renderSenhaAlteradaSucesso: (req, res) => {
         res.render("pages/senhaAlteradaSucesso", {
             title: 'Senha Alterada'
@@ -179,14 +185,23 @@ module.exports = {
                         }
                     })
 
-                    fs.rename(backDoc.path, backDocPath, (err) => {
+                    fs.rename(backDoc.path, backDocPath, async (err) => {
                         if (err) {
                             console.log("Erro ao mover o documento do verso:", err);
                             return res.status(500).send("Erro ao mover o documento do verso.");
                         }
 
-                        console.log("Upload de documentos realizado com sucesso!");
-                        res.redirect('/cadastroEnvioConcluido');
+                        try {
+                            // Atualiza o campo A01_DOCUMENTACAO_ENVIADA no banco de dados
+                            await cadastro.update({ A01_DOCUMENTACAO_ENVIADA: true }, { where: { A01_ID: userId } }
+                            );
+
+                            console.log("Documentação enviada e banco de dados atualizado com sucesso!");
+                            res.redirect('/cadastroEnvioConcluido');
+                        } catch (dbError) {
+                            console.log("Erro ao atualizar o banco de dados:", dbError);
+                            return res.status(500).send("Erro ao atualizar o banco de dados.");
+                        }
                     });
                 });
             });
@@ -197,25 +212,29 @@ module.exports = {
         const { email, senha } = req.body;
         try {
             const user = await cadastro.findOne({ where: { A01_EMAIL: email } });
-
+    
             if (user && await bcrypt.compare(senha, user.A01_SENHA)) {
-
-                if (!user.A01_CONTA_APROVADA) {
-                    return res.render('pages/loginPage', { error: 'Sua conta ainda não foi aprovada.' });
+    
+                // Verifica se a documentação foi enviada
+                if (!user.A01_DOCUMENTACAO_ENVIADA) {
+                    req.session.userId = user.A01_ID; // Armazena o ID do usuário na sessão
+                    return res.render('pages/cadastroEnvioDocs'); // Redireciona para a tela de envio de documentos
                 }
-
+    
+                // Verifica se a conta foi aprovada
+                if (!user.A01_CONTA_APROVADA) {
+                    return res.render('pages/cadastroEnvioConcluido', { error: 'Sua conta ainda não foi aprovada.' });
+                }
+    
                 // Verifica se o usuário é administrador
-                if (user.A01_IsADMIN) {
+                if (user.A01_ISADMIN) {
                     // Armazena o status do administrador na sessão
                     req.session.user = {
                         nome: user.A01_NOME,
                         email: user.A01_EMAIL,
                         isAdmin: true
                     };
-                    return res.render('pages/adminInitialPage', {
-                        title: 'Administrador - Página Inicial',
-                        user: req.session.user
-                    });
+                    return res.redirect('/administrador'); // Redireciona para a tela do administrador
                 } else {
                     // Usuário comum
                     req.session.user = {
@@ -235,7 +254,7 @@ module.exports = {
             res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente.' });
         }
     },
-
+    
     logout: (req, res) => {
         req.session.destroy((err) => {
             if (err) {

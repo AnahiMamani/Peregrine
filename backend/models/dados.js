@@ -10,6 +10,10 @@ const cadastro = db.sequelize.define("USUARIA_01", {
     A01_NOME: {
         type: db.Sequelize.STRING(50),
         allowNull: false
+    },
+    A01_APELIDO: {
+        type: db.Sequelize.STRING(50),
+        allowNull: true
     }, 
     A01_EMAIL: {
         type: db.Sequelize.STRING(50),
@@ -42,6 +46,10 @@ const cadastro = db.sequelize.define("USUARIA_01", {
         defaultValue: false
     },
     A01_CONTA_APROVADA: {
+        type: db.Sequelize.BOOLEAN,
+        defaultValue: false
+    },
+    A01_DOCUMENTACAO_ENVIADA: {
         type: db.Sequelize.BOOLEAN,
         defaultValue: false
     }

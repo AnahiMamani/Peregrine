@@ -11,10 +11,9 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                             <div class="navbar-nav ms-auto">
-                                <a class="nav-link" href="#">admin@peregrine.com</a>
+                                <a class="nav-link" href="#">{{user.email}}</a>
                                 <a class="nav-link" href="/logout">Sair</a>
                             </div>
                         </div>
@@ -25,7 +24,7 @@
 
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1>Bem vindo, admin@peregrine.com</h1>
+                <h1>Bem vindo, {{{user.nome}}}</h1>
                 <img src="../public/images/img-adminInitialPage.png" alt="Montanha" class="img-fluid">
             </div>
         </div>
