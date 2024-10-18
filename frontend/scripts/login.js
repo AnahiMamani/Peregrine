@@ -42,10 +42,25 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.addEventListener('click', function (event) {
         const emailValue = inputEmail.value;
         const passwordValue = inputPassword.value;
-        
-        if (!emailValue || !passwordValue || emailErrorMessage.style.display === 'block') {
-            event.preventDefault(); // impede o envio do formulário
-            alert('Você precisa preencher todos os campos para se cadastrar :/');
+
+        let hasErrors = false; // Variável para rastrear se há erros
+
+        // Verifica se o email está preenchido e se a mensagem de erro está visível
+        if (!emailValue || emailErrorMessage.style.display === 'block') {
+            emailErrorMessage.textContent = 'Preencha seu e-mail para continuar';
+            emailErrorMessage.style.display = 'block';
+            hasErrors = true; // Define que houve erro
+        }
+
+        // Verifica se a senha está preenchida e se a mensagem de erro está visível
+        if (!passwordValue) {
+            passwordErrorMessage.textContent = 'Preencha sua senha para continuar';
+            passwordErrorMessage.style.display = 'block';
+            hasErrors = true; // Define que houve erro
+        }
+
+        if (hasErrors) {
+            event.preventDefault(); // impede o envio do formulário se houver erros
         }
     });
 });

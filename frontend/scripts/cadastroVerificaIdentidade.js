@@ -1,12 +1,14 @@
 //pagina u_cadastroVerificaIdentidade
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const inputName = document.getElementById('inputName');
     const inputCPF = document.getElementById('inputCPF');
     const inputBirthDate = document.getElementById('inputBirthDate');
     const submitButton = document.querySelector('button[type="submit"]');
+    const formFile3 = document.getElementById('formFile3'); 
 
-    //mensagens de erro
+    // mensagens de erro
     const nameErrorMessage = document.createElement('div');
     nameErrorMessage.className = 'text-danger';
     nameErrorMessage.style.display = 'none'; 
@@ -21,6 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
     ageErrorMessage.className = 'text-danger';
     ageErrorMessage.style.display = 'none';
     inputBirthDate.parentNode.insertBefore(ageErrorMessage, inputBirthDate.nextSibling);
+
+    const submitErrorMessage = document.createElement('div');
+    submitErrorMessage.className = 'text-danger';
+    submitErrorMessage.style.display = 'none';
+    submitButton.parentNode.insertBefore(submitErrorMessage, submitButton.nextSibling);
 
     // Validação do nome
     inputName.addEventListener('input', function () {
@@ -71,9 +78,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // validação antes de enviar o formulário
     submitButton.addEventListener('click', function (event) {
         const allInputsFilled = inputName.value && inputCPF.value && inputBirthDate.value && formFile3.files.length > 0;
+        clearErrorMessages(); // Limpa as mensagens de erro anteriores
+
         if (!allInputsFilled) {
             event.preventDefault(); // impede o envio do formulário sem tudo estar preenchido
-            alert('Você deve preencher todos os campos para conseguir enviar seu cadastro :/');
+            submitErrorMessage.textContent = 'Você deve preencher todos os campos para conseguir enviar seu cadastro :/';
+            submitErrorMessage.style.display = 'block';
+        } else {
+            submitErrorMessage.style.display = 'none'; // Esconde a mensagem de erro se todos os campos estiverem preenchidos
         }
     });
+
+    function clearErrorMessages() {
+        nameErrorMessage.style.display = 'none';
+        cpfErrorMessage.style.display = 'none';
+        ageErrorMessage.style.display = 'none';
+        submitErrorMessage.style.display = 'none';
+    }
 });

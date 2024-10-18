@@ -75,15 +75,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmPasswordValue = inputConfirmPassword.value;
         const passwordPattern = /^(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/;
 
-        if (!passwordPattern.test(passwordValue)) {
-            passwordErrorMessage.textContent = 'A senha deve conter no mínimo 8 dígitos, uma letra e um caractere especial';
-            passwordErrorMessage.style.display = 'block';
-        } else if (passwordValue !== confirmPasswordValue) {
+        // Limpa a mensagem de erro ao verificar
+        passwordErrorMessage.style.display = 'none';
+
+        if (passwordValue !== confirmPasswordValue) {
             passwordErrorMessage.textContent = 'As senhas não conferem';
             passwordErrorMessage.style.display = 'block';
-        } else {
-            passwordErrorMessage.style.display = 'none';
-        }
+        } else if (!passwordPattern.test(passwordValue)) {
+            passwordErrorMessage.textContent = 'A senha deve conter no mínimo 8 dígitos, uma letra e um caractere especial';
+            passwordErrorMessage.style.display = 'block';
+        } 
     }
 
     inputPassword.addEventListener('input', validatePassword);
@@ -105,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Máscara e validação do CPF (formato: 000.000.000-00)
     inputCPF.addEventListener('input', function () {
-        let cpfValue = inputCPF.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+        let cpfValue = inputCPF.value.replace(/\D/g, ''); // remove todos os caracteres não numéricos
         cpfValue = cpfValue.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
         inputCPF.value = cpfValue;
 
@@ -165,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordErrorMessage.textContent = 'Preencha os dois campos de senha para continuar';
             passwordErrorMessage.style.display = 'block';
         }
+
         if (!inputPhone.value) {
             phoneErrorMessage.textContent = 'Preencha seu telefone para continuar';
             phoneErrorMessage.style.display = 'block';
@@ -184,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Se não houver erros, envia o formulário
         if (inputName.value && inputEmail.value && inputPassword.value && inputConfirmPassword.value && inputPhone.value && inputCPF.value && inputBirthDate.value && termsCheckbox.checked) {
-            event.target.form.submit(); // Envia o formulário se todas as validações forem bem-sucedidas
+            event.target.form.submit(); // Envia o formulário se todas as validações passarem
         }
     });
 });
