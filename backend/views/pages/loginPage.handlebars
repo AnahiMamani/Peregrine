@@ -1,84 +1,90 @@
-    <div class="container-fluid center">
-        <div class="row">
-            <!--primeira coluna com conteúdo e forms -->
-            <div class="col">
-                <div class="p-3">
-                    <a href="/" class="back-arrow">←</a>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                    <main class="container mx-5">
-                        <h1 style="color: #99067E" class="text-center">Embarque na sua próxima aventura</h1>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-
-                        <!-- formulário de login -->
-                        <form action="/verificandoLogin" method="post" class="text-center">
-                            <div class="mb-3 text-start">
-                                <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                                <input name="email" type="email" class="form-control" id="inputEmail"
-                                    aria-describedby="emailHelp" placeholder="Ex.: peregrina@outlook.com">
-                            </div>
-                            <div class="mb-3 text-start">
-                                <label for="exampleInputEmail1" class="form-label">Senha</label>
-                                <input name="senha" type="password" class="form-control" id="inputPassword"
-                                    aria-describedby="emailHelp" placeholder="Informe a senha que criou no cadastro">
-                            </div>
-                            <button type="submit" class="btn btn-primary text-centerviar email">Entrar</button>
-                        </form>
-
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-
-                        <div class="text-center">
-                            <!-- links para cadastro ou esqueci minha senha -->
-                            <br>
-                            <a href="/senhaRecuperar" style="color: #99067E;">Esqueci minha senha</a>
-                            <br>
-                            <p class="text-muted">Não tem conta? <a href="/cadastro" class="linkcadastro" style="color: #99067E;">Cadastre-se agora</a></p>
-                        </div>
-                    </main>
+<div class="container-fluid center">
+    <div class="row">
+        <!--primeira coluna com conteúdo e forms -->
+        <div class="col">
+            <div class="p-3">
+                <a href="/" class="back-arrow">←</a>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
                 </div>
-            </div>
-            <!--segunda coluna com a imagem principal -->
-            <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
-                <img src="/public/images/img-loginPage.png" alt="Duas amigas caminham pela estrada"
-                    class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
-            </aside>
-        </div>
-    </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <main class="container mx-5">
+                    <h1 style="color: #99067E" class="text-center">Embarque na sua próxima aventura</h1>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
 
-    <script src="/scripts/login.js"></script>
+                    {{#if error}}
+                    <div class="alert alert-danger">{{error}}</div>
+                    {{/if}}
+
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <!-- formulário de login -->
+                    <form action="/verificandoLogin" method="post" class="text-center">
+                        <div class="mb-3 text-start">
+                            <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                            <input name="email" type="email" class="form-control" id="inputEmail"
+                                aria-describedby="emailHelp" placeholder="Ex.: peregrina@outlook.com">
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="exampleInputEmail1" class="form-label">Senha</label>
+                            <input name="senha" type="password" class="form-control" id="inputPassword"
+                                aria-describedby="emailHelp" placeholder="Informe a senha que criou no cadastro">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-centerviar email">Entrar</button>
+                    </form>
+
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <!-- links para cadastro ou esqueci minha senha -->
+                        <br>
+                        <a href="/senhaRecuperar" style="color: #99067E;">Esqueci minha senha</a>
+                        <br>
+                        <p class="text-muted">Não tem conta? <a href="/cadastro" class="linkcadastro"
+                                style="color: #99067E;">Cadastre-se agora</a></p>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!--segunda coluna com a imagem principal -->
+        <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
+            <img src="/public/images/img-loginPage.png" alt="Duas amigas caminham pela estrada"
+                class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
+        </aside>
+    </div>
+</div>
+
+<script src="/scripts/login.js"></script>

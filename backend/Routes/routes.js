@@ -41,7 +41,7 @@ router.get("/senhaAlteradaSucesso", Controller.renderSenhaAlteradaSucesso);
 
 
                 // Rota para primeira etapa
-                router.post('/cadastrarUsuarioEtapa1', Controller.cadastrarUsuarioEtapa1);
+                router.post('/funcadastro', Controller.funcadastro);
 
                 // Rota para upload de documentos (segunda tela)
                 router.post('/uploadDocumentos', Controller.uploadDocumentos);

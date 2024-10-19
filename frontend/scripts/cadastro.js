@@ -1,6 +1,7 @@
 //pagina u_cadastro.html
 
 document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector("form");
     const inputName = document.getElementById('inputName'); // campo de nome
     const inputEmail = document.getElementById('inputEmail');
     const inputPassword = document.getElementById('inputPassword');
@@ -58,44 +59,84 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Validação do email (deve conter @)
+    // Validação do e-mail (deve conter @ e pelo menos uma letra/número antes e depois)
     inputEmail.addEventListener('input', function () {
         const emailValue = inputEmail.value;
-        if (!emailValue.includes('@')) {
-            emailErrorMessage.textContent = 'Por favor, insira um email válido';
+        // Expressão regular para validar o e-mail
+        const emailPattern = /^(?=.*[A-Za-z0-9]).+@(?=.*[A-Za-z0-9]).+$/;
+
+        if (!emailPattern.test(emailValue)) {
+            emailErrorMessage.textContent = 'Por favor, insira um e-mail válido (deve conter pelo menos uma letra ou número antes e depois do @)';
             emailErrorMessage.style.display = 'block';
         } else {
             emailErrorMessage.style.display = 'none';
         }
     });
 
-    // Validação da senha e confirmação de senha (mínimo 8 caracteres, uma letra e um caractere especial)
-    function validatePassword() {
-        const passwordValue = inputPassword.value;
-        const confirmPasswordValue = inputConfirmPassword.value;
-        const passwordPattern = /^(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/;
+    // Verifica a senha enquanto o usuário digita no campo nova senha
+    inputPassword.addEventListener("input", function () {
+        const newPassword = inputPassword.value.trim();
 
-        // Limpa a mensagem de erro ao verificar
-        passwordErrorMessage.style.display = 'none';
+        // Limpa mensagens de erro anteriores
+        clearErrorMessages();
 
-        if (passwordValue !== confirmPasswordValue) {
-            passwordErrorMessage.textContent = 'As senhas não conferem';
-            passwordErrorMessage.style.display = 'block';
-        } else if (!passwordPattern.test(passwordValue)) {
-            passwordErrorMessage.textContent = 'A senha deve conter no mínimo 8 dígitos, uma letra e um caractere especial';
-            passwordErrorMessage.style.display = 'block';
-        } 
+        // Exibe mensagem se a senha não atender aos critérios
+        validateNewPassword(newPassword);
+    });
+
+    // Verifica as senhas enquanto o usuário digita no campo de confirmação
+    inputConfirmPassword.addEventListener("input", function () {
+        const newPassword = inputPassword.value.trim();
+        const confirmPassword = inputConfirmPassword.value.trim();
+
+        // Limpa mensagens de erro anteriores
+        clearErrorMessages();
+
+        // Exibe mensagem se as senhas não coincidem
+        if (newPassword !== confirmPassword) {
+            showError(inputConfirmPassword, "As senhas não conferem");
+        }
+    });
+
+    function showError(input, message) {
+        // Verifica se já existe uma mensagem de erro antes de adicionar
+        if (!input.parentElement.querySelector(".text-danger")) {
+            const errorElement = document.createElement("div");
+            errorElement.className = "text-danger mt-1";
+            errorElement.innerText = message;
+            input.parentElement.appendChild(errorElement);
+        }
     }
 
-    inputPassword.addEventListener('input', validatePassword);
-    inputConfirmPassword.addEventListener('input', validatePassword);
+    function clearErrorMessages() {
+        const errorMessages = document.querySelectorAll(".text-danger");
+        errorMessages.forEach(function (message) {
+            message.remove();
+        });
+    }
+
+    function validateNewPassword(password) {
+        const passwordCriteria = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{8,}$/; // Mínimo 8 caracteres, 1 letra, 1 caractere especial
+        if (!passwordCriteria.test(password)) {
+            showError(inputPassword, "A senha deve ter pelo menos 8 dígitos, incluindo uma letra e um caractere especial");
+            return false;
+        }
+        return true;
+    }
 
     // Máscara e validação do telefone (formato: (00) 00000-0000)
     inputPhone.addEventListener('input', function () {
         let phoneValue = inputPhone.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-        phoneValue = phoneValue.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
-        inputPhone.value = phoneValue;
 
+        // Limita a entrada a 11 dígitos
+        if (phoneValue.length > 11) {
+            phoneValue = phoneValue.slice(0, 11);
+        }
+
+        // Aplica a máscara
+        inputPhone.value = phoneValue.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+
+        // Valida o número de dígitos (somente os números, sem formatação)
         if (phoneValue.length !== 11) {
             phoneErrorMessage.textContent = 'Por favor, insira um telefone válido com 11 algarismos (DDD + telefone)';
             phoneErrorMessage.style.display = 'block';
@@ -106,10 +147,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Máscara e validação do CPF (formato: 000.000.000-00)
     inputCPF.addEventListener('input', function () {
-        let cpfValue = inputCPF.value.replace(/\D/g, ''); // remove todos os caracteres não numéricos
-        cpfValue = cpfValue.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
-        inputCPF.value = cpfValue;
+        let cpfValue = inputCPF.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
 
+        // Limita a entrada a 11 dígitos
+        if (cpfValue.length > 11) {
+            cpfValue = cpfValue.slice(0, 11);
+        }
+
+        // Aplica a máscara
+        inputCPF.value = cpfValue.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+
+        // Valida o número de dígitos (somente os números, sem formatação)
         if (cpfValue.length !== 11) {
             cpfErrorMessage.textContent = 'Por favor, insira um CPF válido com 11 algarismos. Se conter letra, substitua por 0';
             cpfErrorMessage.style.display = 'block';
@@ -139,6 +187,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Verificação de todos os campos antes do envio
     submitButton.addEventListener('click', function (event) {
         event.preventDefault(); // Impede o envio do formulário inicialmente
+        const newPassword = inputPassword.value.trim();
+        const confirmPassword = inputConfirmPassword.value.trim();
+        let valid = true;
 
         // Limpar mensagens de erro antes da validação
         nameErrorMessage.style.display = 'none';
@@ -149,6 +200,28 @@ document.addEventListener('DOMContentLoaded', function () {
         birthDateErrorMessage.style.display = 'none';
         termsErrorMessage.style.display = 'none';
 
+        // Remove mensagens de erro anteriores
+        clearErrorMessages();
+
+        // Verifica se os campos estão preenchidos
+        if (newPassword === "") {
+            showError(inputPassword, "Crie uma senha para continuar");
+            valid = false;
+        }
+
+        if (confirmPassword === "") {
+            showError(inputConfirmPassword, "Confirme a senha criada para continuar");
+            valid = false;
+        }
+
+        // Valida a nova senha
+        valid = validateNewPassword(newPassword) && valid;
+
+        // Verifica se as senhas coincidem
+        if (newPassword !== confirmPassword) {
+            showError(inputConfirmPassword, "As senhas não conferem");
+            valid = false;
+        }
         // Verifica se os campos estão preenchidos
         if (!inputName.value) {
             nameErrorMessage.textContent = 'Preencha seu nome para continuar';
@@ -185,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Se não houver erros, envia o formulário
-        if (inputName.value && inputEmail.value && inputPassword.value && inputConfirmPassword.value && inputPhone.value && inputCPF.value && inputBirthDate.value && termsCheckbox.checked) {
+        if (inputName.value && inputEmail.value && inputPassword.value && inputConfirmPassword.value && inputPhone.value && inputCPF.value && inputBirthDate.value && termsCheckbox.checked && valid) {
             event.target.form.submit(); // Envia o formulário se todas as validações passarem
         }
     });

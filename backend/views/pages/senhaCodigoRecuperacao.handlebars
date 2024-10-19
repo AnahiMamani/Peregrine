@@ -34,6 +34,12 @@
                     de recuperação recebido.</p>
                 <br>
 
+                {{#if error}}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {{/if}}
+
                 <!-- campo para inserir o codigo de verificacao recebido por email -->
                 <form action="/validaCodigo" method="POST" class="text-center">
                     <div class="mb-3 text-start">
@@ -45,7 +51,7 @@
                 </form>
 
                 <br>
-                <p class="text-muted text-center">Não recebeu o código?  Reenvie seu email novamente.
+                <p class="text-muted text-center">Não recebeu o código? Reenvie seu email novamente.
                     <a href="/senhaRecuperar" style="color: #99067E">Reenviar</a>
                 </p>
             </main>

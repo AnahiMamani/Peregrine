@@ -97,44 +97,85 @@ module.exports = {
         });
     },
 
-    cadastrarUsuarioEtapa1: (req, res) => {
+    funcadastro: async (req, res) => {
         const { nome, email, senha, confirmSenha, cpf, dataNascimento, celular, termos } = req.body;
-
+    
         // Verificar se os campos obrigatórios estão preenchidos
         if (!nome || !email || !senha || !confirmSenha || !cpf || !dataNascimento || !celular || !termos) {
             return res.render('pages/cadastroPage', { error: 'Todos os campos são obrigatórios.' });
         }
-
+    
         // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmSenha) {
             return res.render('pages/cadastroPage', { error: 'As senhas não coincidem. Tente novamente.' });
         }
-
+    
         // Verificar se o checkbox de termos foi marcado
         if (!termos) {
             return res.render('pages/cadastroPage', { error: 'Você deve concordar com os termos e condições.' });
         }
-
-        // Se todas as verificações passarem, prosseguir com o hash da senha e a criação do usuário
-        bcrypt.hash(senha, saltRounds)
-            .then((hashedPassword) => {
-                return cadastro.create({
-                    A01_NOME: nome,
-                    A01_EMAIL: email,
-                    A01_SENHA: hashedPassword,
-                    A01_CPF: cpf,
-                    A01_DATA_NASCIMENTO: dataNascimento,
-                    A01_CELULAR: celular
-                });
-            })
-            .then((usuario) => {
-                req.session.userId = usuario.A01_ID; // Armazena o ID do usuário na sessão
-                res.redirect('/cadastroEnvioDocs');
-            })
-            .catch((error) => {
-                console.log("Erro ao gravar os dados:", error);
-                res.render('pages/cadastroPage', { error: 'Erro ao cadastrar. Tente novamente.' });
+    
+        //se tudo ok prosseguir com o hash da senha e a criação do usuário
+        try {
+            const hashedPassword = await bcrypt.hash(senha, saltRounds);
+            
+            const usuario = await cadastro.create({
+                A01_NOME: nome,
+                A01_EMAIL: email,
+                A01_SENHA: hashedPassword,
+                A01_CPF: cpf,
+                A01_DATA_NASCIMENTO: dataNascimento,
+                A01_CELULAR: celular
             });
+    
+            //Enviando email de confirmação
+            const transport = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS,
+                }
+            });
+    
+            await transport.sendMail({
+                from: 'Peregrine<peregrine.planoviagem@gmail.com>',
+                to: email,
+                subject: 'Bem-vindo ao Peregrine!',
+                html: `
+                    <h1 style="color: #99067E; text-align: center;">Bem-vindo ao Peregrine!</h1>
+                    <p style="text-align: justify;">Olá ${nome},</p>
+                    <p style="text-align: justify;">
+                        Seu cadastro foi realizado com sucesso! Estamos felizes em tê-lo conosco no <strong>Peregrine</strong>.
+                    </p>
+                    <p style="text-align: justify;">
+                        ${!usuario.A01_DOCUMENTACAO_ENVIADA ? 
+                            'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.' 
+                            : 
+                            'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
+                        }
+                    </p>
+                    <p style="text-align: justify;">
+                        Caso tenha alguma dúvida, entre em contato conosco. 
+                    </p>
+                    <p style="text-align: justify;">Atenciosamente,</p>
+                    <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
+                    <br><br><hr>
+                    <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
+                `,
+                text: `Olá ${nome}, seu cadastro foi realizado com sucesso! ${!usuario.A01_DOCUMENTACAO_ENVIADA ? 
+                    'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.' 
+                    : 
+                    'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
+                }`,
+            });
+            req.session.userId = usuario.A01_ID; // Armazena o ID do usuário na sessão
+            res.redirect('/cadastroEnvioDocs');
+        } catch (error) {
+            console.log("Erro ao gravar os dados:", error);
+            res.render('pages/cadastroPage', { error: 'Erro ao cadastrar, CPF ou Email já cadastrados. Tente novamente.' });
+        }
     },
 
     uploadDocumentos: (req, res) => {
@@ -251,9 +292,11 @@ module.exports = {
             }
         } catch (error) {
             console.error('Erro ao realizar o login:', error);
-            res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente.' });
+            // Renderiza a página de login com a mensagem de erro
+            res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
         }
     },
+    
     
     logout: (req, res) => {
         req.session.destroy((err) => {
@@ -341,7 +384,7 @@ module.exports = {
             res.redirect('/senhaCriarNova');
         } else {
             res.render('pages/senhaCodigoRecuperacao', {
-                codigoError: 'Código inválido. Tente novamente.',
+                error: 'Código inválido. Tente novamente.',
                 showCodeField: true,
                 email: req.session.emailRecuperacao // Passa o email para a renderização da página
             });

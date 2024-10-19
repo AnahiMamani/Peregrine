@@ -8,24 +8,28 @@ document.addEventListener('DOMContentLoaded', function () {
     // Mensagens de erro
     const emailErrorMessage = document.createElement('div');
     emailErrorMessage.className = 'text-danger';
-    emailErrorMessage.style.display = 'none'; 
+    emailErrorMessage.style.display = 'none';
     inputEmail.parentNode.insertBefore(emailErrorMessage, inputEmail.nextSibling);
 
     const passwordErrorMessage = document.createElement('div');
     passwordErrorMessage.className = 'text-danger';
-    passwordErrorMessage.style.display = 'none'; 
+    passwordErrorMessage.style.display = 'none';
     inputPassword.parentNode.insertBefore(passwordErrorMessage, inputPassword.nextSibling);
 
-    // Validação do e-mail (deve conter @)
+    // Validação do e-mail (deve conter @ e pelo menos uma letra/número antes e depois)
     inputEmail.addEventListener('input', function () {
         const emailValue = inputEmail.value;
-        if (!emailValue.includes('@')) {
-            emailErrorMessage.textContent = 'Por favor, insira um e-mail válido';
+        // Expressão regular para validar o e-mail
+        const emailPattern = /^(?=.*[A-Za-z0-9]).+@(?=.*[A-Za-z0-9]).+$/;
+
+        if (!emailPattern.test(emailValue)) {
+            emailErrorMessage.textContent = 'Por favor, insira um e-mail válido (deve conter pelo menos uma letra ou número antes e depois do @)';
             emailErrorMessage.style.display = 'block';
         } else {
             emailErrorMessage.style.display = 'none';
         }
     });
+
 
     // Validação da senha (verifica se está preenchida)
     inputPassword.addEventListener('input', function () {
