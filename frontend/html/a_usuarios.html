@@ -9,7 +9,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Relatórios</title>
+    <title>Usuários</title>
 </head>
 
 <body>
@@ -46,14 +46,22 @@
                         </div>
                     </div>
 
-                    <!-- container principal com a div de gerar relatorio -->
+                    <!-- container principal -->
                     <main class="container">
-                        <h1 style="color: #99067E">Relatórios</h1>
+                        <h1 style="color: #99067E">Usuários</h1>
                         <br>
-                        <!-- campo para gerar relatorio de Destinos mais visitados-->
+                        <!-- div de cantos arredondados-->
                         <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container" style="min-height: 70vh;">
-                            <div class="col-md-4 rounded-4 container p-4" style="width: 20rem; background-color: #dee2e6;">
-                                <h4 style="color: #99067E">Destinos mais visitados</h4>
+
+                            <!-- campo para botao gerenciar usuários -->
+                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; background-color: #dee2e6;">
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
+                                    </div>
+                                </div>
+
+                                <img src="../public/images/icon-gerenciarUsuario.png" alt="Ícone de menina - gerenciar usuário">
 
                                 <div class="row">
                                     <div class="col">
@@ -61,16 +69,46 @@
                                     </div>
                                 </div>
 
-                                <img src="../public/images/icon_mundoRelatorio.png" alt="Ícone de avião sobrevoando em volta do mundo">
-
-                                <div class="row">
-                                    <div class="col">
-                                        &nbsp;
-                                    </div>
-                                </div>
-
-                                <a href="#" class="btn btn-primary btn-lg w-75">Gerar relatório</a>
+                                <a href="#" class="btn btn-primary btn-lg w-100">Gerenciar usuário</a>
                             </div>
+
+                            <!-- campo para botao gerenciar usuários -->
+                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; background-color: #dee2e6;">
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
+                                    </div>
+                                </div>
+
+                                <img src="../public/images/icon-aprovarUsuario.png" alt="Ícone de aprovado">
+
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
+                                    </div>
+                                </div>
+
+                                <a href="#" class="btn btn-primary btn-lg w-100">Aprovar usuário</a>
+                            </div>
+
+                            <!-- campo para botao gerenciar usuários -->
+                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; background-color: #dee2e6;">
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
+                                    </div>
+                                </div>
+
+                                <img src="../public/images/icon-verificarDenuncia.png" alt="Ícone de megafone - denúncia">
+
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
+                                    </div>
+                                </div>
+
+                                <a href="#" class="btn btn-primary btn-lg w-100">Verificar denúncias</a>
+                            </div>                            
                         </div>
                     </main>
 
