@@ -88,7 +88,6 @@ ul {
     justify-content: center;
 }
 
-
 .btnRoxo {
     background-color: #99067E;
     color: #fff;
@@ -106,9 +105,8 @@ ul {
     color: #fff;
 }
 
-.btn:hover
- {
-    background-color: #cf70be; /* Cor para hover e foco */
+.btn:hover {
+    background-color: #cf70be; 
     border-color: #cf70be;
     transition: ease-in 0.4s;
 }

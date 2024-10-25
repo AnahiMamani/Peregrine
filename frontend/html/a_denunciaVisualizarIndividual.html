@@ -54,61 +54,58 @@
                         <!-- nesta div, "overflow-y: auto" adiciona rolagem vertical se necessário e "height: 70vh" define a altura máxima da caixa das denúncias-->
                         <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container" style="height: 70vh; overflow-y: auto;">
 
-                            <!-- coluna que contêm o ID -->
-                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 10rem; height: 60vh;">
+                            <!--div com as informacoes da denuncia individual-->
+                            <div class="col rounded-4 container p-4 my-4" style="width: 10rem; height: 60vh;">
+                                <!-- título da denuncia -->
+                                <h3 id="tituloDenuncia" class="text-start" style="color: #99067E">Pessoa sem noção!</h3><br>
+                                
+                                <!-- texto descritivo da denuncia -->
+                                <p id="descricaoDenuncia" style="font-size: 1.3rem; text-align: justify;">Usuária Fulana de tal roubou meu salgadinho no meio da viagem de ida ao destino, postou fotos feias e roncava demais!</p>
+
                                 <div class="row">
                                     <div class="col">
-                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
                                     </div>
                                 </div>
 
-                                <br><p id="idDenuncia">562</p><br>
-                                <br><p id="idDenuncia">562</p><br>
-                                <br><p id="idDenuncia">562</p><br>
-                                <br><p id="idDenuncia">562</p><br>
-                            </div>
-
-                            <!-- coluna que contém o nome da usuária denunciada -->
-                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; height: 60vh;">
-                                <div class="row">
-                                    <div class="col">
-                                        <h4 style="text-transform: uppercase;">Denunciada</h4>
-                                    </div>
-                                </div>
-
-                                <br><p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                                <br><p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                                <br><p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                                <br><p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                            </div>
-
-                            <!-- coluna que contém a data da denúncia -->
-                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 15rem; height: 60vh;">
-                                <div class="row">
-                                    <div class="col">
-                                        <h4 style="text-transform: uppercase;">Data</h4>
-                                    </div>
-                                </div>
-
-                                <br><p id="dateDenuncia">31/12/2023</p><br>
-                                <br><p id="dateDenuncia">31/12/2023</p><br>
-                                <br><p id="dateDenuncia">31/12/2023</p><br>
-                                <br><p id="dateDenuncia">31/12/2023</p><br>
-                            </div>    
+                                <!-- texto descritivo da denuncia -->
+                                <p id="nameDenunciada" style="font-size: 1.3rem; text-align: justify;"><b>Usuária denunciada: </b> &nbsp; Adriana Silva e Silva</p>    
+                                
+                                <!-- texto descritivo da denuncia -->
+                                <p id="nameViagem" style="font-size: 1.3rem; text-align: justify;"><b>Nome da viagem: </b>  &nbsp; Reveillon em Copacabana</p>  
                             
-                            <!-- coluna que contém os botoes para exibir os detalhes da denuncia -->
-                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; height: 60vh;">
+                                <!-- texto descritivo da denuncia -->
+                                <p id="dateDenuncia" style="font-size: 1.3rem; text-align: justify;"><b>Data da viagem: </b>  &nbsp; 31/12/2023</p>
+
                                 <div class="row">
                                     <div class="col">
-                                        <h4 style="text-transform: uppercase;">Ação</h4>
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        &nbsp;
                                     </div>
                                 </div>
 
-                                <a id="verificarDenuncia" href="#" class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                                <a id="verificarDenuncia" href="#" class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                                <a id="verificarDenuncia" href="#" class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                                <a id="verificarDenuncia" href="#" class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                            </div>  
+                                <!-- div para conter os botões -->
+                                <div class="row d-flex justify-content-between">
+                                    <!-- botao para cancelar denuncia -->
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <button type="submit" class="btn btn-primary w-75 bg-success">Cancelar denúncia</button>                                        
+                                    </div>
+
+                                    <!-- botao para banir usuário -->
+                                    <div class="col-md-4 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary w-75 bg-danger">Banir usuário</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </main>
 
