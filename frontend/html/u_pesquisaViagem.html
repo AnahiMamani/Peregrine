@@ -52,32 +52,32 @@
                     <!-- container principal -->
                     <main class="container">
                         <!-- imagem principal -->
-                        <div class="d-flex center align-items-center justify-content-center container position-relative" style="height: 30vh; margin-top: 22vh; z-index: 1000;">
-                            <img src="../public/images/img-u-pesquisaViagemPrincipal.png" alt="Garota admira paisagem tropical">
+                        <div class="d-flex center align-items-center justify-content-center container position-relative" style="height: 30vh; margin-top: 22vh; margin-bottom: 2vh; z-index: 1000;">
+                            <img src="../public/images/img-u-pesquisaViagemPrincipal.png" alt="Garota contempla paisagem tropical">
                         </div>
 
                         <!--container para a pesquisa de viagem com os filtros específicos-->
-                        <div class="d-flex align-items-center justify-content-center container position-absolute p-4 rounded-4" style="height: 20vh; width: 65vw; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); z-index: 1001; margin-top: 8vh; left: 50%; transform: translateX(-50%);">
+                        <div class="d-flex my-5 align-items-center justify-content-center container position-absolute p-4 rounded-4" style="height: 20vh; width: 65vw; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); z-index: 1001; left: 50%; transform: translateX(-50%);">
                             <!-- campo para inserir a localização (Origem) desejada para a viagem (filtro)-->  
-                            <div class="col-md-4 rounded-4 container p-4 my-4 d-flex flex-column align-items-center" style="width: 15rem;">
+                            <div class="col-md-4 rounded-4 container p-4 mx-0 my-4 d-flex flex-column align-items-center" style="width: 15rem;">
                                 <div class="d-flex align-items-center mb-2">
                                     <img src="../public/images/icon-origem-localizacao.png" alt="Ícone de localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
                                     <h4 class="m-0">Origem</h4>
                                 </div>
-                                <input type="search" name="" id="" placeholder="Onde você está?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
+                                <input type="text" name="searchOrigem" id="searchOrigem" placeholder="Onde você está?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
                             </div>
                             
                             <!-- campo para inserir a localização (Destino) desejada para a viagem (filtro)-->
-                            <div class="col-md-4 rounded-4 container p-4 my-4 d-flex flex-column align-items-center" style="width: 15rem;">
+                            <div class="col-md-4 rounded-4 container mx-0 p-4 my-4 d-flex flex-column align-items-center" style="width: 15rem;">
                                 <div class="d-flex align-items-center mb-2">
                                     <img src="../public/images/icon-destino-mundo.png" alt="Ícone de mundo - localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
                                     <h4 class="m-0">Destino</h4>
                                 </div>
-                                <input type="search" name="" id="" placeholder="Para onde você vai?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
+                                <input type="text" name="searchDestino" id="searchDestino" placeholder="Para onde você vai?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
                             </div>
                            
                             <!-- campo para inserir o período desejado para a viagem (filtro)-->                           
-                            <div class="col-md-4 container p-4 my-4" style="width: 25rem;">
+                            <div class="col-md-4 container p-4 mx-0 my-4" style="width: 25rem;">
                                 <!-- div para "Embarque", ícone de data, e "Retorno" -->
                                 <div class="d-flex align-items-center justify-content-center mb-2">
                                     <h4 class="m-0">Embarque</h4>
@@ -87,25 +87,25 @@
                                 
                                 <!-- grupo de inputs para os campos de data (embarque/retorno)-->
                                 <div class="input-group">
-                                    <input type="date" placeholder="dd/mm/aaaa" class="form-control text-center rounded-start-4" style="height: 2.5rem;">
-                                    <input type="date" placeholder="dd/mm/aaaa" class="form-control text-center rounded-end-4" style="height: 2.5rem;">
+                                    <input type="date" name="searchDataEmbarque" id="searchDataEmbarque" placeholder="dd/mm/aaaa" class="form-control text-center rounded-start-4" style="height: 2.5rem;">
+                                    <input type="date" name="searchDataRetorno" id="searchDataRetorno" placeholder="dd/mm/aaaa" class="form-control text-center rounded-end-4" style="height: 2.5rem;">
                                 </div>
                             </div>
 
                             <!-- campo para inserir a quantidade máxima de pessoas para a viagem (filtro)-->
-                            <div class="col-md-4 text-center d-flex flex-column align-items-center" style="width: 5rem;">
-                                <!-- Ícone centralizado acima do input -->
+                            <div class="col-md-4 mx-0 text-center d-flex flex-column align-items-center" style="width: 5rem;">
+                                <!-- ícone centralizado acima do input -->
                                 <img src="../public/images/icon-perfilPreto.png" alt="Ícone de perfil na cor preta" style="height: 1.5rem; margin-bottom: 0.5rem;">
-                                <!-- Input de quantidade de pessoas -->
-                                <input type="search" name="" id="" placeholder="02" class="form-control text-center rounded-4" style="height: 2.5rem; width: 4rem;">
+                                <!-- input de quantidade de pessoas -->
+                                <input type="number" name="searchVagas" id="searchVagas" placeholder="02" class="form-control text-center rounded-4" style="height: 2.5rem; width: 4rem;">
                             </div>
 
                             <!-- coluna do botão de pesquisa (botão arredondado roxo com lupa) -->
-                            <div class="col-md-4 d-flex align-items-center justify-content-center" style="width: 5rem;">
+                            <div class="col-md-4 d-flex align-items-center justify-content-center" style="width: 7rem;">
                                 <div class="d-flex align-items-center justify-content-center" 
                                      style="background-color: #99067E; border-radius: 50%; height: 4rem; width: 4rem;">
                                     <!-- botão de pesquisa da viagem que vai direcionar para a página de resultados -->
-                                    <a href="#">
+                                    <a href="#" name="searchViagem" id="searchViagem">
                                         <img src="../public/images/icon-pesquisa-lupa.png" alt="Ícone de lupa - pesquisa" style="height: 2rem;">
                                     </a>
                                 </div>
