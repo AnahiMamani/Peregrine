@@ -53,20 +53,46 @@
 
                         <!-- div de cantos arredondados-->
                         <!-- nesta div, "overflow-y: auto" adiciona rolagem vertical se necessário e "height: 60vh" define a altura máxima da caixa das denúncias-->
-                        <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container" style="height: 70vh; overflow-y: auto;">
+                        <div class="row rounded-4 border border-2 border-secondary container" style="height: 70vh; overflow-y: auto;">
 
-                            <!-- coluna que contém o nome completo da usuária-->
-                            <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 15rem; height: 60vh;">
-                                <div class="row">
-                                    <div class="col">
-                                        <h4 style="text-transform: uppercase;">Nome</h4>
+                            <!-- coluna que contém o form de cadastro -->
+                            <div class="container rounded-4 container p-1 my-2" style="width: 50rem; height: 60vh; margin-left: 2rem;">
+                                <form class="row d-flex align-items-start justify-content-start text-start" action="/cadastrarUsuarioAdm" method="post">
+                                    <div class="col-md-8">
+                                        <label for="exampleInputText1" class="form-label">Nome completo</label>
+                                        <input name="nome" type="name" class="form-control rounded-5 mb-2" id="inputName"
+                                            placeholder="Insira seu nome completo">
                                     </div>
+                                    <div class="col-md-8">
+                                        <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                                        <input name="email" type="email" class="form-control rounded-5 mb-2" id="inputEmail"
+                                            placeholder="Informe o e-mail que você mais utiliza">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="inputCPF" class="form-label">CPF</label>
+                                        <input type="text" class="form-control rounded-5 mb-2" id="inputCPF" 
+                                            placeholder="Ex: 0000000000">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="exampleInputPhone1" class="form-label">Celular</label>
+                                        <input name="celular" type="tel" class="form-control rounded-5 mb-2" id="inputPhone"
+                                            placeholder="Ex.: (00) 00000-0000">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="exampleInputPassword1" class="form-label">Senha</label>
+                                        <input name="senha" type="password" class="form-control rounded-5 mb-2" id="inputPassword"
+                                            placeholder="Crie uma senha">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="exampleInputPassword1" class="form-label">Confirme a senha</label>
+                                        <input type="password" class="form-control rounded-5 mb-2" id="inputConfirmPassword"
+                                            placeholder="Insira a mesma senha que criou acima">
+                                    </div>
+                                </form>
+                                
+                                <div class="col-md-8 d-flex align-items-end justify-content-end text-end" style="margin-left: 40rem;">
+                                    <button type="submit" class="btn btn-primary w-75 h-25">Criar administrador</button>
                                 </div>
-
-                                <br><p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                                <br><p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                                <br><p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                                <br><p id="nameUsuaria">Adriana Silva e Silva</p><br>
                             </div>
                         </div>
                     </main>
