@@ -133,7 +133,7 @@
     margin-bottom: 1rem;
 }
 
-.filtro-header h4 {
+.filtro-header h3 {
     color: #99067E;
     text-align: center;
     margin: 0;
@@ -142,7 +142,7 @@
 .filtro-close {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     cursor: pointer;
 }
 
@@ -164,12 +164,28 @@ hr {
     margin: 1rem 0;
 }
 
-.filtro-section input[type="text"] {
+.filtro-section input[type="number"] {
     width: 45%;
     margin-right: 0.5rem;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.custo-inputs {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-group-custo {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group-custo label {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.25rem;
 }
 
 .btn-aplicar {
@@ -182,6 +198,42 @@ hr {
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
+}
+
+/* estilização do botao(radio) de avaliação de organizadora */
+.radio-button-avaliacao {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #555;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.radio-button-avaliacao input[type="radio"] {
+    display: none;
+}
+
+.radio-button-avaliacao span {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.radio-button-avaliacao:hover {
+    background-color: #e0e0e0;
+}
+
+.radio-button-avaliacao input[type="radio"]:checked + span {
+    background-color: #99067E;
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
 }
 
 
