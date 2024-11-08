@@ -96,26 +96,26 @@ module.exports = {
 
     funcadastro: async (req, res) => {
         const { nome, email, senha, confirmSenha, cpf, dataNascimento, celular, termos } = req.body;
-    
+
         // Verificar se os campos obrigatórios estão preenchidos
         if (!nome || !email || !senha || !confirmSenha || !cpf || !dataNascimento || !celular || !termos) {
             return res.render('pages/cadastroPage', { error: 'Todos os campos são obrigatórios.' });
         }
-    
+
         // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmSenha) {
             return res.render('pages/cadastroPage', { error: 'As senhas não coincidem. Tente novamente.' });
         }
-    
+
         // Verificar se o checkbox de termos foi marcado
         if (!termos) {
             return res.render('pages/cadastroPage', { error: 'Você deve concordar com os termos e condições.' });
         }
-    
+
         try {
             // Criptografando a senha
             const hashedPassword = await bcrypt.hash(senha, saltRounds);
-    
+
             // Criando o usuário na tabela 'Usuario'
             const usuario = await Usuario.create({
                 A01_EMAIL: email,
@@ -124,7 +124,7 @@ module.exports = {
                 A01_APROVADA: 0, // Aprovado ou não (0 ou 1)
                 A01_DOCUMENTACAO: 0 // Defina se a documentação foi enviada
             });
-    
+
             // Criando o viajante na tabela 'Viajante'
             const viajante = await Viajante.create({
                 A01_ID: usuario.A01_ID,  // Relacionando com o 'Usuario'
@@ -133,7 +133,7 @@ module.exports = {
                 A02_DATA_NACSI: dataNascimento,
                 A02_CELULAR: celular
             });
-    
+
             // Enviar email de confirmação
             const transport = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -144,26 +144,23 @@ module.exports = {
                     pass: process.env.EMAIL_PASS,
                 }
             });
-    
+
             await transport.sendMail({
                 from: 'Peregrine<peregrine.planoviagem@gmail.com>',
                 to: email,
-                subject: 'Bem-vindo ao Peregrine!',
-                html: `<h1 style="color: #99067E; text-align: center;">Bem-vindo ao Peregrine!</h1>
-                    <p style="text-align: justify;">Olá ${nome},</p>
-                    <p style="text-align: justify;">
-                        Seu cadastro foi realizado com sucesso! Estamos felizes em tê-lo conosco no <strong>Peregrine</strong>.
-                    </p>`,
-                text: `Olá ${nome}, seu cadastro foi realizado com sucesso!`
+                subject: 'Confirmação de cadastro',
+                html: '<h1 style="color: #99067E; text-align: center;">Bem-vinda à Peregrine!</h1><p style="text-align: justify;">Olá Peregrina!</p><p style="text-align: justify;">Estamos muito felizes em ter você a bordo em <strong>Peregrine</strong> - o planejador de viagens exclusivo para mulheres! Agora você está pronta para começar a sonhar e planejar suas próximas aventuras pelo mundo.</p><p style="text-align: justify;">Com a sua conta, você pode criar viagens, explorar novos destinos e se conectar com outras viajantes apaixonadas por descobertas.</p><p style="text-align: justify;">Estamos ansiosas para fazer parte da sua jornada e ajudar a tornar cada viagem única e inesquecível!</p><p style="text-align: justify;">Se você tiver qualquer dúvida, estamos à disposição.</p><p style="text-align: justify;">Boas viagens!</p><br><p style="text-align: justify;">Com carinho,</p><p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p><br><br><hr><h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4><h4 style="color: #777; text-align: center;">Você está recebendo esta mensagem porque se cadastrou no site <strong>Peregrine</strong>.</h4>',
+                text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
             });
-    
+
             req.session.userId = usuario.A01_ID; // Armazena o ID do usuário na sessão
             res.redirect('/cadastroEnvioDocs');
         } catch (error) {
             console.log("Erro ao gravar os dados:", error);
             res.render('pages/cadastroPage', { error: 'Erro ao cadastrar, CPF ou Email já cadastrados. Tente novamente.' });
         }
-    }, 
+    },
+
 
     uploadDocumentos: (req, res) => {
         const userId = req.session.userId; // Pegue o userId da sessão
@@ -240,27 +237,27 @@ module.exports = {
         const { email, senha } = req.body;
         try {
             const user = await Usuario.findOne({ where: { A01_EMAIL: email } });
-    
+
             if (!user) {
                 return res.render('pages/loginPage', { error: 'Usuário não encontrado!' });
             }
-    
+
             if (await bcrypt.compare(senha, user.A01_SENHA)) {
-    
+
                 // Verifica se o usuário é administrador
                 if (!user.A01_PERFIL) {
-    
+
                     // Verifica se a documentação foi enviada
                     if (!user.A01_DOCUMENTACAO) {
                         req.session.userId = user.A01_ID; // Armazena o ID do usuário na sessão
                         return res.render('pages/cadastroEnvioDocs'); // Redireciona para a tela de envio de documentos
                     }
-    
+
                     // Verifica se a conta foi aprovada
                     if (!user.A01_APROVADA) {
                         return res.render('pages/cadastroEnvioConcluido', { error: 'Sua conta ainda não foi aprovada.' });
                     }
-    
+
                     // Usuário comum
                     req.session.user = {
                         nome: user.A01_NOME,

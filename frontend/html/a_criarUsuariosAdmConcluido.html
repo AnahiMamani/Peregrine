@@ -9,30 +9,51 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Cadastre-se</title>
+    <title>Usuários administradores</title>
 </head>
 
 <body>
     <div class="container-fluid center">
         <div class="row">
-            <!--pagina inicial do upload de documentos-->
             <div class="col">
                 <div class="p-3">
-                    <!-- seta para voltar -->
-                    <a href="#" class="back-arrow">←</a>
+                    <!-- seta para voltar e menu -->
+                    <div class="row">
+                        <div class="col">
+                            <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
+                                <div class="container-fluid">
+            
+                                    <a class="back-arrow" href="#">←</a>
+                                    
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    
+                                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                                        <div class="navbar-nav ms-auto">
+                                            <a class="nav-link" href="#" style="color: #050505; text-transform: uppercase; margin-right: 60px;">admin@peregrine.com</a>
+                                            <a class="nav-link" href="#" style="color: #99067E; text-transform: uppercase;">Sair</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>    
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col">
                             &nbsp;
                         </div>
                     </div>
-                    <main class="container">
-                        <h1 style="color: #99067E">Envio concluído</h1>
+
+                    <!-- container principal -->
+                    <main class="container text-center">
+                        <h1 style="color: #99067E">Operação realizada com sucesso</h1>
                         <div class="row">
                             <div class="col">
                                 &nbsp;
                             </div>
                         </div>
-                        <p style="font-size: 1.3rem; text-align: justify;">Seus dados e arquivos foram enviados para a análise de segurança. Fique atenta a sua caixa de e-mail, em até 3 dias úteis você receberá uma mensagem sobre o resultado da verificação do seu perfil.</p>
                         <div class="row">
                             <div class="col">
                                 &nbsp;
@@ -42,7 +63,7 @@
 
                         <!-- imagem principal -->
                         <div class="d-flex center align-items-center justify-content-center container" style="min-height: 125px;">
-                            <img src="../public/images/icon-analisandoCadastro.png" alt="Ícone de etapa de análise" style="height: 30vh;">
+                            <img src="../public/images/icon-aprovarUsuariosConcluido.png" alt="Ícone de conclusão de etapa" style="height: 30vh;">
                         </div>
 
                         <div class="row">
@@ -52,16 +73,15 @@
                         </div>
                         <br><br>
 
-                        <!--botão de confirmação analise de cadastro -->
+                        <!--botão de confirmação de criação de usuário administrador -->
                         <div class="d-flex align-items-center justify-content-center">
                             <button type="submit" class="btn btn-primary">Ok, entendi!</button>
                         </div>
                     </main>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="../scripts/cadastroEnvioDoc.js"></script>
 </body>
 </html>

@@ -28,6 +28,15 @@ ul {
     font-family: "Montserrat", sans-serif;
 }
 
+.bgIndexAdm {
+    background-image: url(../public/images/img-a-admIndex.png); 
+    background-size: cover; 
+    background-position: center;
+    height: 100vh;
+    padding-top: 0;
+    margin-top: 0;
+}
+
 .setaVoltar {
     text-decoration: none; 
     font-size: 3rem;
@@ -79,7 +88,6 @@ ul {
     justify-content: center;
 }
 
-
 .btnRoxo {
     background-color: #99067E;
     color: #fff;
@@ -97,9 +105,8 @@ ul {
     color: #fff;
 }
 
-.btn:hover
- {
-    background-color: #cf70be; /* Cor para hover e foco */
+.btn:hover {
+    background-color: #cf70be; 
     border-color: #cf70be;
     transition: ease-in 0.4s;
 }
