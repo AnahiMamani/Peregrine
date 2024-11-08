@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Controller = require("../Controllers/control");
+const Controller = require("../Controllers/ControllerUsuariaViajante");
 
 // Rota para renderizar o Index
 router.get("/", Controller.renderIndex);
@@ -8,8 +8,7 @@ router.get("/", Controller.renderIndex);
 // Rota para renderizar o perfil
 router.get("/perfil", Controller.renderPerfil);
 
-// Rota para renderizar a Página Inicial do Admin
-router.get("/administrador", Controller.renderAdmin);
+
 
 // Rota para renderizar a página de login
 router.get("/login", Controller.renderLogin);

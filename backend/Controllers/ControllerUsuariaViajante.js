@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
-const cadastro = require("../models/dados");
+const Usuario = require('../models/Usuario'); // Verifique o caminho correto do arquivo de modelo
+const Viajante = require('../models/Viajante');
+
 const saltRounds = 10; // Define o número de salt rounds para o hash da senha
 require('dotenv').config(); // Para usar variáveis de ambiente do arquivo .env
 const crypto = require('crypto'); // Para gerar o código de verificação
@@ -21,8 +23,8 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)); // Nomeia o arquivo com um identificador único
     }
 });
-
 const upload = multer({ storage: storage });
+
 module.exports = {
     renderIndex: (req, res) => {
         res.render('pages/telaInicial', {
@@ -30,15 +32,10 @@ module.exports = {
             user: req.session.user // Passa os dados do usuário logado
         });
     },
+
     renderPerfil: (req, res) => {
         res.render('pages/perfilPage', {
             title: 'perfil',
-            user: req.session.user
-        });
-    },
-    renderAdmin: (req, res) => {
-        res.render('pages/adminPage', {
-            title: 'Administrador - Página Inicial',
             user: req.session.user
         });
     },
@@ -99,36 +96,45 @@ module.exports = {
 
     funcadastro: async (req, res) => {
         const { nome, email, senha, confirmSenha, cpf, dataNascimento, celular, termos } = req.body;
-
+    
         // Verificar se os campos obrigatórios estão preenchidos
         if (!nome || !email || !senha || !confirmSenha || !cpf || !dataNascimento || !celular || !termos) {
             return res.render('pages/cadastroPage', { error: 'Todos os campos são obrigatórios.' });
         }
-
+    
         // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmSenha) {
             return res.render('pages/cadastroPage', { error: 'As senhas não coincidem. Tente novamente.' });
         }
-
+    
         // Verificar se o checkbox de termos foi marcado
         if (!termos) {
             return res.render('pages/cadastroPage', { error: 'Você deve concordar com os termos e condições.' });
         }
-
-        //se tudo ok prosseguir com o hash da senha e a criação do usuário
+    
         try {
+            // Criptografando a senha
             const hashedPassword = await bcrypt.hash(senha, saltRounds);
-
-            const usuario = await cadastro.create({
-                A01_NOME: nome,
+    
+            // Criando o usuário na tabela 'Usuario'
+            const usuario = await Usuario.create({
                 A01_EMAIL: email,
                 A01_SENHA: hashedPassword,
-                A01_CPF: cpf,
-                A01_DATA_NASCIMENTO: dataNascimento,
-                A01_CELULAR: celular
+                A01_PERFIL: 0, // A01_PERFIL pode ser padrão 0 para usuários normais, se necessário
+                A01_APROVADA: 0, // Aprovado ou não (0 ou 1)
+                A01_DOCUMENTACAO: 0 // Defina se a documentação foi enviada
             });
-
-            //Enviando email de confirmação
+    
+            // Criando o viajante na tabela 'Viajante'
+            const viajante = await Viajante.create({
+                A01_ID: usuario.A01_ID,  // Relacionando com o 'Usuario'
+                A02_NOME: nome,
+                A02_CPF: cpf,
+                A02_DATA_NACSI: dataNascimento,
+                A02_CELULAR: celular
+            });
+    
+            // Enviar email de confirmação
             const transport = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
                 port: 465,
@@ -138,45 +144,26 @@ module.exports = {
                     pass: process.env.EMAIL_PASS,
                 }
             });
-
+    
             await transport.sendMail({
                 from: 'Peregrine<peregrine.planoviagem@gmail.com>',
                 to: email,
                 subject: 'Bem-vindo ao Peregrine!',
-                html: `
-                    <h1 style="color: #99067E; text-align: center;">Bem-vindo ao Peregrine!</h1>
+                html: `<h1 style="color: #99067E; text-align: center;">Bem-vindo ao Peregrine!</h1>
                     <p style="text-align: justify;">Olá ${nome},</p>
                     <p style="text-align: justify;">
                         Seu cadastro foi realizado com sucesso! Estamos felizes em tê-lo conosco no <strong>Peregrine</strong>.
-                    </p>
-                    <p style="text-align: justify;">
-                        ${!usuario.A01_DOCUMENTACAO_ENVIADA ?
-                        'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.'
-                        :
-                        'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
-                    }
-                    </p>
-                    <p style="text-align: justify;">
-                        Caso tenha alguma dúvida, entre em contato conosco. 
-                    </p>
-                    <p style="text-align: justify;">Atenciosamente,</p>
-                    <p style="text-align: justify;"><strong>Equipe Peregrine ✈️</strong></p>
-                    <br><br><hr>
-                    <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
-                `,
-                text: `Olá ${nome}, seu cadastro foi realizado com sucesso! ${!usuario.A01_DOCUMENTACAO_ENVIADA ?
-                    'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.'
-                    :
-                    'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
-                    }`,
+                    </p>`,
+                text: `Olá ${nome}, seu cadastro foi realizado com sucesso!`
             });
+    
             req.session.userId = usuario.A01_ID; // Armazena o ID do usuário na sessão
             res.redirect('/cadastroEnvioDocs');
         } catch (error) {
             console.log("Erro ao gravar os dados:", error);
             res.render('pages/cadastroPage', { error: 'Erro ao cadastrar, CPF ou Email já cadastrados. Tente novamente.' });
         }
-    },
+    }, 
 
     uploadDocumentos: (req, res) => {
         const userId = req.session.userId; // Pegue o userId da sessão
@@ -234,7 +221,7 @@ module.exports = {
 
                         try {
                             // Atualiza o campo A01_DOCUMENTACAO_ENVIADA no banco de dados
-                            await cadastro.update({ A01_DOCUMENTACAO_ENVIADA: true }, { where: { A01_ID: userId } }
+                            await Usuario.update({ A01_DOCUMENTACAO: true }, { where: { A01_ID: userId } }
                             );
 
                             console.log("Documentação enviada e banco de dados atualizado com sucesso!");
@@ -252,7 +239,7 @@ module.exports = {
     login: async (req, res) => {
         const { email, senha } = req.body;
         try {
-            const user = await cadastro.findOne({ where: { A01_EMAIL: email } });
+            const user = await Usuario.findOne({ where: { A01_EMAIL: email } });
     
             if (!user) {
                 return res.render('pages/loginPage', { error: 'Usuário não encontrado!' });
@@ -261,16 +248,16 @@ module.exports = {
             if (await bcrypt.compare(senha, user.A01_SENHA)) {
     
                 // Verifica se o usuário é administrador
-                if (!user.A01_ISADMIN) {
+                if (!user.A01_PERFIL) {
     
                     // Verifica se a documentação foi enviada
-                    if (!user.A01_DOCUMENTACAO_ENVIADA) {
+                    if (!user.A01_DOCUMENTACAO) {
                         req.session.userId = user.A01_ID; // Armazena o ID do usuário na sessão
                         return res.render('pages/cadastroEnvioDocs'); // Redireciona para a tela de envio de documentos
                     }
     
                     // Verifica se a conta foi aprovada
-                    if (!user.A01_CONTA_APROVADA) {
+                    if (!user.A01_APROVADA) {
                         return res.render('pages/cadastroEnvioConcluido', { error: 'Sua conta ainda não foi aprovada.' });
                     }
     
@@ -288,7 +275,7 @@ module.exports = {
                         email: user.A01_EMAIL,
                         isAdmin: true
                     };
-                    return res.redirect('/administrador'); // Redireciona para a tela do administrador
+                    return res.redirect('/admin/administrador'); // Redireciona para a tela do administrador
                 }
             } else {
                 return res.render('pages/loginPage', { error: 'Email ou senha incorretos!' });
@@ -298,8 +285,6 @@ module.exports = {
             return res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
         }
     },
-    
-
 
     logout: (req, res) => {
         req.session.destroy((err) => {
@@ -329,7 +314,7 @@ module.exports = {
         }
 
         try {
-            const user = await cadastro.findOne({ where: { A01_EMAIL: email } });
+            const user = await Usuario.findOne({ where: { A01_EMAIL: email } });
 
             if (user) {
                 const verificationCode = crypto.randomInt(100000, 999999);
@@ -406,7 +391,7 @@ module.exports = {
         }
         try {
             const hashedPassword = await bcrypt.hash(novaSenha, saltRounds);
-            await cadastro.update({ A01_SENHA: hashedPassword }, { where: { A01_EMAIL: email } });
+            await Usuario.update({ A01_SENHA: hashedPassword }, { where: { A01_EMAIL: email } });
 
             req.session.verificationCode = null;
             req.session.emailRecuperacao = null;

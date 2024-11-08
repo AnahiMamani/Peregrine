@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const exphbs = require("express-handlebars").engine;
 const bodyParser = require("body-parser");
-const indexRoutes = require("./Routes/routes"); // Importando as rotas
+const indexRoutes = require("./Routes/routesUsuariaViajante"); // Importando as rotas
+const indexAdim = require("./Routes/routesUsuariaAdmin"); // Importando as rotas
 const path = require('path');
 const session = require('express-session');
 
@@ -35,7 +36,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Configuração das rotas
-app.use("/", indexRoutes);
+app.use("/", indexRoutes);          // Roteia para as rotas usuárias
+app.use("/admin", indexAdim);       // Roteia para as rotas do administrador
+
 
 // Inicialização do servidor na porta 8021
 app.listen(8021, function () {
