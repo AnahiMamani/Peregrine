@@ -1,0 +1,82 @@
+<div class="container bgIndex">
+    <div class="row">
+        <div class="col">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="../public/images/img-logoPeregrine.png" alt="Logo peregrine">
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link" aria-current="page" href="#">SOBRE</a>
+                            <a class="nav-link" href="#">AJUDA</a>
+
+                            <!-- Verifica se o usuário está logado -->
+                            {{#if user}}
+                            <!-- Se o usuário estiver logado, exibe o nome e o ícone -->
+                            <a class="nav-link" href="/perfil">
+                                PERFIL
+                            </a>
+                            {{else}}
+                            <p></p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- O restante do conteúdo da página permanece o mesmo -->
+    <div class="row">
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="row justify-content-start">
+                    <div class="col-6 text-start">
+                        <h1>Faça as malas e inicie sua próxima jornada!</h1>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <p>Colecione experiências incríveis em ótima companhia.</p>
+                        <div class="row">
+                            {{#if user}}
+                            <div class="col">
+                                <a href="#"><button type="button" class="btn btnRoxo">Planejar uma viagem</button></a>
+                            </div>
+                            <div class="col">
+                                <a href="#"><button type="button" class="btn btnBranco">Pesquisar viagem</button></a>
+                            </div>
+                            {{else}}
+                            <div class="col">
+                                <a href="/cadastro"><button type="button" class="btn btnRoxo">Cadastre-se</button></a>
+                            </div>
+                            <div class="col">
+                                <a href="/login"><button type="button" class="btn btnBranco">Fazer login</button></a>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

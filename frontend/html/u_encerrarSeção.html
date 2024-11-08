@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
+    <title>Meu Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -28,9 +28,8 @@
             <div class="col-md-3">
                 <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action" style="font-size: 18px;">
+                    <a href="u_editar_perfil.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
                         <span class="mr-2">✏️</span> Editar perfil
-                        
                     </a>
                     <a href="#" class="list-group-item list-group-item-action" style="font-size: 18px;">
                         <span class="mr-2">🧳</span> Minhas viagens
@@ -44,13 +43,12 @@
                             <a class="dropdown-item" href="#"><span class="mr-2">📧</span> Alterar email</a>
                             <a class="dropdown-item" href="#"><span class="mr-2">🗑</span> Excluir perfil</a>
                         </div>
-                        <footer>
-                            <div style="position: relative; height: 65vh;">
-                                <a href="#" class="text-danger" style="font-size: 18px; text-decoration: none; position: absolute; bottom: 0;">
-                                    <span class="mr-2">🔌</span> Sair
-                                </a>
-                            </div>
+                        <footer class="mt-4 text-center" style="position: relative; min-height: 63vh; text-align: center;">
+                            <a href="#" class="text-danger" style="font-size: 18px; text-decoration: none; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);" data-bs-toggle="modal" data-bs-target="#modalEncerrar">
+                                <span class="mr-2">🔌</span> Sair
+                            </a>
                         </footer>
+                        
                     </div>
                 </div>
             </div>
@@ -60,33 +58,30 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <img src="/Peregrine/frontend/public/images/iStock-648229868-1024x909.jpg" alt="Foto de Perfil" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover; margin-right: 20px;">
-                            <div class="container mt-4">
-                                <h3>Editar Perfil</h3>
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="profilePicture" class="form-label">Foto de Perfil</label>
-                                        <input type="file" class="form-control" id="profilePicture">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Apelido</label>
-                                        <input type="text" class="form-control" id="name" value="Fulana da Silva Sauro">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="celular" class="form-label">Celular</label>
-                                        <input type="tel" class="form-control" id="celular" placeholder="(xx) xxxxx-xxxx" pattern="\(\d{2}\) \d{5}-\d{4}" required>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="description" class="form-label">Bio</label>
-                                        <textarea class="form-control" id="description" rows="3">Tenho 40 anos e amo viajar. Possuo 2 filhos e 3 pets (dois cachorros e um gato). Moro em São Paulo e trabalho como corretora de imóveis. Gosto de ir ao cinema e pratico corrida de rua. Viajo pelo menos uma vez por mês.</textarea>
-                                    </div>
-                                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancelar</button>
-                                    <button style= "background-color: #99067E; color:white; type="submit class="btn btn-primary">Salvar</button>
-                                </form>
+                            <div>
+                                <h3 style="color: #99067E; font-weight: bold;">Fulana da Silva Sauro</h3>
+                                <p style="font-size: 1.2rem; color: #6c757d;"><span>⭐</span> 4,97</p>
                             </div>
+                        </div>
+                        <p style="margin-top: 20px;">Tenho 40 anos e amo viajar. Possuo 2 filhos e 3 pets (dois cachorros e um gato). Moro em São Paulo e trabalho como corretora de imóveis. Gosto de ir ao cinema e pratico corrida de rua. Viajo pelo menos uma vez por mês.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-</body>
-</html>
+    
+    <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
+                    <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                </div>
+            </div>
+        </div>
+    </div>

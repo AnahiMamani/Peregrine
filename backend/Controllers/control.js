@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 module.exports = {
     renderIndex: (req, res) => {
-        res.render('pages/indexPage', {
+        res.render('pages/telaInicial', {
             title: 'Página Inicial',
             user: req.session.user // Passa os dados do usuário logado
         });
@@ -99,26 +99,26 @@ module.exports = {
 
     funcadastro: async (req, res) => {
         const { nome, email, senha, confirmSenha, cpf, dataNascimento, celular, termos } = req.body;
-    
+
         // Verificar se os campos obrigatórios estão preenchidos
         if (!nome || !email || !senha || !confirmSenha || !cpf || !dataNascimento || !celular || !termos) {
             return res.render('pages/cadastroPage', { error: 'Todos os campos são obrigatórios.' });
         }
-    
+
         // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmSenha) {
             return res.render('pages/cadastroPage', { error: 'As senhas não coincidem. Tente novamente.' });
         }
-    
+
         // Verificar se o checkbox de termos foi marcado
         if (!termos) {
             return res.render('pages/cadastroPage', { error: 'Você deve concordar com os termos e condições.' });
         }
-    
+
         //se tudo ok prosseguir com o hash da senha e a criação do usuário
         try {
             const hashedPassword = await bcrypt.hash(senha, saltRounds);
-            
+
             const usuario = await cadastro.create({
                 A01_NOME: nome,
                 A01_EMAIL: email,
@@ -127,7 +127,7 @@ module.exports = {
                 A01_DATA_NASCIMENTO: dataNascimento,
                 A01_CELULAR: celular
             });
-    
+
             //Enviando email de confirmação
             const transport = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -138,7 +138,7 @@ module.exports = {
                     pass: process.env.EMAIL_PASS,
                 }
             });
-    
+
             await transport.sendMail({
                 from: 'Peregrine<peregrine.planoviagem@gmail.com>',
                 to: email,
@@ -150,11 +150,11 @@ module.exports = {
                         Seu cadastro foi realizado com sucesso! Estamos felizes em tê-lo conosco no <strong>Peregrine</strong>.
                     </p>
                     <p style="text-align: justify;">
-                        ${!usuario.A01_DOCUMENTACAO_ENVIADA ? 
-                            'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.' 
-                            : 
-                            'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
-                        }
+                        ${!usuario.A01_DOCUMENTACAO_ENVIADA ?
+                        'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.'
+                        :
+                        'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
+                    }
                     </p>
                     <p style="text-align: justify;">
                         Caso tenha alguma dúvida, entre em contato conosco. 
@@ -164,11 +164,11 @@ module.exports = {
                     <br><br><hr>
                     <h4 style="color: #777; text-align: center;">Este é um e-mail automático, por favor, não responda.</h4>
                 `,
-                text: `Olá ${nome}, seu cadastro foi realizado com sucesso! ${!usuario.A01_DOCUMENTACAO_ENVIADA ? 
-                    'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.' 
-                    : 
+                text: `Olá ${nome}, seu cadastro foi realizado com sucesso! ${!usuario.A01_DOCUMENTACAO_ENVIADA ?
+                    'Para acessar todas as funcionalidades do nosso site, pedimos que envie sua documentação. Assim que recebermos, você terá acesso completo ao nosso conteúdo.'
+                    :
                     'Caso já tenha enviado sua documentação, por favor, desconsidere este aviso.'
-                }`,
+                    }`,
             });
             req.session.userId = usuario.A01_ID; // Armazena o ID do usuário na sessão
             res.redirect('/cadastroEnvioDocs');
@@ -254,21 +254,34 @@ module.exports = {
         try {
             const user = await cadastro.findOne({ where: { A01_EMAIL: email } });
     
-            if (user && await bcrypt.compare(senha, user.A01_SENHA)) {
+            if (!user) {
+                return res.render('pages/loginPage', { error: 'Usuário não encontrado!' });
+            }
     
-                // Verifica se a documentação foi enviada
-                if (!user.A01_DOCUMENTACAO_ENVIADA) {
-                    req.session.userId = user.A01_ID; // Armazena o ID do usuário na sessão
-                    return res.render('pages/cadastroEnvioDocs'); // Redireciona para a tela de envio de documentos
-                }
-    
-                // Verifica se a conta foi aprovada
-                if (!user.A01_CONTA_APROVADA) {
-                    return res.render('pages/cadastroEnvioConcluido', { error: 'Sua conta ainda não foi aprovada.' });
-                }
+            if (await bcrypt.compare(senha, user.A01_SENHA)) {
     
                 // Verifica se o usuário é administrador
-                if (user.A01_ISADMIN) {
+                if (!user.A01_ISADMIN) {
+    
+                    // Verifica se a documentação foi enviada
+                    if (!user.A01_DOCUMENTACAO_ENVIADA) {
+                        req.session.userId = user.A01_ID; // Armazena o ID do usuário na sessão
+                        return res.render('pages/cadastroEnvioDocs'); // Redireciona para a tela de envio de documentos
+                    }
+    
+                    // Verifica se a conta foi aprovada
+                    if (!user.A01_CONTA_APROVADA) {
+                        return res.render('pages/cadastroEnvioConcluido', { error: 'Sua conta ainda não foi aprovada.' });
+                    }
+    
+                    // Usuário comum
+                    req.session.user = {
+                        nome: user.A01_NOME,
+                        email: user.A01_EMAIL,
+                        isAdmin: false
+                    };
+                    return res.redirect('/');
+                } else {
                     // Armazena o status do administrador na sessão
                     req.session.user = {
                         nome: user.A01_NOME,
@@ -276,28 +289,18 @@ module.exports = {
                         isAdmin: true
                     };
                     return res.redirect('/administrador'); // Redireciona para a tela do administrador
-                } else {
-                    // Usuário comum
-                    req.session.user = {
-                        nome: user.A01_NOME,
-                        email: user.A01_EMAIL,
-                        isAdmin: false
-                    };
-                    // Redireciona para a página inicial do usuário comum
-                    return res.redirect('/');
                 }
             } else {
-                // Credenciais inválidas
-                res.render('pages/loginPage', { error: 'Email ou senha incorretos!' });
+                return res.render('pages/loginPage', { error: 'Email ou senha incorretos!' });
             }
         } catch (error) {
             console.error('Erro ao realizar o login:', error);
-            // Renderiza a página de login com a mensagem de erro
-            res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
+            return res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
         }
     },
     
-    
+
+
     logout: (req, res) => {
         req.session.destroy((err) => {
             if (err) {
