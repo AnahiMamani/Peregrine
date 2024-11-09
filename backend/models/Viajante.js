@@ -18,6 +18,8 @@ const Viajante = sequelize.define('Viajante', {
     A02_CPF: { type: DataTypes.INTEGER, unique: true },
     A02_DATA_NACSI: { type: DataTypes.DATE },
     A02_DESCRICAO: { type: DataTypes.STRING },
+    A02_APROVADA: { type: DataTypes.TINYINT, defaultValue: 0 },
+    A02_DOCUMENTACAO: { type: DataTypes.TINYINT, defaultValue: 0 }
 }, {
     tableName: 'VIAJANTE_02',
     timestamps: false

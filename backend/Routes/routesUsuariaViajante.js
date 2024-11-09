@@ -8,8 +8,6 @@ router.get("/", Controller.renderIndex);
 // Rota para renderizar o perfil
 router.get("/perfil", Controller.renderPerfil);
 
-
-
 // Rota para renderizar a página de login
 router.get("/login", Controller.renderLogin);
 
@@ -36,7 +34,6 @@ router.get("/senhaCodigoRecuperacao", Controller.renderSenhaCodigoRecuperacao);
 
 // Rota para renderizar a página de Redefinir Senha
 router.get("/senhaAlteradaSucesso", Controller.renderSenhaAlteradaSucesso);
-
 
 
                 // Rota para primeira etapa

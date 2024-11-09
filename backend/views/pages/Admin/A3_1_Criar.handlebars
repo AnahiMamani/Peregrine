@@ -7,8 +7,7 @@
                     <div class="col">
                         <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
                             <div class="container-fluid">
-
-                                <a class="back-arrow" href="#">←</a>
+                                <a class="back-arrow" href="/administrador/indexAdmin">←</a>
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -49,26 +48,11 @@
                         <div class="container rounded-4 container p-1 my-2"
                             style="width: 50rem; height: 60vh; margin-left: 2rem;">
                             <form class="row d-flex align-items-start justify-content-start text-start"
-                                action="/cadastrarUsuarioAdm" method="post">
-                                <div class="col-md-8">
-                                    <label for="exampleInputText1" class="form-label">Nome completo</label>
-                                    <input name="nome" type="name" class="form-control rounded-5 mb-2" id="inputNameAdm"
-                                        placeholder="Insira seu nome completo">
-                                </div>
+                                action="/administrador/cadastrarAdmin" method="post">
                                 <div class="col-md-8">
                                     <label for="exampleInputEmail1" class="form-label">E-mail</label>
                                     <input name="email" type="email" class="form-control rounded-5 mb-2"
                                         id="inputEmailAdm" placeholder="Informe o e-mail que você mais utiliza">
-                                </div>
-                                <div class="col-md-8">
-                                    <label for="inputCPF" class="form-label">CPF</label>
-                                    <input type="text" class="form-control rounded-5 mb-2" id="inputCPFAdm"
-                                        placeholder="Ex: 0000000000">
-                                </div>
-                                <div class="col-md-8">
-                                    <label for="exampleInputPhone1" class="form-label">Celular</label>
-                                    <input name="celular" type="tel" class="form-control rounded-5 mb-2"
-                                        id="inputPhoneAdm" placeholder="Ex.: (00) 00000-0000">
                                 </div>
                                 <div class="col-md-8">
                                     <label for="exampleInputPassword1" class="form-label">Senha</label>
@@ -77,15 +61,16 @@
                                 </div>
                                 <div class="col-md-8">
                                     <label for="exampleInputPassword1" class="form-label">Confirme a senha</label>
-                                    <input type="password" class="form-control rounded-5 mb-2"
+                                    <input name="confirmarSenha" type="password" class="form-control rounded-5 mb-2"
                                         id="inputConfirmPasswordAdm" placeholder="Insira a mesma senha que criou acima">
                                 </div>
-                            </form>
 
-                            <div class="col-md-8 d-flex align-items-end justify-content-end text-end"
-                                style="margin-left: 40rem;">
-                                <button type="submit" class="btn btn-primary w-75 h-25">Criar administrador</button>
-                            </div>
+                                <!-- Botão de enviar agora dentro da tag form -->
+                                <div class="col-md-8 d-flex align-items-end justify-content-end text-end"
+                                    style="margin-left: 40rem;">
+                                    <button type="submit" class="btn btn-primary w-75 h-25">Criar administrador</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </main>

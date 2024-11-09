@@ -26,7 +26,7 @@ app.engine("handlebars", exphbs({
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials'),
-    extname: '.handlebars' 
+    extname: '.handlebars'
 }));
 
 app.set("view engine", "handlebars");
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Configuração das rotas
 app.use("/", indexRoutes);          // Roteia para as rotas usuárias
-app.use("/admin", indexAdim);       // Roteia para as rotas do administrador
+app.use("/administrador", indexAdim);       // Roteia para as rotas do administrador
 
 
 // Inicialização do servidor na porta 8021
