@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const Usuario = require('../models/Usuario'); // Verifique o caminho correto do arquivo de modelo
-const Viajante = require('../models/Viajante');
+const Usuario = require('../models/Usuario_01'); // Verifique o caminho correto do arquivo de modelo
+const Viajante = require('../models/Viajante_02');
 
 const saltRounds = 10; // Define o número de salt rounds para o hash da senha
 require('dotenv').config(); // Para usar variáveis de ambiente do arquivo .env

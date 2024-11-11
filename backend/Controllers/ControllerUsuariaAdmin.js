@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const Usuario = require('../models/Usuario'); // Ajuste o caminho conforme necessário
+const Usuario = require('../models/Usuario_01'); // Ajuste o caminho conforme necessário
 const saltRounds = 10;
 const sequelize = require('../config/bd');
 

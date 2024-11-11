@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Usuario = require('../models/Usuario'); // Importando o modelo de Usuario
+const Usuario = require('../models/Usuario_01'); // Importando o modelo de Usuario
 
 const Controller = require("../Controllers/ControllerUsuariaAdmin");
 

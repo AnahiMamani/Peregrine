@@ -1,7 +1,7 @@
 // models/Viajante.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/bd');
-const Usuario = require('./Usuario');
+const Usuario = require('./Usuario_01');
 
 const Viajante = sequelize.define('Viajante', {
     A02_ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -12,12 +12,13 @@ const Viajante = sequelize.define('Viajante', {
             key: 'A01_ID'
         }
     },
-    A02_NOME: { type: DataTypes.STRING, allowNull: false },
+    A02_NOME: { type: DataTypes.STRING, allowNull: false }, 
     A02_APELIDO: { type: DataTypes.STRING },
     A02_CELULAR: { type: DataTypes.STRING },
     A02_CPF: { type: DataTypes.INTEGER, unique: true },
     A02_DATA_NACSI: { type: DataTypes.DATE },
     A02_DESCRICAO: { type: DataTypes.STRING },
+    A02_NOTA: { type: DataTypes.INTEGER },
     A02_APROVADA: { type: DataTypes.TINYINT, defaultValue: 0 },
     A02_DOCUMENTACAO: { type: DataTypes.TINYINT, defaultValue: 0 }
 }, {

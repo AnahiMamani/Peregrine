@@ -1,7 +1,7 @@
 // models/Avaliacao.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/bd');
-const Viajante = require('./Viajante');
+const Viajante = require('./Viajante_02');
 
 const Avaliacao = sequelize.define('Avaliacao', {
     A06_ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },

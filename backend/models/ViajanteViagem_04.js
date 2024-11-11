@@ -1,10 +1,11 @@
 // models/ViajanteViagem.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/bd');
-const Viajante = require('./Viajante');
-const Viagem = require('./Viagem');
+const Viajante = require('./Viajante_02');
+const Viagem = require('./Viagem_03');
 
 const ViajanteViagem = sequelize.define('ViajanteViagem', {
+    A04_ID: {type: DataTypes.INTEGER, allowNull: false},
     A03_ID: {
         type: DataTypes.INTEGER,
         references: {
