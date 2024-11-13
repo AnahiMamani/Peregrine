@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="p-3">
-                <a href="/senhaCodigoRecuperacao" class="back-arrow">←</a>
+                {{!-- <a href="/recuperar-senha" class="back-arrow">←</a> --}}
                 <div class="row">
                     <div class="col">
                         &nbsp;
@@ -33,7 +33,7 @@
 
                     <!-- campos para criação de nova senha -->
 
-                    <form action="/atualizarSenha" method="POST" class="text-center">
+                    <form action="/AtualizarSenha" method="POST" class="text-center">
                         <div class="mb-3 text-start">
                             <label for="nova-senha" class="form-label">Nova Senha</label>
                             <input type="password" class="form-control" id="inputPassword" name="novaSenha"
@@ -57,10 +57,10 @@
             </div>
         </div>
         <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
-            <img src="../public/images/img-u-criarNovaSenha.png" alt="Duas amigas caminham pela estrada"
+            <img src="/images/img-u-criarNovaSenha.png" alt="Duas amigas caminham pela estrada"
                 class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
         </aside>
     </div>
 </div>
 
-<script src="../scripts/criarNovaSenha.js"></script>
+<script src="/scripts/criarNovaSenha.js"></script>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="p-3">
-                <a href="/senhaRecuperar" class="back-arrow">←</a>
+                {{!-- <a href="/recuperar-senha" class="back-arrow">←</a> --}}
             </div>
 
             <div class="row">
@@ -41,7 +41,7 @@
                 {{/if}}
 
                 <!-- campo para inserir o codigo de verificacao recebido por email -->
-                <form action="/validaCodigo" method="POST" class="text-center">
+                <form action="/ValidaCodigo" method="POST" class="text-center">
                     <div class="mb-3 text-start">
                         <label for="exampleInputEmail1" class="form-label">Código de Verificação</label>
                         <input name="codigo" type="number" class="form-control" id="verificationInput"
@@ -52,17 +52,17 @@
 
                 <br>
                 <p class="text-muted text-center">Não recebeu o código? Reenvie seu email novamente.
-                    <a href="/senhaRecuperar" style="color: #99067E">Reenviar</a>
+                    <a href="/recuperar-senha" style="color: #99067E">Reenviar</a>
                 </p>
             </main>
         </div>
 
         <!--segunda coluna com a imagem principal -->
         <aside class="col-6 p-2 d-flex justify-content-center align-items-center">
-            <img src="../public/images/img-u-codigoRecuperacao.png" alt="Mulher admirando a paisagem"
+            <img src="/images/img-u-codigoRecuperacao.png" alt="Mulher admirando a paisagem"
                 class="img-fluid img-full-height mx-5 d-none d-xl-block rounded-5">
         </aside>
     </div>
 </div>
 
-<script src="../scripts/codigoRecuperacao.js"></script>
+<script src="/scripts/codigoRecuperacao.js"></script>

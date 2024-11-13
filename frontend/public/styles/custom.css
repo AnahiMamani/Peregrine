@@ -21,7 +21,7 @@ ul {
 }
 
 .bgIndex {
-    background-image: url(../public/images/img-telaInicial.png); 
+    background-image: url(../images/img-telaInicial.png); 
     background-size: cover; 
     max-width: 100%;
     min-height: 100vh;
@@ -29,7 +29,7 @@ ul {
 }
 
 .bgIndexAdm {
-    background-image: url(../public/images/img-a-admIndex.png); 
+    background-image: url(../images/img-a-admIndex.png); 
     background-size: cover; 
     background-position: center;
     height: 100vh;

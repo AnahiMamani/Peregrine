@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const BoundaryAdmin = require('../Boundary/BoundaryAdmin');
 const BoundaryViajante = require('../Boundary/BoundaryViajante');
+const BoundaryUsuario = require('../Boundary/BoundaryUsuario');
+
+//Nota: Controles/Boundary -> Routes -> Server.js
+
+router.get('/', BoundaryUsuario.renderIndex);
 
 // Rotas da página inicial do administrador
 router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);
@@ -30,18 +35,18 @@ router.get('/administradores/criar-concluido', BoundaryAdmin.criarAdminConcluido
 router.get('/perfil', BoundaryViajante.renderPerfil);
 
 // Rota para renderizar a página de login
-router.get('/login', BoundaryViajante.renderLogin);
+router.get('/login', BoundaryUsuario.renderLogin);
 
 // Rota para renderizar a página de cadastro
-router.get('/cadastro', BoundaryViajante.renderCadastro);
-router.get('/cadastro/termos-condicoes', BoundaryViajante.renderCadastroTermos);
-router.get('/cadastro/documentação', BoundaryViajante.renderCadastroEnvioDocs);
-router.get('/cadastro/documentação/concluido', BoundaryViajante.renderCadastroEnvioConcluido);
+router.get('/cadastro', BoundaryUsuario.renderCadastro);
+router.get('/cadastro/termos-condicoes', BoundaryUsuario.renderCadastroTermos);
+router.get('/cadastro/documentação', BoundaryUsuario.renderCadastroEnvioDocs);
+router.get('/cadastro/documentação/concluido', BoundaryUsuario.renderCadastroEnvioConcluido);
 
 // Rota para renderizar a página de recuperar senha
-router.get('/recuperar-senha', BoundaryViajante.renderSenhaRecuperar);
-router.get('/recuperar-senha/codigo', BoundaryViajante.renderSenhaCodigoRecuperacao);
-router.get('/recuperar-senha/codigo/criar', BoundaryViajante.renderSenhaCriarNova);
-router.get('/recuperar-senha/codigo/criar/concluido', BoundaryViajante.renderSenhaAlteradaSucesso);
+router.get('/recuperar-senha', BoundaryUsuario.renderSenhaRecuperar);
+router.get('/recuperar-senha/codigo', BoundaryUsuario.renderSenhaCodigoRecuperacao);
+router.get('/recuperar-senha/codigo/criar', BoundaryUsuario.renderSenhaCriarNova);
+router.get('/recuperar-senha/codigo/criar/concluido', BoundaryUsuario.renderSenhaAlteradaSucesso);
 
 module.exports = router;
