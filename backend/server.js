@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 // Definição das rotas
 app.use("/", indexRoutes);            // Rotas das views principais
-app.use("/Control", indexController); // Rotas de controle para funções
+app.use("/control", indexController); // Rotas de controle para funções
 
 // Inicialização do servidor
 const PORT = 8021;

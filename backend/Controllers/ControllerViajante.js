@@ -100,18 +100,18 @@ module.exports = {
 
                 // Armazenar o ID do usuário na sessão e redirecionar
                 req.session.userId = usuario.A01_ID;
-                res.redirect('/cadastroEnvioDocs');
+                res.redirect('/cadastro/documentacao');
 
             } catch (error) {
                 // Reverter a transação em caso de erro
                 await transaction.rollback();
                 console.error("Erro ao gravar os dados:", error);
-                res.render('pages/cadastroPage', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
+                res.render('pages/cadastro/index', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
             }
 
         } catch (error) {
             console.log("Erro ao verificar o cadastro:", error);
-            res.render('pages/cadastroPage', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
+            res.render('pages/cadastro/index', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
         }
     },
     uploadDocumentos: (req, res) => {
@@ -174,7 +174,7 @@ module.exports = {
                             );
 
                             console.log("Documentação enviada e banco de dados atualizado com sucesso!");
-                            res.redirect('/cadastroEnvioConcluido');
+                            res.redirect('/cadastro/documentacao/concluido');
                         } catch (dbError) {
                             console.log("Erro ao atualizar o banco de dados:", dbError);
                             return res.status(500).send("Erro ao atualizar o banco de dados.");

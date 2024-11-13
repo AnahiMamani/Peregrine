@@ -7,7 +7,7 @@
                     <div class="col">
                         <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
                             <div class="container-fluid">
-                                <a class="back-arrow" href="/administrador/indexAdmin">←</a>
+                                <a class="back-arrow" href="/administradores">←</a>
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -19,7 +19,7 @@
                                     <div class="navbar-nav ms-auto">
                                         <a class="nav-link" href="#"
                                             style="color: #050505; text-transform: uppercase; margin-right: 60px;">admin@peregrine.com</a>
-                                        <a class="nav-link" href="/logout"
+                                        <a class="nav-link" href="/Logout"
                                             style="color: #99067E; text-transform: uppercase;">Sair</a>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                         <div class="container rounded-4 container p-1 my-2"
                             style="width: 50rem; height: 60vh; margin-left: 2rem;">
                             <form class="row d-flex align-items-start justify-content-start text-start"
-                                action="/administrador/cadastrarAdmin" method="post">
+                                action="/control/CadastrarAdmin" method="post">
                                 <div class="col-md-8">
                                     <label for="exampleInputEmail1" class="form-label">E-mail</label>
                                     <input name="email" type="email" class="form-control rounded-5 mb-2"
@@ -64,7 +64,6 @@
                                     <input name="confirmarSenha" type="password" class="form-control rounded-5 mb-2"
                                         id="inputConfirmPasswordAdm" placeholder="Insira a mesma senha que criou acima">
                                 </div>
-
                                 <!-- Botão de enviar agora dentro da tag form -->
                                 <div class="col-md-8 d-flex align-items-end justify-content-end text-end"
                                     style="margin-left: 40rem;">
@@ -79,4 +78,4 @@
     </div>
 </div>
 
-<script src="../scripts/a_criarUsuariosAdm.js"></script>
+<script src="/scripts/a_criarUsuariosAdm.js"></script>

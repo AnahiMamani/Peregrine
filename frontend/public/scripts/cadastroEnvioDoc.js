@@ -10,8 +10,8 @@ const uploadIcon3 = document.getElementById('uploadIcon3');
 
 const proceedArrow = document.getElementById('proceedArrow');
 
-const defaultIconSrc = '../public/images/icon-arquivoUpload.png';
-const doneIconSrc = '../public/images/icon-arquivoUploadFeito.png';
+const defaultIconSrc = '/images/icon-arquivoUpload.png';
+const doneIconSrc = '/images/icon-arquivoUploadFeito.png';
 
 // Mensagens de erro
 const errorMessages = {

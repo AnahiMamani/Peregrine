@@ -8,7 +8,7 @@
                         <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
                             <div class="container-fluid">
 
-                                <a class="back-arrow" href="#">←</a>
+                                {{!-- <a class="back-arrow" href="#">←</a> --}}
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -55,7 +55,7 @@
                     <!-- imagem principal -->
                     <div class="d-flex center align-items-center justify-content-center container"
                         style="min-height: 125px;">
-                        <img src="../public/images/icon-aprovarUsuariosConcluido.png" alt="Ícone de conclusão de etapa"
+                        <img src="/images/icon-aprovarUsuariosConcluido.png" alt="Ícone de conclusão de etapa"
                             style="height: 30vh;">
                     </div>
 
@@ -68,7 +68,9 @@
 
                     <!--botão de confirmação analise de denúncia e banimento de usuária -->
                     <div class="d-flex align-items-center justify-content-center">
-                        <button type="submit" class="btn btn-primary">Ok, entendi!</button>
+                        <a href="/denuncias">
+                            <button type="submit" class="btn btn-primary">Ok, entendi!</button>
+                        </a>
                     </div>
                 </main>
 

@@ -14,39 +14,33 @@ module.exports = {
             const user = await Usuario.findOne({ where: { A01_EMAIL: email } });
 
             if (!user) {
-                return res.render('pages/loginPage', { error: 'Usuário não encontrado!' });
+                return res.render('pages/login', { error: 'Usuário não encontrado!' });
             }
 
             if (await bcrypt.compare(senha, user.A01_SENHA)) {
-
-                // Verifica se o usuário é administrador
                 if (user.A01_PERFIL === 1) { // Perfil 1 para administrador
                     req.session.user = {
                         nome: user.A01_NOME,
                         email: user.A01_EMAIL,
                         isAdmin: true
                     };
-                    return res.redirect('/administrador/indexAdmin'); // Redireciona para a tela do administrador
+                    return res.redirect('/index-admin'); // Redireciona para a tela do administrador
                 } else {
-                    // Busca informações adicionais do viajante na tabela viajante_02
                     const viajante = await Viajante.findOne({ where: { A01_ID: user.A01_ID } });
 
                     if (!viajante) {
-                        return res.render('pages/loginPage', { error: 'Viajante não encontrado!' });
+                        return res.render('pages/login', { error: 'Viajante não encontrado!' });
                     }
 
-                    // Verifica se a documentação foi enviada
                     if (!viajante.A02_DOCUMENTACAO) {
-                        req.session.userId = user.A01_ID; // Armazena o ID do usuário na sessão
-                        return res.render('pages/cadastroEnvioDocs'); // Redireciona para a tela de envio de documentos
+                        req.session.userId = user.A01_ID;
+                        return res.redirect('/cadastro/documentacao'); // Redireciona para a tela de envio de documentos
                     }
 
-                    // Verifica se a conta foi aprovada
                     if (!viajante.A02_APROVADA) {
-                        return res.render('pages/cadastroEnvioConcluido', { error: 'Sua conta ainda não foi aprovada.' });
+                        return res.render('pages/cadastro/cadastro-concluido', { error: 'Sua conta ainda não foi aprovada.' });
                     }
 
-                    // Usuário comum
                     req.session.user = {
                         nome: viajante.A02_NOME,
                         email: user.A01_EMAIL,
@@ -55,11 +49,11 @@ module.exports = {
                     return res.redirect('/');
                 }
             } else {
-                return res.render('pages/loginPage', { error: 'Email ou senha incorretos!' });
+                return res.render('pages/login', { error: 'Email ou senha incorretos!' });
             }
         } catch (error) {
             console.error('Erro ao realizar o login:', error);
-            return res.render('pages/loginPage', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
+            return res.render('pages/login', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
         }
     },
 
@@ -87,7 +81,7 @@ module.exports = {
         });
 
         if (!email) {
-            return res.render('pages/senhaRecuperar', { error: 'O campo de e-mail está vazio.' });
+            return res.render('pages/recuperar-senha/index', { error: 'O campo de e-mail está vazio.' });
         }
 
         try {
@@ -125,18 +119,18 @@ module.exports = {
                 });
 
                 console.log('E-mail enviado com sucesso');
-                res.render('pages/senhaCodigoRecuperacao', {
+                res.render('pages/recuperar-senha/codigo', {
                     success: 'Código enviado no seu e-mail. Insira o código aqui:',
                     showCodeField: true,
                     email
                 });
             } else {
-                res.render('pages/senhaRecuperar', { error: 'Email não encontrado!' });
+                res.render('pages/recuperar-senha/index', { error: 'Email não encontrado!' });
             }
 
         } catch (error) {
             console.error('Erro ao recuperar senha:', error);
-            res.render('pages/senhaRecuperar', { error: 'Erro ao tentar enviar o e-mail. Tente novamente.' });
+            res.render('pages/recuperar-senha/index', { error: 'Erro ao tentar enviar o e-mail. Tente novamente.' });
         }
     },
 
@@ -146,9 +140,9 @@ module.exports = {
 
         if (codigo === String(codigoEnviado)) {
             req.session.verificationCode = null;
-            res.redirect('/senhaCriarNova');
+            res.redirect('/recuperar-senha/codigo/criar');
         } else {
-            res.render('pages/senhaCodigoRecuperacao', {
+            res.render('pages/recuperar-senha/codigo', {
                 error: 'Código inválido. Tente novamente.',
                 showCodeField: true,
                 email: req.session.emailRecuperacao // Passa o email para a renderização da página
@@ -161,10 +155,10 @@ module.exports = {
         const email = req.session.emailRecuperacao;
 
         if (!novaSenha || !confirmarSenha) {
-            return res.render('pages/senhaCriarNova', { senhaError: 'Preencha todos os campos.' });
+            return res.render('pages/recuperar-senha/criar', { senhaError: 'Preencha todos os campos.' });
         }
         if (novaSenha !== confirmarSenha) {
-            return res.render('pages/senhaCriarNova', { senhaError: 'As senhas não coincidem.' });
+            return res.render('pages/recuperar-senha/criar', { senhaError: 'As senhas não coincidem.' });
         }
         try {
             const hashedPassword = await bcrypt.hash(novaSenha, SALT_ROUNDS);
@@ -173,10 +167,10 @@ module.exports = {
             req.session.verificationCode = null;
             req.session.emailRecuperacao = null;
 
-            res.render('pages/senhaAlteradaSucesso', { senhaSuccess: 'Senha redefinida com sucesso!' });
+            res.render('pages/recuperar-senha/alterar-concluido', { senhaSuccess: 'Senha redefinida com sucesso!' });
         } catch (error) {
             console.error('Erro ao atualizar a senha:', error);
-            res.render('pages/senhaCriarNova', { senhaError: 'Erro ao atualizar a senha. Tente novamente.' });
+            res.render('pages/recuperar-senha/criar', { senhaError: 'Erro ao atualizar a senha. Tente novamente.' });
         }
     }
 }

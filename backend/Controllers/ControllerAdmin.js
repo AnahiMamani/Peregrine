@@ -9,19 +9,19 @@ module.exports = {
 
         // Verificar se os campos obrigatórios estão preenchidos
         if (!email || !senha || !confirmarSenha) {
-            return res.render('pages/Admin/A3_1_Criar', { error: 'Todos os campos são obrigatórios.' });
+            return res.render('pages/admin/administradores/criar', { error: 'Todos os campos são obrigatórios.' });
         }
 
         // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmarSenha) {
-            return res.render('pages/Admin/A3_1_Criar', { error: 'As senhas não coincidem. Tente novamente.' });
+            return res.render('pages/admin/administradores/criar', { error: 'As senhas não coincidem. Tente novamente.' });
         }
 
         try {
             // Verificar se o email ou CPF já estão cadastrados
             const emailExists = await Usuario.findOne({ where: { A01_EMAIL: email } });
             if (emailExists) {
-                return res.render('pages/Admin/A3_1_Criar', { error: 'CPF ou Email já cadastrados. Tente novamente.' });
+                return res.render('pages/admin/administradores/criar', { error: 'CPF ou Email já cadastrados. Tente novamente.' });
             }
 
             // Iniciar uma transação para garantir a consistência dos dados

@@ -13,10 +13,13 @@ router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);
 
 // Rotas de relatórios
 router.get('/relatorio', BoundaryAdmin.renderRelatorio);
+router.get('/relatorio/concluir-relatorio', BoundaryAdmin.renderRelatorioConcluido);
+
 
 // Rotas de viajantes
 router.get('/viajantes', BoundaryAdmin.renderViajantes);
 router.get('/viajantes/listar', BoundaryAdmin.listarViajantes);
+
 router.get('/viajantes/aprovar', BoundaryAdmin.aprovarViajantes);
 router.get('/viajantes/concluir-aprovacao', BoundaryAdmin.concluirAprovacao);
 
@@ -40,8 +43,8 @@ router.get('/login', BoundaryUsuario.renderLogin);
 // Rota para renderizar a página de cadastro
 router.get('/cadastro', BoundaryUsuario.renderCadastro);
 router.get('/cadastro/termos-condicoes', BoundaryUsuario.renderCadastroTermos);
-router.get('/cadastro/documentação', BoundaryUsuario.renderCadastroEnvioDocs);
-router.get('/cadastro/documentação/concluido', BoundaryUsuario.renderCadastroEnvioConcluido);
+router.get('/cadastro/documentacao', BoundaryUsuario.renderCadastroEnvioDocs);
+router.get('/cadastro/documentacao/concluido', BoundaryUsuario.renderCadastroEnvioConcluido);
 
 // Rota para renderizar a página de recuperar senha
 router.get('/recuperar-senha', BoundaryUsuario.renderSenhaRecuperar);
