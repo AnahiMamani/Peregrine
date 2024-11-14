@@ -7,7 +7,6 @@
                 <!-- container principal -->
                 <main class="container">
                     <h1 style="color: #99067E">Gerenciar usuárias</h1>
-
                     <div class="container p-4">
                         <div class="row input-group mb-3 align-items-center justify-content-center"
                             style="height: 30px;">
@@ -18,98 +17,43 @@
                     </div>
 
                     <br>
-
                     <!-- div de cantos arredondados-->
                     <!-- nesta div, "overflow-y: auto" adiciona rolagem vertical se necessário e "height: 60vh" define a altura máxima da caixa das denúncias-->
                     <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
-                        style="height: 60vh; overflow-y: auto;">
-
-                        <!-- coluna que contém o nome completo da usuária-->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 15rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Nome</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                            <br>
-                            <p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                            <br>
-                            <p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                            <br>
-                            <p id="nameUsuaria">Adriana Silva e Silva</p><br>
-                        </div>
-
-                        <!-- coluna que contém o email da usuária-->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 10rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Email</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="emailUsuaria">Adriana@gmail.com</p><br>
-                            <br>
-                            <p id="emailUsuaria">Adriana@gmail.com</p><br>
-                            <br>
-                            <p id="emailUsuaria">Adriana@gmail.com</p><br>
-                            <br>
-                            <p id="emailUsuaria">Adriana@gmail.com</p><br>
-                        </div>
-
-                        <!-- coluna que contém o nome completo da usuária-->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 12rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Celular</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="telefoneUsuaria">(11) 000000-0000</p><br>
-                            <br>
-                            <p id="telefoneUsuaria">(11) 000000-0000</p><br>
-                            <br>
-                            <p id="telefoneUsuaria">(11) 000000-0000</p><br>
-                            <br>
-                            <p id="telefoneUsuaria">(11) 000000-0000</p><br>
-                        </div>
-
-                        <!-- coluna que contém o status do perfil da usuaria -->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 15rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Status perfil</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="statusPerfil">Aprovada</p><br>
-                            <br>
-                            <p id="statusPerfil">Aprovada</p><br>
-                            <br>
-                            <p id="statusPerfil">Aprovada</p><br>
-                            <br>
-                            <p id="statusPerfil">Aprovada</p><br>
-                        </div>
-
-                        <!-- coluna que contém os botoes para banir usuária -->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 10rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Ação</h4>
-                                </div>
-                            </div>
-
-                            <!-- o botao deve direcionar para a caixa de confirmacao para banir a usuária ou cancelar -->
-                            <a id="banirUsuaria" href="#" class="btn btn-primary btn-lg w-100">Banir</a><br>
-                            <a id="banirUsuaria" href="#" class="btn btn-primary btn-lg w-100">Banir</a><br>
-                            <a id="banirUsuaria" href="#" class="btn btn-primary btn-lg w-100">Banir</a><br>
-                            <a id="banirUsuaria" href="#" class="btn btn-primary btn-lg w-100">Banir</a><br>
-                        </div>
+                        style="height: 60vh; overflow-y: auto;padding-right: 3rem;padding-left: 3rem;padding-top: 2rem;">
+                        {{#if usuarios.length}}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">EMAIL</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">PERFIL</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each usuarios}}
+                                <tr>
+                                    <td>{{this.A01_ID}}</td>
+                                    <td>{{this.A01_EMAIL}}</td>
+                                    <td>{{this.A01_PERFIL}}</td>
+                                    <td><a id="banirUsuaria" href="#" class="btn btn-primary btn-lg w-100">Banir</a><br>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <p>Nenhum usuário encontrado.</p>
+                        {{/if}}
                     </div>
                 </main>
             </div>

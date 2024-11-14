@@ -1,3 +1,5 @@
+const Usuario = require('../models/Usuario_01'); // Ajuste o caminho conforme necessário
+
 module.exports = {
     renderIndexAdmin: (req, res) => {
         res.render('pages/admin/index', {
@@ -32,12 +34,23 @@ module.exports = {
         });
     },
 
-    listarViajantes: (req, res) => {
-        res.render('pages/admin/viajantes/gerenciar/index', {
-            title: 'Usuários - Viajantes',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
+    listarViajantes: async (req, res) => {
+        try {
+            // Consulta os registros de usuários, omitindo o campo de senha
+            const usuarios = await Usuario.findAll({
+                attributes: ['A01_ID', 'A01_EMAIL', 'A01_PERFIL']
+            });
+            // Renderiza a página com os dados dos viajantes e os registros dos usuários
+            res.render('pages/admin/viajantes/gerenciar/index', {
+                title: 'Usuários - Viajantes',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                usuarios: usuarios // Passando os registros dos usuários para a view
+            });
+        } catch (error) {
+            console.error('Erro ao buscar usuários:', error);
+            res.status(500).send('Erro ao buscar usuários');
+        }
     },
 
     aprovarViajantes: (req, res) => {
@@ -90,12 +103,27 @@ module.exports = {
     },
 
     //ADMINISTRADORES
-    renderAdminUsuarios: (req, res) => {
-        res.render('pages/admin/administradores/index', {
-            title: 'Usuários Administradores',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
+    renderAdminUsuarios: async (req, res) => {
+        try {
+            // Consulta os registros de usuários, omitindo o campo de senha
+            const usuarios = await Usuario.findAll({
+                attributes: ['A01_ID', 'A01_EMAIL', 'A01_PERFIL'],
+                where: {
+                    A01_PERFIL: 1
+                }
+            }
+        );
+            // Renderiza a página com os dados dos viajantes e os registros dos usuários
+            res.render('pages/admin/administradores/index', {
+                title: 'Usuários Administradores',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                usuarios: usuarios // Passando os registros dos usuários para a view
+            });
+        } catch (error) {
+            console.error('Erro ao buscar usuários:', error);
+            res.status(500).send('Erro ao buscar usuários');
+        }
     },
 
     criarAdmin: (req, res) => {

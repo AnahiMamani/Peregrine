@@ -55,5 +55,5 @@ module.exports = {
             console.log("Erro ao verificar o cadastro:", error);
             res.render('pages/admin/administradores/criar', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
         }
-    },
+    }
 };
