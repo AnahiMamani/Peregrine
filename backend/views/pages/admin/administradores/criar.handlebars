@@ -2,38 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="p-3">
-                <!-- seta para voltar e menu -->
-                <div class="row">
-                    <div class="col">
-                        <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
-                            <div class="container-fluid">
-                                <a class="back-arrow" href="/administradores">←</a>
-
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-
-                                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                                    <div class="navbar-nav ms-auto">
-                                        <a class="nav-link" href="#"
-                                            style="color: #050505; text-transform: uppercase; margin-right: 60px;">admin@peregrine.com</a>
-                                        <a class="nav-link" href="/Logout"
-                                            style="color: #99067E; text-transform: uppercase;">Sair</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        &nbsp;
-                    </div>
-                </div>
-
+                {{> adminHeader headerClass="bg-body-tertiary" backLink="/administradores"}}
                 <!-- container principal -->
                 <main class="container">
                     <h1 style="color: #99067E">Usuários administradores</h1>
@@ -43,7 +12,9 @@
                     <!-- nesta div, "overflow-y: auto" adiciona rolagem vertical se necessário e "height: 60vh" define a altura máxima da caixa das denúncias-->
                     <div class="row rounded-4 border border-2 border-secondary container"
                         style="height: 70vh; overflow-y: auto;">
-
+                        {{#if error}}
+                        <div class="alert alert-danger">{{error}}</div>
+                        {{/if}}
                         <!-- coluna que contém o form de cadastro -->
                         <div class="container rounded-4 container p-1 my-2"
                             style="width: 50rem; height: 60vh; margin-left: 2rem;">

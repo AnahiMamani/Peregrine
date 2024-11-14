@@ -2,39 +2,8 @@
     <div class="row">
         <div class="col">
             <div class="p-3">
-                <!-- seta para voltar e menu -->
-                <div class="row">
-                    <div class="col">
-                        <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
-                            <div class="container-fluid">
-
-                                {{!-- <a class="back-arrow" href="#">←</a> --}}
-
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-
-                                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                                    <div class="navbar-nav ms-auto">
-                                        <a class="nav-link" href="#"
-                                            style="color: #050505; text-transform: uppercase; margin-right: 60px;">admin@peregrine.com</a>
-                                        <a class="nav-link" href="/control/Logout"
-                                            style="color: #99067E; text-transform: uppercase;">Sair</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        &nbsp;
-                    </div>
-                </div>
-
+                <!-- CABEÇALHO -->
+                {{> adminHeader headerClass="bg-body-tertiary" backLink="/administradores/criar"}}
                 <!-- container principal -->
                 <main class="container text-center">
                     <h1 style="color: #99067E">Operação realizada com sucesso</h1>

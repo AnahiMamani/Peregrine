@@ -2,6 +2,7 @@ module.exports = {
     renderIndexAdmin: (req, res) => {
         res.render('pages/admin/index', {
             title: 'Administrador - Página Inicial',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -17,6 +18,7 @@ module.exports = {
     renderRelatorioConcluido: (req, res) => {
         res.render('pages/admin/relatorios/relatorio-concluido', {
             title: 'Relatório',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -25,6 +27,7 @@ module.exports = {
     renderViajantes: (req, res) => {
         res.render('pages/admin/viajantes/index', {
             title: 'Usuários - Viajantes',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -32,6 +35,7 @@ module.exports = {
     listarViajantes: (req, res) => {
         res.render('pages/admin/viajantes/gerenciar/index', {
             title: 'Usuários - Viajantes',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -39,6 +43,7 @@ module.exports = {
     aprovarViajantes: (req, res) => {
         res.render('pages/admin/viajantes/aprovar/index', {
             title: 'Usuários - Viajantes',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -46,6 +51,7 @@ module.exports = {
     concluirAprovacao: (req, res) => {
         res.render('pages/admin/viajantes/aprovar/aprovar-concluido', {
             title: 'Usuários - Viajantes',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -54,6 +60,7 @@ module.exports = {
     renderDenuncias: (req, res) => {
         res.render('pages/admin/viajantes/denuncias/index', {
             title: 'Usuários - Viajantes',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -61,6 +68,7 @@ module.exports = {
     denunciaIndividual: (req, res) => {
         res.render('pages/admin/viajantes/denuncias/individual', {
             title: 'Administrador - Página Inicial',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -68,6 +76,7 @@ module.exports = {
     cancelarDenuncia: (req, res) => {
         res.render('pages/admin/viajantes/denuncias/cancelada', {
             title: 'Administrador - Página Inicial',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -75,6 +84,7 @@ module.exports = {
     banirDenuncia: (req, res) => {
         res.render('pages/admin/viajantes/denuncias/banida', {
             title: 'Administrador - Página Inicial',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -83,6 +93,7 @@ module.exports = {
     renderAdminUsuarios: (req, res) => {
         res.render('pages/admin/administradores/index', {
             title: 'Usuários Administradores',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -90,6 +101,7 @@ module.exports = {
     criarAdmin: (req, res) => {
         res.render('pages/admin/administradores/criar', {
             title: 'Criar Administrador',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     },
@@ -97,6 +109,7 @@ module.exports = {
     criarAdminConcluido: (req, res) => {
         res.render('pages/admin/administradores/criar-concluido', {
             title: 'Criar Administrador',
+            logoPath: '/images/logo.ico',
             user: req.session.user
         });
     }
