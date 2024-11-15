@@ -55,5 +55,17 @@ module.exports = {
             console.log("Erro ao verificar o cadastro:", error);
             res.render('pages/admin/administradores/criar', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
         }
+    },
+    delete: async (req, res) => {
+        const { id } = req.params;
+        try {
+            await Usuario.destroy({
+                where: { A01_ID: id }
+            });
+            res.redirect('/administradores');
+        } catch (error) {
+            console.error('Erro ao deletar dado:', error);
+            res.status(500).send('Erro no servidor');
+        }
     }
 };

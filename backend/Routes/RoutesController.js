@@ -6,6 +6,7 @@ const ControllerAdmin = require("../Controllers/ControllerAdmin");
 
 //Contorller Administrador
 router.post("/CadastrarAdmin", ControllerAdmin.cadastroAdmin);
+router.post('/delete/:id', ControllerAdmin.delete);
 
 //Contorller Viajante
 router.post('/CadastroViajante', ControllerViajante.cadastroViajante);

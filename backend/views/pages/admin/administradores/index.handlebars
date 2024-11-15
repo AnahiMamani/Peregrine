@@ -27,12 +27,18 @@
                     <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
                         style="height: 60vh; overflow-y: auto;padding-right: 3rem;padding-left: 3rem;padding-top: 2rem;">
                         {{#if usuarios.length}}
-                        <table>
+                        <table class="col-md-4 rounded-4 container p-4 my-4" style="width: 90rem; height: 19vh;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Email</th>
-                                    <th>Ação</th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">Nome</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">EMAIL</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +47,9 @@
                                     <td>{{this.A01_ID}}</td>
                                     <td>{{this.A01_EMAIL}}</td>
                                     <td>
-                                        <button onclick="banirUsuario({{this.A01_ID}})">Banir</button>
+                                        <form action="/control/delete/{{this.A01_ID}}" method="POST">
+                                            <button class="btn btn-primary btn-lg w-100" type="submit">Deletar</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -56,4 +64,3 @@
         </div>
     </div>
 </div>
-<script src="/scripts/deletando.js"></script>
