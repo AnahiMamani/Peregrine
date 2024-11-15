@@ -26,16 +26,34 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                        <h6 style="text-transform: uppercase;">ID USUARIO</h6>
                                     </th>
                                     <th>
-                                        <h4 style="text-transform: uppercase;">EMAIL</h4>
+                                        <h6 style="text-transform: uppercase;">ID VIAJANTE</h6>
                                     </th>
                                     <th>
-                                        <h4 style="text-transform: uppercase;">PERFIL</h4>
+                                        <h6 style="text-transform: uppercase;">NOME</h6>
                                     </th>
                                     <th>
-                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                        <h6 style="text-transform: uppercase;">CELULAR</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">CPF</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">DATA DE NASCIMENTO</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">NOTA</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">DOCUMENTAÇÃO</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">APROVAÇÃO</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">AÇÃO</h6>
                                     </th>
                                 </tr>
                             </thead>
@@ -43,8 +61,14 @@
                                 {{#each usuarios}}
                                 <tr>
                                     <td>{{this.A01_ID}}</td>
-                                    <td>{{this.A01_EMAIL}}</td>
-                                    <td>{{this.A01_PERFIL}}</td>
+                                    <td>{{this.A02_ID}}</td>
+                                    <td>{{this.A02_NOME}}</td>
+                                    <td>{{this.A02_CELULAR}}</td>
+                                    <td>{{this.A02_CPF}}</td>
+                                    <td>{{this.A02_DATA_NACSI}}</td>
+                                    <td>{{#if this.A02_NOTA}}{{this.A02_NOTA}}{{else}}null{{/if}}</td>
+                                    <td>{{this.A02_DOCUMENTACAO}}</td>
+                                    <td>{{this.A02_APROVADA}}</td>
                                     <td><a id="banirUsuaria" href="#" class="btn btn-primary btn-lg w-100">Banir</a><br>
                                     </td>
                                 </tr>

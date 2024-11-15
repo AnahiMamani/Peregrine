@@ -1,6 +1,13 @@
 const { Op } = require('sequelize');  // Importa o operador `Op` do Sequelize
 const Usuario = require('../models/Usuario_01'); // Ajuste o caminho conforme necessário
-
+const Viajante = require('../models/Viajante_02'); // Ajuste o caminho conforme necessário
+const formatarData = (data) => {
+    const date = new Date(data);
+    const dia = String(date.getDate()).padStart(2, '0');
+    const mes = String(date.getMonth() + 1).padStart(2, '0');
+    const ano = date.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+};
 module.exports = {
     renderIndexAdmin: (req, res) => {
         res.render('pages/admin/index', {
@@ -34,19 +41,22 @@ module.exports = {
             user: req.session.user
         });
     },
-
     listarViajantes: async (req, res) => {
         try {
-            // Consulta os registros de usuários, omitindo o campo de senha
-            const usuarios = await Usuario.findAll({
-                attributes: ['A01_ID', 'A01_EMAIL', 'A01_PERFIL']
-            });
-            // Renderiza a página com os dados dos viajantes e os registros dos usuários
+            // Busca todos os usuários com todos os campos
+            const usuarios = await Viajante.findAll();
+    
+            // Formata os dados necessários
+            const usuariosFormatados = usuarios.map(usuario => ({
+                ...usuario.dataValues,
+                A02_DATA_NACSI: formatarData(usuario.A02_DATA_NACSI)
+            }));
+    
             res.render('pages/admin/viajantes/gerenciar/index', {
                 title: 'Usuários - Viajantes',
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
-                usuarios: usuarios // Passando os registros dos usuários para a view
+                usuarios: usuariosFormatados
             });
         } catch (error) {
             console.error('Erro ao buscar usuários:', error);
