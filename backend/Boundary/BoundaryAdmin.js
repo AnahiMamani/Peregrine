@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');  // Importa o operador `Op` do Sequelize
 const Usuario = require('../models/Usuario_01'); // Ajuste o caminho conforme necessário
 
 module.exports = {
@@ -105,20 +106,35 @@ module.exports = {
     //ADMINISTRADORES
     renderAdminUsuarios: async (req, res) => {
         try {
-            // Consulta os registros de usuários, omitindo o campo de senha
-            const usuarios = await Usuario.findAll({
-                attributes: ['A01_ID', 'A01_EMAIL', 'A01_PERFIL'],
+        let usuarios;
+        let buscaRealizada = false;
+        const query = req.query.query ? req.query.query.trim() : '';  // Captura o termo de busca, ou define como string vazia
+
+        if (query) {
+            buscaRealizada = true;
+
+            // Busca pelo ID ou Email usando a query
+            usuarios = await Usuario.findAll({
                 where: {
-                    A01_PERFIL: 1
+                    [Op.or]: [
+                        { A01_ID: query },
+                        { A01_EMAIL: { [Op.like]: `%${query}%` } }
+                    ]
                 }
-            }
-        );
+            });
+        } else {
+            // Se o campo de busca estiver vazio, exibe todos os registros
+            usuarios = await Usuario.findAll();
+        }
+
+        const usuariosData = usuarios.map(usuario => usuario.get({ plain: true }));
             // Renderiza a página com os dados dos viajantes e os registros dos usuários
             res.render('pages/admin/administradores/index', {
                 title: 'Usuários Administradores',
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
-                usuarios: usuarios // Passando os registros dos usuários para a view
+                usuarios: usuariosData, // Passando os registros dos usuários para a view
+                buscaRealizada, query 
             });
         } catch (error) {
             console.error('Erro ao buscar usuários:', error);
