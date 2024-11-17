@@ -16,6 +16,7 @@ router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);
 router.get('/administradores', BoundaryAdmin.renderAdminUsuarios);
 router.get('/administradores/criar', BoundaryAdmin.criarAdmin);
 router.get('/administradores/criar/concluido', BoundaryAdmin.criarAdminConcluido);
+router.get('/administradores/banir', BoundaryAdmin.banirAdmin);
 
 // Relatórios
 router.get('/relatorio', BoundaryAdmin.renderRelatorio);

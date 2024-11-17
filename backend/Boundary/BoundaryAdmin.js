@@ -185,5 +185,13 @@ module.exports = {
             logoPath: '/images/logo.ico',
             user: req.session.user
         });
-    }
+    },
+    
+    banirAdmin: (req, res) => {
+        res.render('pages/admin/administradores/banidaAdmin', {
+            title: 'Administrador - Página Inicial',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
 }

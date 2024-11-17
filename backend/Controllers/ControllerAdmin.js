@@ -59,13 +59,23 @@ module.exports = {
     delete: async (req, res) => {
         const { userId } = req.body; // Agora você recebe o ID do corpo da requisição
         try {
-            await Usuario.destroy({
+            // Tenta deletar o usuário
+            const result = await Usuario.destroy({
                 where: { A01_ID: userId }
             });
-            res.sendStatus(200); // Retorna status OK
+    
+            // Verifica se a deleção foi bem-sucedida
+            if (result > 0) {
+                // Usuário deletado com sucesso, agora redireciona para a página de banir
+                res.redirect('/administradores/banir');
+            } else {
+                // Caso o usuário não seja encontrado
+                res.status(404).send('Usuário não encontrado');
+            }
         } catch (error) {
             console.error('Erro ao deletar dado:', error);
             res.status(500).send('Erro no servidor');
         }
-    }    
+    }
+    
 };
