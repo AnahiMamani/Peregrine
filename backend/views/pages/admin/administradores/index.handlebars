@@ -27,67 +27,63 @@
                     <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
                         style="height: 60vh; overflow-y: auto;padding-right: 3rem;padding-left: 3rem;">
                         {{#if buscaRealizada}}
-                            {{#if usuarios.length}}
-                            <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
-                                <thead style="position: sticky; top: 0; background-color: white; z-index: 1; height: 5rem;">
-                                    <tr>
-                                        <th>
-                                            <h4 style="text-transform: uppercase;">Nome</h4>
-                                        </th>
-                                        <th>
-                                            <h4 style="text-transform: uppercase;">EMAIL</h4>
-                                        </th>
-                                        <th>
-                                            <h4 style="text-transform: uppercase;">AÇÃO</h4>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each usuarios}}
-                                    <tr id="user-{{this.A01_ID}}">
-                                        <td>{{this.A01_ID}}</td>
-                                        <td>{{this.A01_EMAIL}}</td>
-                                        <td>
-                                            <form action="/control/delete/{{this.A01_ID}}" method="POST">
-                                                <button class="btn btn-primary btn-lg w-100" type="submit">Deletar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                            {{else}}
-                            <p>Nenhum usuário encontrado.</p>
-                            {{/if}}
+                        {{#if usuarios.length}}
+                        <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
+                            <thead style="position: sticky; top: 0; background-color: white; z-index: 1; height: 5rem;">
+                                <tr>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">EMAIL</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each usuarios}}
+                                <tr id="user-{{this.A01_ID}}">
+                                    <td>{{this.A01_ID}}</td>
+                                    <td>{{this.A01_EMAIL}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-danger btn-lg w-100" data-id="{{this.A01_ID}}">Deletar Administrador</button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                         {{else}}
-                            <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
-                                <thead style="position: sticky; top: 0; background-color: white; z-index: 1;height: 5rem;">
-                                    <tr>
-                                        <th>
-                                            <h4 style="text-transform: uppercase;">Nome</h4>
-                                        </th>
-                                        <th>
-                                            <h4 style="text-transform: uppercase;">EMAIL</h4>
-                                        </th>
-                                        <th>
-                                            <h4 style="text-transform: uppercase;">AÇÃO</h4>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each usuarios}}
-                                    <tr id="user-{{this.A01_ID}}">
-                                        <td>{{this.A01_ID}}</td>
-                                        <td>{{this.A01_EMAIL}}</td>
-                                        <td>
-                                            <form action="/control/delete/{{this.A01_ID}}" method="POST">
-                                                <button class="btn btn-primary btn-lg w-100" type="submit">Deletar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
+                        <p>Nenhum usuário encontrado.</p>
+                        {{/if}}
+                        {{else}}
+                        <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
+                            <thead style="position: sticky; top: 0; background-color: white; z-index: 1;height: 5rem;">
+                                <tr>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">EMAIL</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each usuarios}}
+                                <tr id="user-{{this.A01_ID}}">
+                                    <td>{{this.A01_ID}}</td>
+                                    <td>{{this.A01_EMAIL}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-danger btn-lg w-100" data-id="{{this.A01_ID}}">Deletar Administrador</button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                         {{/if}}
                     </div>
                 </main>
@@ -96,10 +92,4 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('searchInput').addEventListener('input', function () {
-        if (this.value === '') {
-            document.getElementById('searchForm').submit();
-        }
-    });
-</script>
+<script src="/scripts/banirAdmin.js"></script>

@@ -43,26 +43,38 @@ module.exports = {
     },
     listarViajantes: async (req, res) => {
         try {
-            // Busca todos os usuários com todos os campos
-            const usuarios = await Viajante.findAll();
+            // Busca os viajantes e inclui o email do usuário associado
+            const viajantes = await Viajante.findAll({
+                include: {
+                    model: Usuario,
+                    attributes: ['A01_EMAIL'] // Campos que você deseja obter
+                }
+            });
     
-            // Formata os dados necessários
-            const usuariosFormatados = usuarios.map(usuario => ({
-                ...usuario.dataValues,
-                A02_DATA_NACSI: formatarData(usuario.A02_DATA_NACSI)
+            // Log para verificar os dados retornados
+            console.log(JSON.stringify(viajantes, null, 2));
+    
+            // Formata os dados
+            const viajantesFormatados = viajantes.map(viajante => ({
+                ...viajante.dataValues,
+                A02_DATA_NACSI: formatarData(viajante.A02_DATA_NACSI),
+                A01_EMAIL: viajante.Usuario?.A01_EMAIL || 'N/A' // Inclui o email associado
             }));
     
+            // Renderiza a view com os dados
             res.render('pages/admin/viajantes/gerenciar/index', {
                 title: 'Usuários - Viajantes',
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
-                usuarios: usuariosFormatados
+                viajantes: viajantesFormatados
             });
         } catch (error) {
-            console.error('Erro ao buscar usuários:', error);
-            res.status(500).send('Erro ao buscar usuários');
+            console.error('Erro ao buscar viajantes:', error);
+            res.status(500).send('Erro ao buscar viajantes');
         }
     },
+    
+    
 
     aprovarViajantes: (req, res) => {
         res.render('pages/admin/viajantes/aprovar/index', {
@@ -116,29 +128,35 @@ module.exports = {
     //ADMINISTRADORES
     renderAdminUsuarios: async (req, res) => {
         try {
-        let usuarios;
-        let buscaRealizada = false;
-        const query = req.query.query ? req.query.query.trim() : '';  // Captura o termo de busca, ou define como string vazia
-
-        if (query) {
-            buscaRealizada = true;
-
-            // Busca pelo ID ou Email usando a query
-            usuarios = await Usuario.findAll({
-                where: {
-                    [Op.or]: [
-                        { A01_ID: query },
-                        { A01_EMAIL: { [Op.like]: `%${query}%` } }
-                    ]
-                }
-            });
-        } else {
-            // Se o campo de busca estiver vazio, exibe todos os registros
-            usuarios = await Usuario.findAll();
-        }
-
-        const usuariosData = usuarios.map(usuario => usuario.get({ plain: true }));
-            // Renderiza a página com os dados dos viajantes e os registros dos usuários
+            let usuarios;
+            let buscaRealizada = false;
+            const query = req.query.query ? req.query.query.trim() : '';  // Captura o termo de busca, ou define como string vazia
+    
+            if (query) {
+                buscaRealizada = true;
+    
+                // Busca pelo ID ou Email usando a query, mas somente exibe usuários com A02_PERFIL igual a 1
+                usuarios = await Usuario.findAll({
+                    where: {
+                        [Op.or]: [
+                            { A01_ID: query },
+                            { A01_EMAIL: { [Op.like]: `%${query}%` } }
+                        ],
+                        A01_PERFIL: 1  // Adiciona a condição de filtro para A02_PERFIL igual a 1
+                    }
+                });
+            } else {
+                // Se o campo de busca estiver vazio, exibe todos os registros com A02_PERFIL igual a 1
+                usuarios = await Usuario.findAll({
+                    where: {
+                        A01_PERFIL: 1  // Condição para filtrar apenas usuários com A02_PERFIL igual a 1
+                    }
+                });
+            }
+    
+            const usuariosData = usuarios.map(usuario => usuario.get({ plain: true }));
+            
+            // Renderiza a página com os dados dos usuários filtrados
             res.render('pages/admin/administradores/index', {
                 title: 'Usuários Administradores',
                 logoPath: '/images/logo.ico',
@@ -151,6 +169,7 @@ module.exports = {
             res.status(500).send('Erro ao buscar usuários');
         }
     },
+    
 
     criarAdmin: (req, res) => {
         res.render('pages/admin/administradores/criar', {

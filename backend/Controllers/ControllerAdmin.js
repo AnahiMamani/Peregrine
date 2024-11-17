@@ -57,15 +57,15 @@ module.exports = {
         }
     },
     delete: async (req, res) => {
-        const { id } = req.params;
+        const { userId } = req.body; // Agora você recebe o ID do corpo da requisição
         try {
             await Usuario.destroy({
-                where: { A01_ID: id }
+                where: { A01_ID: userId }
             });
-            res.redirect('/administradores');
+            res.sendStatus(200); // Retorna status OK
         } catch (error) {
             console.error('Erro ao deletar dado:', error);
             res.status(500).send('Erro no servidor');
         }
-    }
+    }    
 };

@@ -27,7 +27,9 @@ const Viajante = sequelize.define('Viajante', {
 });
 
 // Relacionamento 1:1 com Usuario
+// Viajante.js
 Usuario.hasOne(Viajante, { foreignKey: 'A01_ID' });
 Viajante.belongsTo(Usuario, { foreignKey: 'A01_ID' });
+
 
 module.exports = Viajante;
