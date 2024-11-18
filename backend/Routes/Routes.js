@@ -10,6 +10,7 @@ const BoundaryUsuario = require('../Boundary/BoundaryUsuario');
 
 // Página inicial
 router.get('/', BoundaryUsuario.renderIndex);
+router.get('/sobre', BoundaryUsuario.renderSobre);
 
 // Rotas do administrador
 router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);

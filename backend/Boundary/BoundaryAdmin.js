@@ -75,7 +75,7 @@ module.exports = {
     },
 
     banirViajante: (req, res) => {
-        res.render('pages/admin/viajantes/gerenciar/banirViajante', {
+        res.render('pages/admin/viajantes/gerenciar/banirViajante-concluido', {
             title: 'Usuários - Viajantes',
             logoPath: '/images/logo.ico',
             user: req.session.user
@@ -195,7 +195,7 @@ module.exports = {
     },
     
     banirAdmin: (req, res) => {
-        res.render('pages/admin/administradores/banidaAdmin', {
+        res.render('pages/admin/administradores/banidaAdmin-concluido', {
             title: 'Administrador - Página Inicial',
             logoPath: '/images/logo.ico',
             user: req.session.user

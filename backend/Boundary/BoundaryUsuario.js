@@ -1,4 +1,11 @@
 module.exports = {
+    renderSobre: (req, res) => {
+        res.render('pages/sobre', {
+            title: 'Sobre',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
     renderIndex: (req, res) => {
         res.render('pages/index', {
             title: 'Peregrine',
