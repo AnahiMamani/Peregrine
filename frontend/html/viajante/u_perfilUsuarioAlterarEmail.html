@@ -9,7 +9,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Meu Perfil</title>
+    <title>Alterar Email</title>
+    <style>
+        body, html {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
 
@@ -21,7 +26,7 @@
                     <nav class="navbar navbar-expand-lg mx-5">
                         <div class="container-fluid">
                             <div class="logo-peregrine">
-                                <img src="../public/images/img-logoPeregrine-horizontal.png" alt="Ícone de Peregrine">
+                                <img src="/frontend/public/images/img-logoPeregrine-horizontal.png" alt="Ícone de Peregrine">
                             </div>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -46,34 +51,50 @@
 </div>
 
 <main>
+    
+
     <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
-        <div class="row" style="height: 70vh; overflow-y: auto;">
-            <!-- coluna com o menu de opções para configurar o perfil da usuaria -->
+        <div class="row" style="height: 65vh; overflow-y: auto;">
             <div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
-                <div class="list-group list-group-flush">
-                    <a href="u_editarPerfil.html" class="list-group-item list-group-item-action border-0 border-bottom" style="font-size: 18px;">
-                        <span class="mr-2">✏️</span> Editar perfil
+                
+                <div class="list-group">
+                    <a href="/frontend/html/viajante/u_perfilUsuarioEditar.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
+                        <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de editar perfil" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                        Editar perfil
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action border-0 border-bottom" style="font-size: 18px;">
-                        <span class="mr-2">🧳</span> Minhas viagens
+                    <a href="#" class="list-group-item list-group-item-action" style="font-size: 18px;">
+                        <img src="/frontend/public/images/img-icone_minhas_viagens.png" alt="Ícone de minhas viagens" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                        Minhas viagens
                     </a>
                     <div class="dropdown">
-                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle border-0 border-bottom" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
-                            <span class="mr-2">⚙️</span> Configurações
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
+                            <img src="/frontend/public/images/img-icone_configuracoes.png" alt="Ícone de configurações" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                            Configurações
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="border: none; box-shadow: 0px 4px 8px rgba(0,0,0,0.2);">
-                            <a class="dropdown-item" href="#"><span class="mr-2">🔒</span> Alterar senha</a>
-                            <a class="dropdown-item" href="#"><span class="mr-2">📧</span> Alterar email</a>
-                            <a class="dropdown-item" href="#"><span class="mr-2">🗑</span> Excluir perfil</a>
-                        </div>
-                    </div>
-                    <footer>
-                        <div style="position: relative; height: 50vh;">
-                            <a href="/frontend/html/u_encerrarSeção.html" class="text-danger" style="font-size: 18px; text-decoration: none; position: absolute; bottom: 0;" data-bs-toggle="modal" data-bs-target="#modalEncerrar">
-                                <span class="mr-2">🔌</span> Sair
+                            <a class="dropdown-item" href="/frontend/html/viajante/u_perfilUsuarioAlterarSenha.html">
+                                <img src="/frontend/public/images/img-icone_senha.png" alt="Ícone de alterar senha" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                                Alterar senha
+                            </a>
+                            <a class="dropdown-item" href="/frontend/html/viajante/u_perfilUsuarioAlterarEmail.html">
+                                <img src="/frontend/public/images/img-icone_email.png" alt="Ícone de alterar email" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                                Alterar email
+                            </a>
+                            <a class="dropdown-item" href="/frontend/html/viajante/u_perfilUsuarioExcluir.html">
+                                <img src="/frontend/public/images/img-icone_excluir.png" alt="Ícone de excluir perfil" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                                Excluir perfil
                             </a>
                         </div>
-                    </footer>
+                        <footer>
+                            <div style="position: fixed; bottom: 80px; width: 100%; text-align: left;">
+                                <a href="#" class="text-danger" style="font-size: 18px; text-decoration: none;" 
+                                data-bs-toggle="modal" data-bs-target="#modalEncerrar">
+                                    <img src="/frontend/public/images/img-icone_logout.png" alt="Ícone de sair" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                                    Sair
+                                </a>
+                            </div>
+                        </footer>
+                    </div>
                 </div>
             </div>
 
@@ -87,20 +108,13 @@
                                 &nbsp;
                             </div>
                         </div>
-    
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-
-                        <!-- campos para alteração de e-mail -->
+                        
                         <form>
-                            <!-- campo para inserir o e-mail atual -->
-                            <div class="col-md-8">
-                                <label for="exampleInputPassword1" class="form-label">Email atual</label>
+                            
+                            <div class="col-md-5">
+                                <label for="exampleInputPassword1" class="form-label">EMAIL ATUAL</label>
                                 <input name="senha" type="password" class="form-control rounded-5 mb-2" id="inputEmailAtual"
-                                    placeholder="Digite o seu e-mail atual">
+                                    placeholder="">
                             </div>
 
                             <div class="row">
@@ -108,23 +122,16 @@
                                     &nbsp;
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    &nbsp;
-                                </div>
-                            </div>
 
-                            <!-- campo para inserir o novo email -->
-                            <div class="col-md-8">
-                                <label for="exampleInputPassword1" class="form-label">Nova senha</label>
+                            <div class="col-md-5">
+                                <label for="exampleInputPassword1" class="form-label">NOVA SENHA</label>
                                 <input name="senha" type="password" class="form-control rounded-5 mb-2" id="inputNovoEmail"
-                                    placeholder="Digite seu novo e-mail">
+                                    placeholder="">
                             </div>
-                            <!-- campo para confirmação do novo email -->
-                            <div class="col-md-8">
-                                <label for="exampleInputPassword1" class="form-label">Confirme a senha</label>
+                            <div class="col-md-5">
+                                <label for="exampleInputPassword1" class="form-label">CONFIRME A SENHA</label>
                                 <input type="password" class="form-control rounded-5 mb-2" id="inputConfirmNovoEmail"
-                                    placeholder="Insira o mesmo e-mail que digitou acima">
+                                    placeholder="">
                             </div>
 
                             <div class="row">
@@ -132,9 +139,8 @@
                                     &nbsp;
                                 </div>
                             </div>
+                            <button type="submit" class="btn w-25 text-center" style="background-color: #99067E; border-color: #99067E; color: white;">Salvar</button>
 
-                            <!-- botão para salvar alteração de email -->
-                            <button type="submit" class="btn w-25 btn-primary text-centerviar">Salvar</button>
                         </form>
                     </div>
                 </div>
