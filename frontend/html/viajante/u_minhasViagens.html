@@ -9,7 +9,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Alterar Email</title>
+    <title>Minhas Viagens</title>
     <style>
         body, html {
             overflow: hidden;
@@ -52,13 +52,13 @@
 
 <main>
     
-
-    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
-        <div class="row" style="height: 65vh; overflow-y: auto;">
+<div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+    <div class="row" style="height: 65vh; overflow-y: auto;">
+            <!-- coluna com o menu de opções para configurar o perfil da usuaria -->
             <div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
                 
                 <div class="list-group">
-                    <a href="/frontend/html/viajante/u_perfilUsuarioEditar.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
+                    <a href="u_perfilUsuarioEditar.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
                         <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de editar perfil" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
                         Editar perfil
                     </a>
@@ -97,12 +97,12 @@
                     </div>
                 </div>
             </div>
+            
 
-            <!-- coluna com o conteúdo principal (inputs de alteração de senha) -->
             <div class="col-md-9" style="padding-left: 0;">
                 <div class="card border-0">
                     <div class="card-body">
-                        <h4>Alterar Email</h4>
+                        <h3>Minhas Viagens</h3>
                         <div class="row">
                             <div class="col">
                                 &nbsp;
@@ -110,46 +110,109 @@
                         </div>
                         
                         <form>
+                            <!-- Opções  -->
+                            <div class="row mt-4">
+                                <div class="col text-center">
+                                    <div class="p-2" style="cursor: pointer;" onmouseover="mostrarDescricao('inscritas')" onmouseout="esconderDescricao('inscritas')">
+                                        <span class="h5" style="color: black;">Inscritas</span>
+                                    </div>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="p-2" style="cursor: pointer;" onmouseover="mostrarDescricao('criadas')" onmouseout="esconderDescricao('criadas')">
+                                        <span class="h5" style="color: black;">Criadas</span>
+                                    </div>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="p-2" style="cursor: pointer;" onmouseover="mostrarDescricao('concluidas')" onmouseout="esconderDescricao('concluidas')">
+                                        <span class="h5" style="color: black;">Concluídas</span>
+                                    </div>
+                                </div>
+                            </div>
                             
-                            <div class="col-md-5">
-                                <label for="exampleInputPassword1" class="form-label">EMAIL ATUAL</label>
-                                <input name="senha" type="password" class="form-control rounded-5 mb-2" id="inputEmailAtual"
-                                    placeholder="">
-                            </div>
+                            <!-- Linha separadora -->
+                            <hr style="border: 1px solid black; margin-top: 20px; margin-bottom: 20px;">
+            
 
-                            <div class="row">
-                                <div class="col">
-                                    &nbsp;
+                            <!-- Descrição das viagens -->
+                            <div class="row mt-4">
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <img src="/frontend/public/images/img-reveillon-2024.jpg" class="img-fluid rounded-circle" alt="Foto da viagem" style="width: 70px; height: 70px;">
+                                </div>
+                                <div class="col-md-10">
+                                    <p><strong>Reveillon em Copacabana</strong></p>
+                                    <p><strong>Data:</strong> 31/12/2024 | <strong>15 Mulheres</strong></p>
                                 </div>
                             </div>
-
-                            <div class="col-md-5">
-                                <label for="exampleInputPassword1" class="form-label">NOVA SENHA</label>
-                                <input name="senha" type="password" class="form-control rounded-5 mb-2" id="inputNovoEmail"
-                                    placeholder="">
-                            </div>
-                            <div class="col-md-5">
-                                <label for="exampleInputPassword1" class="form-label">CONFIRME A SENHA</label>
-                                <input type="password" class="form-control rounded-5 mb-2" id="inputConfirmNovoEmail"
-                                    placeholder="">
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    &nbsp;
+                            <div class="row mt-9">
+                                <div class="row mt-9">
+                                    <div class="col-md-10">
+                                        <h5 class="fw-normal" style="font-size: 16px;">Partiu Copacabana na virada do ano! Junte-se a nós nessa viagem maravilhosa...</h5>
+                                        <h6 class="fw-normal" style="font-size: 14px;">Destino: Copacabana, RJ, Brasil.</h6>
+                                        <h5 class="fw-normal" style="font-size: 16px;">Data: 31/12/2024</h5>
+                                        <h6 class="fw-normal" style="font-size: 14px;">Horário de partida: 05:00</h6>
+                                        <h6 class="fw-normal" style="font-size: 14px;">Ponto de encontro: Av. Águia de Haia, 2000 - Arthur Alvim, SP, CEP 00000-000</h6>
+                                        <h6 class="fw-normal" style="font-size: 14px;">Estimativa de custo: R$1000,00 para uma pessoa.</h6>
+                                        <h6 class="fw-normal" style="font-size: 14px;">Link do grupo no WhatsApp: <a href="www.whatsapp.com.br" target="_blank">www.whatsapp.com.br</a></h6> 
+                                    </div>
                                 </div>
+                                <br>
+                                <button class="btn btn-sm text-white rounded-pill mt-1" style="background-color: #99067E; border-color: #99067E; padding: 5px 15px; font-size: 14px; width: auto;">Desistir da viagem</button>
                             </div>
-                            <button type="submit" class="btn w-25 text-center" style="background-color: #99067E; border-color: #99067E; color: white;">Salvar</button>
+                            
+</div>
+</div>
+                            
 
-                        </form>
-                    </div>
+                <div id="descricaoCriadas" class="mt-3" style="display: none;">
+                    <p>Descrição das viagens criadas...</p>
                 </div>
-            </div>
+                <div id="descricaoConcluidas" class="mt-3" style="display: none;">
+                    <p>Descrição das viagens concluídas...</p>
+                </div>
+                
+            </form>
         </div>
     </div>
-</main>
+</div>
 
-<!-- Modal de Encerrar Sessão -->
+<script>
+    function mostrarDescricao(tipo) {
+        
+        document.getElementById('descricaoInscritas').style.display = 'none';
+        document.getElementById('descricaoCriadas').style.display = 'none';
+        document.getElementById('descricaoConcluidas').style.display = 'none';
+
+        
+        if (tipo === 'inscritas') {
+            document.getElementById('descricaoInscritas').style.display = 'block';
+        } else if (tipo === 'criadas') {
+            document.getElementById('descricaoCriadas').style.display = 'block';
+        } else if (tipo === 'concluidas') {
+            document.getElementById('descricaoConcluidas').style.display = 'block';
+        }
+
+        
+        const separador = document.getElementById('separador');
+        separador.style.border = '3px solid #99067E'; 
+
+        
+        if (tipo === 'inscritas') {
+            separador.style.width = '90px'; 
+        } else if (tipo === 'criadas') {
+            separador.style.width = '80px'; 
+        } else if (tipo === 'concluidas') {
+            separador.style.width = '100px'; 
+        }
+    }
+
+    function esconderDescricao(tipo) {
+        
+        const separador = document.getElementById('separador');
+        separador.style.border = '1px solid rgb(109, 107, 107)'; 
+        separador.style.width = '100%'; 
+    }
+</script>
+
 <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -157,17 +220,12 @@
                 <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" class="card border-0">
-                <p>Tem certeza que deseja encerrar a sessão?</p>
-            </div>
-            <div class="modal-footer" style="display: flex; justify-content: space-between; width: 100%;">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E; width: 48%;">Não, quero voltar</button>
-                <button type="button" class="btn" style="background-color: #99067E; color: white; width: 48%;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
+                <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
             </div>
         </div>
     </div>
 </div>
-
-
+</main>
 </body>
-</html>
