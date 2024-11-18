@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="/frontend/public/styles/custom.css" rel="stylesheet">
+    <title>Meu Perfil</title>
+</head>
+<body>
+
+<header>
+    <div class="container-fluid center">
+        <div class="row">
+            <div class="col">
+                <div class="p-3">
+                    <nav class="navbar navbar-expand-lg mx-5">
+                        <div class="container-fluid">
+                            <div class="logo-peregrine">
+                                <img src="/frontend/public/images/img-logoPeregrine-horizontal.png" alt="Ícone de Peregrine">
+                            </div>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                                <div class="navbar-nav ms-auto">
+                                    <a class="nav-link" href="#" style="color: #99067E; text-transform: uppercase; margin-right: 60px;">sobre</a>
+                                    <a class="nav-link" href="#" style="color: #99067E; text-transform: uppercase; margin-right: 60px;">ajuda</a>
+                                    <a class="nav-link" href="#" style="color: #99067E; text-transform: uppercase;">perfil</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-4">
+    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+</div>
+
+<main>
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 70vh; overflow-y: auto;">
+            <!-- coluna com o menu de opções para configurar o perfil da usuaria -->
+            <div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
+                <div class="list-group list-group-flush">
+                    <a href="u_editarPerfil.html" class="list-group-item list-group-item-action border-0 border-bottom" style="font-size: 18px;">
+                        <span class="mr-2">✏️</span> Editar perfil
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action border-0 border-bottom" style="font-size: 18px;">
+                        <span class="mr-2">🧳</span> Minhas viagens
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="list-group-item list-group-item-action dropdown-toggle border-0 border-bottom" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
+                            <span class="mr-2">⚙️</span> Configurações
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="border: none; box-shadow: 0px 4px 8px rgba(0,0,0,0.2);">
+                            <a class="dropdown-item" href="#"><span class="mr-2">🔒</span> Alterar senha</a>
+                            <a class="dropdown-item" href="#"><span class="mr-2">📧</span> Alterar email</a>
+                            <a class="dropdown-item" href="#"><span class="mr-2">🗑</span> Excluir perfil</a>
+                        </div>
+                    </div>
+                    <footer>
+                        <div style="position: relative; height: 50vh;">
+                            <a href="/frontend/html/u_encerrarSeção.html" class="text-danger" style="font-size: 18px; text-decoration: none; position: absolute; bottom: 0;" data-bs-toggle="modal" data-bs-target="#modalEncerrar">
+                                <span class="mr-2">🔌</span> Sair
+                            </a>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- coluna com o conteúdo principal (inputs de alteração de senha) -->
+            <div class="col-md-9" style="padding-left: 0;">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h4>Excluir perfil</h4>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <p>Sentimos muito que você queira nos deixar. Você realmente deseja apagar seu perfil?  Ao fazer isso, <strong>seus dados serão perdidos</strong>.</p>
+    
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <p>Se ainda quiser excluir seu perfil, por favor indique o(s) motivo(s) que a levaram a essa decisão:</p>
+
+                        <!-- campos (opçoes check) para incluir os motivos da inclusão -->
+                        <form>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Eu não estou usando minha conta</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Eu não entendi como funciona</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Não há viagens partindo da minha cidade</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Eu há viagens para o destino que eu desejo</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Eu tive problemas com outras usuárias</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Eu tive problemas durante uma viagem</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Eu estou usando outra plataforma de viagem</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Outro motivo</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;
+                                </div>
+                            </div>
+
+                            <!-- botão para salvar alteração de senha -->
+                            <button type="submit" class="btn w-25 btn-primary text-centerviar">Excluir perfil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal de Encerrar Sessão -->
+<div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" class="card border-0">
+                <p>Tem certeza que deseja encerrar a sessão?</p>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; width: 100%;">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E; width: 48%;">Não, quero voltar</button>
+                <button type="button" class="btn" style="background-color: #99067E; color: white; width: 48%;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
