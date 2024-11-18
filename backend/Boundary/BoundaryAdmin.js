@@ -73,7 +73,14 @@ module.exports = {
             res.status(500).send('Erro ao buscar viajantes');
         }
     },
-    
+
+    banirViajante: (req, res) => {
+        res.render('pages/admin/viajantes/gerenciar/banirViajante', {
+            title: 'Usuários - Viajantes',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
     
 
     aprovarViajantes: (req, res) => {

@@ -60,7 +60,7 @@
                                         {{#if this.A02_APROVADA}}Aprovada{{else}}Pendente{{/if}}
                                     </td>
                                     <td>
-                                        <a id="banirViajante" href="#" class="btn btn-primary btn-lg w-100">Banir</a>
+                                        <button class="btn btn-primary btn-danger btn-lg w-100" data-id="{{this.A02_ID}}">Deletar Viajante</button>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -75,3 +75,4 @@
         </div>
     </div>
 </div>
+<script src="/scripts/banirViajante.js"></script>

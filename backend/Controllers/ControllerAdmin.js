@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const Usuario = require('../models/Usuario_01'); // Ajuste o caminho conforme necessário
+const Viajante = require('../models/Viajante_02');
 const SALT_ROUNDS = 10;
 const sequelize = require('../config/bd');
 
@@ -56,7 +57,7 @@ module.exports = {
             res.render('pages/admin/administradores/criar', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
         }
     },
-    delete: async (req, res) => {
+    deleteAdmin: async (req, res) => {
         const { userId } = req.body; // Agora você recebe o ID do corpo da requisição
         try {
             // Tenta deletar o usuário
@@ -76,6 +77,32 @@ module.exports = {
             console.error('Erro ao deletar dado:', error);
             res.status(500).send('Erro no servidor');
         }
-    }
+    },
+    deleteViajante: async (req, res) => {
+        const { userId } = req.body; // ID do Viajante a ser excluído
+        try {
+            // Localiza o viajante pelo ID fornecido
+            const viajante = await Viajante.findOne({ where: { A02_ID: userId } });
+    
+            if (!viajante) {
+                return res.status(404).send('Viajante não encontrado');
+            }
+    
+            // Obtém o ID do usuário associado
+            const usuarioId = viajante.A01_ID;
+    
+            // Deleta o viajante
+            await Viajante.destroy({ where: { A02_ID: userId } });
+    
+            // Deleta o usuário associado
+            await Usuario.destroy({ where: { A01_ID: usuarioId } });
+    
+            // Redireciona após a exclusão bem-sucedida
+            res.redirect('/viajantes/gerenciar/banir');
+        } catch (error) {
+            console.error('Erro ao deletar viajante e usuário:', error);
+            res.status(500).send('Erro no servidor');
+        }
+    }    
     
 };

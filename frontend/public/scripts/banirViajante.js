@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmBox.className = 'confirm-box';
 
         confirmBox.innerHTML = `
-            <h4>Você tem certeza que deseja banir este administrador?</h4>
-            <p>Essa ação não poderá ser desfeita. O administrador será banido permanentemente.</p>
+            <h4>Você tem certeza que deseja banir esta Viajante?</h4>
+            <p>Essa ação não poderá ser desfeita. A Viajante será banida permanentemente.</p>
             <div class="confirm-buttons">
                 <button class="btn btn-secondary" id="cancelar">Voltar</button>
-                <button class="btn btn-danger" id="confirmarBanimento">Sim, banir administrador</button>
+                <button class="btn btn-danger" id="confirmarBanimento">Sim, banir Viajante</button>
             </div>
         `;
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Ação para o botão de confirmar
         document.getElementById('confirmarBanimento').addEventListener('click', function () {
             // Envia o pedido de banir para o servidor usando POST
-            fetch(`/control/deleteAdmin/${userId}`, {
+            fetch(`/control/deleteViajante/${userId}`, {
                 method: 'POST', // Usando POST como estava no seu código original
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 if (response.ok) {
                     // Redireciona para a página '/administradores/banir' após a exclusão
-                    window.location.href = '/administradores/banir'; // Redirecionamento após sucesso
+                    window.location.href = '/viajantes/gerenciar/banir'; // Redirecionamento após sucesso
                 } else {
                     alert('Erro ao banir a usuária.');
                 }

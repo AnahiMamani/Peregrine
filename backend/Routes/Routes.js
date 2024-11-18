@@ -37,6 +37,7 @@ router.get('/viajantes/denuncias/individual/banir', BoundaryAdmin.banirDenuncia)
 
 // Gerenciar viajantes
 router.get('/viajantes/gerenciar', BoundaryAdmin.listarViajantes);
+router.get('/viajantes/gerenciar/banir', BoundaryAdmin.banirViajante);
 
 // Perfil do viajante
 router.get('/perfil', BoundaryViajante.renderPerfil);

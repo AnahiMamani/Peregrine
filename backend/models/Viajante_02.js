@@ -26,10 +26,7 @@ const Viajante = sequelize.define('Viajante', {
     timestamps: false
 });
 
-// Relacionamento 1:1 com Usuario
-// Viajante.js
-Usuario.hasOne(Viajante, { foreignKey: 'A01_ID' });
-Viajante.belongsTo(Usuario, { foreignKey: 'A01_ID' });
-
+Usuario.hasOne(Viajante, { foreignKey: 'A01_ID', onDelete: 'CASCADE' });
+Viajante.belongsTo(Usuario, { foreignKey: 'A01_ID', onDelete: 'CASCADE' });
 
 module.exports = Viajante;
