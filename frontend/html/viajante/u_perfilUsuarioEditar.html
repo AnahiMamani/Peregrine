@@ -9,7 +9,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Excluir Perfil</title>
+    <title>Editar Perfil</title>
     <style>
         body, html {
             overflow: hidden;
@@ -51,9 +51,12 @@
 </div>
 
 <main>
-    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
-        <div class="row" style="height: 65vh; overflow-y: auto;">
+    
+
+<div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+    <div class="row" style="height: 65vh; overflow-y: auto;">
             <div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
+                
                 <div class="list-group">
                     <a href="/frontend/html/viajante/u_perfilUsuarioEditar.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
                         <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de editar perfil" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
@@ -97,82 +100,64 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
-                        <h2 style="color: #99067E; font-weight: bold; font-size: 20px;">Excluir perfil</h2>
-                        <br>
-                        <h6>Sentimos muito que você queira nos deixar. Você realmente deseja apagar seu perfil? Ao fazer isso, seus dados serão perdidos.</h6>
-                        <br>
-                        <div class="mb-3">
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo1" style="border-color: #99067E;">
-                                <label class="form-check-label" for="motivo1">
-                                    Eu não estou usando minha conta
-                                </label>
+                        <div class="d-flex align-items">
+                            <!-- Container da foto de perfil -->
+                            <div style="position: relative; width: 100px; height: 100px; margin-right: 20px;">
+                                <!-- Foto de perfil -->
+                                <img src="/frontend/public/images/perfil.jpg" alt="Foto de Perfil" class="rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
+                                <!-- Ícone de lápis para editar a foto -->
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#uploadModal" style="position: absolute; bottom: 5px; right: 5px; background-color: white; border-radius: 50%; padding: 5px;">
+                                    <img src="/frontend/public/images/icone_editar_foto.png" alt="Ícone de editar foto" style="width: 20px; height: 20px;">
+                                </a>
                             </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo2" style="border-color: #99067E;">
-                                <label class="form-check-label" for="motivo2">
-                                    Eu não entendi como funciona
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo3" style="border-color: #99067E;">
-                                <label class="form-check-label" for="motivo3">
-                                    Não há viagens partindo da minha cidade
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo4" style="border-color: #99067E;">
-                                <label class="form-check-label" for="motivo4">
-                                    Não há viagens para o destino que eu desejo
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo5" style="border-color: #99067E;">
-                                <label class="form-check-label" for="motivo5">
-                                    Eu tive problemas com outras usuárias
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo6" style="border-color: #99067E;">
-                                <label class="form-check-label" for="motivo6">
-                                    Eu tive problemas durante uma viagem
-                                </label>
-                            </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" style="border-color: #99067E;" >
-                                <label class="form-check-label" for="exampleCheck1">Eu estou usando outra plataforma de viagem</label>
-                            </div>
-                            <div class="form-check" style="margin-bottom: 10px;">
-                                <input class="form-check-input" type="checkbox" value="" id="motivo8" style="border-color: #99067E;" onclick="toggleTextarea()">
-                                <label class="form-check-label" for="motivo8">
-                                    Outro motivo
-                                </label>
-                                <!-- Caixa de texto para descrição de outro motivo -->
-                                <textarea class="form-control mt-2" id="outroMotivo" placeholder="Descreva o motivo aqui..." style="display: none;"></textarea>
+            
+                            <div class="container mt-4">
+                                <h3>Editar Perfil</h3>
+                                <form>
+                                
+                                    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="uploadModalLabel">Alterar Foto do Perfil</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="file" class="form-control" id="profilePicture" accept="image/*">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary" style="background-color: #99067E; border-color: #99067E">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Apelido</label>
+                                        <input type="text" class="form-control" id="name" value="Fulana da Silva Sauro">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="celular" class="form-label">Celular</label>
+                                        <input type="tel" class="form-control" id="celular" placeholder="(xx) xxxxx-xxxx" pattern="\(\d{2}\) \d{5}-\d{4}" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Bio</label>
+                                        <textarea class="form-control" id="description" rows="3">Tenho 40 anos e amo viajar. Possuo 2 filhos e 3 pets (dois cachorros e um gato). Moro em São Paulo e trabalho como corretora de imóveis. Gosto de ir ao cinema e pratico corrida de rua. Viajo pelo menos uma vez por mês.</textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancelar</button>
+                                    <button style="background-color: #99067E; color:white;" type="submit" class="btn btn-primary">Salvar</button>
+                                </form>
                             </div>
                         </div>
-                        
-                        <!-- Script para mostrar a caixa de texto -->
-                        <script>
-                            function toggleTextarea() {
-                                var checkbox = document.getElementById("motivo8");
-                                var textarea = document.getElementById("outroMotivo");
-                                if (checkbox.checked) {
-                                    textarea.style.display = "block";  // Mostra o textarea
-                                } else {
-                                    textarea.style.display = "none";  // Esconde o textarea
-                                }
-                            }
-                        </script>
-                        </div>
-                        
-                        
-                        </div>
-                        <form>
-                            <button type="button" class="btn" style="background-color: #99067E; color: white; font-size: 16px;">Excluir perfil</button>
-                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+                
+                        
+                        
 
     
     <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
