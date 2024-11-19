@@ -10,14 +10,18 @@
                     <div class="container p-4">
                         <div class="row input-group mb-3 align-items-center justify-content-center"
                             style="height: 30px;">
-                            <input type="text" class="form-control w-50" placeholder="Buscar por CPF ou login"
-                                aria-label="Buscar por CPF ou login">
-                            <button class="btn btn-primary w-25 h-10" type="button">Pesquisar</button>
+                            <form class="input-group w-75 h-10" id="searchForm" action="/viajantes/gerenciar"
+                                method="GET">
+                                <input type="text" class="form-control w-50 m-0" id="searchInput" name="query"
+                                    placeholder="Buscar por ID ou Email" value="{{query}}">
+                                <button class="btn btn-primary w-25 m-0" type="submit">Buscar</button>
+                            </form>
                         </div>
                     </div>
                     <br>
                     <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
                         style="height: 60vh; overflow-y: auto;padding-right: 3rem;padding-left: 3rem;padding-top: 2rem;">
+                        {{#if buscaRealizada}}
                         {{#if viajantes.length}}
                         <table>
                             <thead>
@@ -60,7 +64,8 @@
                                         {{#if this.A02_APROVADA}}Aprovada{{else}}Pendente{{/if}}
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary btn-danger btn-lg w-100" data-id="{{this.A02_ID}}">Deletar Viajante</button>
+                                        <button class="btn btn-primary btn-danger btn-lg w-100"
+                                            data-id="{{this.A02_ID}}">Deletar Viajante</button>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -69,6 +74,57 @@
                         {{else}}
                         <p>Nenhum viajante encontrado.</p>
                         {{/if}}
+                        {{else}}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">NOME</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">email</h6>
+                                    </th>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">CELULAR</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">DATA DE NASCIMENTO</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">DOCUMENTAÇÃO</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">APROVAÇÃO</h6>
+                                    </th>
+                                    <th>
+                                        <h6 style="text-transform: uppercase;">AÇÃO</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each viajantes}}
+                                <tr>
+                                    <td>{{this.A02_NOME}}</td>
+                                    <td>{{this.A01_EMAIL}}</td>
+                                    <td>{{this.A02_CELULAR}}</td>
+                                    <td>{{this.A02_DATA_NACSI}}</td>
+                                    <td style="color: {{#if this.A02_DOCUMENTACAO}}green{{else}}red{{/if}}">
+                                        {{#if this.A02_DOCUMENTACAO}}Enviada{{else}}Não enviada{{/if}}
+                                    </td>
+                                    <td style="color: {{#if this.A02_APROVADA}}green{{else}}red{{/if}}">
+                                        {{#if this.A02_APROVADA}}Aprovada{{else}}Pendente{{/if}}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-danger btn-lg w-100"
+                                            data-id="{{this.A02_ID}}">Deletar Viajante</button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{/if}}
+
                     </div>
                 </main>
             </div>

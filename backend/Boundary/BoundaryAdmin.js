@@ -43,13 +43,39 @@ module.exports = {
     },
     listarViajantes: async (req, res) => {
         try {
-            // Busca os viajantes e inclui o email do usuário associado
-            const viajantes = await Viajante.findAll({
-                include: {
-                    model: Usuario,
-                    attributes: ['A01_EMAIL'] // Campos que você deseja obter
-                }
-            });
+            let viajantes;
+            let buscaRealizada = false;
+            const query = req.query.query ? req.query.query.trim() : ''; // Captura o termo de busca, ou define como string vazia
+    
+            if (query) {
+                buscaRealizada = true;
+    
+                // Realiza a busca pelo nome ou email do usuário associado
+                viajantes = await Viajante.findAll({
+                    include: {
+                        model: Usuario,
+                        attributes: ['A01_EMAIL'], // Campos do usuário que queremos incluir
+                        where: {
+                            [Op.or]: [
+                                { A01_EMAIL: { [Op.like]: `%${query}%` } }
+                            ]
+                        }
+                    },
+                    where: {
+                        [Op.or]: [
+                            { A02_NOME: { [Op.like]: `%${query}%` } } // Filtra pelo nome
+                        ]
+                    }
+                });
+            } else {
+                // Se não houver busca, busca todos os viajantes
+                viajantes = await Viajante.findAll({
+                    include: {
+                        model: Usuario,
+                        attributes: ['A01_EMAIL'] // Campos que você deseja obter
+                    }
+                });
+            }
     
             // Log para verificar os dados retornados
             console.log(JSON.stringify(viajantes, null, 2));
@@ -66,7 +92,8 @@ module.exports = {
                 title: 'Usuários - Viajantes',
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
-                viajantes: viajantesFormatados
+                viajantes: viajantesFormatados,
+                buscaRealizada, query // Passa informações sobre a busca para a view
             });
         } catch (error) {
             console.error('Erro ao buscar viajantes:', error);
