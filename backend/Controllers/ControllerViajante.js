@@ -30,17 +30,17 @@ module.exports = {
 
         // Verificar se os campos obrigatórios estão preenchidos
         if (!nome || !email || !senha || !confirmSenha || !cpf || !dataNascimento || !celular || !termos) {
-            return res.render('pages/cadastroPage', { error: 'Todos os campos são obrigatórios.' });
+            return res.render('pages/cadastro/index', { error: 'Todos os campos são obrigatórios.' });
         }
 
         // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmSenha) {
-            return res.render('pages/cadastroPage', { error: 'As senhas não coincidem. Tente novamente.' });
+            return res.render('pages/cadastro/index', { error: 'As senhas não coincidem. Tente novamente.' });
         }
 
         // Verificar se o checkbox de termos foi marcado
         if (!termos) {
-            return res.render('pages/cadastroPage', { error: 'Você deve concordar com os termos e condições.' });
+            return res.render('pages/cadastro/index', { error: 'Você deve concordar com os termos e condições.' });
         }
 
         try {
@@ -48,7 +48,7 @@ module.exports = {
             const emailExists = await Usuario.findOne({ where: { A01_EMAIL: email } });
             const cpfExists = await Viajante.findOne({ where: { A02_CPF: cpf } });
             if (emailExists || cpfExists) {
-                return res.render('pages/cadastroPage', { error: 'CPF ou Email já cadastrados. Tente novamente.' });
+                return res.render('pages/cadastro/index', { error: 'CPF ou Email já cadastrados. Tente novamente.' });
             }
 
             // Iniciar uma transação para garantir a consistência dos dados
