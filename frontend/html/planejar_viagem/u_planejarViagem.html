@@ -41,7 +41,7 @@
     </header>
 
     <main>
-        <form class="container center">
+        <form class="container">
             <div class="row">
                 <div class="col">
                     &nbsp;
@@ -219,8 +219,8 @@
             </div>
 
             <!-- espaço para inserção do texto descritivo da viagem -->
-            <input type="text" name="descricaoViagem" id="descricaoViagem" placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..." 
-            class="my-4 container rounded-4 border border-2 border-secondary" style="height: 50rem; width: 80vw;">
+            <textarea name="descricaoViagem" id="descricaoViagem" placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..." 
+            class="my-4 container rounded-4 border border-2 border-secondary" style="height: 40rem; width: 80vw; padding: 2rem;"></textarea>
 
             <div class="row">
                 <div class="col">
@@ -235,7 +235,7 @@
             
             <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
             <div class="d-flex align-items-center justify-content-center">
-                <a class="btn btn-primary" href="#" style="width: 20rem;">Criar viagem</a>
+                <a class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">Criar viagem</a>
             </div>
         </form>
     </main>
@@ -301,5 +301,7 @@
 
     <!-- link bootstrap icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">                    
+    <script src="/frontend/public/scripts/u_planejarViagem.js"></script>
+
 </body>
 </html>
