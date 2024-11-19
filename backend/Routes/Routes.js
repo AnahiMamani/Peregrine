@@ -12,7 +12,7 @@ const BoundaryUsuario = require('../Boundary/BoundaryUsuario');
 router.get('/', BoundaryUsuario.renderIndex);
 router.get('/sobre', BoundaryUsuario.renderSobre);
 router.get('/faq', BoundaryUsuario.renderAjudaFAQ);
-router.get('/suporteemail', BoundaryUsuario.renderAjudaEmail);
+router.get('/suporte-email', BoundaryUsuario.renderAjudaEmail);
 
 // Rotas do administrador
 router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);
@@ -46,15 +46,15 @@ router.get('/viajantes/gerenciar/banir', BoundaryAdmin.banirViajante);
 
 // Perfil do viajante
 router.get('/perfil', BoundaryViajante.renderPerfil);
-router.get('/minhasviagens', BoundaryViajante.renderMinhasViagens);
-router.get('/alteraremail', BoundaryViajante.renderUsuarioAlterarEmail);
-router.get('/alterarsenha', BoundaryViajante.renderUsuarioAlterarSenha);
-router.get('/editarperfil', BoundaryViajante.renderUsuarioEditar);
-router.get('/excluirperfil', BoundaryViajante.renderUsuarioExcluir);
+router.get('/perfil/minhas-viagens', BoundaryViajante.renderMinhasViagens);
+router.get('/perfil/alterar-email', BoundaryViajante.renderUsuarioAlterarEmail);
+router.get('/perfil/alterar-senha', BoundaryViajante.renderUsuarioAlterarSenha);
+router.get('/perfil/editar-perfil', BoundaryViajante.renderUsuarioEditar);
+router.get('/perfil/excluir-perfil', BoundaryViajante.renderUsuarioExcluir);
 
 // Viagem
-router.get('/pesquisaviagem', BoundaryViajante.renderPesquisaViagem);
-router.get('/pesquisaviagemresultados', BoundaryViajante.renderPesquisaViagemResultados);
+router.get('/viagem', BoundaryViajante.renderPesquisaViagem);
+router.get('/viagem/resultados', BoundaryViajante.renderPesquisaViagemResultados);
 
 // Cadastro de usuário
 router.get('/cadastro', BoundaryUsuario.renderCadastro);
