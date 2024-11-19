@@ -4,7 +4,9 @@
             <div class="container-fluid">
 
                 <div class="logo-peregrine">
-                    <img src="/images/img-logoPeregrine-horizontal.png"  href="/backend/views/pages/index.handlebars" alt="Ícone de Peregrine">
+                    <a href="/">
+                        <img src="/images/img-logoPeregrine-horizontal.png" alt="Ícone de Peregrine">
+                    </a>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -17,17 +19,18 @@
                     <div class="navbar-nav ms-auto">
                         <a class="nav-link" href="/sobre"
                             style="color: #99067E; text-transform: uppercase; margin-right: 60px;">sobre</a>
-                        <a class="nav-link" href="#"
+                        <a class="nav-link" href="/faq"
                             style="color: #99067E; text-transform: uppercase; margin-right: 60px;">ajuda</a>
-                            <!-- Verifica se o usuário está logado -->
-                            {{#if user}}
-                            <!-- Se o usuário estiver logado, exibe o nome e o ícone -->
-                            <a class="nav-link" href="/perfil">
-                                PERFIL
-                            </a>
-                            {{else}}
-                            <p></p>
-                            {{/if}}                    </div>
+                        <!-- Verifica se o usuário está logado -->
+                        {{#if user}}
+                        <!-- Se o usuário estiver logado, exibe o nome e o ícone -->
+                        <a class="nav-link" href="/perfil">
+                            PERFIL
+                        </a>
+                        {{else}}
+                        <p></p>
+                        {{/if}}
+                    </div>
                 </div>
             </div>
         </nav>
