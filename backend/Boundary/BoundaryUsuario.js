@@ -75,5 +75,19 @@ module.exports = {
             title: 'Esqueci minha senha',
             logoPath: '/images/logo.ico'
         });
+    },
+
+    renderAjudaFAQ: (req, res) => {
+        res.render("pages/ajuda/ajudaFAQ", {
+            title: 'FAQ - Dúvidas frequentes',
+            logoPath: '/images/logo.ico'
+        });
+    },
+
+    renderAjudaEmail: (req, res) => {
+        res.render("pages/ajuda/ajudaSuporteEmail", {
+            title: 'Suporte - Email',
+            logoPath: '/images/logo.ico'
+        });
     }
 }
