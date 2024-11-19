@@ -50,20 +50,19 @@ module.exports = {
             if (query) {
                 buscaRealizada = true;
     
-                // Realiza a busca pelo nome ou email do usuário associado
+                // Realiza a busca pelo nome do viajante ou email do usuário associado
                 viajantes = await Viajante.findAll({
-                    include: {
-                        model: Usuario,
-                        attributes: ['A01_EMAIL'], // Campos do usuário que queremos incluir
-                        where: {
-                            [Op.or]: [
-                                { A01_EMAIL: { [Op.like]: `%${query}%` } }
-                            ]
+                    include: [
+                        {
+                            model: Usuario,
+                            attributes: ['A01_EMAIL'], // Campos do usuário que queremos incluir
+                            required: true // Inclui apenas os viajantes que têm usuários associados
                         }
-                    },
+                    ],
                     where: {
                         [Op.or]: [
-                            { A02_NOME: { [Op.like]: `%${query}%` } } // Filtra pelo nome
+                            { A02_NOME: { [Op.like]: `%${query}%` } }, // Filtra pelo nome do viajante
+                            { '$Usuario.A01_EMAIL$': { [Op.like]: `%${query}%` } } // Filtra pelo email do usuário
                         ]
                     }
                 });
@@ -83,8 +82,8 @@ module.exports = {
             // Formata os dados
             const viajantesFormatados = viajantes.map(viajante => ({
                 ...viajante.dataValues,
-                A02_DATA_NACSI: formatarData(viajante.A02_DATA_NACSI),
-                A01_EMAIL: viajante.Usuario?.A01_EMAIL || 'N/A' // Inclui o email associado
+                A02_DATA_NACSI: formatarData(viajante.A02_DATA_NACSI), // Converte a data para um formato legível
+                A01_EMAIL: viajante.Usuario?.A01_EMAIL || 'N/A' // Inclui o email associado ou 'N/A' se não existir
             }));
     
             // Renderiza a view com os dados
@@ -93,13 +92,14 @@ module.exports = {
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
                 viajantes: viajantesFormatados,
-                buscaRealizada, query // Passa informações sobre a busca para a view
+                buscaRealizada,
+                query // Passa informações sobre a busca para a view
             });
         } catch (error) {
             console.error('Erro ao buscar viajantes:', error);
             res.status(500).send('Erro ao buscar viajantes');
         }
-    },
+    },    
 
     banirViajante: (req, res) => {
         res.render('pages/admin/viajantes/gerenciar/banirViajante-concluido', {

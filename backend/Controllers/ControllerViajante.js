@@ -13,7 +13,7 @@ const sequelize = require('../config/bd');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // Cria a pasta uploads se não existir
-        const uploadsDir = path.join(__dirname, '../../uploads');
+        const uploadsDir = path.join(__dirname, '../../uploads/viajantesDocumentos');
         fs.mkdirSync(uploadsDir, { recursive: true });
         cb(null, uploadsDir); // Pasta onde os arquivos serão armazenados
     },
@@ -120,7 +120,7 @@ module.exports = {
         if (!userId) {
             return res.status(400).send("User ID não fornecido.");
         }
-        const userDir = path.join(__dirname, '../../uploads', userId.toString());
+        const userDir = path.join(__dirname, '../../uploads/viajantesDocumentos/', userId.toString());
         fs.mkdir(userDir, { recursive: true }, (err) => {
             if (err) {
                 console.log("Erro ao criar diretório do usuário:", err);

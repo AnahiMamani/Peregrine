@@ -45,3 +45,4 @@ PEREGRINE
 │   ├── partials
 │   │
 │   └── server.js
+├── uploads
