@@ -9,7 +9,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/public/styles/custom.css" rel="stylesheet">
-    <title>Planejar viagem</title>
+    <title>Pesquisa viagem</title>
 </head>
 <body>
     <header>
@@ -76,11 +76,18 @@
                 </button>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    &nbsp;
+            <!-- espaço para informações do perfil da usuária organizadora (foto, nome e avalização) -->
+            <div class="card-body" style="margin-left: 48vw;">
+                <div class="d-flex align-items-center">
+                    <div class="my-2">
+                        <h4 id="nomeOrganizadora" name="nomeOrganizadora" class="text-end" style="font-weight: bold;">Fulana da Silva Sauro</h4>
+                        <p id="avaliacaoOrganizadora" name="avaliacaoOrganizadora" class="text-end" style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span> 4,97</p>
+                    </div>
+                    <!-- quando clicar na imagem, o javascript abrirá uma janela com o resumo do perfil da organizadora -->
+                    <img id="perfilOrganizadora" name="perfilOrganizadora" src="/frontend/public/images/img-fotoPerfilFulana.png" alt="Foto de Perfil" class="rounded-circle border border-3 border-light" style="cursor:pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px; margin-top: -100px; z-index: 1001;">
                 </div>
             </div>
+
             <div class="row">
                 <div class="col">
                     &nbsp;
@@ -90,27 +97,17 @@
             <!-- espaço para inserção do título e subtítulo da viagem -->
             <div class="row text-center">
                 <!-- input para título da viagem -->
-                <input type="text" name="tituloViagem" id="tituloViagem" placeholder="Insira um título..." class="border-0 fs-1 text-center rounded-4">
+                <h1 type="text" name="tituloViagem" id="tituloViagem" class="border-0 fs-1 text-center rounded-4">Título da viagem</h1>
 
                 <!-- input para subtítulo da viagem -->
-                <input type="text" name="subtituloViagem" id="subtituloViagem" placeholder="Insira um subtítulo..." class="my-4 container text-center rounded-4 border border-2 border-secondary" style="height: 4rem;">
-
+                <h5 type="text" name="subtituloViagem" id="subtituloViagem" placeholder="Insira um subtítulo..." class="my-4 container text-center">Subtítulo da viagem</h5>
             </div>
 
             <!-- espaço para inserção das principais informações da viagem -->
             <div class="row my-4 container text-center rounded-4 border border-2 border-secondary" style="width: 80vw;">
                 <!-- primeira coluna de informações - Origem, destino, vagas e custo -->
                 <div class="col">
-                    <!-- campo para inserir a localização (Origem) desejada para a viagem-->  
-                    <div class="col-md-4 rounded-4 container p-4 mx-0 my-4 d-flex flex-column align-items-center" style="width: 25rem;">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="/frontend/public/images/icon-origem-localizacao.png" alt="Ícone de localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-                            <h4 class="m-0">Origem</h4>
-                        </div>
-                        <input type="text" name="origemViagem" id="origemViagem" placeholder="Onde você está?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
-                    </div>
-
-                    <!-- campo para inserir a localização (Destino) desejada para a viagem-->
+                    <!-- campo para inserir a localização (Destino) da viagem-->
                     <div class="col-md-4 rounded-4 container mx-0 p-4 my-4 d-flex flex-column align-items-center" style="width: 25rem;">
                         <div class="d-flex align-items-center mb-2">
                             <img src="/frontend/public/images/icon-destino-mundo.png" alt="Ícone de mundo - localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
@@ -120,12 +117,19 @@
                     </div>
 
                     <!-- campo para inserir a quantidade de vagas disponíveis para a viagem-->
-                    <div class="col-md-4 rounded-4 container mx-0 p-4 my-4 d-flex flex-column align-items-center" style="width: 25rem;">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de mulher - pessoa" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-                            <h4 class="m-0">Vagas</h4>
+                    <div class="col-md-4 container p-4 mx-0 my-4" style="width: 25rem;">
+                        <!-- div para "Vagas Totais" e "Disponíveis" -->
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <h4 class="m-0">Vagas totais</h4>
+                            <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de menina - perfil" style="width: 1.5rem; height: 1.5rem; margin: 0 0.5rem;">
+                            <h4 class="m-0">Disponíveis</h4>
                         </div>
-                        <input type="number" name="vagasViagem" id="vagasViagem" placeholder="Quantas vagas serão oferecidas na viagem?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
+                        
+                        <!-- grupo de inputs para os campos de vagas(number)-->
+                        <div class="input-group">
+                            <input type="number" name="searchDataEmbarque" id="searchDataEmbarque" placeholder="02" class="form-control text-center rounded-start-4" style="height: 2.5rem;">
+                            <input type="number" name="searchDataRetorno" id="searchDataRetorno" placeholder="02" class="form-control text-center rounded-end-4" style="height: 2.5rem;">
+                        </div>
                     </div>
 
                     <!-- campo para inserir o custo estimado para a viagem-->
@@ -140,21 +144,6 @@
 
                 <!-- segunda coluna de informações - Ida, Volta e link de grupo -->
                 <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                    </div>
                     <!-- Campo para inserir o período desejado para a viagem (Embarque)-->
                     <div class="col-md-4 container p-4 mx-0 my-4" style="width: 45rem;">
                         <!-- Linha com "Ida - Ponto de encontro", Embarque e Horario -->
@@ -211,7 +200,7 @@
                     <div class="col-md-4 rounded-4 container mx-0 p-4 my-4 d-flex flex-column align-items-start" style="width: 45rem;">
                         <div class="d-flex align-items-center mb-2">
                             <h4 class="m-0">Link de grupo externo</h4>
-                            <img id="infoIcon" src="/frontend/public/images/icon-informacao.png" alt="Ícone de informação" style="width: 1.5rem; height: 1.5rem; margin-left: 0.5rem;">
+                            <img id="infoIcon" src="/frontend/public/images/icon-informacao.png" alt="Ícone de informação" style="width: 1.5rem; height: 1.5rem; margin-left: 0.5rem; cursor: pointer;">
                         </div>
                         <input type="text" name="custoViagem" id="custoViagem" placeholder="Insira o link de um grupo externo de sua preferência" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
                     </div>
@@ -219,8 +208,10 @@
             </div>
 
             <!-- espaço para inserção do texto descritivo da viagem -->
-            <textarea name="descricaoViagem" id="descricaoViagem" placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..." 
-            class="my-4 container rounded-4 border border-2 border-secondary" style="height: 40rem; width: 80vw; padding: 2rem;"></textarea>
+            <p name="descricaoViagem" id="descricaoViagem" placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..." 
+            class="my-4 container" style="width: 80vw; padding: 2rem; text-align: justify;">
+                aqui vai o texto descritivo da viagem.
+            </p>
 
             <div class="row">
                 <div class="col">
@@ -233,9 +224,9 @@
                 </div>
             </div>
             
-            <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
+            <!-- o botão abaixo abre uma janela no js para confirmação da inscrição na viagem-->
             <div class="d-flex align-items-center justify-content-center">
-                <a class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">Criar viagem</a>
+                <a class="btn btn-primary" id="confirmaInscreverViagem" style="width: 20rem;">Me inscrever</a>
             </div>
         </form>
     </main>
@@ -301,7 +292,7 @@
 
     <!-- link bootstrap icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">                    
-    <script src="/frontend/public/scripts/u_planejarViagem.js"></script>
+    <script src="/frontend/public/scripts/u_pesquisaViagemDetalhes.js"></script>
 
 </body>
 </html>
