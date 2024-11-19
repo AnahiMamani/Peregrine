@@ -1,3 +1,9 @@
+document.getElementById('searchInput').addEventListener('input', function() {
+    if (this.value === '') {
+        document.getElementById('searchForm').submit();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const banirButtons = document.querySelectorAll('.btn-danger'); // Botões de banir
     
