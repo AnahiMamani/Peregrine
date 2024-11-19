@@ -137,3 +137,4 @@ document.addEventListener("DOMContentLoaded", function () {
     custoMaxInput.addEventListener("blur", validateMinMax);
     custoMinInput.addEventListener("blur", validateMinMax);
 });
+
