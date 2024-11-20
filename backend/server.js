@@ -29,8 +29,11 @@ app.engine("handlebars", exphbs({
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "views/layouts"),
     partialsDir: path.join(__dirname, "views/partials"),
-    extname: ".handlebars"
-}));
+    extname: ".handlebars",
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true  // Permite acessar métodos também
+    }}));
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 

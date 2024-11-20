@@ -6,8 +6,8 @@ const uploadIcon1 = document.getElementById('uploadIcon1');
 
 const proceedArrow = document.getElementById('proceedArrow');
 
-const defaultIconSrc = '../public/images/icon-arquivoUpload.png';
-const doneIconSrc = '../public/images/icon-arquivoUploadFeito.png';
+const defaultIconSrc = '/images/icon-arquivoUpload.png';
+const doneIconSrc = '/images/icon-arquivoUploadFeito.png';
 
 // Mensagens de erro
 const errorMessages = {
@@ -35,25 +35,24 @@ function checkUploads() {
 
 // Função para validar se os arquivos foram anexados
 function validateAndProceed(event) {
-    event.preventDefault(); // Previna o envio do formulário
+    const form = document.querySelector('form');
+    event.preventDefault();
 
     let valid = true;
 
-    // Verifica se os inputs estão vazios e exibe mensagens de erro
     if (fileInput1.files.length === 0) {
         errorMessages.fileInput1.innerText = "É necessário anexar o documento.";
-        errorMessages.fileInput1.style.display = 'block'; // mostra a mensagem de erro
+        errorMessages.fileInput1.style.display = 'block';
         valid = false;
     }
 
-    // Se o documento estiver anexado, você pode prosseguir
     if (valid) {
-        // Redirecionar para a próxima página ou realizar a ação desejada
-        window.location.href = "#"; 
+        form.submit(); // Envia o formulário
     }
 }
 
+proceedArrow.addEventListener('click', validateAndProceed);
+
+
 // Adicionando listeners para cada input
 fileInput1.addEventListener('change', checkUploads);
-
-proceedArrow.addEventListener('click', validateAndProceed);

@@ -15,7 +15,7 @@ const Viajante = sequelize.define('Viajante', {
     A02_NOME: { type: DataTypes.STRING, allowNull: false }, 
     A02_APELIDO: { type: DataTypes.STRING },
     A02_CELULAR: { type: DataTypes.STRING },
-    A02_CPF: { type: DataTypes.INTEGER, unique: true },
+    A02_CPF: { type: DataTypes.STRING, unique: true },
     A02_DATA_NACSI: { type: DataTypes.DATE },
     A02_DESCRICAO: { type: DataTypes.STRING },
     A02_NOTA: { type: DataTypes.INTEGER },
@@ -26,8 +26,7 @@ const Viajante = sequelize.define('Viajante', {
     timestamps: false
 });
 
-// Relacionamento 1:1 com Usuario
-Usuario.hasOne(Viajante, { foreignKey: 'A01_ID' });
-Viajante.belongsTo(Usuario, { foreignKey: 'A01_ID' });
+Usuario.hasOne(Viajante, { foreignKey: 'A01_ID', onDelete: 'CASCADE' });
+Viajante.belongsTo(Usuario, { foreignKey: 'A01_ID', onDelete: 'CASCADE' });
 
 module.exports = Viajante;

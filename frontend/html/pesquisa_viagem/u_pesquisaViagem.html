@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <link href="/frontend/styles/custom.css" rel="stylesheet">
+    <link href="/frontend/public/styles/custom.css" rel="stylesheet">
     <title>Pesquisar viagem</title>
 </head>
 
@@ -20,11 +20,11 @@
                     <!-- seta para voltar e menu -->
                     <div class="row">
                         <div class="col">
-                            <nav class="navbar navbar-expand-lg bg-body-tertiary mx-5">
+                            <nav class="navbar navbar-expand-lg mx-5">
                                 <div class="container-fluid">
             
                                     <div class="logo-peregrine">
-                                        <img src="../public/images/img-logoPeregrine-horizontal.png" alt="Ícone de Peregrine">
+                                        <img src="/frontend/public/images/img-logoPeregrine-horizontal.png" alt="Ícone de Peregrine">
                                     </div>
                                     
                                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
                     <main class="container">
                         <!-- imagem principal -->
                         <div class="d-flex center align-items-center justify-content-center container position-relative" style="height: 30vh; margin-top: 22vh; margin-bottom: 2vh; z-index: 1000;">
-                            <img src="../public/images/img-u-pesquisaViagemPrincipal.png" alt="Garota contempla paisagem tropical">
+                            <img src="/frontend/public/images/img-u-pesquisaViagemPrincipal.png" alt="Garota contempla paisagem tropical">
                         </div>
 
                         <!--container para a pesquisa de viagem com os filtros específicos-->
@@ -61,7 +61,7 @@
                             <!-- campo para inserir a localização (Origem) desejada para a viagem (filtro)-->  
                             <div class="col-md-4 rounded-4 container p-4 mx-0 my-4 d-flex flex-column align-items-center" style="width: 15rem;">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="../public/images/icon-origem-localizacao.png" alt="Ícone de localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                                    <img src="/frontend/public/images/icon-origem-localizacao.png" alt="Ícone de localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
                                     <h4 class="m-0">Origem</h4>
                                 </div>
                                 <input type="text" name="searchOrigem" id="searchOrigem" placeholder="Onde você está?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
@@ -70,7 +70,7 @@
                             <!-- campo para inserir a localização (Destino) desejada para a viagem (filtro)-->
                             <div class="col-md-4 rounded-4 container mx-0 p-4 my-4 d-flex flex-column align-items-center" style="width: 15rem;">
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="../public/images/icon-destino-mundo.png" alt="Ícone de mundo - localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                                    <img src="/frontend/public/images/icon-destino-mundo.png" alt="Ícone de mundo - localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
                                     <h4 class="m-0">Destino</h4>
                                 </div>
                                 <input type="text" name="searchDestino" id="searchDestino" placeholder="Para onde você vai?" class="form-control text-center rounded-4 container" style="height: 2.5rem;">
@@ -81,7 +81,7 @@
                                 <!-- div para "Embarque", ícone de data, e "Retorno" -->
                                 <div class="d-flex align-items-center justify-content-center mb-2">
                                     <h4 class="m-0">Embarque</h4>
-                                    <img src="../public/images/icon-data.png" alt="Ícone de data - calendário" style="width: 1.5rem; height: 1.5rem; margin: 0 0.5rem;">
+                                    <img src="/frontend/public/images/icon-data.png" alt="Ícone de data - calendário" style="width: 1.5rem; height: 1.5rem; margin: 0 0.5rem;">
                                     <h4 class="m-0">Retorno</h4>
                                 </div>
                                 
@@ -95,7 +95,7 @@
                             <!-- campo para inserir a quantidade máxima de pessoas para a viagem (filtro)-->
                             <div class="col-md-4 mx-0 text-center d-flex flex-column align-items-center" style="width: 5rem;">
                                 <!-- ícone centralizado acima do input -->
-                                <img src="../public/images/icon-perfilPreto.png" alt="Ícone de perfil na cor preta" style="height: 1.5rem; margin-bottom: 0.5rem;">
+                                <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de perfil na cor preta" style="height: 1.5rem; margin-bottom: 0.5rem;">
                                 <!-- input de quantidade de pessoas -->
                                 <input type="number" name="searchVagas" id="searchVagas" placeholder="02" class="form-control text-center rounded-4" style="height: 2.5rem; width: 4rem;">
                             </div>
@@ -106,7 +106,7 @@
                                      style="background-color: #99067E; border-radius: 50%; height: 4rem; width: 4rem;">
                                     <!-- botão de pesquisa da viagem que vai direcionar para a página de resultados -->
                                     <a href="#" name="searchViagem" id="searchViagem">
-                                        <img src="../public/images/icon-pesquisa-lupa.png" alt="Ícone de lupa - pesquisa" style="height: 2rem;">
+                                        <img src="/frontend/public/images/icon-pesquisa-lupa.png" alt="Ícone de lupa - pesquisa" style="height: 2rem;">
                                     </a>
                                 </div>
                             </div>

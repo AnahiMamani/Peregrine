@@ -4,66 +4,49 @@
             <div class="p-3">
                 <!-- CABEÇALHO -->
                 {{> adminHeader headerClass="bg-body-tertiary" backLink="/viajantes"}}
-                <!-- container principal -->
+                <!-- Container principal -->
                 <main class="container">
-                    <h1 style="color: #99067E">Aprovar usuárias</h1>
+                    <h1 style="color: #99067E;">Aprovar Usuárias</h1>
                     <br>
-
-                    <!-- texto descritivo -->
-                    <p style="font-size: 1.3rem; text-align: justify;">Faça uploading e importe o arquivo .txt contendo
-                        os CPFs dos usuários que tiveram seus <strong>perfis aprovados</strong> pelo Departamento de
-                        análise documental.</h5><br>
-                    <p style="font-size: 1.3rem; text-align: justify;">Serão aceitos arquivos no formato .txt, de até
-                        50MB.</p>
-
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                    </div>
+                    <!-- Texto descritivo -->
+                    <p style="font-size: 1.3rem; text-align: justify;">
+                        Faça upload e importe o arquivo <strong>.txt</strong> contendo os CPFs das usuárias que tiveram
+                        seus
+                        <strong>perfis aprovados</strong> pelo Departamento de Análise Documental.
+                    </p>
+                    <p style="font-size: 1.3rem; text-align: justify;">
+                        Serão aceitos arquivos no formato <strong>.txt</strong>, com tamanho de até
+                        <strong>50MB</strong>.
+                    </p>
                     <br>
-
-                    <!-- upload selfie com o documento -->
-                    <div class="row d-flex align-items-center text-center rounded-4 border border-2 border-dark container"
-                        style="min-height: 125px;">
-                        <div class="col-6 col-md-4 text-start">
-                            <img id="uploadIcon1" class="img-fluid h-70" src="/images/icon-arquivoUpload.png"
-                                alt="ícone de arquivo para upload"><span class="fs-5">Arquivo de usuários
-                                aprovados</span>
-                        </div>
-                        <div class="col-6 col-md-4 text-start"></div>
-                        <div class="col-6 col-md-4">
-                            <div class="mb-3">
-                                <label for="formFile1" class="form-label"></label>
-                                <input id="formFile1" type="file"
-                                    class="form-control flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium">
+                    <!-- Formulário de upload -->
+                    <form action="/control/aprovandoViajantes" method="POST" enctype="multipart/form-data">
+                        <div class="row d-flex align-items-center text-center rounded-4 border border-2 border-dark container"
+                            style="min-height: 125px;">
+                            <div class="col-6 col-md-4 text-start">
+                                <img id="uploadIcon1" class="img-fluid h-70" src="/images/icon-arquivoUpload.png"
+                                    alt="Ícone de arquivo para upload">
+                                <span class="fs-5">Arquivo de Usuárias Aprovadas</span>
+                            </div>
+                            <div class="col-6 col-md-4 text-start"></div>
+                            <div class="col-6 col-md-4">
+                                <div class="mb-3">
+                                    <label for="formFile1" class="form-label"></label>
+                                    <input id="formFile1" name="arquivo" type="file" required
+                                        class="form-control flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium">
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
+                        <br>
+                        <!-- Botão para envio do formulário -->
+                        <div class="d-flex align-items-end justify-content-end">
+                            <button id="proceedArrow" type="submit" class="btn btn-primary">Importar</button>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                    </div>
-                    <br>
-
-                    <!-- botão para envio do formulario -->
-                    <a href="/administrador/viajantes/concluir-aprovacao">
-                    <div class="d-flex align-items-end justify-content-end">
-                        <button type="submit" class="btn btn-primary">Importar</button>
-                    </div>
-                    </a>
+                    </form>
                 </main>
-
             </div>
         </div>
     </div>
 </div>
 
-<script src="../scripts/a_aprovarUsuario.js"></script>
+<script src="/scripts/a_aprovarUsuario.js"></script>

@@ -1,0 +1,65 @@
+<div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
+    <div class="list-group" style="position: fixed; width: 19rem;">
+        <a href="/perfil/editar-perfil" class="list-group-item list-group-item-action" style="font-size: 18px;">
+            <img src="/images/icon-perfilPreto.png" alt="Ícone de editar perfil"
+                style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+            Editar perfil
+        </a>
+        <a href="/perfil/minhas-viagens" class="list-group-item list-group-item-action" style="font-size: 18px;">
+            <img src="/images/img-icone_minhas_viagens.png" alt="Ícone de minhas viagens"
+                style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+            Minhas viagens
+        </a>
+        <div class="dropdown">
+            <a href="#" class="list-group-item list-group-item-action dropdown-toggle" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">
+                <img src="/images/img-icone_configuracoes.png" alt="Ícone de configurações"
+                    style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                Configurações
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                style="border: none; box-shadow: 0px 4px 8px rgba(0,0,0,0.2);">
+                <a class="dropdown-item" href="/perfil/alterar-senha">
+                    <img src="/images/img-icone_senha.png" alt="Ícone de alterar senha"
+                        style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                    Alterar senha
+                </a>
+                <a class="dropdown-item" href="/perfil/alterar-email">
+                    <img src="/images/img-icone_email.png" alt="Ícone de alterar email"
+                        style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                    Alterar email
+                </a>
+                <a class="dropdown-item" href="/perfil/excluir-perfil">
+                    <img src="/images/img-icone_excluir.png" alt="Ícone de excluir perfil"
+                        style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                    Excluir perfil
+                </a>
+            </div>
+        </div>
+        <div class="list-group-item list-group-item-action" style="font-size: 18px;">
+            <a href="#" class="text-danger" style="font-size: 18px; text-decoration: none;" data-bs-toggle="modal"
+                data-bs-target="#modalEncerrar">
+                <img src="/images/img-icone_logout.png" alt="Ícone de sair"
+                    style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                Sair
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não,
+                    quero voltar</button>
+                <button type="button" class="btn" style="background-color: #99067E; color: white;"
+                    onclick="window.location.href='/control/logout'">Sim, sair</button>
+            </div>
+        </div>
+    </div>
+</div>

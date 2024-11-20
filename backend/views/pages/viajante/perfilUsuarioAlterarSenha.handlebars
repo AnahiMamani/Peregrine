@@ -1,0 +1,49 @@
+{{> headerUsuario}}
+<main>
+    <div class="container mt-4">
+        <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+    </div>
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 65vh; overflow-y: auto;">
+            {{>menuPerfil}}
+            <!-- coluna com o conteúdo principal (inputs de alteração de senha) -->
+            <div class="col-md-9" style="padding-left: 0;">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h4>Alterar Senha</h4>
+                        <div class="row">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <!-- campo para inserir a nova senha -->
+                            <div class="col-md-8">
+                                <label for="exampleInputPassword1" class="form-label">NOVA SENHA</label>
+                                <input name="senha" type="password" class="form-control rounded-5 mb-2"
+                                    id="inputNovaPassword" placeholder="">
+                            </div>
+                            <br>
+                            <!-- campo para confirmação da nova senha criada -->
+                            <div class="col-md-8">
+                                <label for="exampleInputPassword1" class="form-label">CONFIRME A SENHA</label>
+                                <input type="password" class="form-control rounded-5 mb-2" id="inputConfirmNovaPassword"
+                                    placeholder="">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn w-25 text-center"
+                                style="background-color: #99067E; border-color: #99067E; color: white;">Salvar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

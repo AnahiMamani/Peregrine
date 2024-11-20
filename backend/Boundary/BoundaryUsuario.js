@@ -1,4 +1,11 @@
 module.exports = {
+    renderSobre: (req, res) => {
+        res.render('pages/sobre', {
+            title: 'Sobre',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
     renderIndex: (req, res) => {
         res.render('pages/index', {
             title: 'Peregrine',
@@ -67,6 +74,22 @@ module.exports = {
         res.render("pages/recuperar-senha/index", {
             title: 'Esqueci minha senha',
             logoPath: '/images/logo.ico'
+        });
+    },
+
+    renderAjudaFAQ: (req, res) => {
+        res.render("pages/ajuda/ajudaFAQ", {
+            title: 'FAQ - Dúvidas frequentes',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+
+    renderAjudaEmail: (req, res) => {
+        res.render("pages/ajuda/ajudaSuporteEmail", {
+            title: 'Suporte - Email',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
         });
     }
 }

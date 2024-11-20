@@ -1,3 +1,5 @@
+//MENSAGEM SECRETA PARA NATALIA
+
 const express = require('express');
 const router = express.Router();
 const BoundaryAdmin = require('../Boundary/BoundaryAdmin');
@@ -8,6 +10,9 @@ const BoundaryUsuario = require('../Boundary/BoundaryUsuario');
 
 // Página inicial
 router.get('/', BoundaryUsuario.renderIndex);
+router.get('/sobre', BoundaryUsuario.renderSobre);
+router.get('/faq', BoundaryUsuario.renderAjudaFAQ);
+router.get('/suporte-email', BoundaryUsuario.renderAjudaEmail);
 
 // Rotas do administrador
 router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);
@@ -16,6 +21,7 @@ router.get('/index-admin', BoundaryAdmin.renderIndexAdmin);
 router.get('/administradores', BoundaryAdmin.renderAdminUsuarios);
 router.get('/administradores/criar', BoundaryAdmin.criarAdmin);
 router.get('/administradores/criar/concluido', BoundaryAdmin.criarAdminConcluido);
+router.get('/administradores/banir', BoundaryAdmin.banirAdmin);
 
 // Relatórios
 router.get('/relatorio', BoundaryAdmin.renderRelatorio);
@@ -36,9 +42,23 @@ router.get('/viajantes/denuncias/individual/banir', BoundaryAdmin.banirDenuncia)
 
 // Gerenciar viajantes
 router.get('/viajantes/gerenciar', BoundaryAdmin.listarViajantes);
+router.get('/viajantes/gerenciar/banir', BoundaryAdmin.banirViajante);
 
 // Perfil do viajante
 router.get('/perfil', BoundaryViajante.renderPerfil);
+router.get('/perfil/minhas-viagens', BoundaryViajante.renderMinhasViagens);
+router.get('/perfil/alterar-email', BoundaryViajante.renderUsuarioAlterarEmail);
+router.get('/perfil/alterar-senha', BoundaryViajante.renderUsuarioAlterarSenha);
+router.get('/perfil/editar-perfil', BoundaryViajante.renderUsuarioEditar);
+router.get('/perfil/excluir-perfil', BoundaryViajante.renderUsuarioExcluir);
+
+// Viagem
+router.get('/viagem', BoundaryViajante.renderPesquisaViagem);
+router.get('/viagem/resultados', BoundaryViajante.renderPesquisaViagemResultados);
+router.get('/viagem/detalhes', BoundaryViajante.renderViagemDetalhes);
+router.get('/viagem/inscricao', BoundaryViajante.renderInscricaoConcluida);
+router.get('/viagem/planejamento', BoundaryViajante.renderPlanejarViagem);
+router.get('/viagem/criada', BoundaryViajante.renderPlanejamentoConcluido);
 
 // Cadastro de usuário
 router.get('/cadastro', BoundaryUsuario.renderCadastro);

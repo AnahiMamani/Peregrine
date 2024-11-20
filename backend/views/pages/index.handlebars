@@ -1,7 +1,7 @@
 <div class="container bgIndex">
     <div class="row">
         <div class="col">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            {{!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="/images/img-logoPeregrine.png" alt="Logo peregrine">
@@ -30,10 +30,10 @@
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav> --}}
         </div>
     </div>
-
+{{> headerUsuario}}
     <!-- O restante do conteúdo da página permanece o mesmo -->
     <div class="row">
         <div class="col">
@@ -60,10 +60,10 @@
                         <div class="row">
                             {{#if user}}
                             <div class="col">
-                                <a href="#"><button type="button" class="btn btnRoxo">Planejar uma viagem</button></a>
+                                <a href="/viagem/planejamento"><button type="button" class="btn btnRoxo">Planejar uma viagem</button></a>
                             </div>
                             <div class="col">
-                                <a href="#"><button type="button" class="btn btnBranco">Pesquisar viagem</button></a>
+                                <a href="/viagem"><button type="button" class="btn btnBranco">Pesquisar viagem</button></a>
                             </div>
                             {{else}}
                             <div class="col">

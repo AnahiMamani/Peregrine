@@ -1,0 +1,46 @@
+{{> headerUsuario}}
+<main>
+    <div class="container mt-4">
+        <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+    </div>
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 65vh; overflow-y: auto;">
+            {{>menuPerfil}}
+            <div class="col-md-9" style="padding-left: 0;">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h4>Alterar Email</h4>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <form>
+
+                            <div class="col-md-5">
+                                <label for="exampleInputPassword1" class="form-label">NOVO EMAIL</label>
+                                <input name="senha" type="password" class="form-control rounded-5 mb-2"
+                                    id="inputEmailAtual" placeholder="">
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <button type="submit" class="btn w-25 text-center"
+                                style="background-color: #99067E; border-color: #99067E; color: white;">Salvar</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

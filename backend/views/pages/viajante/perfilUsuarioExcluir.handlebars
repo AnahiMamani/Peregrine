@@ -1,0 +1,26 @@
+{{> headerUsuario}}
+<main>
+    <div class="container mt-4">
+        <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+    </div>
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 65vh; overflow-y: auto;">
+            {{>menuPerfil}}
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 style="color: #99067E; font-weight: bold; font-size: 20px;">Excluir perfil</h2>
+                        <br>
+                        <h6>Sentimos muito que você queira nos deixar. Você realmente deseja apagar seu perfil? Ao
+                            fazer isso, seus dados serão perdidos.</h6>
+                        <br>
+                    </div>
+                </div>
+                <form>
+                    <button type="button" class="btn"
+                        style="background-color: #99067E; color: white; font-size: 16px;">Excluir perfil</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

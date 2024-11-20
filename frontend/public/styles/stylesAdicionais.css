@@ -236,6 +236,25 @@ hr {
     font-weight: 600;
 }
 
+/* estilo para Acordion da pagina de Duvidas frequentes(ajuda) */
+/*quando o botão está expandido */
+.accordion-button:not(.collapsed) {
+    background-color: #99067E; 
+    color: #fff;
+    border-color: #99067E; 
+}
+
+/*alterar o hover quando está expandido */
+.accordion-button:not(.collapsed):hover {
+    background-color: #cf70be; 
+    color: #f8f9fa;
+}
+
+
+
+
+
+
 
 
 

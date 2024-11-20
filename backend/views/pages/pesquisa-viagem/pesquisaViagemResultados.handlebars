@@ -1,0 +1,241 @@
+<div class="container-fluid center">
+    <div class="row">
+        <div class="col">
+            <div class="p-3">
+                {{> headerUsuario}}
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <!-- container principal -->
+                <main class="container">
+                    <!--container para a pesquisa de viagem com os filtros específicos-->
+                    <div class="d-flex my-3 align-items-center justify-content-center container p-4 rounded-4" style="height: 20vh; width: 90vw; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
+                        <!-- campo para inserir a localização (Origem) desejada para a viagem (filtro)-->
+                        <div class="col-md-4 rounded-4 container p-4 mx-0 my-4 d-flex flex-column align-items-center"
+                            style="width: 15rem;">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="/images/icon-origem-localizacao.png"
+                                    alt="Ícone de localização"
+                                    style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                                <h4 class="m-0">Origem</h4>
+                            </div>
+                            <input type="text" name="searchOrigem" id="searchOrigem" placeholder="Onde você está?"
+                                class="form-control text-center rounded-4 container" style="height: 2.5rem;">
+                        </div>
+
+                        <!-- campo para inserir a localização (Destino) desejada para a viagem (filtro)-->
+                        <div class="col-md-4 rounded-4 container mx-0 p-4 my-4 d-flex flex-column align-items-center"
+                            style="width: 15rem;">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="/images/icon-destino-mundo.png"
+                                    alt="Ícone de mundo - localização"
+                                    style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                                <h4 class="m-0">Destino</h4>
+                            </div>
+                            <input type="text" name="searchDestino" id="searchDestino" placeholder="Para onde você vai?"
+                                class="form-control text-center rounded-4 container" style="height: 2.5rem;">
+                        </div>
+
+                        <!-- campo para inserir o período desejado para a viagem (filtro)-->
+                        <div class="col-md-4 container p-4 mx-0 my-4" style="width: 25rem;">
+                            <!-- div para "Embarque", ícone de data, e "Retorno" -->
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <h4 class="m-0">Embarque</h4>
+                                <img src="/images/icon-data.png" alt="Ícone de data - calendário"
+                                    style="width: 1.5rem; height: 1.5rem; margin: 0 0.5rem;">
+                                <h4 class="m-0">Retorno</h4>
+                            </div>
+
+                            <!-- grupo de inputs para os campos de data (embarque/retorno)-->
+                            <div class="input-group">
+                                <input type="date" name="searchDataEmbarque" id="searchDataEmbarque"
+                                    placeholder="dd/mm/aaaa" class="form-control text-center rounded-start-4"
+                                    style="height: 2.5rem;">
+                                <input type="date" name="searchDataRetorno" id="searchDataRetorno"
+                                    placeholder="dd/mm/aaaa" class="form-control text-center rounded-end-4"
+                                    style="height: 2.5rem;">
+                            </div>
+                        </div>
+
+                        <!-- campo para inserir a quantidade máxima de pessoas para a viagem (filtro)-->
+                        {{!-- <div class="col-md-4 mx-0 text-center d-flex flex-column align-items-center"
+                            style="width: 5rem;">
+                            <!-- ícone centralizado acima do input -->
+                            <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de perfil na cor preta"
+                                style="height: 1.5rem; margin-bottom: 0.5rem;">
+                            <!-- input de quantidade de pessoas -->
+                            <input type="number" name="searchVagas" id="searchVagas" placeholder="02"
+                                class="form-control text-center rounded-4" style="height: 2.5rem; width: 4rem;">
+                        </div> --}}
+
+                        <!-- coluna do botão de pesquisa (botão arredondado roxo com lupa) -->
+                        <div class="col-md-4 d-flex align-items-center justify-content-center" style="width: 7rem;">
+                            <div class="d-flex align-items-center justify-content-center"
+                                style="background-color: #99067E; border-radius: 50%; height: 4rem; width: 4rem;">
+                                <!-- botão de pesquisa da viagem que vai direcionar para a página de resultados -->
+                                <a href="#" name="searchViagem" id="searchViagem">
+                                    <img src="/images/icon-pesquisa-lupa.png"
+                                        alt="Ícone de lupa - pesquisa" style="height: 2rem;">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- coluna com o botao para filtros -->
+                        {{!-- <div class="col-md-4 d-flex align-items-center justify-content-center" style="width: 7rem;">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center"
+                            style="height: 4rem; width: 4rem;">
+                            <!-- botão de pesquisa da viagem que vai direcionar para a página de resultados -->
+                            <a href="#" name="filtroSearchViagem" id="filtroSearchViagem">
+                                <img src="/frontend/public/images/icon-filtro-pesquisa.png"
+                                    alt="Ícone de filtro - pesquisar viagens" style="height: 2rem;">
+                            </a>
+                        </div> --}}
+                    </div>
+            </div>
+
+            <!-- section com o container dos resultados -->
+            <section class="container row mx-auto center">
+                <div class="col-12 col-md-6 col-xl-4 pb-4">
+                    <div class="card rounded-4">
+                        <img class="card-img-top rounded-4" src="/images/img_u_reveillonCopacabana.png"
+                            alt="Foto principal da viagem.">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8 text-start">
+                                    <h5 class="card-title">Reveillon em Copacabana</h5>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="#" style="color: #99067E;">Ver mais</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col card-text text-start">
+                                    31/12/2024
+                                </div>
+                                <div class="col card-text text-end">
+                                    15 mulheres
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row" style="line-height: 0.5rem;">
+                                <p class="card-text"><b>Destino:</b> Cobacana, RJ, Brasil</p>
+                                <p class="card-text"><b>Embarque:</b> 31/12/2024</p>
+                                <p class="card-text"><b>Retorno:</b> 04/01/2025</p>
+                                <p class="card-text"><b>Origem:</b> São Paulo, SP</p>
+                                <p class="card-text"><b>Estimativa de custo:</b> R$ 1000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-4 pb-4">
+                    <div class="card rounded-4">
+                        <img class="card-img-top rounded-4" src="/images/img_u_reveillonCopacabana.png"
+                            alt="Foto principal da viagem.">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8 text-start">
+                                    <h5 class="card-title">Reveillon em Copacabana</h5>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="#" style="color: #99067E;">Ver mais</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col card-text text-start">
+                                    31/12/2024
+                                </div>
+                                <div class="col card-text text-end">
+                                    15 mulheres
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row" style="line-height: 0.5rem;">
+                                <p class="card-text"><b>Destino:</b> Cobacana, RJ, Brasil</p>
+                                <p class="card-text"><b>Embarque:</b> 31/12/2024</p>
+                                <p class="card-text"><b>Retorno:</b> 04/01/2025</p>
+                                <p class="card-text"><b>Origem:</b> São Paulo, SP</p>
+                                <p class="card-text"><b>Estimativa de custo:</b> R$ 1000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-4 pb-4">
+                    <div class="card rounded-4">
+                        <img class="card-img-top rounded-4" src="/images/img_u_reveillonCopacabana.png"
+                            alt="Foto principal da viagem.">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8 text-start">
+                                    <h5 class="card-title">Reveillon em Copacabana</h5>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="#" style="color: #99067E;">Ver mais</a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col card-text text-start">
+                                    31/12/2024
+                                </div>
+                                <div class="col card-text text-end">
+                                    15 mulheres
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row" style="line-height: 0.5rem;">
+                                <p class="card-text"><b>Destino:</b> Cobacana, RJ, Brasil</p>
+                                <p class="card-text"><b>Embarque:</b> 31/12/2024</p>
+                                <p class="card-text"><b>Retorno:</b> 04/01/2025</p>
+                                <p class="card-text"><b>Origem:</b> São Paulo, SP</p>
+                                <p class="card-text"><b>Estimativa de custo:</b> R$ 1000,00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container center d-flex justify-content-center align-items-center">
+                <a href="#" class="btn btn-primary w-25">
+                    Ver mais resultados
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    &nbsp;
+                </div>
+            </div>
+            </main>
+
+            
+        </div>
+    </div>
+</div>
+{{> footer }}
+
+<!-- link bootstrap icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
+<script src="/frontend/public/scripts/a_pesquisaViagemResultados.js"></script>
