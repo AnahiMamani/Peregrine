@@ -13,7 +13,13 @@
                             <img src="/images/perfil.jpg" alt="Foto de Perfil" class="rounded-circle"
                                 style="width: 100px; height: 100px; object-fit: cover; margin-right: 20px;">
                             <div>
-                                <h4 style="color: #99067E; font-weight: bold;">{{user.nome}}</h4>
+                                <h4 style="color: #99067E; font-weight: bold;">
+                                    {{#if user.apelido}}
+                                    {{user.apelido}} 
+                                    {{else}}
+                                    {{user.nome}}
+                                    {{/if}}
+                                </h4>
                                 <p style="font-size: 1.2rem; color: #6c757d;">
                                     <span style="color: #99067E;">⭐</span> {{user.nota}}
                                 </p>

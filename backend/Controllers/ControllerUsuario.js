@@ -63,6 +63,11 @@ module.exports = {
     
             // Login concluído para viajante aprovado
             req.session.user = {
+                apelido: viajante.A02_APELIDO,
+                celular: viajante.A02_CELULAR,
+                descricao: viajante.A02_DESCRICAO || 'Nenhuma descrção adicionada',
+                nota: viajante.A02_NOTA || 'N/A',
+                aprovacao: viajante.A02_APROVADA,
                 id: user.A01_ID,
                 viajanteId: viajante.A02_ID,
                 nome: viajante.A02_NOME,

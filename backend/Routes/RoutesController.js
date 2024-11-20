@@ -13,6 +13,7 @@ router.post('/AprovandoViajantes', ControllerAdmin.aprovandoViajantes);
 router.post('/CadastroViajante', ControllerViajante.cadastroViajante);
 router.post('/UploadDocumentos', ControllerViajante.uploadDocumentos);
 router.post('/deleteViajante/:id', ControllerAdmin.deleteViajante);
+router.post('/editarPerfil', ControllerViajante.editarPerfil);
 
 //Contorller Usuario
 router.get("/Logout", ControllerUsuario.logout);

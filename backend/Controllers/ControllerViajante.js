@@ -123,7 +123,7 @@ module.exports = {
             }
     
             // Busque o viajante associado ao usuário
-            const viajante = await Viajante.findOne({ where: { A01_ID: userId } }); // Substitua 'A01_ID' pela chave correta se necessário
+            const viajante = await Viajante.findOne({ where: { A01_ID: userId } });
             if (!viajante) {
                 return res.status(404).send("Viajante não encontrado.");
             }
@@ -218,5 +218,15 @@ module.exports = {
             res.status(500).send("Erro no processamento do upload.");
         }
     },
-    
+    editarPerfil: async(req,res) =>{
+        const {apelido, celular, descricao} = req.body;
+        const viajante = req.session.user.viajanteId;
+        try{
+            await Viajante.update({A02_APELIDO: apelido, A02_CELULAR: celular, A02_DESCRICAO: descricao},{where: {A02_ID: viajante}})
+            res.redirect('/perfil');
+        } catch (error){
+            console.error("Erro ao editar perfil:", error)
+            res.redirect('/perfil/editar-perfil')
+        }
+    }
 }

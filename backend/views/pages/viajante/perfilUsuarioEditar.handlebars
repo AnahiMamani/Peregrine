@@ -24,7 +24,7 @@
                             </div>
                             <div class="container mt-4">
                                 <h3>Editar Perfil</h3>
-                                <form>
+                                <form action="/control/editarPerfil" method="post">
                                     <div class="modal fade" id="uploadModal" tabindex="-1"
                                         aria-labelledby="uploadModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -50,20 +50,18 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Apelido</label>
-                                        <input type="text" class="form-control" id="name" value="Fulana da Silva Sauro">
+                                        <input name="apelido" type="text" class="form-control" id="name" placeholder="{{user.nome}}" value="{{user.apelido}}" >
                                     </div>
                                     <div class="mb-3">
                                         <label for="celular" class="form-label">Celular</label>
-                                        <input type="tel" class="form-control" id="celular"
+                                        <input name="celular" type="tel" class="form-control" id="celular"
                                             placeholder="(xx) xxxxx-xxxx" pattern="\(\d{2}\) \d{5}-\d{4}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Bio</label>
-                                        <textarea class="form-control" id="description"
-                                            rows="3">Tenho 40 anos e amo viajar. Possuo 2 filhos e 3 pets (dois cachorros e um gato). Moro em São Paulo e trabalho como corretora de imóveis. Gosto de ir ao cinema e pratico corrida de rua. Viajo pelo menos uma vez por mês.</textarea>
+                                        <textarea name="descricao" class="form-control" id="description"
+                                            rows="3" placeholder="Escreva mais sobre você..."></textarea>
                                     </div>
-                                    <button type="button" class="btn btn-secondary"
-                                        onclick="window.history.back()">Cancelar</button>
                                     <button style="background-color: #99067E; color:white;" type="submit"
                                         class="btn btn-primary">Salvar</button>
                                 </form>
