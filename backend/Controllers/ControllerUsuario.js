@@ -10,53 +10,73 @@ const nodemailer = require('nodemailer');
 module.exports = {
     login: async (req, res) => {
         const { email, senha } = req.body;
+    
         try {
+            // Busca o usuário pelo email
             const user = await Usuario.findOne({ where: { A01_EMAIL: email } });
-
+    
             if (!user) {
-                return res.render('pages/login', { error: 'Usuário não encontrado!' });
+                return res.render('pages/login', { error: 'Usuário não encontrado. Verifique o email e tente novamente.' });
             }
-
-            if (await bcrypt.compare(senha, user.A01_SENHA)) {
-                if (user.A01_PERFIL === 1) { // Perfil 1 para administrador
-                    req.session.user = {
-                        nome: user.A01_NOME,
-                        email: user.A01_EMAIL,
-                        isAdmin: true
-                    };
-                    return res.redirect('/index-admin'); // Redireciona para a tela do administrador
-                } else {
-                    const viajante = await Viajante.findOne({ where: { A01_ID: user.A01_ID } });
-
-                    if (!viajante) {
-                        return res.render('pages/login', { error: 'Viajante não encontrado!' });
-                    }
-
-                    if (!viajante.A02_DOCUMENTACAO) {
-                        req.session.userId = user.A01_ID;
-                        return res.redirect('/cadastro/documentacao'); // Redireciona para a tela de envio de documentos
-                    }
-
-                    if (!viajante.A02_APROVADA) {
-                        return res.render('pages/cadastro/cadastro-concluido', { error: 'Sua conta ainda não foi aprovada.' });
-                    }
-
-                    req.session.user = {
-                        nome: viajante.A02_NOME,
-                        email: user.A01_EMAIL,
-                        isAdmin: false
-                    };
-                    return res.redirect('/');
-                }
-            } else {
-                return res.render('pages/login', { error: 'Email ou senha incorretos!' });
+    
+            // Verifica a senha
+            const senhaCorreta = await bcrypt.compare(senha, user.A01_SENHA);
+            if (!senhaCorreta) {
+                return res.render('pages/login', { error: 'Senha incorreta! Por favor, tente novamente.' });
             }
+    
+            // Verifica o perfil do usuário
+            if (user.A01_PERFIL === 1) { // Perfil 1: Administrador
+                req.session.user = {
+                    id: user.A01_ID,
+                    nome: user.A01_NOME,
+                    email: user.A01_EMAIL,
+                    perfil: 'admin',
+                    isAdmin: true
+                };
+                return res.redirect('/index-admin'); // Redireciona para o painel do administrador
+            }
+    
+            // Perfil comum: busca o viajante associado
+            const viajante = await Viajante.findOne({ where: { A01_ID: user.A01_ID } });
+    
+            if (!viajante) {
+                return res.render('pages/login', { error: 'Viajante não encontrado! Entre em contato com o suporte.' });
+            }
+    
+            // Verifica se a documentação foi enviada
+            if (!viajante.A02_DOCUMENTACAO) {
+                req.session.user = {
+                    id: user.A01_ID,
+                    email: user.A01_EMAIL,
+                    nome: user.A01_NOME,
+                    perfil: 'viajante',
+                    isAdmin: false
+                };
+                return res.redirect('/cadastro/documentacao'); // Redireciona para o envio de documentos
+            }
+    
+            // Verifica se a conta foi aprovada
+            if (!viajante.A02_APROVADA) {
+                return res.render('pages/cadastro/cadastro-concluido', { error: 'Sua conta ainda não foi aprovada pelo administrador.' });
+            }
+    
+            // Login concluído para viajante aprovado
+            req.session.user = {
+                id: user.A01_ID,
+                viajanteId: viajante.A02_ID,
+                nome: viajante.A02_NOME,
+                email: user.A01_EMAIL,
+                perfil: 'viajante',
+                isAdmin: false
+            };
+            return res.redirect('/'); // Redireciona para a página principal do viajante
         } catch (error) {
             console.error('Erro ao realizar o login:', error);
             return res.render('pages/login', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
         }
     },
-
+    
     logout: (req, res) => {
         req.session.destroy((err) => {
             if (err) {

@@ -80,14 +80,16 @@ module.exports = {
     renderAjudaFAQ: (req, res) => {
         res.render("pages/ajuda/ajudaFAQ", {
             title: 'FAQ - Dúvidas frequentes',
-            logoPath: '/images/logo.ico'
+            logoPath: '/images/logo.ico',
+            user: req.session.user
         });
     },
 
     renderAjudaEmail: (req, res) => {
         res.render("pages/ajuda/ajudaSuporteEmail", {
             title: 'Suporte - Email',
-            logoPath: '/images/logo.ico'
+            logoPath: '/images/logo.ico',
+            user: req.session.user
         });
     }
 }

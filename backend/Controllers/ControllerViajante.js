@@ -13,7 +13,7 @@ const sequelize = require('../config/bd');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // Cria a pasta uploads se não existir
-        const uploadsDir = path.join(__dirname, '../../uploads/viajantesDocumentos');
+        const uploadsDir = path.join(__dirname, '../../uploads/viajantes');
         fs.mkdirSync(uploadsDir, { recursive: true });
         cb(null, uploadsDir); // Pasta onde os arquivos serão armazenados
     },
@@ -114,74 +114,109 @@ module.exports = {
             res.render('pages/cadastro/index', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
         }
     },
-    uploadDocumentos: (req, res) => {
-        const userId = req.session.userId; // Pegue o userId da sessão
-        // Verifique se o userId está definido
-        if (!userId) {
-            return res.status(400).send("User ID não fornecido.");
-        }
-        const userDir = path.join(__dirname, '../../uploads/viajantesDocumentos/', userId.toString());
-        fs.mkdir(userDir, { recursive: true }, (err) => {
-            if (err) {
-                console.log("Erro ao criar diretório do usuário:", err);
-                return res.status(500).send("Erro ao criar diretório.");
+    uploadDocumentos:  async (req, res) => {
+        try {
+            // Obtenha o ID do usuário logado
+            const userId = req.session.userId; // ID do usuário da sessão
+            if (!userId) {
+                return res.status(400).send("Usuário não está logado.");
             }
-            upload.fields([{ name: 'frenteDoc', maxCount: 1 }, { name: 'versoDoc', maxCount: 1 }, { name: 'selfieDoc', maxCount: 1 }])(req, res, (err) => {
+    
+            // Busque o viajante associado ao usuário
+            const viajante = await Viajante.findOne({ where: { A01_ID: userId } }); // Substitua 'A01_ID' pela chave correta se necessário
+            if (!viajante) {
+                return res.status(404).send("Viajante não encontrado.");
+            }
+    
+            const viajanteId = viajante.A02_ID; // ID do viajante
+    
+            // Diretório principal do viajante
+            const viajanteDir = path.join(__dirname, '../../uploads/viajantes/', viajanteId.toString());
+            const profileDir = path.join(viajanteDir, 'perfil');
+            const tripDir = path.join(viajanteDir, 'viagem');
+            const docDir = path.join(viajanteDir, 'documentacao');
+    
+            // Criar as pastas necessárias
+            fs.mkdir(viajanteDir, { recursive: true }, (err) => {
                 if (err) {
-                    console.log("Erro no upload:", err);
-                    return res.status(500).send("Erro ao fazer upload.");
+                    console.log("Erro ao criar diretório principal:", err);
+                    return res.status(500).send("Erro ao criar diretório principal.");
                 }
-                const frontDoc = req.files['frenteDoc'] ? req.files['frenteDoc'][0] : null;
-                const backDoc = req.files['versoDoc'] ? req.files['versoDoc'][0] : null;
-                const selfieDoc = req.files['selfieDoc'] ? req.files['selfieDoc'][0] : null;
-
-                if (!frontDoc || !backDoc || !selfieDoc) {
-                    return res.status(400).send("Documentos não enviados.");
-                }
-
-                const newFileNameSelfie = `selfie_${userId}${path.extname(selfieDoc.originalname)}`;
-                const selfieDocPath = path.join(userDir, newFileNameSelfie);
-
-                const newFileNameBack = `backDoc_${userId}${path.extname(backDoc.originalname)}`;
-                const backDocPath = path.join(userDir, newFileNameBack);
-
-                // Renomeia o arquivo da selfie para "frontDoc<userId>"
-                const newFileNameFront = `frontDoc_${userId}${path.extname(frontDoc.originalname)}`;
-                const frontDocPath = path.join(userDir, newFileNameFront); // Caminho com o novo nome
-
-                fs.rename(frontDoc.path, frontDocPath, (err) => {
+    
+                // Criar subpastas
+                fs.mkdir(profileDir, { recursive: true }, (err) => {
+                    if (err) console.log("Erro ao criar pasta 'perfil':", err);
+                });
+                fs.mkdir(tripDir, { recursive: true }, (err) => {
+                    if (err) console.log("Erro ao criar pasta 'viagem':", err);
+                });
+                fs.mkdir(docDir, { recursive: true }, (err) => {
                     if (err) {
-                        console.log("Erro ao mover o documento da frente:", err);
-                        return res.status(500).send("Erro ao mover o documento da frente.");
+                        console.log("Erro ao criar pasta 'documentacao':", err);
+                        return res.status(500).send("Erro ao criar pasta 'documentacao'.");
                     }
-
-                    fs.rename(selfieDoc.path, selfieDocPath, (err) => {
+    
+                    // Continuar com o upload dentro de 'documentacao'
+                    upload.fields([{ name: 'frenteDoc', maxCount: 1 }, { name: 'versoDoc', maxCount: 1 }, { name: 'selfieDoc', maxCount: 1 }])(req, res, (err) => {
                         if (err) {
-                            console.log("Erro ao mover o documento de selfie:", err);
-                            return res.status(500).send("Erro ao mover o documento de selfie.");
+                            console.log("Erro no upload:", err);
+                            return res.status(500).send("Erro ao fazer upload.");
                         }
-                    })
-
-                    fs.rename(backDoc.path, backDocPath, async (err) => {
-                        if (err) {
-                            console.log("Erro ao mover o documento do verso:", err);
-                            return res.status(500).send("Erro ao mover o documento do verso.");
+    
+                        const frontDoc = req.files['frenteDoc'] ? req.files['frenteDoc'][0] : null;
+                        const backDoc = req.files['versoDoc'] ? req.files['versoDoc'][0] : null;
+                        const selfieDoc = req.files['selfieDoc'] ? req.files['selfieDoc'][0] : null;
+    
+                        if (!frontDoc || !backDoc || !selfieDoc) {
+                            return res.status(400).send("Documentos não enviados.");
                         }
-
-                        try {
-                            // Atualiza o campo A01_DOCUMENTACAO_ENVIADA no banco de dados
-                            await Viajante.update({ A02_DOCUMENTACAO: true }, { where: { A01_ID: userId } }
-                            );
-
-                            console.log("Documentação enviada e banco de dados atualizado com sucesso!");
-                            res.redirect('/cadastro/documentacao/concluido');
-                        } catch (dbError) {
-                            console.log("Erro ao atualizar o banco de dados:", dbError);
-                            return res.status(500).send("Erro ao atualizar o banco de dados.");
-                        }
+    
+                        // Renomear e mover os arquivos para a pasta 'documentacao'
+                        const frontDocPath = path.join(docDir, `frontDoc_${viajanteId}${path.extname(frontDoc.originalname)}`);
+                        const backDocPath = path.join(docDir, `backDoc_${viajanteId}${path.extname(backDoc.originalname)}`);
+                        const selfieDocPath = path.join(docDir, `selfie_${viajanteId}${path.extname(selfieDoc.originalname)}`);
+    
+                        fs.rename(frontDoc.path, frontDocPath, (err) => {
+                            if (err) {
+                                console.log("Erro ao mover o documento da frente:", err);
+                                return res.status(500).send("Erro ao mover o documento da frente.");
+                            }
+    
+                            fs.rename(backDoc.path, backDocPath, (err) => {
+                                if (err) {
+                                    console.log("Erro ao mover o documento do verso:", err);
+                                    return res.status(500).send("Erro ao mover o documento do verso.");
+                                }
+    
+                                fs.rename(selfieDoc.path, selfieDocPath, async (err) => {
+                                    if (err) {
+                                        console.log("Erro ao mover o documento de selfie:", err);
+                                        return res.status(500).send("Erro ao mover o documento de selfie.");
+                                    }
+    
+                                    try {
+                                        // Atualiza o campo A02_DOCUMENTACAO_ENVIADA no banco de dados
+                                        await Viajante.update(
+                                            { A02_DOCUMENTACAO: true },
+                                            { where: { A02_ID: viajanteId } }
+                                        );
+    
+                                        console.log("Documentação enviada e banco de dados atualizado com sucesso!");
+                                        res.redirect('/cadastro/documentacao/concluido');
+                                    } catch (dbError) {
+                                        console.log("Erro ao atualizar o banco de dados:", dbError);
+                                        return res.status(500).send("Erro ao atualizar o banco de dados.");
+                                    }
+                                });
+                            });
+                        });
                     });
                 });
             });
-        });
-    }
+        } catch (err) {
+            console.log("Erro no processo:", err);
+            res.status(500).send("Erro no processamento do upload.");
+        }
+    },
+    
 }
