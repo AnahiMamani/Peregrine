@@ -1,315 +1,310 @@
-{{!--
-<!DOCTYPE html>
-<html lang="en">
+{{> headerUsuario}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link href="/frontend/public/styles/custom.css" rel="stylesheet">
-    <title>Planejar viagem</title>
-</head>
 
-<body>
-    <header> --}}
-        <div class="container-fluid center">
-            <div class="row">
-                <div class="col">
-                    <div class="p-3">
-                        {{> headerUsuario}}
-                        {{!-- <nav class="navbar navbar-expand-lg mx-5">
-                            <div class="container-fluid">
-                                <div class="logo-peregrine">
-                                    <img src="/frontend/public/images/img-logoPeregrine-horizontal.png"
-                                        alt="Ícone de Peregrine">
-                                </div>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                                    <div class="navbar-nav ms-auto">
-                                        <a class="nav-link" href="#"
-                                            style="color: #99067E; text-transform: uppercase; margin-right: 60px;">sobre</a>
-                                        <a class="nav-link" href="#"
-                                            style="color: #99067E; text-transform: uppercase; margin-right: 60px;">ajuda</a>
-                                        <a class="nav-link" href="#"
-                                            style="color: #99067E; text-transform: uppercase;">perfil</a>
-                                    </div>
-                                </div>
+<main>
+    <form class="container">
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+
+        <!-- espaço para o carrossel de imagens da viagem -->
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner rounded-5">
+                <div class="carousel-item active" id="imageViagem1" name="imageViagem1">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                            dy=".3em">First slide</text>
+                    </svg>
+                </div>
+                <div class="carousel-item" id="imageViagem2" name="imageViagem2">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                            dy=".3em">Second slide</text>
+                    </svg>
+                </div>
+                <div class="carousel-item" id="imageViagem3" name="imageViagem3">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                            dy=".3em">Third slide</text>
+                    </svg>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        {{!-- ícone de lápis para editar a foto --}}
+        <div class="image-edit-container" style="position: relative;">
+            <!-- Ícone de editar as fotos -->
+            <a href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"
+                style="position: absolute; bottom: -50px; right: 100px; background-color: rgb(255, 255, 255); border-radius: 50%; padding: 5px;">
+                <img src="/images/icone_editar_foto.png" alt="Ícone de editar foto" style="width: 80px; height: 80px;">
+            </a>
+            {{!-- <img src="/images/imagem1.jpg" alt="Imagem de Perfil 1" style="width: 150px; height: 150px;">
+            <img src="/images/imagem2.jpg" alt="Imagem de Perfil 2" style="width: 150px; height: 150px;">
+            <img src="/images/imagem3.jpg" alt="Imagem de Perfil 3" style="width: 150px; height: 150px;"> --}}
+        </div>
+
+        <!-- Modal para editar as imagens -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadModalLabel">Alterar Fotos do Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Primeiro campo para escolher a imagem -->
+                        <div class="mb-3">
+                            <label for="profilePicture1" class="form-label">Escolha a primeira foto</label>
+                            <input type="file" class="form-control" id="profilePicture1" accept="image/*">
+                        </div>
+
+                        <!-- Segundo campo para escolher a imagem -->
+                        <div class="mb-3">
+                            <label for="profilePicture2" class="form-label">Escolha a segunda foto</label>
+                            <input type="file" class="form-control" id="profilePicture2" accept="image/*">
+                        </div>
+
+                        <!-- Terceiro campo para escolher a imagem -->
+                        <div class="mb-3">
+                            <label for="profilePicture3" class="form-label">Escolha a terceira foto</label>
+                            <input type="file" class="form-control" id="profilePicture3" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary"
+                            style="background-color: #99067E; border-color: #99067E" id="savePhotosBtn">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+
+        <!-- espaço para inserção do título e subtítulo da viagem -->
+        <div class="row text-center">
+            <!-- input para título da viagem -->
+            <input type="text" name="tituloViagem" id="tituloViagem" placeholder="Insira um título..."
+                class="border-0 fs-1 text-center rounded-4">
+
+            <!-- input para subtítulo da viagem -->
+            <input type="text" name="subtituloViagem" id="subtituloViagem" placeholder="Insira um subtítulo..."
+                class="my-4 container text-center rounded-4 border border-2 border-secondary" style="height: 4rem;">
+
+        </div>
+
+        <!-- espaço para inserção das principais informações da viagem -->
+        <div class="row my-4 container text-center rounded-4 border border-2 border-secondary" style="width: 90vw;">
+            <div class="container my-4">
+                <!-- Linha contendo as 4 colunas -->
+                <div class="row justify-content-center">
+                    <!-- Primeira coluna - Origem -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-origem-localizacao.png" alt="Ícone de localização"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Origem</h4>
+                        </div>
+                        <input type="text" name="origemViagem" id="origemViagem" placeholder="Onde você está?"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">
+                    </div>
+
+                    <!-- Segunda coluna - Destino -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-destino-mundo.png" alt="Ícone de mundo - localização"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Destino</h4>
+                        </div>
+                        <input type="text" name="destinoViagem" id="destinoViagem" placeholder="Para onde você vai?"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">
+                    </div>
+
+                    <!-- Terceira coluna - Vagas -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-perfilPreto.png" alt="Ícone de mulher - pessoa"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Vagas</h4>
+                        </div>
+                        <input type="number" name="vagasViagem" id="vagasViagem" placeholder="Total de vagas oferecidas"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">
+                    </div>
+
+                    <!-- Quarta coluna - Custo -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-dinheiro.png" alt="Ícone de dinheiro"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Custo estimado</h4>
+                        </div>
+                        <input type="number" name="custoViagem" id="custoViagem" placeholder="Valor para cada uma"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">
+                    </div>
+                </div>
+
+                <!-- Campo para o período de viagem -->
+                <div class="row justify-content-center">
+                    <!-- Campo de ida e volta -->
+                    <div class="col-12 col-md-6 p-4 my-4">
+                        <div class="d-flex align-items-center justify-content-center px-2 mb-2">
+                            <h4 class="m-0 me-5">Ida</h4>
+                            <div class="d-flex align-items-center" style="margin-left: 130px;">
+                                <h4 class="m-0">Embarque</h4>
+                                <img src="/images/icon-data.png" alt="Ícone de data - calendário" class="mx-2"
+                                    style="width: 1.5rem; height: 1.5rem;">
+                                <h4 class="m-0">Horário</h4>
                             </div>
-                        </nav>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="localIdaViagem" id="localIdaViagem"
+                                placeholder="Local de embarque na ida" class="form-control text-center rounded-start-4"
+                                style="height: 2.5rem; flex: 2;">
+                            <input type="date" name="dataIdaViagem" id="dataIdaViagem" placeholder="dd/mm/aaaa"
+                                class="form-control text-center" style="height: 2.5rem; flex: 1;">
+                            <input type="time" name="horaIdaViagem" id="horaIdaViagem" placeholder="00:00"
+                                class="form-control text-center rounded-end-4" style="height: 2.5rem; flex: 1;">
+                        </div>
+                    </div>
+
+                    <!-- Campo de volta -->
+                    <div class="col-12 col-md-6 p-4 my-4">
+                        <div class="d-flex align-items-center justify-content-center px-2 mb-2">
+                            <h4 class="m-0 me-5">Volta</h4>
+                            <div class="d-flex align-items-center" style="margin-left: 100px;">
+                                <h4 class="m-0">Embarque</h4>
+                                <img src="/images/icon-data.png" alt="Ícone de data - calendário" class="mx-2"
+                                    style="width: 1.5rem; height: 1.5rem;">
+                                <h4 class="m-0">Horário</h4>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="localVoltaViagem" id="localVoltaViagem"
+                                placeholder="Local de embarque na ida" class="form-control text-center rounded-start-4"
+                                style="height: 2.5rem; flex: 2;">
+                            <input type="date" name="dataVoltaViagem" id="dataVoltaViagem" placeholder="dd/mm/aaaa"
+                                class="form-control text-center" style="height: 2.5rem; flex: 1;">
+                            <input type="time" name="horaVoltaViagem" id="horaVoltaViagem" placeholder="00:00"
+                                class="form-control text-center rounded-end-4" style="height: 2.5rem; flex: 1;">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header> --}}
 
-    <main>
-        <form class="container">
-            <div class="row">
-                <div class="col">
-                    &nbsp;
-                </div>
-            </div>
-
-            <!-- espaço para o carrossel de imagens da viagem -->
-            <div id="carouselExampleIndicators" class="carousel slide">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner rounded-5">
-                    <div class="carousel-item active" id="imageViagem1" name="imageViagem1">
-                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
-                            preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
-                                dy=".3em">First slide</text>
-                        </svg>
-                    </div>
-                    <div class="carousel-item" id="imageViagem2" name="imageViagem2">
-                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                            preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
-                                dy=".3em">Second slide</text>
-                        </svg>
-                    </div>
-                    <div class="carousel-item" id="imageViagem3" name="imageViagem3">
-                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
-                            preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
-                                dy=".3em">Third slide</text>
-                        </svg>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
-            <div class="d-flex" style="margin-left: 70vw;">
-                <img id="uploadImageViagem" name="uploadImageViagem" src="/images/icon-editarFoto.png"
-                    alt="Foto de Perfil"
-                    style="cursor: pointer; width: 50%; object-fit: cover; margin-top: -40px; z-index: 1001;">
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    &nbsp;
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    &nbsp;
-                </div>
-            </div>
-
-            <!-- espaço para inserção do título e subtítulo da viagem -->
-            <div class="row text-center">
-                <!-- input para título da viagem -->
-                <input type="text" name="tituloViagem" id="tituloViagem" placeholder="Insira um título..."
-                    class="border-0 fs-1 text-center rounded-4">
-
-                <!-- input para subtítulo da viagem -->
-                <input type="text" name="subtituloViagem" id="subtituloViagem" placeholder="Insira um subtítulo..."
-                    class="my-4 container text-center rounded-4 border border-2 border-secondary" style="height: 4rem;">
-
-            </div>
-
-            <!-- espaço para inserção das principais informações da viagem -->
-            <div class="row my-4 container text-center rounded-4 border border-2 border-secondary" style="width: 80vw;">
-                <div class="container my-4">
-    <!-- Linha contendo as 4 colunas -->
-    <div class="row justify-content-center">
-        <!-- Primeira coluna - Origem -->
-        <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
-            <div class="d-flex align-items-center mb-2">
-                <img src="/images/icon-origem-localizacao.png" alt="Ícone de localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-                <h4 class="m-0">Origem</h4>
-            </div>
-            <input type="text" name="origemViagem" id="origemViagem" placeholder="Onde você está?" class="form-control text-center rounded-4" style="height: 2.5rem;">
         </div>
 
-        <!-- Segunda coluna - Destino -->
-        <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
-            <div class="d-flex align-items-center mb-2">
-                <img src="/images/icon-destino-mundo.png" alt="Ícone de mundo - localização" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-                <h4 class="m-0">Destino</h4>
+        <!-- espaço para inserção do texto descritivo da viagem -->
+        <textarea name="descricaoViagem" id="descricaoViagem"
+            placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..."
+            class="my-4 container rounded-4 border border-2 border-secondary"
+            style="height: 40rem; width: 80vw; padding: 2rem;"></textarea>
+
+        <div class="row">
+            <div class="col">
+                &nbsp;
             </div>
-            <input type="text" name="destinoViagem" id="destinoViagem" placeholder="Para onde você vai?" class="form-control text-center rounded-4" style="height: 2.5rem;">
+        </div>
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
         </div>
 
-        <!-- Terceira coluna - Vagas -->
-        <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
-            <div class="d-flex align-items-center mb-2">
-                <img src="/images/icon-perfilPreto.png" alt="Ícone de mulher - pessoa" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-                <h4 class="m-0">Vagas</h4>
-            </div>
-            <input type="number" name="vagasViagem" id="vagasViagem" placeholder="Total de vagas oferecidas" class="form-control text-center rounded-4" style="height: 2.5rem;">
+        <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
+        <div class="d-flex align-items-center justify-content-center">
+            <a class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">Criar viagem</a>
         </div>
+    </form>
+</main>
 
-        <!-- Quarta coluna - Custo -->
-        <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
-            <div class="d-flex align-items-center mb-2">
-                <img src="/images/icon-dinheiro.png" alt="Ícone de dinheiro" style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
-                <h4 class="m-0">Custo estimado</h4>
-            </div>
-            <input type="number" name="custoViagem" id="custoViagem" placeholder="Valor para cada uma?" class="form-control text-center rounded-4" style="height: 2.5rem;">
-        </div>
+<div class="row">
+    <div class="col">
+        &nbsp;
     </div>
-    
-    <!-- Campo para o período de viagem -->
-    <div class="row justify-content-center">
-        <!-- Campo de ida e volta -->
-        <div class="col-12 col-md-6 p-4 my-4">
-            <div class="d-flex align-items-center justify-content-center px-2 mb-2">
-                <h4 class="m-0 me-5">Ida</h4>
-                <div class="d-flex align-items-center" style="margin-left: 130px;">
-                    <h4 class="m-0">Embarque</h4>
-                    <img src="/images/icon-data.png" alt="Ícone de data - calendário" class="mx-2" style="width: 1.5rem; height: 1.5rem;">
-                    <h4 class="m-0">Horário</h4>
-                </div>
-            </div>
-            <div class="input-group">
-                <input type="text" name="localIdaViagem" id="localIdaViagem" placeholder="Local de embarque na ida" class="form-control text-center rounded-start-4" style="height: 2.5rem; flex: 2;">
-                <input type="date" name="dataIdaViagem" id="dataIdaViagem" placeholder="dd/mm/aaaa" class="form-control text-center" style="height: 2.5rem; flex: 1;">
-                <input type="time" name="horaIdaViagem" id="horaIdaViagem" placeholder="00:00" class="form-control text-center rounded-end-4" style="height: 2.5rem; flex: 1;">
-            </div>
-        </div>
-        
-        <!-- Campo de volta -->
-        <div class="col-12 col-md-6 p-4 my-4">
-            <div class="d-flex align-items-center justify-content-center px-2 mb-2">
-                <h4 class="m-0 me-5">Volta</h4>
-                <div class="d-flex align-items-center" style="margin-left: 100px;">
-                    <h4 class="m-0">Embarque</h4>
-                    <img src="/images/icon-data.png" alt="Ícone de data - calendário" class="mx-2" style="width: 1.5rem; height: 1.5rem;">
-                    <h4 class="m-0">Horário</h4>
-                </div>
-            </div>
-            <div class="input-group">
-                <input type="text" name="localVoltaViagem" id="localVoltaViagem" placeholder="Local de embarque na ida" class="form-control text-center rounded-start-4" style="height: 2.5rem; flex: 2;">
-                <input type="date" name="dataVoltaViagem" id="dataVoltaViagem" placeholder="dd/mm/aaaa" class="form-control text-center" style="height: 2.5rem; flex: 1;">
-                <input type="time" name="horaVoltaViagem" id="horaVoltaViagem" placeholder="00:00" class="form-control text-center rounded-end-4" style="height: 2.5rem; flex: 1;">
-            </div>
-        </div>
+</div>
+<div class="row">
+    <div class="col">
+        &nbsp;
     </div>
 </div>
 
-            </div>
+<!-- link bootstrap icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
+<script src="/frontend/public/scripts/u_planejarViagem.js"></script>
 
-            <!-- espaço para inserção do texto descritivo da viagem -->
-            <textarea name="descricaoViagem" id="descricaoViagem"
-                placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..."
-                class="my-4 container rounded-4 border border-2 border-secondary"
-                style="height: 40rem; width: 80vw; padding: 2rem;"></textarea>
 
-            <div class="row">
-                <div class="col">
-                    &nbsp;
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    &nbsp;
-                </div>
-            </div>
+<script>
+    // Função para salvar as imagens
+    document.getElementById('savePhotosBtn').addEventListener('click', function () {
+        var file1 = document.getElementById('profilePicture1').files[0];
+        var file2 = document.getElementById('profilePicture2').files[0];
+        var file3 = document.getElementById('profilePicture3').files[0];
 
-            <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
-            <div class="d-flex align-items-center justify-content-center">
-                <a class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">Criar viagem</a>
-            </div>
-        </form>
-    </main>
+        if (!file1 || !file2 || !file3) {
+            alert("Por favor, selecione as três imagens.");
+            return;
+        }
 
-    <div class="row">
-        <div class="col">
-            &nbsp;
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            &nbsp;
-        </div>
-    </div>
+        var formData = new FormData();
+        formData.append('profilePicture1', file1);
+        formData.append('profilePicture2', file2);
+        formData.append('profilePicture3', file3);
 
-    {{!-- <footer class="bg-dark text-light py-4">
-        <div class="container">
-            <div class="row">
+        // Aqui você pode enviar o FormData via AJAX para o servidor
+        // Exemplo usando fetch:
+        fetch('/upload_photos', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                alert('Fotos enviadas com sucesso!');
+                // Fechar o modal após o envio
+                $('#uploadModal').modal('hide');
+            } else {
+                alert('Ocorreu um erro ao enviar as fotos.');
+            }
+        }).catch(error => {
+            alert('Erro de rede: ' + error);
+        });
+    });
+</script>
 
-                <!-- Seção de redes sociais -->
-                <div class="col-md-4 d-flex justify-content-start align-items-center">
-                    <h1>Peregrine ✈️</h1>
-                </div>
-
-                <!-- Seção de links -->
-                <div class="col-md-2">
-                    <h5>Seu perfil e viagens</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-light">Home</a></li>
-                        <li><a href="#" class="text-light">Perfil</a></li>
-                        <li><a href="#" class="text-light">Viagens</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-2">
-                    <ul class="list-unstyled">
-                        <h5>Ajuda e privacidade</h5>
-                        <li><a href="#" class="text-light">Dúvidas frequentes</a></li>
-                        <li><a href="#" class="text-light">Termos e condições</a></li>
-                        <li><a href="#" class="text-light">Contatos</a></li>
-                    </ul>
-                </div>
-
-                <!-- Email para contato -->
-                <div class="col-md-4 text-md-end text-center">
-                    <h5>Contato</h5>
-                    <p class="mb-1">Email: peregrine.planoviagem@gmail.com</p>
-
-                    <br><br>
-                    <h5>Nos siga nas redes sociais</h5>
-                    <a href="#" class="text-light mx-2"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-light mx-2"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-light mx-2"><i class="bi bi-whatsapp"></i></a>
-                    <a href="#" class="text-light mx-2"><i class="bi bi-linkedin"></i></a>
-                </div>
-            </div>
-            <!-- Direitos autorais -->
-            <div class="text-center mt-4">
-                <p class="mb-0">&copy; 2024 Peregrine. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer> --}}
-
-    <!-- link bootstrap icons -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
-    <script src="/frontend/public/scripts/u_planejarViagem.js"></script>
-
-    {{!--
-</body>
-
-</html> --}}
 {{> footer }}
