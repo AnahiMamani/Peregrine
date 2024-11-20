@@ -54,5 +54,33 @@ module.exports = {
             logoPath: '/images/logo.ico',
             user: req.session.user
         });
+    },
+    renderInscricaoConcluida: (req, res) => {
+        res.render('pages/pesquisa-viagem/pesquisaInscricaoConcluida', {
+            title: 'Inscrição concluída',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderViagemDetalhes: (req, res) => {
+        res.render('pages/pesquisa-viagem/pesquisaViagemDetalhes', {
+            title: 'Detalhes da viagem',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderPlanejarViagem: (req, res) => {
+        res.render('pages/planejar-viagem/planejarViagem', {
+            title: 'Planejar viagem',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderPlanejamentoConcluido: (req, res) => {
+        res.render('pages/planejar-viagem/planejarViagemConcluido', {
+            title: 'Viagem criada',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
     }
 }
