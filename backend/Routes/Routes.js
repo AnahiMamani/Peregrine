@@ -55,6 +55,10 @@ router.get('/perfil/excluir-perfil', BoundaryViajante.renderUsuarioExcluir);
 // Viagem
 router.get('/viagem', BoundaryViajante.renderPesquisaViagem);
 router.get('/viagem/resultados', BoundaryViajante.renderPesquisaViagemResultados);
+router.get('/viagem/detalhes', BoundaryViajante.renderViagemDetalhes);
+router.get('/viagem/inscricao', BoundaryViajante.renderInscricaoConcluida);
+router.get('/viagem/planejamento', BoundaryViajante.renderPlanejarViagem);
+router.get('/viagem/criada', BoundaryViajante.renderPlanejamentoConcluido);
 
 // Cadastro de usuário
 router.get('/cadastro', BoundaryUsuario.renderCadastro);
