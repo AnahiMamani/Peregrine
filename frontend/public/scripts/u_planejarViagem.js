@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Redireciona ao clicar no botão "Sim, publicar"
         overlay.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
-            alert('Viagem publicada!'); 
+            window.location.href = '/viagem/criada';
         });
     });
 });
