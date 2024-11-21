@@ -50,23 +50,26 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Apelido</label>
-                                        <input name="apelido" type="text" class="form-control" id="name" placeholder="{{user.nome}}" value="{{user.apelido}}" >
+                                        <input name="apelido" type="text" class="form-control" id="name"
+                                            placeholder="{{user.nome}}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="celular" class="form-label">Celular</label>
                                         <input name="celular" type="tel" class="form-control" id="celular"
-                                            placeholder="(xx) xxxxx-xxxx" pattern="\(\d{2}\) \d{5}-\d{4}" required>
+                                            placeholder="{{user.celular}}" pattern="\(\d{2}\) \d{5}-\d{4}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Bio</label>
-                                        <textarea name="descricao" class="form-control" id="description"
-                                            rows="3" placeholder="Escreva mais sobre você..."></textarea>
+                                        <textarea name="descricao" class="form-control" id="description" rows="3"
+                                            placeholder="{{user.descricao}}"></textarea>
                                     </div>
                                     <button style="background-color: #99067E; color:white;" type="submit"
                                         class="btn btn-primary">Salvar</button>
                                 </form>
+                                <a href="/perfil"><button style="background-color: #868585; color:white;" type="submit"
+                                        class="btn btn-primary">Cancelar</button></a>
                             </div>
-                        </div>
+                        </div>s
                     </div>
                 </div>
             </div>

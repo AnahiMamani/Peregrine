@@ -218,15 +218,25 @@ module.exports = {
             res.status(500).send("Erro no processamento do upload.");
         }
     },
-    editarPerfil: async(req,res) =>{
-        const {apelido, celular, descricao} = req.body;
+    editarPerfil: async (req, res) => {
+        const { apelido, celular, descricao } = req.body;
         const viajante = req.session.user.viajanteId;
-        try{
-            await Viajante.update({A02_APELIDO: apelido, A02_CELULAR: celular, A02_DESCRICAO: descricao},{where: {A02_ID: viajante}})
+    
+        try {
+            // Objeto de atualização dinâmico
+            const updates = {};
+            if (apelido) updates.A02_APELIDO = apelido;
+            if (celular) updates.A02_CELULAR = celular;
+            if (descricao) updates.A02_DESCRICAO = descricao;
+    
+            if (Object.keys(updates).length > 0) { // Só faz o update se houver algo para atualizar
+                await Viajante.update(updates, { where: { A02_ID: viajante } });
+            }
+    
             res.redirect('/perfil');
-        } catch (error){
-            console.error("Erro ao editar perfil:", error)
-            res.redirect('/perfil/editar-perfil')
+        } catch (error) {
+            console.error("Erro ao editar perfil:", error);
+            res.redirect('/perfil/editar-perfil');
         }
-    }
+    }    
 }
