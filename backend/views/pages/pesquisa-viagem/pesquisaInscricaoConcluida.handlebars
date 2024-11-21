@@ -14,7 +14,9 @@
     <title>Pesquisar Viagem</title>
 </head> --}}
 
-{{!-- <body> --}}
+{{!--
+
+<body> --}}
     <div class="container-fluid center">
         <div class="row">
             <!--pagina inicial do upload de documentos-->
@@ -48,8 +50,8 @@
                         <!-- imagem principal -->
                         <div class="d-flex center align-items-center justify-content-center container"
                             style="min-height: 125px;">
-                            <img src="/images/icon-aprovarUsuariosConcluido.png"
-                                alt="Ícone de etapa de análise" style="height: 30vh;">
+                            <img src="/images/icon-aprovarUsuariosConcluido.png" alt="Ícone de etapa de análise"
+                                style="height: 30vh;">
                         </div>
 
                         <div class="row">
@@ -59,15 +61,25 @@
                         </div>
                         <br><br>
 
+                        {{!--
                         <!--botão de confirmação inscrição de viagem concluído (vai direcionar para o link de grupo criado pela organizadora)-->
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="#" class="btn btn-primary" style="width: 20rem;">Ok, entrar no grupo!</a>
+                            <a class="btn btn-primary" style="width: 20rem;">Ok, entrar no grupo!</a>
+                        </div> --}}
+
+                        <!-- Botão de confirmação da inscrição de viagem concluída -->
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a class="btn btn-primary" id="entrarNoGrupo" style="width: 20rem;">Ok, entrar no grupo!</a>
                         </div>
+
                     </main>
                 </div>
             </div>
         </div>
     </div>
-{{!-- </body>
+    {{!--
+</body>
 
 </html> --}}
+
+<script src="/scripts/linkGrupo.js"></script>
