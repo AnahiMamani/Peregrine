@@ -1,4 +1,37 @@
 //pagina u_planejarViagem.html
+document.getElementById('savePhotosBtn').addEventListener('click', function () {
+    var file1 = document.getElementById('profilePicture1').files[0];
+    var file2 = document.getElementById('profilePicture2').files[0];
+    var file3 = document.getElementById('profilePicture3').files[0];
+
+    if (!file1 || !file2 || !file3) {
+        alert("Por favor, selecione as três imagens.");
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('profilePicture1', file1);
+    formData.append('profilePicture2', file2);
+    formData.append('profilePicture3', file3);
+
+    // Aqui você pode enviar o FormData via AJAX para o servidor
+    // Exemplo usando fetch:
+    fetch('/upload_photos', {
+        method: 'POST',
+        body: formData
+    }).then(response => {
+        if (response.ok) {
+            alert('Fotos enviadas com sucesso!');
+            // Fechar o modal após o envio
+            $('#uploadModal').modal('hide');
+        } else {
+            alert('Ocorreu um erro ao enviar as fotos.');
+        }
+    }).catch(error => {
+        alert('Erro de rede: ' + error);
+    });
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnCriarViagem = document.getElementById('confirmaPlanejarViagem');

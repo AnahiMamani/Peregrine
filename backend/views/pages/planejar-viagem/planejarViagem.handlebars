@@ -1,6 +1,4 @@
 {{> headerUsuario}}
-
-
 <main>
     <form class="container">
         <div class="row">
@@ -8,106 +6,6 @@
                 &nbsp;
             </div>
         </div>
-
-        <!-- espaço para o carrossel de imagens da viagem -->
-        <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner rounded-5">
-                <div class="carousel-item active" id="imageViagem1" name="imageViagem1">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
-                            dy=".3em">First slide</text>
-                    </svg>
-                </div>
-                <div class="carousel-item" id="imageViagem2" name="imageViagem2">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
-                            dy=".3em">Second slide</text>
-                    </svg>
-                </div>
-                <div class="carousel-item" id="imageViagem3" name="imageViagem3">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
-                            dy=".3em">Third slide</text>
-                    </svg>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-        {{!-- ícone de lápis para editar a foto --}}
-        <div class="image-edit-container" style="position: relative;">
-            <!-- Ícone de editar as fotos -->
-            <a href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"
-                style="position: absolute; bottom: -50px; right: 100px; background-color: rgb(255, 255, 255); border-radius: 50%; padding: 5px;">
-                <img src="/images/icone_editar_foto.png" alt="Ícone de editar foto" style="width: 80px; height: 80px;">
-            </a>
-            {{!-- <img src="/images/imagem1.jpg" alt="Imagem de Perfil 1" style="width: 150px; height: 150px;">
-            <img src="/images/imagem2.jpg" alt="Imagem de Perfil 2" style="width: 150px; height: 150px;">
-            <img src="/images/imagem3.jpg" alt="Imagem de Perfil 3" style="width: 150px; height: 150px;"> --}}
-        </div>
-
-        <!-- Modal para editar as imagens -->
-        <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="uploadModalLabel">Alterar Fotos do Perfil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Primeiro campo para escolher a imagem -->
-                        <div class="mb-3">
-                            <label for="profilePicture1" class="form-label">Escolha a primeira foto</label>
-                            <input type="file" class="form-control" id="profilePicture1" accept="image/*">
-                        </div>
-
-                        <!-- Segundo campo para escolher a imagem -->
-                        <div class="mb-3">
-                            <label for="profilePicture2" class="form-label">Escolha a segunda foto</label>
-                            <input type="file" class="form-control" id="profilePicture2" accept="image/*">
-                        </div>
-
-                        <!-- Terceiro campo para escolher a imagem -->
-                        <div class="mb-3">
-                            <label for="profilePicture3" class="form-label">Escolha a terceira foto</label>
-                            <input type="file" class="form-control" id="profilePicture3" accept="image/*">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary"
-                            style="background-color: #99067E; border-color: #99067E" id="savePhotosBtn">Salvar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <div class="row">
             <div class="col">
                 &nbsp;
@@ -268,43 +166,6 @@
 
 <!-- link bootstrap icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
-<script src="/frontend/public/scripts/u_planejarViagem.js"></script>
-
-
-<script>
-    // Função para salvar as imagens
-    document.getElementById('savePhotosBtn').addEventListener('click', function () {
-        var file1 = document.getElementById('profilePicture1').files[0];
-        var file2 = document.getElementById('profilePicture2').files[0];
-        var file3 = document.getElementById('profilePicture3').files[0];
-
-        if (!file1 || !file2 || !file3) {
-            alert("Por favor, selecione as três imagens.");
-            return;
-        }
-
-        var formData = new FormData();
-        formData.append('profilePicture1', file1);
-        formData.append('profilePicture2', file2);
-        formData.append('profilePicture3', file3);
-
-        // Aqui você pode enviar o FormData via AJAX para o servidor
-        // Exemplo usando fetch:
-        fetch('/upload_photos', {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            if (response.ok) {
-                alert('Fotos enviadas com sucesso!');
-                // Fechar o modal após o envio
-                $('#uploadModal').modal('hide');
-            } else {
-                alert('Ocorreu um erro ao enviar as fotos.');
-            }
-        }).catch(error => {
-            alert('Erro de rede: ' + error);
-        });
-    });
-</script>
+<script src="/scripts/u_planejarViagem.js"></script>
 
 {{> footer }}
