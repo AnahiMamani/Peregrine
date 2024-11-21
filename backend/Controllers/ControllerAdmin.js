@@ -122,7 +122,6 @@ module.exports = {
         }
     },
 
-
     deleteViajante: async (req, res) => {
         const { userId } = req.body;
 

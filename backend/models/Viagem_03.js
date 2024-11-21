@@ -5,13 +5,19 @@ const Viajante = require('./Viajante_02'); // Importa o modelo Viajante para ref
 
 const Viagem = sequelize.define('Viagem', {
     A03_ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    A03_DESTINO: { type: DataTypes.STRING, allowNull: false },
     A03_TITULO: { type: DataTypes.STRING, allowNull: false },
+    A03_SUBTITULO: { type: DataTypes.STRING, allowNull: false },  // Novo campo
+    A03_ORIGEM: { type: DataTypes.STRING, allowNull: false },  // Novo campo
+    A03_DESTINO: { type: DataTypes.STRING, allowNull: false },
+    A03_VAGAS: { type: DataTypes.INTEGER, allowNull: false },  // Novo campo
+    A03_CUSTO: { type: DataTypes.DOUBLE, allowNull: false },  // Novo campo
+    A03_LOCAL_IDA: { type: DataTypes.STRING, allowNull: false },  // Novo campo
+    A03_DATA_IDA: { type: DataTypes.DATE, allowNull: false },  // Novo campo
+    A03_HORA_IDA: { type: DataTypes.TIME, allowNull: false },  // Novo campo
+    A03_LOCAL_VOLTA: { type: DataTypes.STRING, allowNull: false },  // Novo campo
+    A03_DATA_VOLTA: { type: DataTypes.DATE, allowNull: false },  // Novo campo
+    A03_HORA_VOLTA: { type: DataTypes.TIME, allowNull: false },  // Novo campo
     A03_DESCRICAO: { type: DataTypes.STRING },
-    A03_DATA_PARTIDA: { type: DataTypes.DATE },
-    A03_DATA_RETORNO: { type: DataTypes.DATE },
-    A03_GASTOS_ESTIMADOS: { type: DataTypes.DOUBLE},
-    A03_PONTO_ENCONTRO: { type: DataTypes.DOUBLE},
     A02_ID_ORGANIZADORA: {
         type: DataTypes.INTEGER,
         references: {
@@ -20,8 +26,7 @@ const Viagem = sequelize.define('Viagem', {
         },
         allowNull: false
     },
-    A03_STATUS:{type: DataTypes.STRING, allowNull: false },
-    A03_INTEGRANTES:{type: DataTypes.INTEGER, allowNull: false} 
+    A03_STATUS: { type: DataTypes.STRING, allowNull: false },
 }, {
     tableName: 'VIAGEM_03',
     timestamps: false

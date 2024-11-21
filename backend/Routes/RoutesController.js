@@ -3,6 +3,7 @@ const router = express.Router();
 const ControllerViajante = require("../Controllers/ControllerViajante");
 const ControllerUsuario = require("../Controllers/ControllerUsuario");
 const ControllerAdmin = require("../Controllers/ControllerAdmin");
+const ControllerViagem = require("../Controllers/ControllerViagem");
 
 //Contorller Administrador
 router.post("/CadastrarAdmin", ControllerAdmin.cadastroAdmin);
@@ -17,6 +18,9 @@ router.post('/editarPerfil', ControllerViajante.editarPerfil);
 router.post('/AtualizarSenhaPerfil', ControllerViajante.atualizarSenhaPerfil);
 router.post('/AtualizarEmailPerfil', ControllerViajante.atualizarEmail);
 router.post('/deletarViajante', ControllerViajante.deleteViajante);
+
+//Controller Viagem
+router.post('/cadastroViagem', ControllerViagem.cadastrarViagem);
 
 
 //Contorller Usuario

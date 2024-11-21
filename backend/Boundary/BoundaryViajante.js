@@ -1,4 +1,16 @@
-const Viajante = require('../models/Viajante_02'); // Ajuste o caminho conforme necessário
+const Viajante = require('../models/Viajante_02');
+const Viagem = require('../models/Viagem_03')
+const formatarData = (data) => {
+    return new Date(data).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+};
+
+const formatarMoeda = (valor) => {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
+};
 
 module.exports = {
     renderPerfil: async (req, res) => {
@@ -42,12 +54,38 @@ module.exports = {
             user: req.session.user
         });
     },
-    renderPesquisaViagemResultados: (req, res) => {
-        res.render('pages/pesquisa-viagem/pesquisaViagemResultados', {
-            title: 'Resultados da pesquisa de viagem',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
+    renderPesquisaViagemResultados: async (req, res) => {
+        try {
+            // Busca todas as viagens cadastradas com status "Planejada"
+            const viagens = await Viagem.findAll({
+                where: {
+                    A03_STATUS: 'Planejada'
+                }
+            });
+
+            // Formata os dados das viagens
+            const viagensFormatadas = viagens.map(viagem => ({
+                id: viagem.A03_ID,
+                A03_TITULO: viagem.A03_TITULO || 'Título não informado',
+                A03_DESTINO: viagem.A03_DESTINO || 'Destino não informado',
+                A03_ORIGEM: viagem.A03_ORIGEM || 'Origem não informada',
+                A03_VAGAS: viagem.A03_VAGAS || 0,
+                A03_DATA_IDA: formatarData(viagem.A03_DATA_IDA),
+                A03_DATA_VOLTA: formatarData(viagem.A03_DATA_VOLTA),
+                A03_CUSTO: formatarMoeda(viagem.A03_CUSTO)
+            }));
+
+            // Renderiza a view com os dados
+            res.render('pages/pesquisa-viagem/pesquisaViagemResultados', {
+                title: 'Resultados da pesquisa de viagem',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagens: viagensFormatadas // Passa os dados das viagens para a view
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viagens:', error);
+            res.status(500).send('Erro ao buscar viagens');
+        }
     },
     renderMinhasViagens: (req, res) => {
         res.render('pages/viajante/minhasViagens', {
@@ -92,12 +130,32 @@ module.exports = {
             user: req.session.user
         });
     },
-    renderViagemDetalhes: (req, res) => {
-        res.render('pages/pesquisa-viagem/pesquisaViagemDetalhes', {
-            title: 'Detalhes da viagem',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
+    renderViagemDetalhes: async (req, res) => {
+        const viagemId = req.params.id; // Obter o ID da URL
+        try {
+            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId }, raw: true }); // Buscar dados no banco
+            if (!viagem) {
+                return res.status(404).send('Viagem não encontrada');
+            }
+            res.render('pages/pesquisa-viagem/pesquisaViagemDetalhes', {
+                title: 'Detalhes da viagem',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagem: {
+                    titulo: viagem.A03_TITULO,
+                    subtitulo: viagem.A03_SUBTITULO,
+                    descricao: viagem.A03_DESCRICAO,
+                    destino: viagem.A03_DESTINO,
+                    custo: viagem.A03_CUSTO,
+                    vagasDisponiveis: viagem.A03_VAGAS,
+                    dataIda: viagem.A03_DATA_IDA,
+                    dataVolta: viagem.A03_DATA_VOLTA,
+                }
+            });
+        } catch (error) {
+            console.error('Erro ao buscar detalhes da viagem:', error);
+            res.status(500).send('Erro no servidor');
+        }
     },
     renderPlanejarViagem: (req, res) => {
         res.render('pages/planejar-viagem/planejarViagem', {

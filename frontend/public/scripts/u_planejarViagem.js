@@ -18,18 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
-
-        // Adiciona a janela ao body
         document.body.appendChild(overlay);
 
-        // Fecha a janela ao clicar no botão "Não, quero voltar"
-        overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
-            document.body.removeChild(overlay);
+        // Ação quando clicar em "Sim, publicar"
+        document.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
+            // Submete o formulário quando a confirmação for positiva
+            document.querySelector('form').submit();
         });
 
-        // Redireciona ao clicar no botão "Sim, publicar"
-        overlay.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
-            alert('Viagem publicada!'); 
+        // Ação quando clicar em "Não, quero voltar"
+        document.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+            document.body.removeChild(overlay); // Fecha a janela de confirmação
         });
     });
 });

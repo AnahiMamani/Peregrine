@@ -1,144 +1,64 @@
-<div class="container-fluid center">
-    <div class="row">
-        <div class="col">
-            <div class="p-3">
-                {{> headerUsuario}}
-                <div class="row">
-                    <div class="col">
-                        &nbsp;
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        &nbsp;
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</header>
+{{> headerUsuario}}
 
 <main>
+    <div class="row">
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+        <div class="row">
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
     <form class="container">
         <div class="row">
             <div class="col">
                 &nbsp;
             </div>
         </div>
-
-        <!-- espaço para o carrossel de imagens da viagem -->
-        <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner rounded-5">
-                <div class="carousel-item active" id="imageViagem1" name="imageViagem1">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
-                            dy=".3em">First slide</text>
-                    </svg>
-                </div>
-                <div class="carousel-item" id="imageViagem2" name="imageViagem2">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
-                            dy=".3em">Second slide</text>
-                    </svg>
-                </div>
-                <div class="carousel-item" id="imageViagem3" name="imageViagem3">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="700" height="500"
-                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
-                        preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
-                            dy=".3em">Third slide</text>
-                    </svg>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-        <!-- espaço para informações do perfil da usuária organizadora (foto, nome e avalização) -->
-        {{!-- <div class="card-body" style="margin-left: 48vw;">
+        <div class="card-body" style="margin-left: 48vw;">
             <div class="d-flex align-items-center">
                 <div class="my-2">
                     <h4 id="nomeOrganizadora" name="nomeOrganizadora" class="text-end" style="font-weight: bold;">
-                        <a href="/perfil" style="color: #99067E;">Fulana da Silva Sauro</a>
+                        <a id="linkPerfil" style="color: #99067E;">Fulana da Silva Sauro</a>
                     </h4>
                     <p id="avaliacaoOrganizadora" name="avaliacaoOrganizadora" class="text-end"
                         style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span> 4,97</p>
                 </div>
-                <!-- quando clicar na imagem, o javascript abrirá uma janela com o resumo do perfil da organizadora -->
+                <!-- Quando clicar na imagem, o JavaScript abrirá a janela com o resumo do perfil da organizadora -->
                 <img id="perfilOrganizadora" name="perfilOrganizadora" src="/images/img-fotoPerfilFulana.png"
                     alt="Foto de Perfil" class="rounded-circle border border-3 border-light"
                     style="cursor:pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px; margin-top: -100px; z-index: 1001;">
             </div>
-        </div> --}}
-        
-        
-
-<div class="card-body" style="margin-left: 48vw;">
-    <div class="d-flex align-items-center">
-        <div class="my-2">
-            <h4 id="nomeOrganizadora" name="nomeOrganizadora" class="text-end" style="font-weight: bold;">
-                <a  id="linkPerfil" style="color: #99067E;">Fulana da Silva Sauro</a>
-            </h4>
-            <p id="avaliacaoOrganizadora" name="avaliacaoOrganizadora" class="text-end"
-                style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span> 4,97</p>
         </div>
-        <!-- Quando clicar na imagem, o JavaScript abrirá a janela com o resumo do perfil da organizadora -->
-        <img id="perfilOrganizadora" name="perfilOrganizadora" src="/images/img-fotoPerfilFulana.png"
-            alt="Foto de Perfil" class="rounded-circle border border-3 border-light"
-            style="cursor:pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px; margin-top: -100px; z-index: 1001;">
-    </div>
-</div>
 
-<!-- Modal para exibir o perfil da organizadora -->
-<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="perfilModalLabel">Perfil da Organizadora</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <img id="modalPerfilImagem" src="" alt="Foto de Perfil" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-                    <h3 id="modalNomeOrganizadora"></h3>
-                    <p id="modalAvaliacaoOrganizadora" style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span> 4,97</p>
-                    <p id="modalDescricaoOrganizadora">Aqui estará a descrição completa sobre a organizadora. Por exemplo, como ela se dedica ao serviço, suas experiências anteriores e outras informações.</p>
+        <!-- Modal para exibir o perfil da organizadora -->
+        <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="perfilModalLabel">Perfil da Organizadora</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <img id="modalPerfilImagem" src="" alt="Foto de Perfil" class="rounded-circle mb-3"
+                                style="width: 150px; height: 150px; object-fit: cover;">
+                            <h3 id="modalNomeOrganizadora"></h3>
+                            <p id="modalAvaliacaoOrganizadora" style="font-size: 1.2rem; color: #6c757d;"><span
+                                    style="color: #99067E;">★</span> 4,97</p>
+                            <p id="modalDescricaoOrganizadora">Aqui estará a descrição completa sobre a organizadora.
+                                Por exemplo, como ela se dedica ao serviço, suas experiências anteriores e outras
+                                informações.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
         </div>
-    </div>
-</div>
-
-
-
-
         <div class="row">
             <div class="col">
                 &nbsp;
@@ -148,12 +68,11 @@
         <!-- espaço para inserção do título e subtítulo da viagem -->
         <div class="row text-center">
             <!-- input para título da viagem -->
-            <h1 type="text" name="tituloViagem" id="tituloViagem" class="border-0 fs-1 text-center rounded-4">Título
-                da viagem</h1>
+            <h1 type="text" name="tituloViagem" id="tituloViagem" class="border-0 fs-1 text-center rounded-4">{{viagem.titulo}}</h1>
 
             <!-- input para subtítulo da viagem -->
             <h5 type="text" name="subtituloViagem" id="subtituloViagem" placeholder="Insira um subtítulo..."
-                class="my-4 container text-center">Subtítulo da viagem</h5>
+                class="my-4 container text-center">{{viagem.subtítulo}}</h5>
         </div>
 
         <!-- espaço para inserção das principais informações da viagem -->
@@ -168,8 +87,8 @@
                             style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
                         <h4 class="m-0">Destino</h4>
                     </div>
-                    <input type="text" name="destinoViagem" id="destinoViagem" placeholder="Para onde você vai?"
-                        class="form-control text-center rounded-4 container" style="height: 2.5rem;">
+                    <p type="text" name="destinoViagem" id="destinoViagem" placeholder="Para onde você vai?"
+                        class="form-control text-center rounded-4 container" style="height: 2.5rem;">{{viagem.destino}}</p>
                 </div>
 
                 <!-- campo para inserir a quantidade de vagas disponíveis para a viagem-->
@@ -199,8 +118,7 @@
                             style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
                         <h4 class="m-0">Custo estimado</h4>
                     </div>
-                    <input type="number" name="custoViagem" id="custoViagem"
-                        placeholder="Valor para cada uma"
+                    <input type="number" name="custoViagem" id="custoViagem" placeholder="Valor para cada uma"
                         class="form-control text-center rounded-4 container" style="height: 2.5rem;">
                 </div>
             </div>
@@ -271,8 +189,9 @@
         <!-- espaço para inserção do texto descritivo da viagem -->
         <p name="descricaoViagem" id="descricaoViagem"
             placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..."
-            class="my-4 container rounded-4 border border-2 border-secondary" style="height: 80vw; width: 80vw; padding: 2rem; text-align: justify;">
-            
+            class="my-4 container rounded-4 border border-2 border-secondary"
+            style="height: 80vw; width: 80vw; padding: 2rem; text-align: justify;">
+
         </p>
 
         <div class="row">
