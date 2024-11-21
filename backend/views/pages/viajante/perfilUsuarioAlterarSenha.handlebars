@@ -18,7 +18,7 @@
                                 &nbsp;
                             </div>
                         </div>
-                        <form>
+                        <form action="/control/AtualizarSenhaPerfil" method="POST">
                             <div class="row">
                                 <div class="col">
                                     &nbsp;
@@ -27,15 +27,15 @@
                             <!-- campo para inserir a nova senha -->
                             <div class="col-md-8">
                                 <label for="exampleInputPassword1" class="form-label">NOVA SENHA</label>
-                                <input name="senha" type="password" class="form-control rounded-5 mb-2"
-                                    id="inputNovaPassword" placeholder="">
+                                <input name="novaSenha" type="password" class="form-control rounded-5 mb-2"
+                                    id="inputNovaPassword" placeholder="Digite sua nova senha">
                             </div>
                             <br>
                             <!-- campo para confirmação da nova senha criada -->
                             <div class="col-md-8">
                                 <label for="exampleInputPassword1" class="form-label">CONFIRME A SENHA</label>
-                                <input type="password" class="form-control rounded-5 mb-2" id="inputConfirmNovaPassword"
-                                    placeholder="">
+                                <input type="password" class="form-control rounded-5 mb-2"  name="confirmarSenha" id="inputConfirmNovaPassword"
+                                    placeholder="Confirme a senha">
                             </div>
                             <br>
                             <button type="submit" class="btn w-25 text-center"

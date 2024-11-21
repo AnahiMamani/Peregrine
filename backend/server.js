@@ -47,5 +47,5 @@ app.use("/control", indexController); // Rotas de controle para funções
 // Inicialização do servidor
 const PORT = 8021;
 app.listen(PORT, () => {
-    console.log(`Servidor ativo na porta ${PORT}!`);
+    console.log(`Servidor ativo na porta ${PORT}! http://localhost:8021/`);
 });

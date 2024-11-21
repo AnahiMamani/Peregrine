@@ -238,5 +238,151 @@ module.exports = {
             console.error("Erro ao editar perfil:", error);
             res.redirect('/perfil/editar-perfil');
         }
-    }    
+    },
+    atualizarSenhaPerfil: async (req, res) => {
+        const { novaSenha, confirmarSenha } = req.body;
+    
+        // Recupera o ID do usuário da sessão
+        const usuarioId = req.session.user?.id; // Garante que o ID está acessando o campo correto
+    
+        if (!usuarioId) {
+            return res.redirect('/login'); // Redireciona para o login se o usuário não estiver autenticado
+        }
+    
+        // Verifica se os campos de senha foram preenchidos
+        if (!novaSenha || !confirmarSenha) {
+            return res.render('pages/viajante/perfilUsuarioAlterarSenha', { 
+                senhaError: 'Preencha todos os campos.', 
+                user: req.session.user 
+            });
+        }
+    
+        // Verifica se as senhas coincidem
+        if (novaSenha !== confirmarSenha) {
+            return res.render('pages/viajante/perfilUsuarioAlterarSenha', { 
+                senhaError: 'As senhas não coincidem.', 
+                user: req.session.user 
+            });
+        }
+    
+        try {
+            // Criptografa a nova senha
+            const hashedPassword = await bcrypt.hash(novaSenha, SALT_ROUNDS);
+    
+            // Atualiza a senha no banco de dados
+            await Usuario.update(
+                { A01_SENHA: hashedPassword }, 
+                { where: { A01_ID: usuarioId } } // Garante que está utilizando o campo correto no banco
+            );
+    
+            // Renderiza a página de perfil com a mensagem de sucesso
+            return res.render('pages/viajante/perfil', { 
+                senhaSuccess: 'Senha atualizada com sucesso!', 
+                user: req.session.user 
+            });
+        } catch (error) {
+            console.error('Erro ao atualizar a senha:', error);
+    
+            // Renderiza a página de alterar senha com a mensagem de erro
+            return res.render('pages/viajante/perfilUsuarioAlterarSenha', { 
+                senhaError: 'Erro ao atualizar a senha. Tente novamente.', 
+                user: req.session.user 
+            });
+        }
+    },
+
+    atualizarEmail: async (req, res) => {
+        const { novoEmail } = req.body;
+    
+        // Recupera o ID do usuário da sessão
+        const usuarioId = req.session.user?.id;
+    
+        if (!usuarioId) {
+            return res.redirect('/login'); // Redireciona para o login se o usuário não estiver autenticado
+        }
+    
+        // Verifica se o e-mail foi fornecido
+        if (!novoEmail) {
+            return res.render('pages/viajante/perfilUsuarioAlterarEmail', { 
+                emailError: 'Por favor, informe o novo e-mail.', 
+                user: req.session.user 
+            });
+        }
+    
+        try {
+            // Verifica se o novo e-mail já está cadastrado
+            const emailExistente = await Usuario.findOne({ where: { A01_EMAIL: novoEmail } });
+            if (emailExistente) {
+                return res.render('pages/viajante/perfilUsuarioAlterarEmail', { 
+                    emailError: 'Este e-mail já está em uso.', 
+                    user: req.session.user 
+                });
+            }
+    
+            // Atualiza o e-mail no banco de dados
+            await Usuario.update(
+                { A01_EMAIL: novoEmail }, 
+                { where: { A01_ID: usuarioId } }
+            );
+    
+            // Atualiza o e-mail na sessão do usuário
+            req.session.user.email = novoEmail;
+    
+            // Renderiza a página de perfil com a mensagem de sucesso
+            return res.render('pages/viajante/perfil', { 
+                emailSuccess: 'E-mail atualizado com sucesso!', 
+                user: req.session.user 
+            });
+        } catch (error) {
+            console.error('Erro ao atualizar o e-mail:', error);
+    
+            // Renderiza a página de alterar e-mail com a mensagem de erro
+            return res.render('pages/viajante/perfilUsuarioAlterarEmail', { 
+                emailError: 'Erro ao atualizar o e-mail. Tente novamente.', 
+                user: req.session.user 
+            });
+        }
+    },
+    deleteViajante: async (req, res) => {
+        console.log('Sessão atual:', req.session);
+    
+        // Obtém o ID do usuário logado a partir da sessão
+        const userId = req.session?.user?.id; 
+    
+        if (!userId) {
+            console.error('ID do usuário não encontrado na sessão.');
+            return res.status(400).send('Erro: usuário não identificado.');
+        }
+    
+        try {
+            // Buscar o viajante relacionado ao usuário
+            const viajante = await Viajante.findOne({
+                where: { A01_ID: userId }, // O campo correto é A01_ID
+                include: { model: Usuario, attributes: ['A01_ID'] },
+            });
+    
+            if (!viajante) {
+                console.error('Viajante não encontrado para o ID do usuário:', userId);
+                return res.status(404).send('Viajante não encontrado.');
+            }
+    
+            const viajanteId = viajante.A02_ID;
+    
+            // Excluir viajante e usuário
+            await Viajante.destroy({ where: { A02_ID: viajanteId } });
+            await Usuario.destroy({ where: { A01_ID: userId } });
+    
+            // Destruir a sessão do usuário
+            req.session.destroy((err) => {
+                if (err) {
+                    console.error('Erro ao destruir a sessão:', err);
+                    return res.status(500).send('Erro ao deslogar o usuário.');
+                }
+                res.redirect('/');
+            });
+        } catch (error) {
+            console.error('Erro ao excluir viajante ou usuário:', error);
+            res.status(500).send('Erro no servidor.');
+        }
+    }      
 }

@@ -64,6 +64,7 @@ module.exports = {
         });
     },
     renderUsuarioAlterarSenha: (req, res) => {
+        console.log('Estado da sessão:', req.session.user);
         res.render('pages/viajante/perfilUsuarioAlterarSenha', {
             title: 'Perfil - Alterar senha',
             logoPath: '/images/logo.ico',

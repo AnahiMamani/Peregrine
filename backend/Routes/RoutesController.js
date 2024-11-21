@@ -14,6 +14,10 @@ router.post('/CadastroViajante', ControllerViajante.cadastroViajante);
 router.post('/UploadDocumentos', ControllerViajante.uploadDocumentos);
 router.post('/deleteViajante/:id', ControllerAdmin.deleteViajante);
 router.post('/editarPerfil', ControllerViajante.editarPerfil);
+router.post('/AtualizarSenhaPerfil', ControllerViajante.atualizarSenhaPerfil);
+router.post('/AtualizarEmailPerfil', ControllerViajante.atualizarEmail);
+router.post('/deletarViajante', ControllerViajante.deleteViajante);
+
 
 //Contorller Usuario
 router.get("/Logout", ControllerUsuario.logout);
