@@ -26,7 +26,17 @@
             <!-- input para subtítulo da viagem -->
             <input type="text" name="subtituloViagem" id="subtituloViagem" placeholder="Insira um subtítulo..."
                 class="my-4 container text-center rounded-4 border border-2 border-secondary" style="height: 4rem;">
-
+            <div class="my-4 container text-center rounded-4 border border-2 border-secondary" style="height: 6rem;">
+                <div class="d-flex align-items-center mb-2">
+                    <h4 class="m-0">Link de grupo externo</h4>
+                    <img id="infoIcon" src="/images/icon-informacao.png" alt="Ícone de informação"
+                        style="width: 1.5rem; height: 1.5rem; margin-left: 0.5rem;">
+                    <input type="text" name="custoViagem" id="custoViagem"
+                        placeholder="Insira o link de um grupo externo de sua preferência"
+                        class="my-4 container text-center rounded-4 border border-2 border-secondary"
+                        style="height: 3rem;width: 40rem;">
+                </div>
+            </div>
         </div>
 
         <!-- espaço para inserção das principais informações da viagem -->
@@ -132,19 +142,7 @@
         <!-- espaço para inserção do texto descritivo da viagem -->
         <textarea name="descricaoViagem" id="descricaoViagem"
             placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..."
-            class="my-4 container rounded-4 border border-2 border-secondary"
-            style="height: 40rem; width: 80vw; padding: 2rem;"></textarea>
-
-        <div class="row">
-            <div class="col">
-                &nbsp;
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                &nbsp;
-            </div>
-        </div>
+            class="row my-4 container text-center rounded-4 border border-2 border-secondary" style="width: 90vw;height: 9rem;"></textarea>
 
         <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
         <div class="d-flex align-items-center justify-content-center">
@@ -153,11 +151,6 @@
     </form>
 </main>
 
-<div class="row">
-    <div class="col">
-        &nbsp;
-    </div>
-</div>
 <div class="row">
     <div class="col">
         &nbsp;
