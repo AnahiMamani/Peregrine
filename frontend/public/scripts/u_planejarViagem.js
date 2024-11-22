@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('form').submit();
         });
 
-        // Ação quando clicar em "Não, quero voltar"
-        document.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
-            document.body.removeChild(overlay); // Fecha a janela de confirmação
+        // Redireciona ao clicar no botão "Sim, publicar"
+        overlay.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
+            window.location.href = '/viagem/criada';
         });
     });
 });
