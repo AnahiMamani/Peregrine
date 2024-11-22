@@ -38,7 +38,7 @@ module.exports = {
                 A03_LINK: linkgrupo,
                 A03_VAGAS: vagasViagem,
                 A02_ID_ORGANIZADORA: viajanteId,
-                A03_STATUS: 'Planejada', // Status inicial
+                A03_STATUS: 'ATIVADA', // Status inicial
             },{ transaction });
 
             await transaction.commit();

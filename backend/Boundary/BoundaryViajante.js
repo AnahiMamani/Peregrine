@@ -1,6 +1,6 @@
 const Viajante = require('../models/Viajante_02');
 const Viagem = require('../models/Viagem_03');
-const Usuario = require('../models/Usuario_01');
+const ViagemViajante = require('../models/ViajanteViagem_04');
 const formatarData = (data) => {
     return new Date(data).toLocaleDateString('pt-BR', {
         day: '2-digit',
@@ -14,23 +14,230 @@ const formatarMoeda = (valor) => {
 };
 
 module.exports = {
-    renderPerfil: async (req, res) => {
+    renderViagensConcluidas: async (req, res) => {
         try {
             const userId = req.session.user?.id;
-    
+
             if (!userId) {
                 return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
             }
+
+            // Passo 1: Busca os dados do viajante
+            const viajante = await Viajante.findOne({
+                where: { A01_ID: userId }
+            });
+
+            if (!viajante) {
+                return res.redirect('/login'); // Redireciona se o viajante não for encontrado
+            }
+
+            // Passo 2: Busca na tabela intermediária (ViagemViajante) os registros do usuário com status 'em_andamento'
+            const viagensRelacionadas = await ViagemViajante.findAll({
+                where: {
+                    A02_ID: viajante.A02_ID,
+                },
+                attributes: ['A03_ID'],
+                raw: true,
+            });
+
+            // Verifica se há viagens relacionadas
+            if (!viagensRelacionadas.length) {
+                return res.render('pages/viajante/minhasViagensConcluidas', {
+                    title: 'Minhas viagens - concluídas',
+                    logoPath: '/images/logo.ico',
+                    user: req.session.user,
+                    viagensInscritas: [], // Nenhuma viagem encontrada
+                });
+            }
+
+            // Passo 3: Extrai os IDs das viagens relacionadas
+            const viagemIds = viagensRelacionadas.map(vr => vr.A03_ID);
+
+            // Passo 4: Busca os títulos das viagens com o status 'em_andamento' diretamente
+            const viagens = await Viagem.findAll({
+                where: {
+                    A03_ID: viagemIds,
+                    A03_STATUS: 'CONCLUIDA' // Adiciona a condição de status na consulta
+                },
+                attributes: ['A03_ID', 'A03_TITULO'],
+                raw: true,
+            });
+
+            // Passo 5: Mapeia os dados das viagens para serem usados na view
+            const viagensInscritas = viagens.map(viagem => ({
+                id: viagem.A03_ID,
+                titulo: viagem.A03_TITULO,
+            }));
+
+            // Renderiza a view com as viagens em andamento
+            res.render('pages/viajante/minhasViagensConcluidas', {
+                title: 'Minhas viagens - concluídas',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagensInscritas, // Passa as viagens para a view
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viagens:', error);
+            res.status(500).send('Erro ao buscar viagens');
+        }
+    },
+    renderViagensCriadas: async (req, res) => {
+        try {
+            const userId = req.session.user?.id;
+
+            if (!userId) {
+                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
+            }
+
+            // Passo 1: Busca os dados do viajante
+            const viajante = await Viajante.findOne({
+                where: { A01_ID: userId }
+            });
+
+            if (!viajante) {
+                return res.redirect('/login'); // Redireciona se o viajante não for encontrado
+            }
+
+            // Passo 2: Busca na tabela intermediária (ViagemViajante) os registros do usuário com status 'em_andamento'
+            const viagensRelacionadas = await Viagem.findAll({
+                where: {
+                    A02_ID_ORGANIZADORA: viajante.A02_ID,
+                },
+                attributes: ['A03_ID'],
+                raw: true,
+            });
+
+            // Verifica se há viagens relacionadas
+            if (!viagensRelacionadas.length) {
+                return res.render('pages/viajante/minhasViagensCriadas', {
+                    title: 'Minhas Viagens',
+                    logoPath: '/images/logo.ico',
+                    user: req.session.user,
+                    viagensInscritas: [], // Nenhuma viagem encontrada
+                });
+            }
+
+            // Passo 3: Extrai os IDs das viagens relacionadas
+            const viagemIds = viagensRelacionadas.map(vr => vr.A03_ID);
+
+            // Passo 4: Busca os títulos das viagens com o status 'em_andamento' diretamente
+            const viagens = await Viagem.findAll({
+                where: {
+                    A03_ID: viagemIds,
+                    A02_ID_ORGANIZADORA: viajante.A02_ID // Adiciona a condição de status na consulta
+                },
+                attributes: ['A03_ID', 'A03_TITULO'],
+                raw: true,
+            });
+
+            // Passo 5: Mapeia os dados das viagens para serem usados na view
+            const viagensInscritas = viagens.map(viagem => ({
+                id: viagem.A03_ID,
+                titulo: viagem.A03_TITULO,
+            }));
+
+            // Renderiza a view com as viagens em andamento
+            res.render('pages/viajante/minhasViagensCriadas', {
+                title: 'Minhas Viagens',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagensInscritas, // Passa as viagens para a view
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viagens:', error);
+            res.status(500).send('Erro ao buscar viagens');
+        }
+    },
+    renderViagensInscritas: async (req, res) => {
+        try {
+            const userId = req.session.user?.id;
+
+            if (!userId) {
+                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
+            }
+
+            // Passo 1: Busca os dados do viajante
+            const viajante = await Viajante.findOne({
+                where: { A01_ID: userId }
+            });
+
+            if (!viajante) {
+                return res.redirect('/login'); // Redireciona se o viajante não for encontrado
+            }
+
+            // Passo 2: Busca na tabela intermediária (ViagemViajante) os registros do usuário com status 'em_andamento'
+            const viagensRelacionadas = await ViagemViajante.findAll({
+                where: {
+                    A02_ID: viajante.A02_ID,
+                },
+                attributes: ['A03_ID'],
+                raw: true,
+            });
+
+            // Verifica se há viagens relacionadas
+            if (!viagensRelacionadas.length) {
+                return res.render('pages/viajante/minhasViagensInscritas', {
+                    title: 'Minhas Viagens em Andamento',
+                    logoPath: '/images/logo.ico',
+                    user: req.session.user,
+                    viagensInscritas: [], // Nenhuma viagem encontrada
+                });
+            }
+
+            // Passo 3: Extrai os IDs das viagens relacionadas
+            const viagemIds = viagensRelacionadas.map(vr => vr.A03_ID);
+
+            // Passo 4: Busca os títulos das viagens com o status 'em_andamento' diretamente
+            const viagens = await Viagem.findAll({
+                where: {
+                    A03_ID: viagemIds,
+                    A03_STATUS: 'ATIVADA' // Adiciona a condição de status na consulta
+                },
+                attributes: ['A03_ID', 'A03_TITULO'],
+                raw: true,
+            });
+
+            // Passo 5: Mapeia os dados das viagens para serem usados na view
+            const viagensInscritas = viagens.map(viagem => ({
+                id: viagem.A03_ID,
+                titulo: viagem.A03_TITULO,
+            }));
+
+            // Renderiza a view com as viagens em andamento
+            res.render('pages/viajante/minhasViagensInscritas', {
+                title: 'Minhas Viagens em Andamento',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagensInscritas, // Passa as viagens para a view
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viagens:', error);
+            res.status(500).send('Erro ao buscar viagens');
+        }
+    },
+
+
+
+
+
     
+    renderPerfil: async (req, res) => {
+        try {
+            const userId = req.session.user?.id;
+
+            if (!userId) {
+                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
+            }
+
             // Busca os dados da viajante
             const viajante = await Viajante.findOne({
                 where: { A01_ID: userId }
             });
-    
+
             if (!viajante) {
                 return res.redirect('/cadastrar'); // Caso não exista viajante, redireciona para cadastro
             }
-    
+
             res.render('pages/viajante/perfil', {
                 title: 'Perfil',
                 logoPath: '/images/logo.ico',
@@ -48,6 +255,14 @@ module.exports = {
             res.status(500).send('Erro ao carregar a página de perfil.');
         }
     },
+    renderSelecaoConcluidas:  (req, res) => {
+        console.log('Estado da sessão:', req.session.user);
+        res.render('pages/viajante/minhasViagensConcluidasSelecao', {
+            title: 'Perfil - Viagem Concluidas',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
     renderPesquisaViagem: (req, res) => {
         res.render('pages/pesquisa-viagem/pesquisaViagem', {
             title: 'Pesquisa de viagem',
@@ -60,7 +275,7 @@ module.exports = {
             // Busca todas as viagens cadastradas com status "Planejada"
             const viagens = await Viagem.findAll({
                 where: {
-                    A03_STATUS: 'Planejada'
+                    A03_STATUS: 'ATIVADA'
                 }
             });
 
@@ -132,7 +347,7 @@ module.exports = {
                     A03_STATUS: 'Planejada'
                 }
             });
-    
+
             // Renderiza a view com os dados
             res.render('pages/pesquisa-viagem/pesquisaInscricaoConcluida', {
                 title: 'Inscrição concluída',
@@ -144,20 +359,20 @@ module.exports = {
             console.error('Erro ao buscar viagem:', error);
             res.status(500).send('Erro ao buscar viagem');
         }
-    },    
+    },
     renderViagemDetalhes: async (req, res) => {
         const viagemId = req.params.id; // Obter o ID da URL
         try {
             // Busca a viagem com base no ID
             const viagem = await Viagem.findOne({ where: { A03_ID: viagemId }, raw: true });
-    
+
             if (!viagem) {
                 return res.status(404).send('Viagem não encontrada');
             }
-    
+
             // Utiliza o A03_ORGANIZADORA da viagem para buscar a organizadora
             const organizadora = await Viajante.findOne({ where: { A02_ID: viagem.A02_ID_ORGANIZADORA }, raw: true });
-    
+
             // Renderiza a página com os dados
             res.render('pages/pesquisa-viagem/pesquisaViagemDetalhes', {
                 title: 'Detalhes da viagem',
@@ -226,27 +441,6 @@ module.exports = {
             user: req.session.user
         });
     },
-    renderViagensInscritas: (req, res) => {
-        res.render('pages/viajante/minhasViagensInscritas', {
-            title: 'Minhas viagens - inscritas',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
-    renderViagensCriadas: (req, res) => {
-        res.render('pages/viajante/minhasViagensCriadas', {
-            title: 'Minhas viagens - criadas',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
-    renderViagensConcluidas: (req, res) => {
-        res.render('pages/viajante/minhasViagensConcluidas', {
-            title: 'Minhas viagens - concluídas',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
     renderAvaliacao: (req, res) => {
         res.render('pages/viajante/Denúncias/avaliacaoViagem', {
             title: 'Avaliação',
@@ -282,12 +476,6 @@ module.exports = {
             user: req.session.user
         });
     },
-    renderSelecaoConcluidas: (req, res) => {
-        res.render('pages/viajante/minhasViagensConcluidasSelecao', {
-            title: 'Minhas viagens - concluídas',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    }
     
+
 }

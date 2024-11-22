@@ -1,21 +1,20 @@
 {{> headerUsuario}}
-
-<div class="container mt-4">
-    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
-</div>
-
 <main>
+    <div class="container mt-4">
+        <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+    </div>
     <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
         <div class="row" style="height: 65vh; overflow-y: auto;">
 
             {{> menuPerfil}}
-
             <div class="col-md-9" style="padding-left: 0;">
                 <div class="card border-0">
                     <div class="card-body">
                         <h3>Minhas Viagens</h3>
-                        <div class="col">
-                            &nbsp;
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
                         </div>
 
                         <!-- Viagens inscritas -->
@@ -31,35 +30,19 @@
                         <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
 
                         <!-- Viagens listadas -->
+                        {{#each viagensInscritas}}
                         <div class="row mt-4">
                             <div class="col-md-10">
-                                <a href="/perfil/minhas-viagens-anuncio" class="h6" style="color: black; cursor: pointer;">
-                                    Reveillon em Copacabana
+                                <a href="/viagem/detalhes/{{this.id}}" class="h6"
+                                    style="color: black; cursor: pointer;">
+                                    {{this.titulo}}
                                 </a>
                             </div>
                         </div>
-
-                        <div class="row mt-4">
-                            <div class="col-md-10">
-                                <a href="/viagem/planejamento" class="h6" style="color: black; cursor: pointer;">
-                                    Carnaval das poderosas
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                        <div class="col">
-                            &nbsp;
-                        </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-

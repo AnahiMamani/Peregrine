@@ -1,6 +1,4 @@
 {{> headerUsuario}}
-
-
 <main>
     <div class="container mt-4">
         <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
@@ -18,7 +16,6 @@
                                 &nbsp;
                             </div>
                         </div>
-                        <form>
 
                             <!-- Viagens inscritas -->
                             <div class="row mt-4">
@@ -31,36 +28,20 @@
 
                             <!-- Linha separadora -->
                             <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
-      
+
                             <!-- Viagens listadas -->
+                            {{#each viagensInscritas}}
                             <div class="row mt-4">
                                 <div class="col-md-10">
-                                    <a href="/viagem/detalhes/:id" class="h6" style="color: black; cursor: pointer;">
-                                        Reveillon em Copacabana
+                                    <a href="/viagem/detalhes/{{this.id}}" class="h6"
+                                        style="color: black; cursor: pointer;">
+                                        {{this.titulo}} 
                                     </a>
                                 </div>
                             </div>
-
-                            <div class="row mt-4">
-                                <div class="col-md-10">
-                                    <a href="/viagem/planejamento" class="h6" style="color: black; cursor: pointer;">
-                                        Carnaval das poderosas
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col-md-10">
-                                    <a href="/viagem/planejamento" class="h6" style="color: black; cursor: pointer;">
-                                        Reveillon em Copacabana
-                                    </a>
-                                </div>
-                            </div>
-
-                            
+                            {{/each}}
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>

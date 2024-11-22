@@ -18,49 +18,32 @@
                                 &nbsp;
                             </div>
                         </div>
-                        <form>
 
-                            <!-- Viagens concluidas -->
-                            <div class="row mt-4">
-                                <div class="col-md-10">
-                                    <a class="h5" style="color: black;">
-                                        Concluídas
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Linha separadora -->
-                            <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
-
-                            <!-- Viagens listadas -->
-                            <div class="row mt-4">
-                                <div class="col-md-10">
-                                    <a href="/viagem/detalhes/:id" class="h6" style="color: black; cursor: pointer;">
-                                        Reveillon em Copacabana
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-between mt-3">
-                                <a href="/perfil/minhas-viagens-concluidas/avaliacao" class="btn btn-sm text-white rounded-pill"
-                                    style="background-color: #99067E; border-color: #99067E; margin-top:70px; padding: 5px 15px; width: 200px;">
-                                    Avaliação
-                                </a>
-                                <a href="/perfil/minhas-viagens-concluidas/denuncia" class="btn btn-sm text-white rounded-pill"
-                                    style="background-color: #B6090C; border-color: #B6090C; margin-top:70px; padding: 5px 15px; width: 200px;">
-                                    Fazer denúncia
+                        <!-- Viagens inscritas -->
+                        <div class="row mt-4">
+                            <div class="col-md-10">
+                                <a class="h5" style="color: black;">
+                                    Concluídas
                                 </a>
                             </div>
+                        </div>
 
+                        <!-- Linha separadora -->
+                        <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
 
-
-
-
-
-
+                        <!-- Viagens listadas -->
+                        {{#each viagensInscritas}}
+                        <div class="row mt-4">
+                            <div class="col-md-10">
+                                <a href="/viagem/detalhes/{{this.id}}" class="h6"
+                                    style="color: black; cursor: pointer;">
+                                    {{this.titulo}}
+                                </a>
+                            </div>
+                        </div>
+                        {{/each}}
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>
