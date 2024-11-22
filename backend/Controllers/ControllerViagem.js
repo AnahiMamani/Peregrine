@@ -1,5 +1,6 @@
 const Usuario = require('../models/Usuario_01');
 const Viajante = require('../models/Viajante_02');
+const ViajanteViagem = require('../models/ViajanteViagem_04');
 const Viagem = require('../models/Viagem_03');
 require('dotenv').config(); // Para usar variáveis de ambiente do arquivo .env
 const sequelize = require('../config/bd');
@@ -10,6 +11,7 @@ module.exports = {
         const transaction = await sequelize.transaction();
 
         try {
+            
             const userId = req.session?.user?.id;
             
             const viajante = await Viajante.findOne({
@@ -47,4 +49,38 @@ module.exports = {
             res.status(500).send('Erro ao cadastrar viagem');
         }
     },
+    adicionarViagem: async (req, res) => {
+        const transaction = await sequelize.transaction(); // Inicia a transação
+        try {
+            const viagemId = req.params.id; // Obter o ID da URL
+            const userId = req.session?.user?.id; // Obter o ID do usuário da sessão
+            console.log('User ID:', userId); // Verificar se o ID do usuário é recuperado corretamente
+    
+            const viajante = await Viajante.findOne({
+                where: { A01_ID: userId }, // O campo correto é A01_ID
+                include: { model: Usuario, attributes: ['A01_ID'] },
+            });
+    
+            if (!viajante) {
+                console.log('Viajante não encontrado'); // Depuração
+                return res.status(404).json({ message: 'Viajante não encontrado' });
+            }
+    
+            const viajanteId = viajante.A02_ID;
+            console.log('Viajante ID:', viajanteId); // Verificar o ID do viajante
+    
+            // Adiciona o registro na tabela ViajanteViagem
+            await ViajanteViagem.create({
+                A02_ID: viajanteId,
+                A03_ID: viagemId,
+            }, { transaction });
+        
+            await transaction.commit(); // Confirma a transação
+            res.status(200).json({ message: 'Inscrição realizada com sucesso!' });
+        } catch (error) {
+            await transaction.rollback(); // Reverte a transação em caso de erro
+            console.error('Erro ao adicionar viagem:', error);
+            res.status(500).json({ message: 'Erro ao realizar inscrição na viagem' });
+        }
+    }     
 }

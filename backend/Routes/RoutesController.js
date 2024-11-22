@@ -21,7 +21,7 @@ router.post('/deletarViajante', ControllerViajante.deleteViajante);
 
 //Controller Viagem
 router.post('/cadastroViagem', ControllerViagem.cadastrarViagem);
-
+router.post('/adicionar/:id', ControllerViagem.adicionarViagem);
 
 //Contorller Usuario
 router.get("/Logout", ControllerUsuario.logout);

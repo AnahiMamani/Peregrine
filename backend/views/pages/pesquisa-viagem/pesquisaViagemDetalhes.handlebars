@@ -11,26 +11,33 @@
             &nbsp;
         </div>
     </div>
+
     <form class="container">
         <div class="row">
             <div class="col">
                 &nbsp;
             </div>
         </div>
-        <div class="card-body" style="margin-left: 48vw;">
-            <div class="d-flex align-items-center">
-                <div class="my-2">
-                    <h4 id="nomeOrganizadora" name="nomeOrganizadora" class="text-end" style="font-weight: bold;">
-                        <a id="linkPerfil" style="color: #99067E;">{{viagem.A02_NOME}}</a>
-                    </h4>
-                    <p id="avaliacaoOrganizadora" name="avaliacaoOrganizadora" class="text-end"
-                        style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span> 4,97</p>
-                </div>
-                <!-- Quando clicar na imagem, o JavaScript abrirá a janela com o resumo do perfil da organizadora -->
-                <img id="perfilOrganizadora" name="perfilOrganizadora" src="/images/img-fotoPerfilFulana.png"
-                    alt="Foto de Perfil" class="rounded-circle border border-3 border-light"
-                    style="cursor:pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px; margin-top: -100px; z-index: 1001;">
+        <div class="card-body d-flex align-items-center justify-content-end" style="margin-left: 48vw;">
+            <!-- Texto da organizadora -->
+            <div class="my-2 text-end">
+                <h3>ORGANIZADORA:</h3>
+                <h4 id="nomeOrganizadora" name="nomeOrganizadora" style="color: #99067E; font-weight: bold;">
+                    {{#if viagem.A02_APELIDO}}
+                    {{viagem.A02_APELIDO}}
+                    {{else}}
+                    {{viagem.A02_NOME}}
+                    {{/if}}
+                </h4>
+                <p id="avaliacaoOrganizadora" name="avaliacaoOrganizadora" style="font-size: 1.2rem; color: #6c757d;">
+                    <span style="color: #99067E;">★</span> {{viagem.A02_NOTA}}
+                </p>
             </div>
+
+            <!-- Imagem de perfil -->
+            <img id="perfilOrganizadora" name="perfilOrganizadora" src="/images/img-fotoPerfilFulana.png"
+                alt="Foto de Perfil" class="rounded-circle border border-3 border-light"
+                style="cursor: pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px;">
         </div>
 
         <div class="row">
@@ -167,7 +174,12 @@
 
         <!-- o botão abaixo abre uma janela no js para confirmação da inscrição na viagem-->
         <div class="d-flex align-items-center justify-content-center">
-            <a class="btn btn-primary" id="confirmaInscreverViagem" style="width: 20rem;">Me inscrever</a>
+            <button id="confirmaInscreverViagem" data-viagem-id="{{viagem.A03_ID}}" class="btn btn-primary"
+                type="button">
+                Inscrever-se
+            </button>
+
+
         </div>
     </form>
 </main>
@@ -203,12 +215,16 @@
             <div class="card-body confirm-box">
                 <img id="perfilOrganizadora" name="perfilOrganizadora" src="/images/img-fotoPerfilFulana.png" alt="Foto de Perfil" class="rounded-circle border border-3 border-light" style="cursor:pointer; width: 150px; height: 150px; object-fit: cover; margin-right: 20px;">
                 <div class="my-2">
-                    <h4 class="text-center" style="font-weight: bold;">{{viagem.A02_NOME}}</h4>
-                    <p class="text-center" style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span> 4,97</p>
+                    <h4 class="text-center" style="font-weight: bold;">
+                    {{#if viagem.A02_APELIDO}}
+                    {{viagem.A02_APELIDO}}
+                    {{else}}
+                    {{viagem.A02_NOME}}
+                    {{/if}}
+                    </h4>
+                    <p class="text-center" style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span>{{viagem.A02_NOTA}}</p>
                 </div>
-                <p class="text-justify">Olá, sou a Fulana de tal, tenho 40 anos e amo viajar.
-                    Sou mãe de pet (dois cachorros e um gato). Moro em São Paulo e trabalho como corretora de imóveis. Gosto de ir ao cinema no tempo livre e pratico corrida de rua. Viajo pelo menos uma vez por mês.
-                </p>
+                <p class="text-justify">{{viagem.A02_DESCRICAO}}</p>
                 <button class="btn btn-primary btn-confirmar-entendi w-50">Ok, entendi!</button>
             </div>
         `;
@@ -226,7 +242,9 @@
     document.addEventListener('DOMContentLoaded', () => {
         const btnInscreverViagem = document.getElementById('confirmaInscreverViagem');
 
-        btnInscreverViagem.addEventListener('click', () => {
+        btnInscreverViagem.addEventListener('click', (event) => {
+            event.preventDefault(); // Previne o comportamento padrão do botão (evita o recarregamento da página)
+
             // Cria a estrutura HTML da janela de confirmação
             const overlay = document.createElement('div');
             overlay.id = 'confirmOverlay';
@@ -250,10 +268,31 @@
                 document.body.removeChild(overlay);
             });
 
-            // Redireciona para a pagina de conclusão da viagem ao clicar no botão "Sim, partiu viajar!"
-            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
-                window.location.href = '/viagem/inscricao';
+            // Redireciona para adicionar viagem no back-end ao clicar no botão "Sim, partiu viajar!"
+            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
+                const viagemId = btnInscreverViagem.dataset.viagemId; // Obter o ID da viagem do botão
+
+                try {
+                    const response = await fetch(`/control/adicionar/${viagemId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (response.ok) {
+                        window.location.href = '/viagem/inscricao'; // Redireciona ao concluir com sucesso
+                    } else {
+                        const errorData = await response.json(); // Obtém os dados de erro
+                        alert(`Erro ao inscrever-se na viagem: ${errorData.message || 'Tente novamente.'}`);
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                    alert('Ocorreu um erro inesperado.');
+                }
             });
+
         });
     });
+
 </script>

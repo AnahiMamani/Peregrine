@@ -150,6 +150,7 @@ module.exports = {
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
                 viagem: {
+                    A03_ID: viagem.A03_ID,
                     A03_TITULO: viagem.A03_TITULO,
                     A03_SUBTITULO: viagem.A03_SUBTITULO,
                     A03_DESCRICAO: viagem.A03_DESCRICAO,
@@ -166,7 +167,9 @@ module.exports = {
                     A03_VAGAS: viagem.A03_VAGAS,
                     A03_ORGANIZADORA: viagem.A02_ID_ORGANIZADORA,
                     A02_NOME: organizadora?.A02_NOME || 'Nome não disponível',
-                    A02_DESCRICAO: organizadora?.A02_DESCRICAO || 'Descrição não disponível'
+                    A02_DESCRICAO: organizadora?.A02_DESCRICAO || 'Descrição não disponível',
+                    A02_NOTA: organizadora?.A02_NOTA || 'N/A',
+                    A02_APELIDO: organizadora?.A02_APELIDO
                 }
             });
         } catch (error) {
