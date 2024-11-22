@@ -142,13 +142,26 @@
         <!-- espaço para inserção do texto descritivo da viagem -->
         <textarea name="descricaoViagem" id="descricaoViagem"
             placeholder="Descreva como a sua viagem será fantástica, os roteiros previstos, informações sobre passeios turísticos, cultura do local, gastronomia..."
-            class="row my-4 container rounded-4 border border-2 border-secondary" style="width: 90vw;height: 9rem;"></textarea>
+            class="row my-4 container rounded-4 border border-2 border-secondary"
+            style="width: 90vw;height: 9rem;"></textarea>
 
         <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
-        <div class="d-flex align-items-center justify-content-center">
-            <a class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">Criar viagem</a>
-        </div>
+    <button type="button" class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">
+        Criar viagem
+    </button>
     </form>
+    
+<!-- Div que aparece como janela de confirmação -->
+<div id="confirmOverlay" class="confirm-overlay" style="display: none;">
+    <div class="confirm-box">
+        <h4>Você confirma a criação dessa viagem?</h4>
+        <p>Após publicada, a viagem estará visível a todas as usuárias do site.<br>Essa ação poderá ser desfeita.</p>
+        <div class="confirm-buttons">
+            <button type="button" class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
+            <button type="button" class="btn btn-primary btn-confirmar-sim">Sim, publicar</button>
+        </div>
+    </div>
+</div>
 </main>
 
 <div class="row">
@@ -159,6 +172,27 @@
 
 <!-- link bootstrap icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
-<script src="/scripts/u_planejarViagem.js"></script>
 
 {{> footer }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const btnCriarViagem = document.getElementById('confirmaPlanejarViagem');
+    const confirmOverlay = document.getElementById('confirmOverlay');
+
+    // Quando clicar no botão "Criar viagem"
+    btnCriarViagem.addEventListener('click', () => {
+        confirmOverlay.style.display = 'flex'; // Mostra a janela de confirmação
+    });
+
+    // Quando clicar em "Não, quero voltar"
+    document.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+        confirmOverlay.style.display = 'none'; // Esconde a janela de confirmação
+    });
+
+    // Quando clicar em "Sim, publicar"
+    document.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
+        // Submete o formulário
+        document.querySelector('form').submit();
+    });
+});
+</script>

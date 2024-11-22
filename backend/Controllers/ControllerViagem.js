@@ -43,7 +43,7 @@ module.exports = {
 
             await transaction.commit();
 
-            res.redirect('/viagem/criada'); // Redireciona para a página de listagem
+            res.redirect('/'); // Redireciona para a página de listagem
         } catch (error) {
             console.error('Erro ao cadastrar viagem:', error);
             res.status(500).send('Erro ao cadastrar viagem');
