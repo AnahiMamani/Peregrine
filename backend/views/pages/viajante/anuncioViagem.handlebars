@@ -1,0 +1,121 @@
+{{> headerUsuario}}
+
+<div class="container mt-4">
+    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+</div>
+
+<main>
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 65vh; overflow-y: auto;">
+
+            {{> menuPerfil}}
+
+            <div class="col-md-9" style="padding-left: 0;">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3>Minhas Viagens</h3>
+                        <div class="col">
+                            &nbsp;
+                        </div>
+
+                        <!-- Viagens inscritas -->
+                        <div class="row mt-4">
+                            <div class="col-md-10">
+                                <a class="h5" style="color: black;">
+                                    Criadas
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Linha separadora -->
+                        <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
+
+                        <!-- Viagens listadas -->
+                        <div class="row mt-4">
+                            <div class="col-md-10">
+                                <a class="h6" style="color: black;">
+                                    Reveillon em Copacabana
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                        <div class="col">
+                            &nbsp;
+                        </div>
+                        <div class="col">
+                            &nbsp;
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn btn-sm text-white rounded-pill"
+                                style="background-color: #99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;"
+                                data-bs-toggle="modal" data-bs-target="#modalAlterarViagem">Anúncio da viagem</button>
+
+                            <a href="/viagem/alteracao"
+                                class="btn btn-sm text-white rounded-pill"
+                                style="background-color:#99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;">Alterar
+                                viagem</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal Alterar Viagem -->
+<div class="modal fade" id="modalAlterarViagem" tabindex="-1" aria-labelledby="modalAlterarViagemLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="modalAlterarViagemLabel">Anúncio da viagem</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center">
+                    <!-- Toggle Switch -->
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="togglePause"
+                            style="width: 50px; height: 25px;">
+                        <label class="form-check-label" for="togglePause"></label>
+                    </div>
+                    <!-- Texto ao lado do botão -->
+                    <span class="ms-3">
+                        <p> Pausar anúncio.(Ao habilitar esta opção, a viagem deixará de ser visível para as usuárias do
+                            site.)
+                        </p>
+
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const togglePause = document.getElementById('togglePause');
+
+    if (togglePause) {
+        togglePause.addEventListener('change', () => {
+            if (togglePause.checked) {
+                // Lógica para ativar a pausa (botão está habilitado)
+                console.log("Anúncio pausado");
+            } else {
+                // Lógica para desativar a pausa (botão está desabilitado)
+                console.log("Anúncio retomado");
+            }
+        });
+    }
+</script>
+
+</body>
+
+</html>

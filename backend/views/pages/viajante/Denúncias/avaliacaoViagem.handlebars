@@ -1,0 +1,110 @@
+{{> headerUsuario}}
+<div class="container mt-4">
+    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+</div>
+
+<main>
+
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 65vh; overflow-y: auto;">
+
+            {{> menuPerfil}}
+            <!--Botão -->
+            <div class="col-md-9" style="padding-left: 0;">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3>Avaliar organizadora</h3>
+                        <div class="row">
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <form>
+
+
+                            <!-- Linha separadora -->
+
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-center align-items-center">
+
+                                    <!-- Nome da usuária ao lado da foto -->
+                                    <div style="margin-right: 10px;">
+                                        <h5 style="margin-bottom: 0;">Fulana da Silva Sauro</h5>
+                                    </div>
+
+                                    <!-- Estrelas para avaliação à direita do nome -->
+                                    <div>
+                                        <div>
+                                            <span class="estrela" data-value="1"
+                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="2"
+                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="3"
+                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="4"
+                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="5"
+                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                {{!-- <button id="avaliarBtn" class="btn"
+                                    style="background-color: #99067E; color: white; padding: 10px 30px; font-size: 1.2rem; border-radius: 25px; cursor: pointer;">
+                                    Avaliar Organizadora
+                                </button> --}}
+
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a class="btn btn-primary" id="avaliacao" style="width: 20rem;">Avaliar organizadora</a>
+                                </div>
+
+                                <div class="modal fade" id="avaliar" tabindex="-1" aria-labelledby="modalavaliarLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                                                    style="color: #99067E;">Não, quero voltar</button>
+                                                <button type="button" class="btn"
+                                                    style="background-color: #99067E; color: white;"
+                                                    onclick="window.location.href='Encerrar.html'">Sim,
+                                                    sair</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+
+
+
+
+                    <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                                        style="color: #99067E;">Não, quero voltar</button>
+                                    <button type="button" class="btn" style="background-color: #99067E; color: white;"
+                                        onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script src="/scripts/avaliacao.js"></script>

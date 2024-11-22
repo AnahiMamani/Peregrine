@@ -225,6 +225,69 @@ module.exports = {
             logoPath: '/images/logo.ico',
             user: req.session.user
         });
+    },
+    renderViagensInscritas: (req, res) => {
+        res.render('pages/viajante/minhasViagensInscritas', {
+            title: 'Minhas viagens - inscritas',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderViagensCriadas: (req, res) => {
+        res.render('pages/viajante/minhasViagensCriadas', {
+            title: 'Minhas viagens - criadas',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderViagensConcluidas: (req, res) => {
+        res.render('pages/viajante/minhasViagensConcluidas', {
+            title: 'Minhas viagens - concluídas',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderAvaliacao: (req, res) => {
+        res.render('pages/viajante/Denúncias/avaliacaoViagem', {
+            title: 'Avaliação',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderDenuncia: (req, res) => {
+        res.render('pages/viajante/Denúncias/denunciaViagem', {
+            title: 'Denúncia',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderDenunciaConcluida: (req, res) => {
+        res.render('pages/viajante/Denúncias/denunciaConcluida', {
+            title: 'Denúncia concluída',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderAvaliacaoConcluida: (req, res) => {
+        res.render('pages/viajante/Denúncias/avaliacaoViagemConcluida', {
+            title: 'Denúncia concluída',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderAnuncio: (req, res) => {
+        res.render('pages/viajante/anuncioViagem', {
+            title: 'Pausar anúncio da viagem',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderSelecaoConcluidas: (req, res) => {
+        res.render('pages/viajante/minhasViagensConcluidasSelecao', {
+            title: 'Minhas viagens - concluídas',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
     }
     
 }

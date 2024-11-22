@@ -23,12 +23,11 @@
                             <!-- Viagens inscritas -->
                             <div class="row mt-4">
                                 <div class="col-md-10">
-                                    <a href="/viagem/planejamento" class="h5" style="color: black; cursor: pointer;">
+                                    <a href="/perfil/minhas-viagens-inscritas" class="h5" style="color: black; cursor: pointer;">
                                         Inscritas
                                     </a>
                                 </div>
                             </div>
-
 
                             <!-- Linha separadora -->
                             <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
@@ -36,17 +35,21 @@
                             <!-- Viagens criadas -->
                             <div class="row mt-4">
                                 <div class="col-md-10">
-                                    <span class="h5" style="color: black; cursor: pointer;">Criadas</span>
+                                    <a href="/perfil/minhas-viagens-criadas" class="h5" style="color: black; cursor: pointer;">
+                                        Criadas
+                                    </a>
                                 </div>
                             </div>
 
                             <!-- Linha separadora -->
                             <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
 
-                            <!-- Viagens concluídas -->
+                            <!-- Viagens concluidas -->
                             <div class="row mt-4">
                                 <div class="col-md-10">
-                                    <span class="h5" style="color: black; cursor: pointer;">Concluídas</span>
+                                    <a href="/perfil/minhas-viagens-concluidas-selecao" class="h5" style="color: black; cursor: pointer;">
+                                        Concluídas
+                                    </a>
                                 </div>
                             </div>
 
@@ -54,56 +57,8 @@
                             <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
                     </div>
                 </div>
-
-
-                {{!-- <div id="descricaoCriadas" class="mt-3" style="display: none;">
-                    <p>Descrição das viagens criadas...</p>
-                </div>
-                <div id="descricaoConcluidas" class="mt-3" style="display: none;">
-                    <p>Descrição das viagens concluídas...</p>
-                </div> --}}
-
                 </form>
             </div>
         </div>
     </div>
-
-    {{!--
-    <script>
-        function mostrarDescricao(tipo) {
-
-            document.getElementById('descricaoInscritas').style.display = 'none';
-            document.getElementById('descricaoCriadas').style.display = 'none';
-            document.getElementById('descricaoConcluidas').style.display = 'none';
-
-
-            if (tipo === 'inscritas') {
-                document.getElementById('descricaoInscritas').style.display = 'block';
-            } else if (tipo === 'criadas') {
-                document.getElementById('descricaoCriadas').style.display = 'block';
-            } else if (tipo === 'concluidas') {
-                document.getElementById('descricaoConcluidas').style.display = 'block';
-            }
-
-
-            const separador = document.getElementById('separador');
-            separador.style.border = '3px solid #99067E';
-
-
-            if (tipo === 'inscritas') {
-                separador.style.width = '90px';
-            } else if (tipo === 'criadas') {
-                separador.style.width = '80px';
-            } else if (tipo === 'concluidas') {
-                separador.style.width = '100px';
-            }
-        }
-
-        function esconderDescricao(tipo) {
-
-            const separador = document.getElementById('separador');
-            separador.style.border = '1px solid rgb(109, 107, 107)';
-            separador.style.width = '100%';
-        }
-    </script> --}}
 </main>

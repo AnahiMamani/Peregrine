@@ -1,0 +1,124 @@
+{{> headerUsuario}}
+<div class="container mt-4">
+    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+</div>
+
+<main>
+
+    <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
+        <div class="row" style="height: 65vh; overflow-y: auto;">
+
+            {{> menuPerfil}}
+
+            <!--Botão -->
+            <div class="col-md-9" style="padding-left: 0;">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h2>Fazer Denúncia</h2>
+                        <br>
+                        <div class="row">
+                            <h5><strong>Título:</strong></h5>
+                            <div class="col">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="denuncia-container" style="margin: 20px;">
+                            <!-- Caixa para descrever a denúncia -->
+                            <label for="descricaoDenuncia" style="font-size: 1.1rem;">Descreva sua denúncia:</label>
+                            <textarea id="descricaoDenuncia" rows="5" cols="50"
+                                placeholder="Descreva o motivo da denúncia aqui..."
+                                style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+
+                            <div style="margin-top: 20px;">
+                                <!-- Denunciadas -->
+                                <label for="usuarioDenuncia" style="font-size: 1.1rem;">Selecione quem deseja
+                                    denunciar:</label>
+
+                                <div class="form-check" style="margin-bottom: 10px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="motivo6"
+                                        style="border-color: #99067E;">
+                                    <label class="form-check-label" for="motivo6">
+                                        Fulana da Silva Sauro
+                                    </label>
+                                </div>
+                                <div class="form-check" style="margin-bottom: 10px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="motivo6"
+                                        style="border-color: #99067E;">
+                                    <label class="form-check-label" for="motivo6">
+                                        Fulana da Silva Sauro
+                                    </label>
+                                </div>
+                                <div class="form-check" style="margin-bottom: 10px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="motivo6"
+                                        style="border-color: #99067E;">
+                                    <label class="form-check-label" for="motivo6">
+                                        Fulana da Silva Sauro
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            {{!-- <div class="text-center mt-4">
+                                <button id="avaliarBtn" class="btn"
+                                    style="background-color:red; color: white; padding: 10px 40px; font-size: 1.2rem; border-radius: 15px; cursor: pointer;">
+                                    Fazer denúncia
+                                </button>
+                            </div> --}}
+                            <div class="text-center mt-4">
+                                <button id="denuncia" class="btn"
+                                    style="background-color:red; color: white; padding: 10px 40px; font-size: 1.2rem; border-radius: 15px; cursor: pointer; width: 300px;">
+                                    Fazer denúncia
+                                </button>
+                            </div>
+
+
+                            <!-- Mensagem de agradecimento -->
+                            {{!-- <div id="mensagemAgradecimento"
+                                style="display: none; text-align: center; margin-top: 20px; font-size: 1.2rem; color: #99067E;">
+                                <p>Obrigada por sua denúncia.</p>
+                            </div> --}}
+
+
+                            {{!-- <script>
+                                // Referência para o botão e a mensagem
+                                const avaliarBtn = document.getElementById('avaliarBtn');
+
+
+                                // Função para mostrar a mensagem após o clique no botão
+                                avaliarBtn.addEventListener('click', function () {
+                                    mensagemAgradecimento.style.display = 'block'; // Exibe a mensagem
+                                });
+
+                                // Fechar a mensagem se o usuário clicar fora dela (opcional)
+                                window.addEventListener('click', function (event) {
+                                    if (!mensagemAgradecimento.contains(event.target) && event.target !== avaliarBtn) {
+                                        mensagemAgradecimento.style.display = 'none'; // Fecha a mensagem
+                                    }
+                                });
+
+                            </script> --}}
+
+
+
+
+                            <div class="modal fade" id="modalEncerrar" tabindex="-1"
+                                aria-labelledby="modalEncerrarLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                                                style="color: #99067E;">Não, quero voltar</button>
+                                            <button type="button" class="btn"
+                                                style="background-color: #99067E; color: white;"
+                                                onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script src="/scripts/minhasViagensDenuncia.js"></script>
