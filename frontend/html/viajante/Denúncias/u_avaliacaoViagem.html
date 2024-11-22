@@ -9,7 +9,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Minhas Viagens</title>
+    <title>Avaliação da Viagem</title>
     <style>
         body, html {
             overflow: hidden;
@@ -35,7 +35,7 @@
                                 <div class="navbar-nav ms-auto">
                                     <a class="nav-link" href="/frontend/html/sobre/sobrePeregrine.html" style="color: #99067E; text-transform: uppercase; margin-right: 60px;">sobre</a>
                                     <a class="nav-link" href="/frontend/html/ajuda/u_ajudaPerguntasFrequentesFAQ.html" style="color: #99067E; text-transform: uppercase; margin-right: 60px;">ajuda</a>
-                                    <a class="nav-link" href="#" style="color: #99067E; text-transform: uppercase;">perfil</a>
+                                    <a href="/frontend/html/viajante/u_perfilUsuario.html" onclick="voltarPerfil(event)" style="color: #99067E; text-decoration: none;">Perfil <a></p>
                                 </div>
                             </div>
                         </div>
@@ -56,6 +56,7 @@
     <div class="row" style="height: 65vh; overflow-y: auto;">
             <!-- coluna com o menu de opções para configurar o perfil da usuaria -->
             <div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
+                
                 <div class="list-group">
                     <a href="/frontend/html/viajante/u_perfilUsuarioEditar.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
                         <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de editar perfil" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
@@ -97,11 +98,11 @@
                 </div>
             </div>
             
-
+            <!--Botão -->
             <div class="col-md-9" style="padding-left: 0;">
                 <div class="card border-0">
                     <div class="card-body">
-                        <h3>Minhas Viagens</h3>
+                        <h3>Avaliar organizadora</h3>
                         <div class="row">
                             <div class="col">
                                 &nbsp;
@@ -129,105 +130,64 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <!-- Foto da usuária em círculo à esquerda -->
+                                    <div class="rounded-circle" style="width: 80px; height: 80px; background-image: url('/frontend/public/images/perfil.jpg'); background-size: cover; background-position: center; border: 2px solid #99067E; margin-right: 10px;"></div>
                             
-                        <!-- Descrições -->
-<!-- Inscritas -->
-<div id="descricaoInscritas" class="descricao mt-3">
-    <div class="row">
-        <div class="col-md-2 d-flex justify-content-center">
-            <img src="/frontend/public/images/img-reveillon-2024.jpg" class="img-fluid rounded-circle" alt="Foto da viagem" style="width: 70px; height: 70px;">
-        </div>
-        <div class="col-md-10">
-            <p><strong>Reveillon em Copacabana</strong></p>
-            <p><strong>Data:</strong> 31/12/2024 | <strong>15 Mulheres</strong></p>
-        </div>
-    </div>
-    <div class="mt-3">
-        <h5>Partiu Copacabana na virada do ano! Junte-se a nós nessa viagem maravilhosa...</h5>
-        <h6>Destino: Copacabana, RJ, Brasil.</h6>
-        <h6>Data: 31/12/2024</h6>
-        <h6>Horário de partida: 05:00</h6>
-        <h6>Ponto de encontro: Av. Águia de Haia, 2000 - Arthur Alvim, SP, CEP 00000-000</h6>
-        <h6>Estimativa de custo: R$1000,00 para uma pessoa.</h6>
-        <h6>Link do grupo no WhatsApp: <a href="www.whatsapp.com.br" target="_blank">www.whatsapp.com.br</a></h6>
-    </div>
-    <button class="btn btn-sm text-white rounded-pill mt-3" 
-        style="background-color: #99067E; border-color: #99067E; padding: 5px 15px;">Desistir da viagem</button>
-</div>
-
-<!-- Criadas -->
-<div id="descricaoCriadas" class="descricao mt-3" style="display: none;">
-    <p>Você ainda não tem viagens criadas</p>
-</div>
-<!-- Concluídas -->
-<div id="descricaoConcluidas" class="descricao mt-3" style="display: none;">
-    <div class="row">
-        <div class="col-md-10">
-            <p><strong>Carnaval - Salvador, Bahia</strong></p>
-            <p><strong>Data:</strong> 13/03/2024 | <strong>5 Mulheres</strong></p>
-        </div>
-    </div>
-    <div class="mt-3">
-        <h5>Carnaval em Salvador, Bahia! O melhor do carnaval de rua. Muitos shows, acesso a diversos trios elétricos incríveis.</h5>
-        <h6>Destino: Salvador, Bahia, RJ, Brasil.</h6>
-        <h6>Data: 13/03/2024</h6>
-        <h6>Horário de partida: 05:00</h6>
-        <h6>Ponto de encontro: Av. Águia de Haia, 2000 - Arthur Alvim, SP, CEP 00000-000</h6>
-        <h6>Estimativa de custo: R$1000,00 para uma pessoa.</h6>
-        <h6>Link do grupo no WhatsApp: <a href="www.whatsapp.com.br" target="_blank">www.whatsapp.com.br</a></h6>
-    </div>
-    <div class="d-flex justify-content-between mt-3">
-        <button class="btn btn-sm text-white rounded-pill" 
-            style="background-color: #99067E; border-color: #99067E; padding: 5px 15px;">Avaliar viagem</button>
-        <button class="btn btn-sm text-white rounded-pill" 
-            style="background-color: red; border-color: red; padding: 5px 15px;">Fazer denúncia</button>
-    </div>
-</div>
-
-
-<script>
-    function mostrarDescricao(tipo) {
-    // Ocultar todas as descrições
-    const descricoes = document.querySelectorAll('.descricao');
-    descricoes.forEach(descricao => descricao.style.display = 'none');
-
-    // Mostrar a descrição correspondente
-    const descricao = document.getElementById(`descricao${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
-    if (descricao) {
-        descricao.style.display = 'block';
-    }
-
-    // Ajustar o separador (opcional, se você quiser um efeito visual nos separadores)
-    const separadores = document.querySelectorAll('.separador'); // Pode ser uma classe comum para os separadores
-    separadores.forEach(separador => {
-        separador.style.border = 'none'; // Remover borda de todos os separadores
-    });
-
-    // Ajustar o separador ativo
-    const separadorAtivo = document.getElementById(`separador${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
-    if (separadorAtivo) {
-        separadorAtivo.style.border = '3px solid #99067E'; // Borda destacada para o separador ativo
-    }
-}
-
-
-</script>
-
-
-<!-- Modal -->
-<div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
-                <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                                    <!-- Nome da usuária ao lado da foto -->
+                                    <div style="margin-right: 10px;">
+                                        <h5 style="margin-bottom: 0;">Fulana da Silva Sauro</h5>
+                                    </div>
+                            
+                                    <!-- Estrelas para avaliação à direita do nome -->
+                                    <div>
+                                        <div>
+                                            <span class="estrela" data-value="1" style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="2" style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="3" style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="4" style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                            <span class="estrela" data-value="5" style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+    <button id="avaliarBtn" class="btn" style="background-color: #99067E; color: white; padding: 10px 30px; font-size: 1.2rem; border-radius: 25px; cursor: pointer;">
+    Avaliar Organizadora
+    </button>
+    <div class="modal fade" id="avaliar" tabindex="-1" aria-labelledby="modalavaliarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
+                    <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</body>
-</html>
+        </div>
+    </div>
+                
+                        
+                        
+
+    
+    <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
+                    <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                </div>
+            </div>
+        </div>
+    </div>

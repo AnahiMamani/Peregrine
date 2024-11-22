@@ -9,7 +9,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link href="/frontend/styles/custom.css" rel="stylesheet">
-    <title>Minhas Viagens</title>
+    <title>Denúncia</title>
     <style>
         body, html {
             overflow: hidden;
@@ -35,7 +35,7 @@
                                 <div class="navbar-nav ms-auto">
                                     <a class="nav-link" href="/frontend/html/sobre/sobrePeregrine.html" style="color: #99067E; text-transform: uppercase; margin-right: 60px;">sobre</a>
                                     <a class="nav-link" href="/frontend/html/ajuda/u_ajudaPerguntasFrequentesFAQ.html" style="color: #99067E; text-transform: uppercase; margin-right: 60px;">ajuda</a>
-                                    <a class="nav-link" href="#" style="color: #99067E; text-transform: uppercase;">perfil</a>
+                                    <a href="/frontend/html/viajante/u_perfilUsuario.html" onclick="voltarPerfil(event)" style="color: #99067E; text-decoration: none;">Perfil <a></p>
                                 </div>
                             </div>
                         </div>
@@ -56,6 +56,7 @@
     <div class="row" style="height: 65vh; overflow-y: auto;">
             <!-- coluna com o menu de opções para configurar o perfil da usuaria -->
             <div class="col-md-3" style="border-right: 2px solid #ccc; padding: 0;">
+                
                 <div class="list-group">
                     <a href="/frontend/html/viajante/u_perfilUsuarioEditar.html" class="list-group-item list-group-item-action" style="font-size: 18px;">
                         <img src="/frontend/public/images/icon-perfilPreto.png" alt="Ícone de editar perfil" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
@@ -97,137 +98,90 @@
                 </div>
             </div>
             
-
+            <!--Botão -->
             <div class="col-md-9" style="padding-left: 0;">
                 <div class="card border-0">
                     <div class="card-body">
-                        <h3>Minhas Viagens</h3>
+                        <h2>Fazer Denúncia</h2>
+                        <br>
                         <div class="row">
+                            <h5><strong>Título:</strong> Pessoa sem noção</h5>
                             <div class="col">
                                 &nbsp;
                             </div>
                         </div>
+                        <div class="denuncia-container" style="margin: 20px;">
+                            <!-- Caixa para descrever a denúncia -->
+                            <label for="descricaoDenuncia" style="font-size: 1.1rem;">Descreva sua denúncia:</label>
+                            <textarea id="descricaoDenuncia" rows="5" cols="50" placeholder="Descreva o motivo da denúncia aqui..." style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
                         
-                        <form>
-                            
-                            
-                            <!-- Linha separadora -->
-                            <div class="row mt-4">
-                                <div class="col text-center">
-                                    <div class="p-2" style="cursor: pointer;" onclick="mostrarDescricao('inscritas')">
-                                        <span class="h5" style="color: black;">Inscritas</span>
-                                    </div>
-                                </div>
-                                <div class="col text-center">
-                                    <div class="p-2" style="cursor: pointer;" onclick="mostrarDescricao('criadas')">
-                                        <span class="h5" style="color: black;">Criadas</span>
-                                    </div>
-                                </div>
-                                <div class="col text-center">
-                                    <div class="p-2" style="cursor: pointer;" onclick="mostrarDescricao('concluidas')">
-                                        <span class="h5" style="color: black;">Concluídas</span>
-                                    </div>
-                                </div>
+                            <div style="margin-top: 20px;">
+                                <!-- Denunciadas -->
+                                <label for="usuarioDenuncia" style="font-size: 1.1rem;">Selecione quem deseja denunciar:</label>
+                                                        
+                                    <div class="form-check" style="margin-bottom: 10px;">
+                                        <input class="form-check-input" type="checkbox" value="" id="motivo6" style="border-color: #99067E;">
+                                        <label class="form-check-label" for="motivo6">
+                                            Fulana da Silva Sauro
+                                        </label>
                             </div>
-                            
-                        <!-- Descrições -->
-<!-- Inscritas -->
-<div id="descricaoInscritas" class="descricao mt-3">
-    <div class="row">
-        <div class="col-md-2 d-flex justify-content-center">
-            <img src="/frontend/public/images/img-reveillon-2024.jpg" class="img-fluid rounded-circle" alt="Foto da viagem" style="width: 70px; height: 70px;">
-        </div>
-        <div class="col-md-10">
-            <p><strong>Reveillon em Copacabana</strong></p>
-            <p><strong>Data:</strong> 31/12/2024 | <strong>15 Mulheres</strong></p>
-        </div>
-    </div>
-    <div class="mt-3">
-        <h5>Partiu Copacabana na virada do ano! Junte-se a nós nessa viagem maravilhosa...</h5>
-        <h6>Destino: Copacabana, RJ, Brasil.</h6>
-        <h6>Data: 31/12/2024</h6>
-        <h6>Horário de partida: 05:00</h6>
-        <h6>Ponto de encontro: Av. Águia de Haia, 2000 - Arthur Alvim, SP, CEP 00000-000</h6>
-        <h6>Estimativa de custo: R$1000,00 para uma pessoa.</h6>
-        <h6>Link do grupo no WhatsApp: <a href="www.whatsapp.com.br" target="_blank">www.whatsapp.com.br</a></h6>
-    </div>
-    <button class="btn btn-sm text-white rounded-pill mt-3" 
-        style="background-color: #99067E; border-color: #99067E; padding: 5px 15px;">Desistir da viagem</button>
-</div>
-
-<!-- Criadas -->
-<div id="descricaoCriadas" class="descricao mt-3" style="display: none;">
-    <p>Você ainda não tem viagens criadas</p>
-</div>
-<!-- Concluídas -->
-<div id="descricaoConcluidas" class="descricao mt-3" style="display: none;">
-    <div class="row">
-        <div class="col-md-10">
-            <p><strong>Carnaval - Salvador, Bahia</strong></p>
-            <p><strong>Data:</strong> 13/03/2024 | <strong>5 Mulheres</strong></p>
-        </div>
-    </div>
-    <div class="mt-3">
-        <h5>Carnaval em Salvador, Bahia! O melhor do carnaval de rua. Muitos shows, acesso a diversos trios elétricos incríveis.</h5>
-        <h6>Destino: Salvador, Bahia, RJ, Brasil.</h6>
-        <h6>Data: 13/03/2024</h6>
-        <h6>Horário de partida: 05:00</h6>
-        <h6>Ponto de encontro: Av. Águia de Haia, 2000 - Arthur Alvim, SP, CEP 00000-000</h6>
-        <h6>Estimativa de custo: R$1000,00 para uma pessoa.</h6>
-        <h6>Link do grupo no WhatsApp: <a href="www.whatsapp.com.br" target="_blank">www.whatsapp.com.br</a></h6>
-    </div>
-    <div class="d-flex justify-content-between mt-3">
-        <button class="btn btn-sm text-white rounded-pill" 
-            style="background-color: #99067E; border-color: #99067E; padding: 5px 15px;">Avaliar viagem</button>
-        <button class="btn btn-sm text-white rounded-pill" 
-            style="background-color: red; border-color: red; padding: 5px 15px;">Fazer denúncia</button>
-    </div>
-</div>
-
-
-<script>
-    function mostrarDescricao(tipo) {
-    // Ocultar todas as descrições
-    const descricoes = document.querySelectorAll('.descricao');
-    descricoes.forEach(descricao => descricao.style.display = 'none');
-
-    // Mostrar a descrição correspondente
-    const descricao = document.getElementById(`descricao${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
-    if (descricao) {
-        descricao.style.display = 'block';
-    }
-
-    // Ajustar o separador (opcional, se você quiser um efeito visual nos separadores)
-    const separadores = document.querySelectorAll('.separador'); // Pode ser uma classe comum para os separadores
-    separadores.forEach(separador => {
-        separador.style.border = 'none'; // Remover borda de todos os separadores
-    });
-
-    // Ajustar o separador ativo
-    const separadorAtivo = document.getElementById(`separador${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
-    if (separadorAtivo) {
-        separadorAtivo.style.border = '3px solid #99067E'; // Borda destacada para o separador ativo
-    }
-}
-
-
-</script>
-
-
-<!-- Modal -->
-<div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="form-check" style="margin-bottom: 10px;">
+                                <input class="form-check-input" type="checkbox" value="" id="motivo6" style="border-color: #99067E;">
+                                <label class="form-check-label" for="motivo6">
+                                    Fulana da Silva Sauro
+                                </label>
+                    </div>
+                    <div class="form-check" style="margin-bottom: 10px;">
+                        <input class="form-check-input" type="checkbox" value="" id="motivo6" style="border-color: #99067E;">
+                        <label class="form-check-label" for="motivo6">
+                            Fulana da Silva Sauro
+                        </label>
             </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
-                <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                        </div>
+                        
+
+                        <div class="text-center mt-4">
+                            <button id="avaliarBtn" class="btn" style="background-color:red; color: white; padding: 10px 40px; font-size: 1.2rem; border-radius: 15px; cursor: pointer;">
+                                Fazer denúncia
+                            </button>
+                        </div>
+                        
+                        <!-- Mensagem de agradecimento -->
+                        <div id="mensagemAgradecimento" style="display: none; text-align: center; margin-top: 20px; font-size: 1.2rem; color: #99067E;">
+                            <p>Obrigada por sua denúncia.</p>
+                        </div>
+                        
+                        <script>
+                            // Referência para o botão e a mensagem
+                            const avaliarBtn = document.getElementById('avaliarBtn');
+                            const mensagemAgradecimento = document.getElementById('mensagemAgradecimento');
+                        
+                            // Função para mostrar a mensagem após o clique no botão
+                            avaliarBtn.addEventListener('click', function() {
+                                mensagemAgradecimento.style.display = 'block'; // Exibe a mensagem
+                            });
+                        
+                            // Fechar a mensagem se o usuário clicar fora dela (opcional)
+                            window.addEventListener('click', function(event) {
+                                if (!mensagemAgradecimento.contains(event.target) && event.target !== avaliarBtn) {
+                                    mensagemAgradecimento.style.display = 'none'; // Fecha a mensagem
+                                }
+                            });
+                        </script>
+                        
+
+    
+    <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="color: #99067E;">Não, quero voltar</button>
+                    <button type="button" class="btn" style="background-color: #99067E; color: white;" onclick="window.location.href='Encerrar.html'">Sim, sair</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</body>
-</html>
