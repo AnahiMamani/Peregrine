@@ -124,13 +124,27 @@ module.exports = {
             user: req.session.user
         });
     },
-    renderInscricaoConcluida: (req, res) => {
-        res.render('pages/pesquisa-viagem/pesquisaInscricaoConcluida', {
-            title: 'Inscrição concluída',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
+    renderInscricaoConcluida: async (req, res) => {
+        try {
+            // Busca a primeira viagem com status "Planejada"
+            const viagem = await Viagem.findOne({
+                where: {
+                    A03_STATUS: 'Planejada'
+                }
+            });
+    
+            // Renderiza a view com os dados
+            res.render('pages/pesquisa-viagem/pesquisaInscricaoConcluida', {
+                title: 'Inscrição concluída',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                linkGrupo: viagem ? viagem.A03_LINK : null // Envia apenas o link do grupo
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viagem:', error);
+            res.status(500).send('Erro ao buscar viagem');
+        }
+    },    
     renderViagemDetalhes: async (req, res) => {
         const viagemId = req.params.id; // Obter o ID da URL
         try {

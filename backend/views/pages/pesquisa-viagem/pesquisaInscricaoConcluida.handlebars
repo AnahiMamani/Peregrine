@@ -1,54 +1,77 @@
-
-    <div class="container-fluid center">
-        <div class="row">
-            <!--pagina inicial do upload de documentos-->
-            <div class="col">
-                <div class="p-3">
+<div class="container-fluid center">
+    <div class="row">
+        <!--pagina inicial do upload de documentos-->
+        <div class="col">
+            <div class="p-3">
+                <div class="row">
+                    <div class="col">
+                        &nbsp;
+                    </div>
+                </div>
+                <main class="container">
+                    <h1 style="color: #99067E">Inscrição concluída</h1>
                     <div class="row">
                         <div class="col">
                             &nbsp;
                         </div>
                     </div>
-                    <main class="container">
-                        <h1 style="color: #99067E">Inscrição concluída</h1>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
+                    <p style="font-size: 1.3rem; text-align: justify;">Você se inscreveu nessa viagem e poderá
+                        consultá-la no menu Minhas viagens. Esperamos que tudo ocorra bem, mas você poderá cancelar
+                        a inscrição. Entre no grupo externo da viagem, para receber notícias e combinar detalhes
+                        sobre a viagem.</p>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
                         </div>
-                        <p style="font-size: 1.3rem; text-align: justify;">Você se inscreveu nessa viagem e poderá
-                            consultá-la no menu Minhas viagens. Esperamos que tudo ocorra bem, mas você poderá cancelar
-                            a inscrição. Entre no grupo externo da viagem, para receber notícias e combinar detalhes
-                            sobre a viagem.</p>
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
-                        </div>
-                        <br><br>
+                    </div>
+                    <br><br>
 
-                        <!-- imagem principal -->
-                        <div class="d-flex center align-items-center justify-content-center container"
-                            style="min-height: 125px;">
-                            <img src="/images/icon-aprovarUsuariosConcluido.png" alt="Ícone de etapa de análise"
-                                style="height: 30vh;">
-                        </div>
+                    <!-- imagem principal -->
+                    <div class="d-flex center align-items-center justify-content-center container"
+                        style="min-height: 125px;">
+                        <img src="/images/icon-aprovarUsuariosConcluido.png" alt="Ícone de etapa de análise"
+                            style="height: 30vh;">
+                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                &nbsp;
-                            </div>
+                    <div class="row">
+                        <div class="col">
+                            &nbsp;
                         </div>
-                        <br><br>
-                        <!-- Botão de confirmação da inscrição de viagem concluída -->
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a class="btn btn-primary" id="entrarNoGrupo" style="width: 20rem;">Ok, entrar no grupo!</a>
-                        </div>
-
-                    </main>
-                </div>
+                    </div>
+                    <br><br>
+                    <!-- Botão de confirmação da inscrição de viagem concluída -->
+                    <div class="d-flex align-items-center justify-content-center">
+                        {{#if linkGrupo}}
+                        <a class="btn btn-primary" id="entrarNoGrupo" style="width: 20rem;">
+                            Ok, entrar no grupo!
+                        </a>
+                        {{else}}
+                        <button class="btn btn-secondary" disabled style="width: 20rem;">
+                            Grupo não disponível
+                        </button>
+                        {{/if}}
+                    </div>
+                </main>
             </div>
         </div>
     </div>
+</div>
 
-<script src="/scripts/linkGrupo.js"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnEntrarNoGrupo = document.getElementById('entrarNoGrupo');
+        const linkGrupo = "{{linkGrupo}}";
+
+        if (linkGrupo) {
+            btnEntrarNoGrupo.addEventListener('click', (event) => {
+                event.preventDefault(); // Impede o comportamento padrão do link
+                window.open(linkGrupo, '_blank'); // Abre o grupo em uma nova aba
+                setTimeout(() => {
+                    window.location.href = '/'; // Redireciona para a página inicial
+                }, 500); // Aguarda meio segundo antes de redirecionar
+            });
+        }
+    });
+</script>
