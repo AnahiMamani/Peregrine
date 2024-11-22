@@ -17,8 +17,8 @@ const Viagem = sequelize.define('Viagem', {
     A03_LOCAL_VOLTA: { type: DataTypes.STRING, allowNull: false },  
     A03_DATA_VOLTA: { type: DataTypes.DATE, allowNull: false },  
     A03_HORA_VOLTA: { type: DataTypes.TIME, allowNull: false },  
-    A03_DESCRICAO: { type: DataTypes.STRING },
-    A03_LINK_WHATSAPP: { type: DataTypes.STRING, allowNull: true }, 
+    A03_DESCRICAO: { type: DataTypes.TEXT },
+    A03_LINK: { type: DataTypes.STRING, allowNull: true }, 
     A02_ID_ORGANIZADORA: {
         type: DataTypes.INTEGER,
         references: {

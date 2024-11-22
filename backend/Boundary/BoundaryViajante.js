@@ -1,5 +1,6 @@
 const Viajante = require('../models/Viajante_02');
-const Viagem = require('../models/Viagem_03')
+const Viagem = require('../models/Viagem_03');
+const Usuario = require('../models/Usuario_01');
 const formatarData = (data) => {
     return new Date(data).toLocaleDateString('pt-BR', {
         day: '2-digit',
@@ -133,23 +134,39 @@ module.exports = {
     renderViagemDetalhes: async (req, res) => {
         const viagemId = req.params.id; // Obter o ID da URL
         try {
-            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId }, raw: true }); // Buscar dados no banco
+            // Busca a viagem com base no ID
+            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId }, raw: true });
+    
             if (!viagem) {
                 return res.status(404).send('Viagem não encontrada');
             }
+    
+            // Utiliza o A03_ORGANIZADORA da viagem para buscar a organizadora
+            const organizadora = await Viajante.findOne({ where: { A02_ID: viagem.A02_ID_ORGANIZADORA }, raw: true });
+    
+            // Renderiza a página com os dados
             res.render('pages/pesquisa-viagem/pesquisaViagemDetalhes', {
                 title: 'Detalhes da viagem',
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
                 viagem: {
-                    titulo: viagem.A03_TITULO,
-                    subtitulo: viagem.A03_SUBTITULO,
-                    descricao: viagem.A03_DESCRICAO,
-                    destino: viagem.A03_DESTINO,
-                    custo: viagem.A03_CUSTO,
-                    vagasDisponiveis: viagem.A03_VAGAS,
-                    dataIda: viagem.A03_DATA_IDA,
-                    dataVolta: viagem.A03_DATA_VOLTA,
+                    A03_TITULO: viagem.A03_TITULO,
+                    A03_SUBTITULO: viagem.A03_SUBTITULO,
+                    A03_DESCRICAO: viagem.A03_DESCRICAO,
+                    A03_ORIGEM: viagem.A03_ORIGEM,
+                    A03_DESTINO: viagem.A03_DESTINO,
+                    A03_LOCAL_IDA: viagem.A03_LOCAL_IDA,
+                    A03_DATA_IDA: formatarData(viagem.A03_DATA_IDA),
+                    A03_HORA_IDA: viagem.A03_HORA_IDA,
+                    A03_LOCAL_VOLTA: viagem.A03_LOCAL_VOLTA,
+                    A03_DATA_VOLTA: formatarData(viagem.A03_DATA_VOLTA),
+                    A03_HORA_VOLTA: viagem.A03_HORA_VOLTA,
+                    A03_CUSTO: formatarMoeda(viagem.A03_CUSTO),
+                    A03_LINK: viagem.A03_LINK,
+                    A03_VAGAS: viagem.A03_VAGAS,
+                    A03_ORGANIZADORA: viagem.A02_ID_ORGANIZADORA,
+                    A02_NOME: organizadora?.A02_NOME || 'Nome não disponível',
+                    A02_DESCRICAO: organizadora?.A02_DESCRICAO || 'Descrição não disponível'
                 }
             });
         } catch (error) {

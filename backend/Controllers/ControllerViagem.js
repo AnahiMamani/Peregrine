@@ -6,7 +6,7 @@ const sequelize = require('../config/bd');
 
 module.exports = {
     cadastrarViagem: async (req, res) => {
-        const {descricaoViagem, tituloViagem,subtituloViagem,origemViagem,destinoViagem,vagasViagem,custoViagem,localIdaViagem, dataIdaViagem, horaIdaViagem, localVoltaViagem, dataVoltaViagem, horaVoltaViagem} = req.body;
+        const {linkgrupo,descricaoViagem, tituloViagem,subtituloViagem,origemViagem,destinoViagem,vagasViagem,custoViagem,localIdaViagem, dataIdaViagem, horaIdaViagem, localVoltaViagem, dataVoltaViagem, horaVoltaViagem} = req.body;
         const transaction = await sequelize.transaction();
 
         try {
@@ -33,6 +33,7 @@ module.exports = {
                 A03_DATA_VOLTA:dataVoltaViagem,  
                 A03_HORA_VOLTA:horaVoltaViagem,  
                 A03_CUSTO: custoViagem,
+                A03_LINK: linkgrupo,
                 A03_VAGAS: vagasViagem,
                 A02_ID_ORGANIZADORA: viajanteId,
                 A03_STATUS: 'Planejada', // Status inicial
