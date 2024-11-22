@@ -18,7 +18,9 @@ const Viajante = sequelize.define('Viajante', {
     A02_CPF: { type: DataTypes.STRING, unique: true },
     A02_DATA_NACSI: { type: DataTypes.DATE },
     A02_DESCRICAO: { type: DataTypes.STRING },
-    A02_NOTA: { type: DataTypes.INTEGER },
+    A02_NOTA: { type: DataTypes.DOUBLE },
+    A02_NOTA_TOTAL: { type: DataTypes.DOUBLE },
+    A02_NOTA_QUANTIDADE: { type: DataTypes.DOUBLE },
     A02_APROVADA: { type: DataTypes.TINYINT, defaultValue: 0 },
     A02_DOCUMENTACAO: { type: DataTypes.TINYINT, defaultValue: 0 }
 }, {

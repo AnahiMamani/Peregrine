@@ -386,5 +386,40 @@ module.exports = {
             console.error('Erro ao excluir viajante ou usuário:', error);
             res.status(500).send('Erro no servidor.');
         }
-    }
+    },
+    updateAvaliacao: async (req, res) => {
+        const { organizadoraId, nota } = req.body;
+    
+        try {
+            // Validação da nota
+            if (nota < 1 || nota > 5) {
+                return res.status(400).json({ error: 'Nota inválida. Deve estar entre 1 e 5.' });
+            }
+    
+            // Busca a organizadora pelo ID
+            const organizadora = await Viajante.findOne({ where: { A02_ID: organizadoraId } });
+    
+            if (!organizadora) {
+                return res.status(404).json({ error: 'Organizadora não encontrada.' });
+            }
+    
+            // Atualiza as notas
+            const novoNotaTotal = (organizadora.A02_NOTA_TOTAL || 0) + nota;
+            const novaNotaQuantidade = (organizadora.A02_NOTA_QUANTIDADE || 0) + 1;
+            const novaNotaMedia = novoNotaTotal / novaNotaQuantidade;
+    
+            // Salva os dados no banco
+            await organizadora.update({
+                A02_NOTA_TOTAL: novoNotaTotal,
+                A02_NOTA_QUANTIDADE: novaNotaQuantidade,
+                A02_NOTA: novaNotaMedia
+            });
+    
+            // Retorna sucesso em JSON
+            res.status(200).json({ message: 'Avaliação registrada com sucesso!' });
+        } catch (error) {
+            console.error('Erro ao atualizar a avaliação:', error);
+            res.status(500).json({ error: 'Erro ao registrar a avaliação. Tente novamente mais tarde.' });
+        }
+    }   
 }

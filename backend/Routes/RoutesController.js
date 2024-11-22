@@ -18,6 +18,7 @@ router.post('/editarPerfil', ControllerViajante.editarPerfil);
 router.post('/AtualizarSenhaPerfil', ControllerViajante.atualizarSenhaPerfil);
 router.post('/AtualizarEmailPerfil', ControllerViajante.atualizarEmail);
 router.post('/deletarViajante', ControllerViajante.deleteViajante);
+router.post('/avaliar-organizadora', ControllerViajante.updateAvaliacao);
 
 //Controller Viagem
 router.post('/cadastroViagem', ControllerViagem.cadastrarViagem);

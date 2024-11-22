@@ -1,13 +1,10 @@
 {{> headerUsuario}}
-<div class="container mt-4">
-    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
-</div>
-
 <main>
-
+    <div class="container mt-4">
+        <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+    </div>
     <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
         <div class="row" style="height: 65vh; overflow-y: auto;">
-
             {{> menuPerfil}}
             <!--Botão -->
             <div class="col-md-9" style="padding-left: 0;">
@@ -19,92 +16,115 @@
                                 &nbsp;
                             </div>
                         </div>
-
-                        <form>
-
-
-                            <!-- Linha separadora -->
-
-                            <div class="mt-3">
-                                <div class="d-flex justify-content-center align-items-center">
-
-                                    <!-- Nome da usuária ao lado da foto -->
-                                    <div style="margin-right: 10px;">
-                                        <h5 style="margin-bottom: 0;">Fulana da Silva Sauro</h5>
+                        <!-- Linha separadora -->
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <!-- Nome da usuária ao lado da foto -->
+                                <div style="margin-right: 10px;">
+                                    <h5 style="margin-bottom: 0;">{{viagem.A02_NOME}}</h5>
+                                </div>
+                                <div>
+                                    <div id="estrelas">
+                                        <span class="estrela" data-value="1"
+                                            style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                        <span class="estrela" data-value="2"
+                                            style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                        <span class="estrela" data-value="3"
+                                            style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                        <span class="estrela" data-value="4"
+                                            style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
+                                        <span class="estrela" data-value="5"
+                                            style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
                                     </div>
-
-                                    <!-- Estrelas para avaliação à direita do nome -->
-                                    <div>
-                                        <div>
-                                            <span class="estrela" data-value="1"
-                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
-                                            <span class="estrela" data-value="2"
-                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
-                                            <span class="estrela" data-value="3"
-                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
-                                            <span class="estrela" data-value="4"
-                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
-                                            <span class="estrela" data-value="5"
-                                                style="font-size: 4rem; color: #c7c7c7; cursor: pointer;">&#9733;</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="text-center mt-4">
-                                {{!-- <button id="avaliarBtn" class="btn"
-                                    style="background-color: #99067E; color: white; padding: 10px 30px; font-size: 1.2rem; border-radius: 25px; cursor: pointer;">
-                                    Avaliar Organizadora
-                                </button> --}}
-
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a class="btn btn-primary" id="avaliacao" style="width: 20rem;">Avaliar organizadora</a>
-                                </div>
-
-                                <div class="modal fade" id="avaliar" tabindex="-1" aria-labelledby="modalavaliarLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-footer justify-content-center">
-                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                                                    style="color: #99067E;">Não, quero voltar</button>
-                                                <button type="button" class="btn"
-                                                    style="background-color: #99067E; color: white;"
-                                                    onclick="window.location.href='Encerrar.html'">Sim,
-                                                    sair</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-
-
-
-
-
-                    <div class="modal fade" id="modalEncerrar" tabindex="-1" aria-labelledby="modalEncerrarLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalEncerrarLabel">Encerrar Sessão</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                                        style="color: #99067E;">Não, quero voltar</button>
-                                    <button type="button" class="btn" style="background-color: #99067E; color: white;"
-                                        onclick="window.location.href='Encerrar.html'">Sim, sair</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <script src="/scripts/avaliacao.js"></script>
+                        <div class="text-center mt-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a class="btn btn-primary" id="avaliacao" style="width: 20rem;">Avaliar
+                                    organizadora</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{!--
+<script src="/scripts/avaliacao.js"></script> --}}
+<!-- comentei por que tenho medo que nao puche da script entao a trouxe para cá-->
+
+<!-- Estrelas para avaliação à direita do nome -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const estrelas = document.querySelectorAll(".estrela");
+        let notaSelecionada = 0; // Valor padrão
+
+        // Adiciona o comportamento de clique às estrelas
+        estrelas.forEach(estrela => {
+            estrela.addEventListener("click", function () {
+                const valor = parseInt(this.getAttribute("data-value"));
+                notaSelecionada = valor;
+
+                // Atualiza as cores das estrelas
+                estrelas.forEach(est => {
+                    if (parseInt(est.getAttribute("data-value")) <= valor) {
+                        est.style.color = "gold";
+                    } else {
+                        est.style.color = "#c7c7c7";
+                    }
+                });
+            });
+        });
+
+        const btnAvaliar = document.getElementById('avaliacao');
+        btnAvaliar.addEventListener('click', () => {
+            // Exibe a janela de confirmação
+            const overlay = document.createElement('div');
+            overlay.id = 'confirmOverlay';
+            overlay.className = 'confirm-overlay';
+            overlay.innerHTML = `
+            <div class="confirm-box">
+                <h4>Enviar avaliação?</h4>
+                <div class="confirm-buttons">
+                    <button class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
+                    <button class="btn btn-primary btn-confirmar-sim">Sim, avaliar</button>
+                </div>
+            </div>
+        `;
+            document.body.appendChild(overlay);
+
+            overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
+
+            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
+                // Envia a avaliação para o servidor
+                fetch('/control/avaliar-organizadora', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        organizadoraId: "{{viagem.A03_ORGANIZADORA}}",
+                        nota: notaSelecionada
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao enviar avaliação');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Redireciona após sucesso
+                        window.location.href = '/perfil/avaliacao/concluida';
+                    })
+                    .catch(error => {
+                        console.error('Erro ao enviar avaliação:', error);
+                    });
+            });
+
+        });
+    });
+</script>

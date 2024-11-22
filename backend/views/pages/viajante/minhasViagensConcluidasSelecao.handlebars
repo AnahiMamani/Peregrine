@@ -1,6 +1,4 @@
 {{> headerUsuario}}
-
-
 <main>
     <div class="container mt-4">
         <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
@@ -35,18 +33,24 @@
                             <!-- Viagens listadas -->
                             <div class="row mt-4">
                                 <div class="col-md-10">
-                                    <a href="/viagem/detalhes/:id" class="h6" style="color: black; cursor: pointer;">
-                                        Reveillon em Copacabana
-                                    </a>
+                                    <a href="/viagem/detalhes/{{viagem.A03_ID}}" class="h6"
+                                        style="color: black; cursor: pointer;">{{viagem.A03_TITULO}}</a>
                                 </div>
+                                <div class="d-flex mt-2">
+                                    <p>{{viagem.A03_DATA_VOLTA}}</p>
+                                    <p style="padding-left:2rem ;">{{viagem.A03_VAGAS}} Vagas</p>
+                                </div>
+                                <p>{{viagem.A03_SUBTITULO}}</p>
                             </div>
 
                             <div class="d-flex justify-content-between mt-3">
-                                <a href="/perfil/minhas-viagens-concluidas/avaliacao" class="btn btn-sm text-white rounded-pill"
+                                <a href="/perfil/concluidas/avaliacao/{{viagem.A03_ID}}"
+                                    class="btn btn-sm text-white rounded-pill"
                                     style="background-color: #99067E; border-color: #99067E; margin-top:70px; padding: 5px 15px; width: 200px;">
                                     Avaliação
                                 </a>
-                                <a href="/perfil/minhas-viagens-concluidas/denuncia" class="btn btn-sm text-white rounded-pill"
+                                <a href="/perfil/concluidas/denuncia/{{viagem.A03_ID}}"
+                                    class="btn btn-sm text-white rounded-pill"
                                     style="background-color: #B6090C; border-color: #B6090C; margin-top:70px; padding: 5px 15px; width: 200px;">
                                     Fazer denúncia
                                 </a>

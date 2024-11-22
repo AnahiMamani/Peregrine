@@ -53,11 +53,11 @@ router.get('/perfil/minhas-viagens-criadas', BoundaryViajante.renderViagensCriad
 router.get('/perfil/minhas-viagens-anuncio', BoundaryViajante.renderAnuncio);
 router.get('/perfil/minhas-viagens-concluidas', BoundaryViajante.renderViagensConcluidas);
 
-router.get('/perfil/minhas-viagens-concluidas-selecao', BoundaryViajante.renderSelecaoConcluidas);
-router.get('/perfil/minhas-viagens-concluidas/avaliacao', BoundaryViajante.renderAvaliacao);
-router.get('/perfil/minhas-viagens-concluidas/avaliacao-concluida', BoundaryViajante.renderAvaliacaoConcluida);
-router.get('/perfil/minhas-viagens-concluidas/denuncia', BoundaryViajante.renderDenuncia);
-router.get('/perfil/minhas-viagens-concluidas/denuncia-concluida', BoundaryViajante.renderDenunciaConcluida);
+router.get('/perfil/minhas-viagens-concluidas/:id', BoundaryViajante.renderSelecaoConcluidas);
+router.get('/perfil/concluidas/avaliacao/:id', BoundaryViajante.renderAvaliacao);
+router.get('/perfil/avaliacao/concluida', BoundaryViajante.renderAvaliacaoConcluida);
+router.get('/perfil/concluidas/denuncia/:id', BoundaryViajante.renderDenuncia);
+router.get('/perfil/concluidas/denuncia/concluida', BoundaryViajante.renderDenunciaConcluida);
 router.get('/perfil/alterar-email', BoundaryViajante.renderUsuarioAlterarEmail);
 router.get('/perfil/alterar-senha', BoundaryViajante.renderUsuarioAlterarSenha);
 router.get('/perfil/editar-perfil', BoundaryViajante.renderUsuarioEditar);
