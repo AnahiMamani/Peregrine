@@ -111,6 +111,13 @@ module.exports = {
             logoPath: '/images/logo.ico',
             user: req.session.user
         });
+    },
+    renderAlterarViagem: (req, res) => {
+        res.render('pages/viajante/alterarViagem', {
+            title: 'Alterar viagem',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
     }
     
 }

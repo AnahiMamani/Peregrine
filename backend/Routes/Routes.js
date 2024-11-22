@@ -59,6 +59,7 @@ router.get('/viagem/detalhes', BoundaryViajante.renderViagemDetalhes);
 router.get('/viagem/inscricao', BoundaryViajante.renderInscricaoConcluida);
 router.get('/viagem/planejamento', BoundaryViajante.renderPlanejarViagem);
 router.get('/viagem/criada', BoundaryViajante.renderPlanejamentoConcluido);
+router.get('/viagem/alteracao', BoundaryViajante.renderAlterarViagem);
 
 // Cadastro de usuário
 router.get('/cadastro', BoundaryUsuario.renderCadastro);

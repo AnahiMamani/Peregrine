@@ -1,40 +1,5 @@
-//pagina u_planejarViagem.html
-// document.getElementById('savePhotosBtn').addEventListener('click', function () {
-//     var file1 = document.getElementById('profilePicture1').files[0];
-//     var file2 = document.getElementById('profilePicture2').files[0];
-//     var file3 = document.getElementById('profilePicture3').files[0];
-
-//     if (!file1 || !file2 || !file3) {
-//         alert("Por favor, selecione as três imagens.");
-//         return;
-//     }
-
-//     var formData = new FormData();
-//     formData.append('profilePicture1', file1);
-//     formData.append('profilePicture2', file2);
-//     formData.append('profilePicture3', file3);
-
-//     // Aqui você pode enviar o FormData via AJAX para o servidor
-//     // Exemplo usando fetch:
-//     fetch('/upload_photos', {
-//         method: 'POST',
-//         body: formData
-//     }).then(response => {
-//         if (response.ok) {
-//             alert('Fotos enviadas com sucesso!');
-//             // Fechar o modal após o envio
-//             $('#uploadModal').modal('hide');
-//         } else {
-//             alert('Ocorreu um erro ao enviar as fotos.');
-//         }
-//     }).catch(error => {
-//         alert('Erro de rede: ' + error);
-//     });
-// });
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    const btnCriarViagem = document.getElementById('confirmaPlanejarViagem');
+    const btnExcluirViagem = document.getElementById('excluirViagem');
 
     btnCriarViagem.addEventListener('click', () => {
         // Cria a estrutura HTML da janela de confirmação
@@ -43,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.className = 'confirm-overlay';
         overlay.innerHTML = `
             <div class="confirm-box">
-                <h4>Você confirma a criação dessa viagem?</h4>
-                <p>Após publicada, a viagem estará visível a todas as usuárias do site. <br>Essa ação poderá ser desfeita.</p>
+                <h4>Você tem certeza que deseja excluir a viagem??</h4>
+                <p>Essa ação não poderá ser desfeita. <br>Essa ação não poderá ser desfeita.</p>
                 <div class="confirm-buttons">
                     <button class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
-                    <button class="btn btn-primary btn-confirmar-sim">Sim, publicar</button>
+                    <button class="btn btn-primary btn-confirmar-sim">Sim, excluir viagem</button>
                 </div>
             </div>
         `;
@@ -62,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Redireciona ao clicar no botão "Sim, publicar"
         overlay.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
-            window.location.href = '/viagem/criada';
+            window.location.href = '/viagem/excluida';
         });
     });
 });
