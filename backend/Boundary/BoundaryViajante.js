@@ -118,6 +118,20 @@ module.exports = {
             logoPath: '/images/logo.ico',
             user: req.session.user
         });
+    },
+    renderExcluirViagemConcluido: (req, res) => {
+        res.render('pages/viajante/excluirViagemConcluido', {
+            title: 'Viagem excluída',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+    renderAlterarViagemConcluido: (req, res) => {
+        res.render('pages/viajante/alterarViagemConcluido', {
+            title: 'Viagem alterada',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
     }
     
 }

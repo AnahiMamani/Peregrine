@@ -60,6 +60,8 @@ router.get('/viagem/inscricao', BoundaryViajante.renderInscricaoConcluida);
 router.get('/viagem/planejamento', BoundaryViajante.renderPlanejarViagem);
 router.get('/viagem/criada', BoundaryViajante.renderPlanejamentoConcluido);
 router.get('/viagem/alteracao', BoundaryViajante.renderAlterarViagem);
+router.get('/viagem/exclusao-concluida', BoundaryViajante.renderExcluirViagemConcluido);
+router.get('/viagem/alteracao-concluida', BoundaryViajante.renderAlterarViagemConcluido);
 
 // Cadastro de usuário
 router.get('/cadastro', BoundaryUsuario.renderCadastro);
