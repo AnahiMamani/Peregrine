@@ -5,7 +5,7 @@
     <div class="d-flex my-3 align-items-center justify-content-center container p-4 rounded-4"
         style="height: 20vh; width: 90vw; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
         <!-- campo para inserir a localização (Origem) desejada para a viagem (filtro)-->
-        <div class="col-md-4 rounded-4 container p-4 mx-0 my-4 d-flex flex-column align-items-center"
+        {{!-- <div class="col-md-4 rounded-4 container p-4 mx-0 my-4 d-flex flex-column align-items-center"
             style="width: 15rem;">
             <div class="d-flex align-items-center mb-2">
                 <img src="/images/icon-origem-localizacao.png" alt="Ícone de localização"
@@ -56,8 +56,7 @@
                     <img src="/images/icon-pesquisa-lupa.png" alt="Ícone de lupa - pesquisa" style="height: 2rem;">
                 </a>
             </div>
-        </div>
-
+        </div> --}}
 
         <div class="container p-4">
             <!-- div para barra de pesquisa de usuário administrador -->
@@ -67,12 +66,8 @@
                         placeholder="Buscar por ID ou Email" value="{{query}}">
                     <button class="btn btn-primary w-25 m-0" type="submit">Buscar</button>
                 </form>
-                {{!-- <!-- div para o botão para criar novo usuário administrador -->
-                <a class="btn fs-3 w-25" style="color: #99067E; font-weight: 600;" href="/administradores/criar">Criar
-                    administrador</a> --}}
             </div>
         </div>
-
     </div>
     <!-- section com o container dos resultados -->
     <section class="container row mx-auto center">

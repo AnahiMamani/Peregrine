@@ -26,8 +26,9 @@ module.exports = {
                 viagens = await Viagem.findAll({
                     where: {
                         [Op.or]:[
-                            {A03_TITULO: query},
-                            {A03_ORIGEM: {[Op.like]:`%${query}%`}}
+                            { A03_TITULO: { [Op.like]: `%${query}%` } }, // Busca no título
+                            { A03_ORIGEM: { [Op.like]: `%${query}%` } }, // Busca na origem
+                            { A03_DESTINO: { [Op.like]: `%${query}%` } } // Busca no destino
                         ],
                         A03_STATUS: 'ATIVADA'
                     }
