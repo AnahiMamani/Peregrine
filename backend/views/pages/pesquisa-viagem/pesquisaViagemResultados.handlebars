@@ -59,9 +59,24 @@
         </div>
 
 
+        <div class="container p-4">
+            <!-- div para barra de pesquisa de usuário administrador -->
+            <div class="row mb-3 align-items-center justify-content-center w-100" style="height: 30px;">
+                <form class="input-group w-75 h-10" id="searchForm" action="/viagem/resultados" method="GET">
+                    <input type="text" class="form-control w-50 m-0" id="searchInput" name="query"
+                        placeholder="Buscar por ID ou Email" value="{{query}}">
+                    <button class="btn btn-primary w-25 m-0" type="submit">Buscar</button>
+                </form>
+                {{!-- <!-- div para o botão para criar novo usuário administrador -->
+                <a class="btn fs-3 w-25" style="color: #99067E; font-weight: 600;" href="/administradores/criar">Criar
+                    administrador</a> --}}
+            </div>
+        </div>
+
     </div>
     <!-- section com o container dos resultados -->
     <section class="container row mx-auto center">
+        {{#if buscaRealizada}}
         {{#if viagens.length}}
         <div class="row">
             {{#each viagens}}
@@ -103,6 +118,45 @@
         {{else}}
         <p>Nenhuma viagem encontrada.</p>
         {{/if}}
+        {{else}}
+        <div class="row">
+            {{#each viagens}}
+            <div class="col-12 col-md-6 col-xl-4 pb-4">
+                <div class="card rounded-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8 text-start">
+                                <h5 class="card-title">{{A03_TITULO}}</h5>
+                            </div>
+                            <div class="col-4 text-end">
+                                <a href="/viagem/detalhes/{{id}}" style="color: #99067E;">Ver mais</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col card-text text-start">
+                                {{A03_DATA_IDA}}
+                            </div>
+                            <div class="col card-text text-end">
+                                {{A03_VAGAS}} participantes
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row" style="line-height: 0.5rem;">
+                            <p class="card-text"><b>Destino:</b> {{A03_DESTINO}}</p>
+                            <p class="card-text"><b>Embarque:</b> {{A03_DATA_IDA}}</p>
+                            <p class="card-text"><b>Retorno:</b> {{A03_DATA_VOLTA}}</p>
+                            <p class="card-text"><b>Origem:</b> {{A03_ORIGEM}}</p>
+                            <p class="card-text"><b>Estimativa de custo:</b> {{A03_CUSTO}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
     </section>
 
     <div class="container center d-flex justify-content-center align-items-center">
@@ -126,4 +180,12 @@
 
 <!-- link bootstrap icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
-{{!-- <script src="/scripts/a_pesquisaViagemResultados.js"></script> --}}
+<script src="/scripts/a_pesquisaViagemResultados.js"></script>
+
+<script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+    if (this.value === '') {
+        document.getElementById('searchForm').submit();
+    }
+});
+</script>

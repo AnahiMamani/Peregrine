@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');  // Importa o operador `Op` do Sequelize
 const Viajante = require('../models/Viajante_02');
 const Viagem = require('../models/Viagem_03');
 const ViagemViajante = require('../models/ViajanteViagem_04');
@@ -14,6 +15,57 @@ const formatarMoeda = (valor) => {
 };
 
 module.exports = {
+    renderPesquisaViagemResultados: async (req, res) => {
+        try {
+            let viagens;
+            let buscaRealizada = false;
+            const query = req.query.query ? req.query.query.trim() : '';  // Captura o termo de busca, ou define como string vazia
+            if (query) {
+                buscaRealizada = true;
+
+                viagens = await Viagem.findAll({
+                    where: {
+                        [Op.or]:[
+                            {A03_TITULO: query},
+                            {A03_ORIGEM: {[Op.like]:`%${query}%`}}
+                        ],
+                        A03_STATUS: 'ATIVADA'
+                    }
+                });
+                } else {
+                // Busca todas as viagens cadastradas com status "Planejada"
+                viagens = await Viagem.findAll({
+                    where: {
+                        A03_STATUS: 'ATIVADA'
+                    }
+                });
+            }
+
+            // Formata os dados das viagens
+            const viagensFormatadas = viagens.map(viagem => ({
+                id: viagem.A03_ID,
+                A03_TITULO: viagem.A03_TITULO || 'Título não informado',
+                A03_DESTINO: viagem.A03_DESTINO || 'Destino não informado',
+                A03_ORIGEM: viagem.A03_ORIGEM || 'Origem não informada',
+                A03_VAGAS: viagem.A03_VAGAS || 0,
+                A03_DATA_IDA: formatarData(viagem.A03_DATA_IDA),
+                A03_DATA_VOLTA: formatarData(viagem.A03_DATA_VOLTA),
+                A03_CUSTO: formatarMoeda(viagem.A03_CUSTO)
+            }));
+
+            // Renderiza a view com os dados
+            res.render('pages/pesquisa-viagem/pesquisaViagemResultados', {
+                title: 'Resultados da pesquisa de viagem',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagens: viagensFormatadas, // Passa os dados das viagens para a view
+                buscaRealizada, query
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viagens:', error);
+            res.status(500).send('Erro ao buscar viagens');
+        }
+    },
     renderViagensConcluidas: async (req, res) => {
         try {
             const userId = req.session.user?.id;
@@ -215,12 +267,6 @@ module.exports = {
             res.status(500).send('Erro ao buscar viagens');
         }
     },
-
-
-
-
-
-    
     renderPerfil: async (req, res) => {
         try {
             const userId = req.session.user?.id;
@@ -255,7 +301,7 @@ module.exports = {
             res.status(500).send('Erro ao carregar a página de perfil.');
         }
     },
-    renderSelecaoConcluidas: async  (req, res) => {
+    renderSelecaoConcluidas: async (req, res) => {
         const viagemId = req.params.id; // Obter o ID da URL
         try {
             // Busca a viagem com base no ID
@@ -307,39 +353,6 @@ module.exports = {
             logoPath: '/images/logo.ico',
             user: req.session.user
         });
-    },
-    renderPesquisaViagemResultados: async (req, res) => {
-        try {
-            // Busca todas as viagens cadastradas com status "Planejada"
-            const viagens = await Viagem.findAll({
-                where: {
-                    A03_STATUS: 'ATIVADA'
-                }
-            });
-
-            // Formata os dados das viagens
-            const viagensFormatadas = viagens.map(viagem => ({
-                id: viagem.A03_ID,
-                A03_TITULO: viagem.A03_TITULO || 'Título não informado',
-                A03_DESTINO: viagem.A03_DESTINO || 'Destino não informado',
-                A03_ORIGEM: viagem.A03_ORIGEM || 'Origem não informada',
-                A03_VAGAS: viagem.A03_VAGAS || 0,
-                A03_DATA_IDA: formatarData(viagem.A03_DATA_IDA),
-                A03_DATA_VOLTA: formatarData(viagem.A03_DATA_VOLTA),
-                A03_CUSTO: formatarMoeda(viagem.A03_CUSTO)
-            }));
-
-            // Renderiza a view com os dados
-            res.render('pages/pesquisa-viagem/pesquisaViagemResultados', {
-                title: 'Resultados da pesquisa de viagem',
-                logoPath: '/images/logo.ico',
-                user: req.session.user,
-                viagens: viagensFormatadas // Passa os dados das viagens para a view
-            });
-        } catch (error) {
-            console.error('Erro ao buscar viagens:', error);
-            res.status(500).send('Erro ao buscar viagens');
-        }
     },
     renderMinhasViagens: (req, res) => {
         res.render('pages/viajante/minhasViagens', {
@@ -535,6 +548,6 @@ module.exports = {
             user: req.session.user
         });
     },
-    
+
 
 }
