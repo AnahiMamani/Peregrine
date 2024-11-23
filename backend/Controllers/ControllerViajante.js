@@ -488,26 +488,25 @@ module.exports = {
         }
     },
     toggleViagemStatus: async (req, res) => {
-        const viagemId = parseInt(req.params.id, 10); // ID da viagem na URL
-    
+        const { id } = req.params;
+        const { novoStatus } = req.body;
+
         try {
-            // Busca a viagem pelo ID
-            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId } });
+            const viagem = await Viagem.findByPk(id);
+
             if (!viagem) {
-                return res.status(404).send('Viagem não encontrada');
+                return res.status(404).json({ error: "Viagem não encontrada." });
             }
-    
-            // Alterna o status da viagem
-            const novoStatus = viagem.A03_STATUS === 'ATIVADA' ? 'DESATIVADA' : 'ATIVADA';
-    
-            // Atualiza o status
-            await Viagem.update({ A03_STATUS: novoStatus }, { where: { A03_ID: viagemId } });
-    
-            res.status(200).json({ message: 'Status atualizado com sucesso', novoStatus });
+
+            // Atualiza o status da viagem
+            viagem.A03_STATUS = novoStatus;
+            await viagem.save();
+
+            res.json({ message: "Status atualizado com sucesso!", novoStatus });
         } catch (error) {
-            console.error('Erro ao alternar status da viagem:', error);
-            res.status(500).send('Erro no servidor ao atualizar status da viagem.');
+            console.error("Erro ao atualizar status da viagem:", error);
+            res.status(500).json({ error: "Erro ao atualizar status da viagem." });
         }
     }
-    
+
 }

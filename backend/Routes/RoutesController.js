@@ -4,6 +4,20 @@ const ControllerViajante = require("../Controllers/ControllerViajante");
 const ControllerUsuario = require("../Controllers/ControllerUsuario");
 const ControllerAdmin = require("../Controllers/ControllerAdmin");
 const ControllerViagem = require("../Controllers/ControllerViagem");
+const { gerarRelatorioViagens } = require('../Controllers/relatorioController');
+
+// Rota para gerar o relatório e fazer o download
+router.get('/relatorio/gerar', async (req, res) => {
+    try {
+        // Gerar o relatório em PDF
+        await gerarRelatorioViagens();
+        
+        // Após o download, redirecionar para a página de conclusão
+        res.redirect('/relatorio/concluido');
+    } catch (error) {
+        res.status(500).send('Erro ao gerar o relatório');
+    }
+});
 
 //Contorller Administrador
 router.post("/CadastrarAdmin", ControllerAdmin.cadastroAdmin);

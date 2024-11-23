@@ -68,17 +68,26 @@
             </div>
             <div class="modal-body">
                 <div class="d-flex align-items-center">
-                    <!-- Toggle Switch -->
+                    <!-- Toggle Pause -->
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="togglePause"
                             style="width: 50px; height: 25px;">
                         <label class="form-check-label" for="togglePause"></label>
                     </div>
-                    <!-- Texto ao lado do botão -->
                     <span class="ms-3">
-                        <p> Pausar anúncio.(Ao habilitar esta opção, a viagem deixará de ser visível para as usuárias do
-                            site.)
-                        </p>
+                        <p> Pausar anúncio. (Ao habilitar esta opção, a viagem deixará de ser visível para as usuárias
+                            do site.)</p>
+                    </span>
+
+                    <!-- Toggle Start -->
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="toggleStart"
+                            style="width: 50px; height: 25px;">
+                        <label class="form-check-label" for="toggleStart"></label>
+                    </div>
+                    <span class="ms-3">
+                        <p> Ative o anúncio. (Ao habilitar esta opção, a viagem voltará a ser visível para as usuárias
+                            do site.)</p>
                     </span>
                 </div>
             </div>
@@ -87,30 +96,49 @@
     </div>
 </div>
 <script>
-    const togglePause = document.getElementById('togglePause');
-    const viagemId = window.location.pathname.split('/').pop(); // Extrai o ID da URL
+    document.addEventListener("DOMContentLoaded", () => {
+    const togglePause = document.getElementById("togglePause");
+    const toggleStart = document.getElementById("toggleStart");
+    const viagemId = window.location.pathname.split("/").pop(); // Extrai o ID da URL
 
-    if (togglePause) {
-        togglePause.addEventListener('change', async () => {
-            try {
-                // Faz a requisição ao servidor para alternar o status
-                const response = await fetch(`/control/viagem/toggle-status/{{viagem.A03_ID}}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                });
+    // Função para enviar o novo status para o servidor
+    const sendStatusChange = async (novoStatus) => {
+        try {
+            const response = await fetch(`/control/viagem/toggle-status/${viagemId}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ novoStatus }),
+            });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log(data.message); // Exibe mensagem de sucesso
-                    alert(`Status da viagem alterado para: ${data.novoStatus}`);
-                } else {
-                    console.error('Erro ao alterar o status da viagem');
-                    alert('Erro ao alterar o status da viagem');
-                }
-            } catch (error) {
-                console.error('Erro ao realizar a requisição:', error);
-                alert('Erro ao realizar a requisição');
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message); // Exibe mensagem de sucesso
+                alert(`Status da viagem alterado para: ${data.novoStatus}`);
+            } else {
+                console.error("Erro ao alterar o status da viagem");
+                alert("Erro ao alterar o status da viagem");
             }
+        } catch (error) {
+            console.error("Erro ao realizar a requisição:", error);
+            alert("Erro ao realizar a requisição");
+        }
+    };
+
+    // Evento do togglePause (Pausar anúncio)
+    if (togglePause) {
+        togglePause.addEventListener("change", () => {
+            const novoStatus = togglePause.checked ? "DESATIVADA" : "ATIVADA";
+            sendStatusChange(novoStatus);
         });
     }
+
+    // Evento do toggleStart (Ativar anúncio)
+    if (toggleStart) {
+        toggleStart.addEventListener("change", () => {
+            const novoStatus = toggleStart.checked ? "ATIVADA" : "DESATIVADA";
+            sendStatusChange(novoStatus);
+        });
+    }
+});
+
 </script>
