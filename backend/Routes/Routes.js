@@ -69,6 +69,7 @@ router.get('/perfil', BoundaryViajante.renderPerfil);
 router.get('/perfil/minhas-viagens', BoundaryViajante.renderMinhasViagens);
 
 router.get('/perfil/minhas-viagens-inscritas', BoundaryViajante.renderViagensInscritas);
+router.get('/perfil/minhas-viagens/consulta-inscritas', BoundaryViajante.renderConsultaViagensInscritas);
 router.get('/perfil/minhas-viagens-criadas', BoundaryViajante.renderViagensCriadas);
 router.get('/perfil/minhas-viagens-anuncio/:id', BoundaryViajante.renderAnuncio);
 router.get('/perfil/minhas-viagens-concluidas', BoundaryViajante.renderViagensConcluidas);
@@ -87,7 +88,7 @@ router.get('/perfil/editar-perfil', BoundaryViajante.renderUsuarioEditar);
 router.get('/perfil/excluir-perfil', BoundaryViajante.renderUsuarioExcluir);
 
 // Viagem
-router.get('/viagem', BoundaryViajante.renderPesquisaViagem);
+// router.get('/viagem', BoundaryViajante.renderPesquisaViagem);
 router.get('/viagem/resultados', BoundaryViajante.renderPesquisaViagemResultados);
 router.get('/viagem/detalhes/:id', BoundaryViajante.renderViagemDetalhes);
 router.get('/viagem/inscricao', BoundaryViajante.renderInscricaoConcluida);
