@@ -198,9 +198,9 @@
 
 {{> footer }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
-{{!--
+
 <script src="/scripts/u_pesquisaViagemDetalhes.js"></script>
-<script src="/scripts/testedoperfildaorganizadora.js"></script> --}}
+<script src="/scripts/testedoperfildaorganizadora.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -280,7 +280,7 @@
                     });
 
                     if (response.ok) {
-                        window.location.href = '/viagem/inscricao'; // Redireciona ao concluir com sucesso
+                        window.location.href = '/viagem/inscricao/{{viagem.A03_ID}}'; // Redireciona ao concluir com sucesso
                     } else {
                         const errorData = await response.json(); // Obtém os dados de erro
                         alert(`Erro ao inscrever-se na viagem: ${errorData.message || 'Tente novamente.'}`);

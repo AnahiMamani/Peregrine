@@ -398,13 +398,10 @@ module.exports = {
         });
     },
     renderInscricaoConcluida: async (req, res) => {
+        const viagemId = req.params.id; // Obter o ID da URL
         try {
-            // Busca a primeira viagem com status "Planejada"
-            const viagem = await Viagem.findOne({
-                where: {
-                    A03_STATUS: 'ATIVADA'
-                }
-            });
+            // Busca a viagem com base no ID
+            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId }, raw: true });
 
             // Renderiza a view com os dados
             res.render('pages/pesquisa-viagem/pesquisaInscricaoConcluida', {
