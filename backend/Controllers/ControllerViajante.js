@@ -77,7 +77,7 @@ module.exports = {
                         user: process.env.EMAIL_USER,
                         pass: process.env.EMAIL_PASS,
                     },
-                    
+
                     tls: {
                         rejectUnauthorized: false,  // Desabilita a verificação de certificado
                     }
@@ -221,7 +221,7 @@ module.exports = {
             if (celular) updates.A02_CELULAR = celular;
             if (descricao) updates.A02_DESCRICAO = descricao;
 
-            if (Object.keys(updates).length > 0) { // Só faz o update se houver algo para atualizar
+            if (Object.keys(updates).length > 0) {
                 await Viajante.update(updates, { where: { A02_ID: viajante } });
             }
 
@@ -413,24 +413,101 @@ module.exports = {
         }
     },
     alterarViagem: async (req, res) => {
-        const {linkgrupo,descricaoViagem, tituloViagem,subtituloViagem,origemViagem,destinoViagem,vagasViagem,custoViagem,localIdaViagem, dataIdaViagem, horaIdaViagem, localVoltaViagem, dataVoltaViagem, horaVoltaViagem} = req.body;
-        const viagemId = req.params.id; // Obter o ID da URL
+        const {
+            linkgrupo,
+            descricaoViagem,
+            tituloViagem,
+            subtituloViagem,
+            origemViagem,
+            destinoViagem,
+            vagasViagem,
+            custoViagem,
+            localIdaViagem,
+            dataIdaViagem,
+            horaIdaViagem,
+            localVoltaViagem,
+            dataVoltaViagem,
+            horaVoltaViagem
+        } = req.body;
+
+        // Valida o ID da viagem
+        const viagemId = parseInt(req.params.id, 10); // Converte para número
+        console.log('Viagem ID:', viagemId);
+
+        if (!viagemId || isNaN(viagemId)) {
+            console.error('Erro: ID inválido.');
+            return res.status(400).send('ID da viagem inválido.');
+        }
 
         try {
-            // Objeto de atualização dinâmico
+            // Monta o objeto de atualização
             const updates = {};
             if (linkgrupo) updates.A03_LINK = linkgrupo;
-            if (celular) updates.A02_CELULAR = celular;
-            if (descricao) updates.A02_DESCRICAO = descricao;
+            if (descricaoViagem) updates.A03_DESCRICAO = descricaoViagem;
+            if (tituloViagem) updates.A03_TITULO = tituloViagem;
+            if (subtituloViagem) updates.A03_SUBTITULO = subtituloViagem;
+            if (origemViagem) updates.A03_ORIGEM = origemViagem;
+            if (destinoViagem) updates.A03_DESTINO = destinoViagem;
+            if (vagasViagem) updates.A03_VAGAS = parseInt(vagasViagem, 10);
+            if (custoViagem) updates.A03_CUSTO = parseFloat(custoViagem);
+            if (localIdaViagem) updates.A03_LOCAL_IDA = localIdaViagem;
+            if (dataIdaViagem) updates.A03_DATA_IDA = dataIdaViagem;
+            if (horaIdaViagem) updates.A03_HORA_IDA = horaIdaViagem;
+            if (localVoltaViagem) updates.A03_LOCAL_VOLTA = localVoltaViagem;
+            if (dataVoltaViagem) updates.A03_DATA_VOLTA = dataVoltaViagem;
+            if (horaVoltaViagem) updates.A03_HORA_VOLTA = horaVoltaViagem;
 
-            if (Object.keys(updates).length > 0) { // Só faz o update se houver algo para atualizar
+            console.log('Updates:', updates);
+
+            // Executa a atualização se houver algo a atualizar
+            if (Object.keys(updates).length > 0) {
                 await Viagem.update(updates, { where: { A03_ID: viagemId } });
             }
 
-            res.redirect('/perfil');
+            res.redirect('/viagem/alteracao-concluida');
         } catch (error) {
-            console.error("Erro ao editar perfil:", error);
-            res.redirect('/perfil/editar-perfil');
+            console.error('Erro ao alterar viagem:', error);
+            res.redirect('/perfil/minhas-viagens-criadas');
         }
-    },  
+    },
+    deleteViagem: async (req, res) => {
+        const viagemId = parseInt(req.params.id, 10); // Converte para número
+
+        try {
+            // Busca a viagem pelo ID
+            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId } });
+            if (!viagem) {
+                return res.status(404).send('Viagem não encontrada');
+            }
+
+            // Remove a viagem
+            const result = await Viagem.destroy({ where: { A03_ID: viagemId } });
+            res.redirect('/viagem/exclusao-concluida'); // Redireciona após a exclusão
+        } catch (error) {
+            console.error('Erro ao deletar viagem:', error);
+        }
+    },
+    toggleViagemStatus: async (req, res) => {
+        const viagemId = parseInt(req.params.id, 10); // ID da viagem na URL
+    
+        try {
+            // Busca a viagem pelo ID
+            const viagem = await Viagem.findOne({ where: { A03_ID: viagemId } });
+            if (!viagem) {
+                return res.status(404).send('Viagem não encontrada');
+            }
+    
+            // Alterna o status da viagem
+            const novoStatus = viagem.A03_STATUS === 'ATIVADA' ? 'DESATIVADA' : 'ATIVADA';
+    
+            // Atualiza o status
+            await Viagem.update({ A03_STATUS: novoStatus }, { where: { A03_ID: viagemId } });
+    
+            res.status(200).json({ message: 'Status atualizado com sucesso', novoStatus });
+        } catch (error) {
+            console.error('Erro ao alternar status da viagem:', error);
+            res.status(500).send('Erro no servidor ao atualizar status da viagem.');
+        }
+    }
+    
 }

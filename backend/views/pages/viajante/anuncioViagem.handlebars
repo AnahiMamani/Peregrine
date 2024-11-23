@@ -7,9 +7,7 @@
 <main>
     <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
         <div class="row" style="height: 65vh; overflow-y: auto;">
-
             {{> menuPerfil}}
-
             <div class="col-md-9" style="padding-left: 0;">
                 <div class="card border-0">
                     <div class="card-body">
@@ -18,11 +16,11 @@
                             &nbsp;
                         </div>
 
-                        <!-- Viagens inscritas -->
+                        <!-- Viagens concluidas -->
                         <div class="row mt-4">
                             <div class="col-md-10">
                                 <a class="h5" style="color: black;">
-                                    Criadas
+                                    Concluídas
                                 </a>
                             </div>
                         </div>
@@ -33,20 +31,14 @@
                         <!-- Viagens listadas -->
                         <div class="row mt-4">
                             <div class="col-md-10">
-                                <a class="h6" style="color: black;">
-                                    Reveillon em Copacabana
-                                </a>
+                                <a href="/viagem/detalhes/{{viagem.A03_ID}}" class="h6"
+                                    style="color: black; cursor: pointer;">{{viagem.A03_TITULO}}</a>
                             </div>
-                        </div>
-
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                        <div class="col">
-                            &nbsp;
-                        </div>
-                        <div class="col">
-                            &nbsp;
+                            <div class="d-flex mt-2">
+                                <p>{{viagem.A03_DATA_VOLTA}}</p>
+                                <p style="padding-left:2rem ;">{{viagem.A03_VAGAS}} Vagas</p>
+                            </div>
+                            <p>{{viagem.A03_SUBTITULO}}</p>
                         </div>
 
                         <div class="d-flex justify-content-between mt-3">
@@ -54,12 +46,10 @@
                                 style="background-color: #99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;"
                                 data-bs-toggle="modal" data-bs-target="#modalAlterarViagem">Anúncio da viagem</button>
 
-                            <a href="/viagem/alteracao"
-                                class="btn btn-sm text-white rounded-pill"
+                            <a href="/viagem/alteracao/{{viagem.A03_ID}}" class="btn btn-sm text-white rounded-pill"
                                 style="background-color:#99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;">Alterar
                                 viagem</a>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -89,7 +79,6 @@
                         <p> Pausar anúncio.(Ao habilitar esta opção, a viagem deixará de ser visível para as usuárias do
                             site.)
                         </p>
-
                     </span>
                 </div>
             </div>
@@ -97,25 +86,31 @@
         </div>
     </div>
 </div>
-
-
-
 <script>
     const togglePause = document.getElementById('togglePause');
+    const viagemId = window.location.pathname.split('/').pop(); // Extrai o ID da URL
 
     if (togglePause) {
-        togglePause.addEventListener('change', () => {
-            if (togglePause.checked) {
-                // Lógica para ativar a pausa (botão está habilitado)
-                console.log("Anúncio pausado");
-            } else {
-                // Lógica para desativar a pausa (botão está desabilitado)
-                console.log("Anúncio retomado");
+        togglePause.addEventListener('change', async () => {
+            try {
+                // Faz a requisição ao servidor para alternar o status
+                const response = await fetch(`/control/viagem/toggle-status/{{viagem.A03_ID}}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data.message); // Exibe mensagem de sucesso
+                    alert(`Status da viagem alterado para: ${data.novoStatus}`);
+                } else {
+                    console.error('Erro ao alterar o status da viagem');
+                    alert('Erro ao alterar o status da viagem');
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+                alert('Erro ao realizar a requisição');
             }
         });
     }
 </script>
-
-</body>
-
-</html>
