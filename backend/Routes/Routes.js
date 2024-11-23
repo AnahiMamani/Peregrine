@@ -69,7 +69,7 @@ router.get('/perfil', BoundaryViajante.renderPerfil);
 router.get('/perfil/minhas-viagens', BoundaryViajante.renderMinhasViagens);
 
 router.get('/perfil/minhas-viagens-inscritas', BoundaryViajante.renderViagensInscritas);
-router.get('/perfil/minhas-viagens/consulta-inscritas', BoundaryViajante.renderConsultaViagensInscritas);
+router.get('/perfil/minhas-viagens/consulta-inscritas/:id', BoundaryViajante.renderConsultaViagensInscritas);
 router.get('/perfil/minhas-viagens-criadas', BoundaryViajante.renderViagensCriadas);
 router.get('/perfil/minhas-viagens-anuncio/:id', BoundaryViajante.renderAnuncio);
 router.get('/perfil/minhas-viagens-concluidas', BoundaryViajante.renderViagensConcluidas);
