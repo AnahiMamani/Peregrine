@@ -354,13 +354,13 @@ module.exports = {
             res.status(500).send('Erro no servidor');
         }
     },
-    renderPesquisaViagem: (req, res) => {
-        res.render('pages/pesquisa-viagem/pesquisaViagem', {
-            title: 'Pesquisa de viagem',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
+    // renderPesquisaViagem: (req, res) => {
+    //     res.render('pages/pesquisa-viagem/pesquisaViagem', {
+    //         title: 'Pesquisa de viagem',
+    //         logoPath: '/images/logo.ico',
+    //         user: req.session.user
+    //     });
+    // },
     renderMinhasViagens: (req, res) => {
         res.render('pages/viajante/minhasViagens', {
             title: 'Minhas viagens',
@@ -633,5 +633,12 @@ module.exports = {
             console.error('Erro ao buscar detalhes da viagem:', error);
             res.status(500).send('Erro no servidor');
         }
+    }
+    ,    renderConsultaViagensInscritas: (req, res) => {
+        res.render('pages/viajante/consulta-viagem/consultaViagensInscritas', {
+            title: 'Consulta viagem inscrita',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
     }
 }
