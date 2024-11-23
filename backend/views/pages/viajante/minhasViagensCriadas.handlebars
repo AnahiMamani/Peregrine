@@ -30,16 +30,29 @@
                         <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
 
                         <!-- Viagens listadas -->
+                        {{#if viagensInscritas.length}}
                         {{#each viagensInscritas}}
                         <div class="row mt-4">
                             <div class="col-md-10">
-                                <a href="/viagem/detalhes/{{this.id}}" class="h6"
-                                    style="color: black; cursor: pointer;">
+                                <a href="/viagem/alteracao/{{this.id}}" class="h6"
+                                    style="color: black; cursor: pointer; font-weight: 600;">
                                     {{this.titulo}}
                                 </a>
                             </div>
+                            <div class="d-flex mt-2" style="padding-left: 1rem;">
+                                <p>{{this.volta}}</p>
+                                <p style="padding-left: 3rem;">{{this.vagas}} Vagas</p>
+                            </div>
                         </div>
+                        <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
                         {{/each}}
+                        {{else}}
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <p>Nenhuma viagem criada.</p>
+                            </div>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

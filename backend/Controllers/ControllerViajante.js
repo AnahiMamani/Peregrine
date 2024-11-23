@@ -421,5 +421,26 @@ module.exports = {
             console.error('Erro ao atualizar a avaliação:', error);
             res.status(500).json({ error: 'Erro ao registrar a avaliação. Tente novamente mais tarde.' });
         }
-    }   
+    },
+    alterarViagem: async (req, res) => {
+        const {linkgrupo,descricaoViagem, tituloViagem,subtituloViagem,origemViagem,destinoViagem,vagasViagem,custoViagem,localIdaViagem, dataIdaViagem, horaIdaViagem, localVoltaViagem, dataVoltaViagem, horaVoltaViagem} = req.body;
+        const viagemId = req.params.id; // Obter o ID da URL
+
+        try {
+            // Objeto de atualização dinâmico
+            const updates = {};
+            if (linkgrupo) updates.A03_LINK = linkgrupo;
+            if (celular) updates.A02_CELULAR = celular;
+            if (descricao) updates.A02_DESCRICAO = descricao;
+
+            if (Object.keys(updates).length > 0) { // Só faz o update se houver algo para atualizar
+                await Viagem.update(updates, { where: { A03_ID: viagemId } });
+            }
+
+            res.redirect('/perfil');
+        } catch (error) {
+            console.error("Erro ao editar perfil:", error);
+            res.redirect('/perfil/editar-perfil');
+        }
+    },  
 }

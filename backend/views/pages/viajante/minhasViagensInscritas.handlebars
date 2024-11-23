@@ -17,29 +17,43 @@
                             </div>
                         </div>
 
-                            <!-- Viagens inscritas -->
-                            <div class="row mt-4">
-                                <div class="col-md-10">
-                                    <a class="h5" style="color: black;">
-                                        Inscritas
-                                    </a>
-                                </div>
+                        <!-- Viagens inscritas -->
+                        <div class="row mt-4">
+                            <div class="col-md-10">
+                                <a class="h5" style="color: black;">
+                                    Inscritas
+                                </a>
                             </div>
+                        </div>
 
-                            <!-- Linha separadora -->
-                            <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
+                        <!-- Linha separadora -->
+                        <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
 
-                            <!-- Viagens listadas -->
-                            {{#each viagensInscritas}}
-                            <div class="row mt-4">
-                                <div class="col-md-10">
-                                    <a href="/viagem/detalhes/{{this.id}}" class="h6"
-                                        style="color: black; cursor: pointer;">
-                                        {{this.titulo}} 
-                                    </a>
-                                </div>
+                        <!-- Viagens listadas -->
+                        {{#if viagensInscritas.length}}
+                        {{#each viagensInscritas}}
+                        <div class="row mt-4">
+                            <div class="col-md-10">
+                                <a href="/viagem/detalhes/{{this.id}}" class="h6"
+                                    style="color: black; cursor: pointer; font-weight: 600">
+                                    {{this.titulo}}
+                                </a>
                             </div>
-                            {{/each}}
+                            <div class="d-flex mt-2" style="justify-content: space-between;padding-left: 1rem;">
+                                <p>{{this.volta}}</p>
+                                <p style="color: rgb(190, 41, 168);">Atenção: você precisa confirmar presença no grupo. </p>
+                            </div>
+                        </div>
+                        <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
+
+                        {{/each}}
+                        {{else}}
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <p>Você não esta inscrita em nenhuma viagem</p>
+                            </div>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

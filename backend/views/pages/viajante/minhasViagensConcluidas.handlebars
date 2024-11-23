@@ -1,6 +1,4 @@
 {{> headerUsuario}}
-
-
 <main>
     <div class="container mt-4">
         <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
@@ -31,7 +29,8 @@
                         <!-- Linha separadora -->
                         <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
 
-                        <!-- Viagens listadas -->
+                        <!-- Verifica se há viagens -->
+                        {{#if viagensInscritas.length}}
                         {{#each viagensInscritas}}
                         <div class="row mt-4">
                             <div class="col-md-10">
@@ -40,8 +39,20 @@
                                     {{this.titulo}}
                                 </a>
                             </div>
+                            <div class="d-flex mt-2" style="padding-left: 1rem;">
+                                <p>{{this.volta}}</p>
+                                <p style="padding-left: 3rem;">{{this.vagas}} Vagas</p>
+                            </div>
                         </div>
+                        <hr style="border: 1px solid black; margin-top: 3px; margin-bottom: 20px;">
                         {{/each}}
+                        {{else}}
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <p>Nenhuma viagem concluída.</p>
+                            </div>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
