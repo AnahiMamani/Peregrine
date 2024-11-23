@@ -30,46 +30,35 @@ module.exports = {
     cadastroViajante: async (req, res) => {
         const { nome, email, senha, confirmSenha, cpf, dataNascimento, celular, termos } = req.body;
 
-        // Verificar se os campos obrigatórios estão preenchidos
         if (!nome || !email || !senha || !confirmSenha || !cpf || !dataNascimento || !celular || !termos) {
             return res.render('pages/cadastro/index', { error: 'Todos os campos são obrigatórios.' });
         }
 
-        // Verificar se a senha e a confirmação de senha correspondem
         if (senha !== confirmSenha) {
             return res.render('pages/cadastro/index', { error: 'As senhas não coincidem. Tente novamente.' });
         }
 
-        // Verificar se o checkbox de termos foi marcado
-        if (!termos) {
-            return res.render('pages/cadastro/index', { error: 'Você deve concordar com os termos e condições.' });
-        }
-
         try {
-            // Verificar se o email ou CPF já estão cadastrados
             const emailExists = await Usuario.findOne({ where: { A01_EMAIL: email } });
             const cpfExists = await Viajante.findOne({ where: { A02_CPF: cpf } });
+
             if (emailExists || cpfExists) {
                 return res.render('pages/cadastro/index', { error: 'CPF ou Email já cadastrados. Tente novamente.' });
             }
 
-            // Iniciar uma transação para garantir a consistência dos dados
             const transaction = await sequelize.transaction();
 
             try {
-                // Criptografando a senha
                 const hashedPassword = await bcrypt.hash(senha, SALT_ROUNDS);
 
-                // Criando o usuário na tabela 'Usuario' com perfil 0
                 const usuario = await Usuario.create({
                     A01_EMAIL: email,
                     A01_SENHA: hashedPassword,
-                    A01_PERFIL: 0 // Perfil fixo como 0 para usuário comum
+                    A01_PERFIL: 0
                 }, { transaction });
 
-                // Criando o viajante na tabela 'Viajante', vinculado ao usuário criado
                 await Viajante.create({
-                    A01_ID: usuario.A01_ID,  // Relacionando com o 'Usuario'
+                    A01_ID: usuario.A01_ID,
                     A02_NOME: nome,
                     A02_CPF: cpf,
                     A02_DATA_NACSI: dataNascimento,
@@ -78,10 +67,8 @@ module.exports = {
                     A01_DOCUMENTACAO: 0
                 }, { transaction });
 
-                // Confirmando todas as operações na transação
                 await transaction.commit();
 
-                // Enviar email de confirmação
                 const transport = nodemailer.createTransport({
                     host: 'smtp.gmail.com',
                     port: 465,
@@ -89,6 +76,10 @@ module.exports = {
                     auth: {
                         user: process.env.EMAIL_USER,
                         pass: process.env.EMAIL_PASS,
+                    },
+                    
+                    tls: {
+                        rejectUnauthorized: false,  // Desabilita a verificação de certificado
                     }
                 });
 
@@ -100,13 +91,11 @@ module.exports = {
                     text: 'Olá, se não funcionar o HTML, envie esta mensagem.',
                 });
 
-                // Armazenar o ID do usuário na sessão e redirecionar
                 req.session.userId = usuario.A01_ID;
                 res.redirect('/cadastro/documentacao');
 
             } catch (error) {
-                // Reverter a transação em caso de erro
-                await transaction.rollback();
+                if (!transaction.finished) await transaction.rollback();
                 console.error("Erro ao gravar os dados:", error);
                 res.render('pages/cadastro/index', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
             }
@@ -116,6 +105,7 @@ module.exports = {
             res.render('pages/cadastro/index', { error: 'Erro ao cadastrar. Tente novamente mais tarde.' });
         }
     },
+
     uploadDocumentos: async (req, res) => {
         try {
             // Obtenha o ID do usuário logado
@@ -389,37 +379,37 @@ module.exports = {
     },
     updateAvaliacao: async (req, res) => {
         const { organizadoraId, nota } = req.body;
-    
+
         try {
             // Validação da nota
             if (nota < 1 || nota > 5) {
                 return res.status(400).json({ error: 'Nota inválida. Deve estar entre 1 e 5.' });
             }
-    
+
             // Busca a organizadora pelo ID
             const organizadora = await Viajante.findOne({ where: { A02_ID: organizadoraId } });
-    
+
             if (!organizadora) {
                 return res.status(404).json({ error: 'Organizadora não encontrada.' });
             }
-    
+
             // Atualiza as notas
             const novoNotaTotal = (organizadora.A02_NOTA_TOTAL || 0) + nota;
             const novaNotaQuantidade = (organizadora.A02_NOTA_QUANTIDADE || 0) + 1;
             const novaNotaMedia = novoNotaTotal / novaNotaQuantidade;
-    
+
             // Salva os dados no banco
             await organizadora.update({
                 A02_NOTA_TOTAL: novoNotaTotal,
                 A02_NOTA_QUANTIDADE: novaNotaQuantidade,
                 A02_NOTA: novaNotaMedia
             });
-    
+
             // Retorna sucesso em JSON
             res.status(200).json({ message: 'Avaliação registrada com sucesso!' });
         } catch (error) {
             console.error('Erro ao atualizar a avaliação:', error);
             res.status(500).json({ error: 'Erro ao registrar a avaliação. Tente novamente mais tarde.' });
         }
-    }   
+    }
 }

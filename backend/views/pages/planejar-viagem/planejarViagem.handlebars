@@ -146,22 +146,30 @@
             style="width: 90vw;height: 9rem;"></textarea>
 
         <!-- o botão abaixo abre uma janela no js para confirmação da criação da viagem-->
-    <button type="button" class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem;">
-        Criar viagem
-    </button>
+        {{!-- <button type="button" class="btn btn-primary" id="confirmaPlanejarViagem"
+            style="width: 20rem; margin-left:350px;">
+            Criar viagem
+        </button> --}}
+        <div class="d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-primary" id="confirmaPlanejarViagem" style="width: 20rem; margin-bottom:50px;">
+                Criar viagem
+            </button>
+        </div>
+
     </form>
-    
-<!-- Div que aparece como janela de confirmação -->
-<div id="confirmOverlay" class="confirm-overlay" style="display: none;">
-    <div class="confirm-box">
-        <h4>Você confirma a criação dessa viagem?</h4>
-        <p>Após publicada, a viagem estará visível a todas as usuárias do site.<br>Essa ação poderá ser desfeita.</p>
-        <div class="confirm-buttons">
-            <button type="button" class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
-            <button type="button" class="btn btn-primary btn-confirmar-sim">Sim, publicar</button>
+
+    <!-- Div que aparece como janela de confirmação -->
+    <div id="confirmOverlay" class="confirm-overlay" style="display: none;">
+        <div class="confirm-box">
+            <h4>Você confirma a criação dessa viagem?</h4>
+            <p>Após publicada, a viagem estará visível a todas as usuárias do site.<br>Essa ação poderá ser desfeita.
+            </p>
+            <div class="confirm-buttons">
+                <button type="button" class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
+                <button type="button" class="btn btn-primary btn-confirmar-sim">Sim, publicar</button>
+            </div>
         </div>
     </div>
-</div>
 </main>
 
 <div class="row">
@@ -175,24 +183,24 @@
 
 {{> footer }}
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const btnCriarViagem = document.getElementById('confirmaPlanejarViagem');
-    const confirmOverlay = document.getElementById('confirmOverlay');
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnCriarViagem = document.getElementById('confirmaPlanejarViagem');
+        const confirmOverlay = document.getElementById('confirmOverlay');
 
-    // Quando clicar no botão "Criar viagem"
-    btnCriarViagem.addEventListener('click', () => {
-        confirmOverlay.style.display = 'flex'; // Mostra a janela de confirmação
-    });
+        // Quando clicar no botão "Criar viagem"
+        btnCriarViagem.addEventListener('click', () => {
+            confirmOverlay.style.display = 'flex'; // Mostra a janela de confirmação
+        });
 
-    // Quando clicar em "Não, quero voltar"
-    document.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
-        confirmOverlay.style.display = 'none'; // Esconde a janela de confirmação
-    });
+        // Quando clicar em "Não, quero voltar"
+        document.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+            confirmOverlay.style.display = 'none'; // Esconde a janela de confirmação
+        });
 
-    // Quando clicar em "Sim, publicar"
-    document.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
-        // Submete o formulário
-        document.querySelector('form').submit();
+        // Quando clicar em "Sim, publicar"
+        document.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
+            // Submete o formulário
+            document.querySelector('form').submit();
+        });
     });
-});
 </script>
