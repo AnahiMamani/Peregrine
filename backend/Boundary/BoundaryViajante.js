@@ -354,13 +354,13 @@ module.exports = {
             res.status(500).send('Erro no servidor');
         }
     },
-    renderPesquisaViagem: (req, res) => {
-        res.render('pages/pesquisa-viagem/pesquisaViagem', {
-            title: 'Pesquisa de viagem',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
+    // renderPesquisaViagem: (req, res) => {
+    //     res.render('pages/pesquisa-viagem/pesquisaViagem', {
+    //         title: 'Pesquisa de viagem',
+    //         logoPath: '/images/logo.ico',
+    //         user: req.session.user
+    //     });
+    // },
     renderMinhasViagens: (req, res) => {
         res.render('pages/viajante/minhasViagens', {
             title: 'Minhas viagens',
@@ -402,7 +402,7 @@ module.exports = {
             // Busca a primeira viagem com status "Planejada"
             const viagem = await Viagem.findOne({
                 where: {
-                    A03_STATUS: 'Planejada'
+                    A03_STATUS: 'Ativada'
                 }
             });
 
@@ -590,6 +590,14 @@ module.exports = {
     renderAnuncio: (req, res) => {
         res.render('pages/viajante/anuncioViagem', {
             title: 'Pausar anúncio da viagem',
+            logoPath: '/images/logo.ico',
+            user: req.session.user
+        });
+    },
+
+    renderConsultaViagensInscritas: (req, res) => {
+        res.render('pages/viajante/consulta-viagem/consultaViagensInscritas', {
+            title: 'Consulta viagem inscrita',
             logoPath: '/images/logo.ico',
             user: req.session.user
         });

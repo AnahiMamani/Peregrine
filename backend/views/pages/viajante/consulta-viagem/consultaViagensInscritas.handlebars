@@ -1,0 +1,298 @@
+{{> headerUsuario}}
+
+<main>
+    <div class="row">
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            &nbsp;
+        </div>
+    </div>
+
+    <form class="container">
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-end" style="margin-left: 48vw;">
+            <!-- Texto da organizadora -->
+            <div class="my-2 text-end">
+                <h3>Organizadora:</h3>
+                <h4 id="nomeOrganizadora" name="nomeOrganizadora"
+                    style="color: #99067E; font-weight: bold; cursor: pointer;">
+                    {{#if viagem.A02_APELIDO}}
+                    {{viagem.A02_APELIDO}}
+                    {{else}}
+                    {{viagem.A02_NOME}}
+                    {{/if}}
+                </h4>
+                <p id="avaliacaoOrganizadora" name="avaliacaoOrganizadora" style="font-size: 1.2rem; color: #6c757d;">
+                    <span style="color: #99067E;">★</span> {{viagem.A02_NOTA}}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <h1 class="border-0 fs-1 text-center rounded-4">
+                {{viagem.A03_TITULO}}
+            </h1>
+            <h5 class="my-4 container text-center border-secondary" style="height: 1rem;">
+                {{viagem.A03_SUBTITULO}}
+            </h5>
+        </div>
+        <!-- espaço para inserção das principais informações da viagem -->
+        <div class="row my-4 container text-center rounded-4 border border-2 border-secondary" style="width: 90vw;">
+            <div class="container my-4">
+                <!-- Linha contendo as 4 colunas -->
+                <div class="row justify-content-center">
+                    <!-- Primeira coluna - Origem -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-origem-localizacao.png" alt="Ícone de localização"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Origem</h4>
+                        </div>
+                        <p type="text" name="origemViagem" id="origemViagem" class="form-control text-center rounded-4"
+                            style="height: 2.5rem;">{{viagem.A03_ORIGEM}}</p>
+                    </div>
+
+                    <!-- Segunda coluna - Destino -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-destino-mundo.png" alt="Ícone de mundo - localização"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Destino</h4>
+                        </div>
+                        <p type="text" name="destinoViagem" id="destinoViagem" placeholder="Para onde você vai?"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">{{viagem.A03_DESTINO}}
+                        </p>
+                    </div>
+
+                    <!-- Terceira coluna - Vagas -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-perfilPreto.png" alt="Ícone de mulher - pessoa"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Vagas</h4>
+                        </div>
+                        <p type="number" name="vagasViagem" id="vagasViagem" placeholder="Total de vagas oferecidas"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">{{viagem.A03_VAGAS}}</p>
+                    </div>
+
+                    <!-- Quarta coluna - Custo -->
+                    <div class="col-12 col-md-3 p-4 my-4 d-flex flex-column align-items-center">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="/images/icon-dinheiro.png" alt="Ícone de dinheiro"
+                                style="width: 1.5rem; height: 1.5rem; margin-right: 0.5rem;">
+                            <h4 class="m-0">Custo estimado</h4>
+                        </div>
+                        <p type="number" name="custoViagem" id="custoViagem" placeholder="Valor para cada uma"
+                            class="form-control text-center rounded-4" style="height: 2.5rem;">{{viagem.A03_CUSTO}}</p>
+                    </div>
+                </div>
+
+                <!-- Campo para o período de viagem -->
+                <div class="row justify-content-center">
+                    <!-- Campo de ida e volta -->
+                    <div class="col-12 col-md-6 p-4 my-4">
+                        <div class="d-flex align-items-center justify-content-center px-2 mb-2">
+                            <h4 class="m-0 me-5">Ida</h4>
+                            <div class="d-flex align-items-center" style="margin-left: 130px;">
+                                <h4 class="m-0">Embarque</h4>
+                                <img src="/images/icon-data.png" alt="Ícone de data - calendário" class="mx-2"
+                                    style="width: 1.5rem; height: 1.5rem;">
+                                <h4 class="m-0">Horário</h4>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <p id="localIdaViagem" class="form-control text-center rounded-start-4"
+                                style="height: 2.5rem; flex: 2;">{{viagem.A03_LOCAL_IDA}}</p>
+                            <p id="dataIdaViagem" class="form-control text-center" style="height: 2.5rem; flex: 1;">
+                                {{viagem.A03_DATA_IDA}}</p>
+                            <p id="horaIdaViagem" class="form-control text-center rounded-end-4"
+                                style="height: 2.5rem; flex: 1;">{{viagem.A03_HORA_IDA}}</p>
+                        </div>
+                    </div>
+
+                    <!-- Campo de volta -->
+                    <div class="col-12 col-md-6 p-4 my-4">
+                        <div class="d-flex align-items-center justify-content-center px-2 mb-2">
+                            <h4 class="m-0 me-5">Volta</h4>
+                            <div class="d-flex align-items-center" style="margin-left: 100px;">
+                                <h4 class="m-0">Embarque</h4>
+                                <img src="/images/icon-data.png" alt="Ícone de data - calendário" class="mx-2"
+                                    style="width: 1.5rem; height: 1.5rem;">
+                                <h4 class="m-0">Horário</h4>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group">
+                                <p id="localIdaViagem" class="form-control text-center rounded-start-4"
+                                    style="height: 2.5rem; flex: 2;">{{viagem.A03_LOCAL_VOLTA}}</p>
+                                <p id="dataIdaViagem" class="form-control text-center" style="height: 2.5rem; flex: 1;">
+                                    {{viagem.A03_DATA_VOLTA}}</p>
+                                <p id="horaIdaViagem" class="form-control text-center rounded-end-4"
+                                    style="height: 2.5rem; flex: 1;">{{viagem.A03_HORA_VOLTA}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- espaço para inserção do texto descritivo da viagem -->
+        <p name="descricaoViagem" id="descricaoViagem"
+            class="row my-4 container rounded-4 border border-2 border-secondary"
+            style="height: 37rem; width: 80vw; padding: 2rem; text-align: justify;">
+            {{viagem.A03_DESCRICAO}}
+        </p>
+
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                &nbsp;
+            </div>
+        </div>
+
+        <!-- o botão abaixo abre uma janela no js para confirmação da inscrição na viagem-->
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center">
+                <a href="/perfil/minhas-viagens-inscritas/{{viagem.A03_ID}}" id="consultaviageminscrita">
+                    <button class="btn btn-primary" type="button">
+                        Ok, entendi
+                    </button>
+                </a>
+            </div>
+
+
+
+        </div>
+    </form>
+</main>
+
+<div class="row">
+    <div class="col">
+        &nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        &nbsp;
+    </div>
+</div>
+
+
+{{> footer }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
+{{!--
+<script src="/scripts/u_pesquisaViagemDetalhes.js"></script>
+<script src="/scripts/testedoperfildaorganizadora.js"></script> --}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnConsultaViagemInscrita = document.getElementById('consultaViagemInscrita');
+
+        btnConsultaViagemInscrita.addEventListener('click', () => {
+            // Cria a estrutura HTML da janela de confirmação
+            const overlay = document.createElement('div');
+            overlay.id = 'confirmOverlay';
+            overlay.className = 'confirm-overlay';
+            overlay.innerHTML = `
+            <div class="card-body confirm-box">
+                <div class="my-2">
+                    <h4 class="text-center" style="font-weight: bold;">
+                    {{#if viagem.A02_APELIDO}}
+                    {{viagem.A02_APELIDO}}
+                    {{else}}
+                    {{viagem.A02_NOME}}
+                    {{/if}}
+                    </h4>
+                    <p class="text-center" style="font-size: 1.2rem; color: #6c757d;"><span style="color: #99067E;">★</span>{{viagem.A02_NOTA}}</p>
+                </div>
+                <p class="text-justify">{{viagem.A02_DESCRICAO}}</p>
+                <button class="btn btn-primary btn-confirmar-entendi w-50">Ok, entendi!</button>
+            </div>
+        `;
+
+            // Adiciona a janela ao body
+            document.body.appendChild(overlay);
+
+            // Fecha a janela ao clicar no botão "Ok,entendi"
+            overlay.querySelector('.btn-confirmar-entendi').addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnConsultaViagemInscrita = document.getElementById('consultaViagemInscrita');
+
+        btnConsultaViagemInscrita.addEventListener('click', (event) => {
+            event.preventDefault(); // Previne o comportamento padrão do botão (evita o recarregamento da página)
+
+            // Cria a estrutura HTML da janela de confirmação
+            const overlay = document.createElement('div');
+            overlay.id = 'confirmOverlay';
+            overlay.className = 'confirm-overlay';
+            overlay.innerHTML = `
+            <div class="confirm-box">
+                <h4>Você confirma sua inscrição nessa viagem?</h4>
+                <p>Ao concordar você será direcionada para o grupo externo da viagem (moderado e sob responsabilidade da organizadora, sem intervenção do Peregrine)</p>
+                <div class="confirm-buttons">
+                    <button class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
+                    <button class="btn btn-primary btn-confirmar-sim">Sim, partiu viajar!</button>
+                </div>
+            </div>
+        `;
+
+            // Adiciona a janela ao body
+            document.body.appendChild(overlay);
+
+            // Fecha a janela ao clicar no botão "Não, quero voltar"
+            overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
+
+            // Redireciona para adicionar viagem no back-end ao clicar no botão "Sim, partiu viajar!"
+            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
+                const viagemId = btnInscreverViagem.dataset.viagemId; // Obter o ID da viagem do botão
+
+                try {
+                    const response = await fetch(`/control/adicionar/${viagemId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (response.ok) {
+                        window.location.href = '/viagem/inscricao'; // Redireciona ao concluir com sucesso
+                    } else {
+                        const errorData = await response.json(); // Obtém os dados de erro
+                        alert(`Erro ao inscrever-se na viagem: ${errorData.message || 'Tente novamente.'}`);
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                    alert('Ocorreu um erro inesperado.');
+                }
+            });
+
+        });
+    });
+
+</script>
