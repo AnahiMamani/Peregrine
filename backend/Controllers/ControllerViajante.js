@@ -54,7 +54,8 @@ module.exports = {
                 const usuario = await Usuario.create({
                     A01_EMAIL: email,
                     A01_SENHA: hashedPassword,
-                    A01_PERFIL: 0
+                    A01_PERFIL: 0,
+                    A01_STATUS: 'ATIVO'
                 }, { transaction });
 
                 await Viajante.create({
@@ -360,10 +361,11 @@ module.exports = {
 
             const viajanteId = viajante.A02_ID;
 
-            // Excluir viajante e usuário
-            await Viajante.destroy({ where: { A02_ID: viajanteId } });
-            await Usuario.destroy({ where: { A01_ID: userId } });
-
+            // mudando status da conta para INATIVO
+            await Usuario.update(
+                { A01_STATUS: 'INATIVO' },
+                { where: { A01_ID: userId } }
+            );
             // Destruir a sessão do usuário
             req.session.destroy((err) => {
                 if (err) {
@@ -378,40 +380,66 @@ module.exports = {
         }
     },
     updateAvaliacao: async (req, res) => {
+        const avaliadorId = req.session?.user?.id;
         const { organizadoraId, nota } = req.body;
-
+    
         try {
             // Validação da nota
             if (nota < 1 || nota > 5) {
                 return res.status(400).json({ error: 'Nota inválida. Deve estar entre 1 e 5.' });
             }
-
-            // Busca a organizadora pelo ID
-            const organizadora = await Viajante.findOne({ where: { A02_ID: organizadoraId } });
-
-            if (!organizadora) {
-                return res.status(404).json({ error: 'Organizadora não encontrada.' });
+    
+            // Verifica se o avaliado existe
+            const avaliado = await Viajante.findOne({ where: { A02_ID: organizadoraId } });
+            if (!avaliado) {
+                return res.status(404).json({ error: 'Viajante avaliado não encontrado.' });
             }
-
-            // Atualiza as notas
-            const novoNotaTotal = (organizadora.A02_NOTA_TOTAL || 0) + nota;
-            const novaNotaQuantidade = (organizadora.A02_NOTA_QUANTIDADE || 0) + 1;
-            const novaNotaMedia = novoNotaTotal / novaNotaQuantidade;
-
-            // Salva os dados no banco
-            await organizadora.update({
-                A02_NOTA_TOTAL: novoNotaTotal,
-                A02_NOTA_QUANTIDADE: novaNotaQuantidade,
+    
+            // Verifica se o avaliador existe
+            const avaliador = await Viajante.findOne({ where: { A02_ID: avaliadorId } });
+            if (!avaliador) {
+                return res.status(404).json({ error: 'Viajante avaliador não encontrado.' });
+            }
+    
+            // Busca avaliação existente
+            const avaliacaoExistente = await Avaliacao.findOne({
+                where: { A02_ID: organizadoraId, Avaliador_ID: avaliadorId }
+            });
+    
+            if (avaliacaoExistente) {
+                // Atualiza a nota existente
+                avaliacaoExistente.A06_NOTA = nota;
+                await avaliacaoExistente.save();
+            } else {
+                // Cria nova avaliação
+                await Avaliacao.create({
+                    A02_ID: organizadoraId,
+                    Avaliador_ID: avaliadorId,
+                    A06_NOTA: nota
+                });
+            }
+    
+            // Recalcula a média
+            const avaliacoes = await Avaliacao.findAll({
+                where: { A02_ID: organizadoraId },
+                attributes: [[sequelize.fn('AVG', sequelize.col('A06_NOTA')), 'media']],
+                raw: true
+            });
+    
+            const novaNotaMedia = parseFloat(avaliacoes[0].media) || 0;
+    
+            // Atualiza o viajante avaliado
+            await avaliado.update({
                 A02_NOTA: novaNotaMedia
             });
-
-            // Retorna sucesso em JSON
+    
             res.status(200).json({ message: 'Avaliação registrada com sucesso!' });
         } catch (error) {
             console.error('Erro ao atualizar a avaliação:', error);
             res.status(500).json({ error: 'Erro ao registrar a avaliação. Tente novamente mais tarde.' });
         }
     },
+    
     alterarViagem: async (req, res) => {
         const {
             linkgrupo,

@@ -56,7 +56,9 @@ module.exports = {
                 const usuario = await Usuario.create({
                     A01_EMAIL: email,
                     A01_SENHA: hashedPassword,
-                    A01_PERFIL: 1
+                    A01_PERFIL: 1,
+                    A01_STATUS: 'ATIVO'
+
                 }, { transaction });
 
                 await transaction.commit();
@@ -108,8 +110,11 @@ module.exports = {
                 text: 'Sua conta foi removida do sistema de administradores.',
             });
 
-            // Remove o administrador após o envio do e-mail
-            const result = await Usuario.destroy({ where: { A01_ID: userId } });
+            // mudando status da conta
+            await Usuario.update(
+                { A01_STATUS: 'INATIVO' },
+                { where: { A01_ID: userId } }
+            );
 
             if (result > 0) {
                 res.status(200).send('Administrador deletado com sucesso.');
@@ -159,9 +164,11 @@ module.exports = {
             // Enviar o e-mail
             await transporter.sendMail(mailOptions);
 
-            // Excluir viajante e usuário associados
-            await Viajante.destroy({ where: { A02_ID: userId } });
-            await Usuario.destroy({ where: { A01_ID: usuarioId } });
+            // mudando status da conta para BANIDO
+            await Usuario.update(
+                { A01_STATUS: 'BANIDO' },
+                { where: { A01_ID: usuarioId } }
+            );
 
             // Redirecionar ou retornar sucesso
             res.redirect('/viajantes/gerenciar/banir');

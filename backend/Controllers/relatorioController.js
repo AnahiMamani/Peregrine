@@ -1,11 +1,7 @@
 const PdfMake = require('pdfmake'); // Importa a biblioteca pdfmake
-const Viagem = require('../models/Viagem_03'); 
+const Viagem = require('../models/Viagem_03');
 const sequelize = require('sequelize');
-
-// Definindo as fontes necessárias para o pdfmake
 const pdfMakePrinter = require('pdfmake/src/printer');
-const fs = require('fs');
-const path = require('path');
 
 // Função para gerar o relatório de destinos
 async function gerarRelatorioViagens() {
@@ -58,20 +54,24 @@ async function gerarRelatorioViagens() {
                 bolditalics: 'C:/xampp/htdocs/Peregrine/backend/fonts/Roboto-MediumItalic.ttf'
             }
         };
-        
 
-        const printer = new pdfMakePrinter(fonts); // Inicializa o printer com as fontes
-        const pdfDoc = printer.createPdfKitDocument(docDefinition); // Gera o documento PDF
-        const filePath = 'C:/xampp/htdocs/Peregrine/backend/relatorio/relatorio.pdf'; // Caminho absoluto
-        // Salva o PDF no diretório especificado
-        pdfDoc.pipe(fs.createWriteStream(filePath));
+        const printer = new pdfMakePrinter(fonts);
+        const pdfDoc = printer.createPdfKitDocument(docDefinition);
+
+        // Criar buffer para armazenar o PDF na memória
+        let chunks = [];
+        pdfDoc.on('data', (chunk) => chunks.push(chunk)); // Coleta dados do PDF
+        pdfDoc.on('end', () => {}); // Finalização do PDF
         pdfDoc.end();
 
-        // Após salvar o arquivo, você pode redirecionar para o download
-        return filePath;
-
+        // Retornar o buffer completo
+        return new Promise((resolve, reject) => {
+            pdfDoc.on('end', () => resolve(Buffer.concat(chunks)));
+            pdfDoc.on('error', reject);
+        });
     } catch (error) {
         console.error('Erro ao gerar o relatório de viagens:', error);
+        throw error; // Lança o erro para ser tratado pela rota
     }
 }
 

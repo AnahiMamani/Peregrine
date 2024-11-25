@@ -22,54 +22,54 @@
                     <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
                         style="height: 60vh; overflow-y: auto;padding-right: 3rem;padding-left: 3rem;">
                         {{#if buscaRealizada}}
-                        {{#if viajantes.length}}
-                        <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
-                            <thead style="position: sticky; top: 0; background-color: white; z-index: 1; height: 5rem;">
-                                <tr>
-                                    <th>
-                                        <h4 style="text-transform: uppercase;">NOME</h4>
-                                    </th>
-                                    <th>
-                                        <h4 style="text-transform: uppercase;">email</h4>
-                                    </th>
-                                    </th>
-                                    <th>
-                                        <h4 style="text-transform: uppercase;">CELULAR</h4>
-                                    </th>
-                                    <th>
-                                        <h4 style="text-transform: uppercase;">DOCUMENTAÇÃO</h4>
-                                    </th>
-                                    <th>
-                                        <h4 style="text-transform: uppercase;">APROVAÇÃO</h4>
-                                    </th>
-                                    <th>
-                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each viajantes}}
-                                <tr>
-                                    <td>{{this.A02_NOME}}</td>
-                                    <td>{{this.A01_EMAIL}}</td>
-                                    <td>{{this.A02_CELULAR}}</td>
-                                    <td style="color: {{#if this.A02_DOCUMENTACAO}}green{{else}}red{{/if}}">
-                                        {{#if this.A02_DOCUMENTACAO}}Enviada{{else}}Não enviada{{/if}}
-                                    </td>
-                                    <td style="color: {{#if this.A02_APROVADA}}green{{else}}red{{/if}}">
-                                        {{#if this.A02_APROVADA}}Aprovada{{else}}Pendente{{/if}}
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-danger btn-lg w-100"
-                                            data-id="{{this.A02_ID}}">Banir</button>
-                                    </td>
-                                </tr>
-                                {{/each}}
-                            </tbody>
-                        </table>
-                        {{else}}
-                        <p>Nenhum viajante encontrado.</p>
-                        {{/if}}
+                            {{#if viajantes.length}}
+                            <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
+                                <thead style="position: sticky; top: 0; background-color: white; z-index: 1; height: 5rem;">
+                                    <tr>
+                                        <th>
+                                            <h4 style="text-transform: uppercase;">NOME</h4>
+                                        </th>
+                                        <th>
+                                            <h4 style="text-transform: uppercase;">email</h4>
+                                        </th>
+                                        </th>
+                                        <th>
+                                            <h4 style="text-transform: uppercase;">CELULAR</h4>
+                                        </th>
+                                        <th>
+                                            <h4 style="text-transform: uppercase;">DOCUMENTAÇÃO</h4>
+                                        </th>
+                                        <th>
+                                            <h4 style="text-transform: uppercase;">APROVAÇÃO</h4>
+                                        </th>
+                                        <th>
+                                            <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each viajantes}}
+                                    <tr>
+                                        <td>{{this.A02_NOME}}</td>
+                                        <td>{{this.A01_EMAIL}}</td>
+                                        <td>{{this.A02_CELULAR}}</td>
+                                        <td style="color: {{#if this.A02_DOCUMENTACAO}}green{{else}}red{{/if}}">
+                                            {{#if this.A02_DOCUMENTACAO}}Enviada{{else}}Não enviada{{/if}}
+                                        </td>
+                                        <td style="color: {{#if this.A02_APROVADA}}green{{else}}red{{/if}}">
+                                            {{#if this.A02_APROVADA}}Aprovada{{else}}Pendente{{/if}}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-danger btn-lg w-100"
+                                                data-id="{{this.A02_ID}}">Banir</button>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            {{else}}
+                            <p>Nenhum viajante encontrado.</p>
+                            {{/if}}
                         {{else}}
                         <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
                             <thead style="position: sticky; top: 0; background-color: white; z-index: 1;height: 5rem;">
@@ -112,6 +112,11 @@
                                             data-id="{{this.A02_ID}}">Banir</button>
                                     </td>
                                 </tr>
+                                {{else}}
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: gray; font-style: italic;">Não há
+                                        usuários</td>
+                                </tr>
                                 {{/each}}
                             </tbody>
                         </table>
@@ -122,35 +127,34 @@
         </div>
     </div>
 </div>
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner">
+        <img src="/images/loading.png" alt="Carregando...">
+    </div>
+</div>
 <script>
-    document.getElementById('searchInput').addEventListener('input', function() {
-    if (this.value === '') {
-        document.getElementById('searchForm').submit();
-    }
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        const banirButtons = document.querySelectorAll('.btn-danger'); // Botões de banir
 
-document.addEventListener('DOMContentLoaded', function () {
-    const banirButtons = document.querySelectorAll('.btn-danger'); // Botões de banir
-    
-    // Para cada botão de banir, adicionamos o evento de clique
-    banirButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            const userId = this.getAttribute('data-id');
-            showConfirmBox(userId);
+        // Adicionar evento de clique para cada botão
+        banirButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const userId = this.getAttribute('data-id');
+                showConfirmBox(userId);
+            });
         });
-    });
 
-    // Função para mostrar a caixa de confirmação
-    function showConfirmBox(userId) {
-        // Cria o overlay e a caixa de confirmação
-        const overlay = document.createElement('div');
-        overlay.className = 'confirm-overlay';
+        // Função para mostrar a caixa de confirmação
+        function showConfirmBox(userId) {
+            // Cria o overlay e a caixa de confirmação
+            const overlay = document.createElement('div');
+            overlay.className = 'confirm-overlay';
 
-        const confirmBox = document.createElement('div');
-        confirmBox.className = 'confirm-box';
+            const confirmBox = document.createElement('div');
+            confirmBox.className = 'confirm-box';
 
-        confirmBox.innerHTML = `
+            confirmBox.innerHTML = `
             <h4>Você tem certeza que deseja banir esta Viajante?</h4>
             <p>Essa ação não poderá ser desfeita. A Viajante será banida permanentemente.</p>
             <div class="confirm-buttons">
@@ -159,39 +163,88 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
 
-        overlay.appendChild(confirmBox);
-        document.body.appendChild(overlay);
+            overlay.appendChild(confirmBox);
+            document.body.appendChild(overlay);
 
-        // Ação para o botão de cancelar
-        document.getElementById('cancelar').addEventListener('click', function () {
-            document.body.removeChild(overlay); // Fecha o overlay
-        });
+            // Ação para o botão de cancelar
+            document.getElementById('cancelar').addEventListener('click', function () {
+                document.body.removeChild(overlay); // Fecha o overlay
+            });
 
-        // Ação para o botão de confirmar
-        document.getElementById('confirmarBanimento').addEventListener('click', function () {
-            // Envia o pedido de banir para o servidor usando POST
+            // Ação para o botão de confirmar
+            document.getElementById('confirmarBanimento').addEventListener('click', function () {
+                banirUsuario(userId, overlay);
+            });
+        }
+
+        // Função para banir o usuário
+        function banirUsuario(userId, overlay) {
+            // Mostra a animação de carregamento (se implementada)
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) loadingOverlay.style.display = 'flex';
+
             fetch(`/control/deleteViajante/${userId}`, {
-                method: 'POST', // Usando POST como estava no seu código original
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: userId }) // Envia o ID do usuário
             })
-            .then(response => {
-                if (response.ok) {
-                    // Redireciona para a página '/administradores/banir' após a exclusão
-                    window.location.href = '/viajantes/gerenciar/banir'; // Redirecionamento após sucesso
-                } else {
-                    alert('Erro ao banir a usuária.');
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao enviar requisição:', error);
-                alert('Erro na comunicação com o servidor.');
-            });
-            document.body.removeChild(overlay); // Fecha o overlay
-        });
-    }
-});
-
+                .then(response => {
+                    if (response.ok) {
+                        // Redireciona para a página após a exclusão
+                        window.location.href = '/viajantes/gerenciar/banir';
+                    } else {
+                        alert('Erro ao banir a usuária.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar requisição:', error);
+                    alert('Erro na comunicação com o servidor.');
+                })
+                .finally(() => {
+                    // Remove o overlay de carregamento (se implementado)
+                    if (loadingOverlay) loadingOverlay.style.display = 'none';
+                    // Fecha a confirmação
+                    document.body.removeChild(overlay);
+                });
+        }
+    });
 </script>
+
+
+<style>
+    /* Estilo para o overlay de carregamento */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        display: none;
+        /* Oculto inicialmente */
+    }
+
+    /* Estilo para a imagem de carregamento */
+    .spinner img {
+        width: 80px;
+        /* Tamanho da imagem */
+        height: 80px;
+        animation: spin 1s linear infinite;
+        /* Animação de rotação */
+    }
+
+    /* Animação de rotação */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>

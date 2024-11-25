@@ -12,22 +12,21 @@ const { gerarRelatorioViagens } = require('../Controllers/relatorioController');
 // Rota para gerar o relatório e fazer o download
 router.get('/relatorio/gerar', async (req, res) => {
     try {
-        // Gerar o relatório e obter o caminho do arquivo
-        const filePath = await gerarRelatorioViagens();
+        // Gera o buffer do PDF
+        const pdfBuffer = await gerarRelatorioViagens();
 
-        // Enviar o arquivo PDF gerado para o usuário
-        res.download(filePath, 'relatorio.pdf', (err) => {
-            if (err) {
-                console.log('Erro ao enviar o arquivo:', err);
-            } else {
-                console.log('Relatório enviado com sucesso');
-            }
-        });
+        // Configura os cabeçalhos para o download do arquivo
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=relatorio.pdf');
 
+        // Envia o buffer como resposta
+        res.send(pdfBuffer);
     } catch (error) {
+        console.error('Erro ao gerar o relatório:', error);
         res.status(500).send('Erro ao gerar o relatório');
     }
 });
+
 // Página inicial
 router.get('/', BoundaryUsuario.renderIndex);
 router.get('/sobre', BoundaryUsuario.renderSobre);

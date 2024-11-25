@@ -56,14 +56,18 @@ module.exports = {
                         {
                             model: Usuario,
                             attributes: ['A01_EMAIL'], // Campos do usuário que queremos incluir
-                            required: true // Inclui apenas os viajantes que têm usuários associados
+                            required: true, // Inclui apenas os viajantes que têm usuários associados
+                            where: {
+                                A01_STATUS: 'ATIVO' // Filtra apenas usuários com status ativo
+                            }
                         }
                     ],
                     where: {
                         [Op.or]: [
                             { A02_NOME: { [Op.like]: `%${query}%` } }, // Filtra pelo nome do viajante
                             { '$Usuario.A01_EMAIL$': { [Op.like]: `%${query}%` } } // Filtra pelo email do usuário
-                        ]
+                        ],
+                        A01_STATUS: 'ATIVO'
                     }
                 });
             } else {
@@ -71,7 +75,10 @@ module.exports = {
                 viajantes = await Viajante.findAll({
                     include: {
                         model: Usuario,
-                        attributes: ['A01_EMAIL'] // Campos que você deseja obter
+                        attributes: ['A01_EMAIL'], // Campos que você deseja obter
+                        where: {
+                            A01_STATUS: 'ATIVO' // Filtra apenas usuários com status ativo
+                        }
                     }
                 });
             }
@@ -176,14 +183,16 @@ module.exports = {
                             { A01_ID: query },
                             { A01_EMAIL: { [Op.like]: `%${query}%` } }
                         ],
-                        A01_PERFIL: 1  // Adiciona a condição de filtro para A02_PERFIL igual a 1
+                        A01_PERFIL: 1,  // Adiciona a condição de filtro para A02_PERFIL igual a 1
+                        A01_STATUS: 'ATIVO'
                     }
                 });
             } else {
                 // Se o campo de busca estiver vazio, exibe todos os registros com A02_PERFIL igual a 1
                 usuarios = await Usuario.findAll({
                     where: {
-                        A01_PERFIL: 1  // Condição para filtrar apenas usuários com A02_PERFIL igual a 1
+                        A01_PERFIL: 1,  // Condição para filtrar apenas usuários com A02_PERFIL igual a 1
+                        A01_STATUS: 'ATIVO'
                     }
                 });
             }
