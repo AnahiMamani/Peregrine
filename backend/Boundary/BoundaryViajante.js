@@ -2,13 +2,18 @@ const { Op } = require('sequelize');  // Importa o operador `Op` do Sequelize
 const Viajante = require('../models/Viajante_02');
 const Viagem = require('../models/Viagem_03');
 const ViagemViajante = require('../models/ViajanteViagem_04');
+
 const formatarData = (data) => {
-    return new Date(data).toLocaleDateString('pt-BR', {
+    const dataAjustada = new Date(data);
+    // Ajusta a data para o fuso horário local sem alterar o valor original
+    dataAjustada.setMinutes(dataAjustada.getMinutes() + dataAjustada.getTimezoneOffset());
+    return dataAjustada.toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
     });
 };
+
 
 const formatarMoeda = (valor) => {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
