@@ -21,16 +21,16 @@ ul {
 }
 
 .bgIndex {
-    background-image: url(../images/img-telaInicial.png); 
-    background-size: cover; 
+    background-image: url(../images/img-telaInicial.png);
+    background-size: cover;
     max-width: 100%;
     min-height: 100vh;
     font-family: "Montserrat", sans-serif;
 }
 
 .bgIndexAdm {
-    background-image: url(../images/img-a-admIndex.png); 
-    background-size: cover; 
+    background-image: url(../images/img-a-admIndex.png);
+    background-size: cover;
     background-position: center;
     height: 100vh;
     padding-top: 0;
@@ -38,17 +38,17 @@ ul {
 }
 
 .setaVoltar {
-    text-decoration: none; 
+    text-decoration: none;
     font-size: 3rem;
     color: #99067E;
     position: absolute;
     margin-left: -10%;
-} 
+}
 
 .container-conteudo {
     display: flex;
     flex-wrap: wrap;
-    height: 100vh; 
+    height: 100vh;
     width: 100%;
 }
 
@@ -56,8 +56,8 @@ ul {
     display: flex;
     min-width: 40rem;
     min-height: 50vh;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     position: relative;
 }
@@ -70,7 +70,7 @@ ul {
 }
 
 .imagem-destaque {
-    height: 96vh; 
+    height: 96vh;
     width: auto;
     border-radius: 15px;
     position: absolute;
@@ -100,20 +100,20 @@ ul {
     width: 16rem;
 }
 
-.btn-primary{
+.btn-primary {
     background-color: #99067E;
     color: #fff;
 }
 
 .btn:hover {
-    background-color: #cf70be; 
+    background-color: #cf70be;
     border-color: #cf70be;
     transition: ease-in 0.4s;
 }
 
 .recuperarSenha a {
     text-decoration: none;
-    font-family: "Montserrat",sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: #99067E;
 }
 
@@ -136,7 +136,7 @@ ul {
     padding-left: 2rem;
 }
 
-.form-check-input{
+.form-check-input {
     border-color: #99067E;
 }
 
@@ -158,8 +158,6 @@ ul {
     color: #fff;
 }
 
-
-
 /* Deixar a navbar transparente */
 .navbar {
     background-color: transparent !important;
@@ -169,7 +167,7 @@ ul {
 
 .navbar-nav {
     align-items: center;
-  }
+}
 
 .nav-link {
     color: #99067E;
@@ -178,8 +176,9 @@ ul {
     font-weight: 700;
 }
 
-.nav-link:hover{
-    background-color: #cf70be; /* Cor para hover e foco */
+.nav-link:hover {
+    background-color: #cf70be;
+    /* Cor para hover e foco */
     border-color: #cf70be;
     transition: ease-in 0.4s;
 }
@@ -189,5 +188,3 @@ ul {
     justify-content: space-between;
     align-items: center;
 }
-
-
