@@ -24,7 +24,7 @@ const Denuncia = sequelize.define('Denuncia', {
         },
         allowNull: false
     },    
-    A03_ID: {                              //NOME DA VIAGEM
+    A03_ID: {
         type: DataTypes.INTEGER,
         references: {
             model: Viagem,

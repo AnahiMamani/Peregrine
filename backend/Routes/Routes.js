@@ -79,7 +79,7 @@ router.get('/perfil/concluidas/avaliacao/:id', BoundaryViajante.renderAvaliacao)
 router.get('/perfil/avaliacao/concluida', BoundaryViajante.renderAvaliacaoConcluida);
 
 router.get('/perfil/concluidas/denuncia/:id', BoundaryViajante.renderDenuncia);
-router.get('/perfil/concluidas/denuncia/concluida', BoundaryViajante.renderDenunciaConcluida);
+router.get('/perfil/denuncia/concluida', BoundaryViajante.renderDenunciaConcluida);
 
 router.get('/perfil/alterar-email', BoundaryViajante.renderUsuarioAlterarEmail);
 router.get('/perfil/alterar-senha', BoundaryViajante.renderUsuarioAlterarSenha);

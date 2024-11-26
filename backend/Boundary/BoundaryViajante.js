@@ -564,13 +564,56 @@ module.exports = {
             res.status(500).send('Erro no servidor');
         }
     },
-    renderDenuncia: (req, res) => {
-        res.render('pages/viajante/Denúncias/denunciaViagem', {
-            title: 'Denúncia',
-            logoPath: '/images/logo.ico',
-            user: req.session.user
-        });
-    },
+    
+    renderDenuncia: async (req, res) => {
+        const viagemId = req.params.id;
+    
+        try {
+            // Passo 1: Buscar os IDs dos viajantes associados à viagem
+            const viajantesNaViagem = await ViagemViajante.findAll({
+                where: { A03_ID: viagemId },
+                attributes: ['A02_ID'] // Apenas pegamos os IDs dos viajantes
+            });
+    
+            // Extraindo apenas os IDs dos viajantes
+            const idsViajantes = viajantesNaViagem.map(v => v.A02_ID);
+    
+            if (idsViajantes.length === 0) {
+                // Se não houver viajantes associados à viagem, renderiza sem dados
+                return res.render('pages/viajante/Denúncias/denunciaViagem', {
+                    title: 'Denúncia',
+                    logoPath: '/images/logo.ico',
+                    user: req.session.user,
+                    viagemId: viagemId, // Passando o viagemId para o front-end
+                    pessoasNaViagem: [] // Nenhum viajante associado
+                });
+            }
+    
+            // Passo 2: Buscar os detalhes dos viajantes na tabela Viajante
+            const viajantesDetalhes = await Viajante.findAll({
+                where: { A02_ID: idsViajantes },
+                attributes: ['A02_ID', 'A02_NOME'] // Pegamos o nome e o ID
+            });
+    
+            // Organizar os dados para enviar ao front-end
+            const pessoasNaViagem = viajantesDetalhes.map(v => ({
+                id: v.A02_ID,
+                nome: v.A02_NOME
+            }));
+    
+            // Renderizar a página com os dados obtidos
+            res.render('pages/viajante/Denúncias/denunciaViagem', {
+                title: 'Denúncia',
+                logoPath: '/images/logo.ico',
+                user: req.session.user,
+                viagemId: viagemId, // Passando o viagemId para o front-end
+                pessoasNaViagem: pessoasNaViagem
+            });
+        } catch (error) {
+            console.error('Erro ao buscar viajantes na viagem:', error);
+            res.status(500).send('Erro ao carregar os dados da denúncia.');
+        }
+    },    
     renderDenunciaConcluida: (req, res) => {
         res.render('pages/viajante/Denúncias/denunciaConcluida', {
             title: 'Denúncia concluída',

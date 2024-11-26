@@ -1,69 +1,82 @@
 {{> headerUsuario}}
-<div class="container mt-4">
-    <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
-</div>
-
 <main>
+    <div class="container mt-4">
+        <h1 style="color: #99067E; font-weight: bold; font-size: 28px; margin-bottom: 20px;">Meu perfil</h1>
+    </div>
     <div class="container mt-2 rounded-4 border border-2 border-secondary" style="padding: 20px;">
         <div class="row" style="height: 65vh; overflow-y: auto;">
             {{> menuPerfil}}
-            <!--Botão -->
+            <!-- Botão -->
             <div class="col-md-9" style="padding-left: 0;">
                 <div class="card border-0">
                     <div class="card-body">
                         <h2>Fazer Denúncia</h2>
-                        <div class="denuncia-container" style="margin: 20px;">
-                            <div class="row">
-                                <div class="col-md-8 d-flex mt-2 align-items-center">
-                                    <h5 style="padding-right: 1rem;"> <strong> Título:</strong></h5>
-                                    <input name="novaSenha" type="password" class="form-control rounded-5 mb-2"
-                                        id="inputNovaPassword" placeholder="Digite sua nova senha">
+                        <form action="/control/denuncia/{{viagemId}}" method="post" >
+                            <div class="denuncia-container" style="margin: 20px;">
+                                <div class="row">
+                                    <div class="col-md-8 d-flex mt-2 align-items-center">
+                                        <h5 style="padding-right: 1rem;"> <strong> Título:</strong></h5>
+                                        <input name="tituloDenuncia" id="tituloDenuncia" type="text" class="form-control rounded-5 mb-2"
+                                            placeholder="Digite o título da denúncia">
+                                    </div>
+                                </div>
+                                <!-- Caixa para descrever a denúncia -->
+                                <label for="descricaoDenuncia" style="font-size: 1.1rem;">Descreva sua denúncia:</label>
+                                <textarea name="descricaoDenuncia" id="descricaoDenuncia" rows="5" cols="50"
+                                    placeholder="Descreva o motivo da denúncia aqui..."
+                                    style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+
+                                <div class="dropdown">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Selecione uma pessoa
+                                    </button>
+                                    <ul id="pessoasDropdown" class="dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton1">
+                                        {{#each pessoasNaViagem}}
+                                        <li>
+                                            <a class="dropdown-item" href="#"
+                                                onclick="selecionarPessoa('{{this.nome}}', '{{this.id}}')">
+                                                {{this.nome}}
+                                            </a>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                <!-- Campo oculto para armazenar o ID da pessoa selecionada -->
+                                <input type="hidden" id="idPessoaDenunciada" name="idPessoaDenunciada" value="">
+
+                                <div class="text-center mt-4">
+                                    <button type="submit" id="denuncia" class="btn"
+                                        style="background-color:red; color: white; padding: 10px 40px; font-size: 1.2rem; border-radius: 15px; cursor: pointer; width: 300px;">
+                                        Fazer denúncia
+                                    </button>
                                 </div>
                             </div>
-                            <!-- Caixa para descrever a denúncia -->
-                            <label for="descricaoDenuncia" style="font-size: 1.1rem;">Descreva sua denúncia:</label>
-                            <textarea id="descricaoDenuncia" rows="5" cols="50"
-                                placeholder="Descreva o motivo da denúncia aqui..."
-                                style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
-
-                            <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Selecione uma pessoa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#" onclick="selecionarPessoa(this)">Anahi</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#" onclick="selecionarPessoa(this)">Fabia</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#" onclick="selecionarPessoa(this)">Luiza</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <script>
-                                function selecionarPessoa(elemento) {
-                                    // Pega o texto do item selecionado
-                                    const nome = elemento.textContent;
-
-                                    // Altera o texto do botão para o nome selecionado
-                                    const botao = document.getElementById('dropdownMenuButton1');
-                                    botao.textContent = nome;
-                                }
-                            </script>
-
-
-                            <div class="text-center mt-4">
-                                <button id="denuncia" class="btn"
-                                    style="background-color:red; color: white; padding: 10px 40px; font-size: 1.2rem; border-radius: 15px; cursor: pointer; width: 300px;">
-                                    Fazer denúncia
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-<script src="/scripts/minhasViagensDenuncia.js"></script>
+
+<script>
+    // Variável para armazenar o ID do usuário
+    let usuarioIdSelecionado = null;
+
+    // Função chamada quando um item do dropdown é selecionado
+    function selecionarPessoa(nome, id) {
+        // Armazenar o ID do usuário selecionado
+        usuarioIdSelecionado = id;
+
+        // Exibir o ID no console
+        console.log('ID do usuário selecionado:', usuarioIdSelecionado);
+
+        // Alterar o texto do botão para o nome da pessoa selecionada
+        document.getElementById('dropdownMenuButton1').textContent = nome;
+
+        // Atualizar o valor do campo oculto com o ID da pessoa
+        document.getElementById('idPessoaDenunciada').value = id;
+    }
+</script>

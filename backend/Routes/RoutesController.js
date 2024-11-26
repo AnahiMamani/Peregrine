@@ -6,6 +6,7 @@ const ControllerAdmin = require("../Controllers/ControllerAdmin");
 const ControllerViagem = require("../Controllers/ControllerViagem");
 const { criarOuAtualizarAvaliacao } = require('../Controllers/ControllerAvaliacao');
 
+
 //Contorller Administrador
 router.post("/CadastrarAdmin", ControllerAdmin.cadastroAdmin);
 router.post('/deleteAdmin/:id', ControllerAdmin.deleteAdmin);
@@ -23,6 +24,7 @@ router.post('/avaliar-organizadora', criarOuAtualizarAvaliacao);
 router.post('/viagem-update/:id', ControllerViajante.alterarViagem);
 router.post('/viagem-delete/:id', ControllerViajante.deleteViagem);
 router.post('/viagem/toggle-status/:id', ControllerViajante.toggleViagemStatus);
+router.post('/denuncia/:id', ControllerViagem.denuncia);
 
 
 //Controller Viagem
