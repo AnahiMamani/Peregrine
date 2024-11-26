@@ -6,7 +6,7 @@ const Viagem = require('./Viagem_03');
 
 const Denuncia = sequelize.define('Denuncia', {
     A05_ID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    A05_DESCRICAO: { type: DataTypes.STRING,  allowNull: false  },
+    A05_DESCRICAO: { type: DataTypes.TEXT,  allowNull: false  },
     A05_TITULO: { type: DataTypes.STRING,  allowNull: false  }, 
     A02_ID_DENUNCIADO: {
         type: DataTypes.INTEGER,
@@ -33,6 +33,7 @@ const Denuncia = sequelize.define('Denuncia', {
         allowNull: true 
     },
     A05_DATA: { type: DataTypes.DATE,  allowNull: false  },
+    A05_STATUS: { type: DataTypes.STRING, allowNull: false }
 }, {
     tableName: 'DENUNCIA_05',
     timestamps: false

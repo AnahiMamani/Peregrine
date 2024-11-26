@@ -4,9 +4,11 @@ const multer = require('multer');
 const bcrypt = require('bcrypt');
 const Usuario = require('../models/Usuario_01');
 const Viajante = require('../models/Viajante_02');
+const Denuncia = require('../models/Denuncia_05')
 const sequelize = require('../config/bd');
 require('dotenv').config(); // Para usar variáveis de ambiente do arquivo .env
 const nodemailer = require('nodemailer');
+const { cancelarDenuncia } = require('../Boundary/BoundaryAdmin');
 const SALT_ROUNDS = 10;
 
 // Configuração do multer para a rota correta
@@ -251,5 +253,101 @@ module.exports = {
                 res.status(500).send('Erro ao processar o arquivo.');
             }
         });
-    }
+    },
+
+    aceitarDenuncia: async (req, res) => {
+        const { userId, denunciaId } = req.body; // Recebe o ID do usuário e da denúncia
+        try {
+            const viajante = await Viajante.findOne({
+                where: { A02_ID: userId },
+                include: { model: Usuario, attributes: ['A01_EMAIL'] },
+            });
+    
+            if (!viajante) {
+                return res.status(404).send('Viajante não encontrado');
+            }
+    
+            const emailUsuario = viajante.Usuario.A01_EMAIL;
+            const usuarioId = viajante.A01_ID;
+    
+            // Envia o e-mail de notificação
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS,
+                },
+            });
+    
+            const mailOptions = {
+                from: `"Equipe de Administração" <${process.env.EMAIL_USER}>`,
+                to: emailUsuario,
+                subject: 'Aviso de Exclusão de Conta',
+                text: `Olá,\n\nEstamos entrando em contato para informar que sua conta será excluída de nossa plataforma. Caso tenha dúvidas, entre em contato com nosso suporte.\n\nAtenciosamente,\nEquipe de Administração`,
+            };
+    
+            await transporter.sendMail(mailOptions);
+    
+            // Atualiza o status do usuário para BANIDO
+            await Usuario.update(
+                { A01_STATUS: 'BANIDO' },
+                { where: { A01_ID: usuarioId } }
+            );
+    
+            // Atualiza o status da denúncia
+            await Denuncia.update(
+                { A05_STATUS: 'RESOLVIDA' },
+                { where: { A05_ID: denunciaId } }
+            );
+    
+            res.redirect('/denuncias/individual/banir');
+        } catch (error) {
+            console.error('Erro ao enviar e-mail ou processar banimento:', error);
+            res.status(500).send('Erro no servidor');
+        }
+    },
+    cancelarDenuncia: async (req, res) => {
+        const { userId, denunciaId } = req.body; // Recebe o ID do usuário e da denúncia
+        try {
+            const viajante = await Viajante.findOne({
+                where: { A02_ID: userId },
+                include: { model: Usuario, attributes: ['A01_EMAIL'] },
+            });
+    
+            if (!viajante) {
+                return res.status(404).send('Viajante não encontrado');
+            }
+    
+            const emailUsuario = viajante.Usuario.A01_EMAIL;
+                
+            // Envia o e-mail de notificação
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS,
+                },
+            });
+    
+            const mailOptions = {
+                from: `"Equipe de Administração" <${process.env.EMAIL_USER}>`,
+                to: emailUsuario,
+                subject: 'Aviso de Exclusão de Conta',
+                text: `Olá,\n\nEstamos entrando em contato para informar que sua conta será excluída de nossa plataforma. Caso tenha dúvidas, entre em contato com nosso suporte.\n\nAtenciosamente,\nEquipe de Administração`,
+            };
+    
+            await transporter.sendMail(mailOptions);
+    
+            // Atualiza o status da denúncia
+            await Denuncia.update(
+                { A05_STATUS: 'DESCARTADA' },
+                { where: { A05_ID: denunciaId } }
+            );
+    
+            res.redirect('/denuncias/individual/banir');
+        } catch (error) {
+            console.error('Erro ao enviar e-mail ou processar banimento:', error);
+            res.status(500).send('Erro no servidor');
+        }
+    },   
 };

@@ -55,9 +55,9 @@ router.get('/viajantes/aprovar/concluido', BoundaryAdmin.concluirAprovacao);
 
 // Denúncias de viajantes
 router.get('/viajantes/denuncias', BoundaryAdmin.renderDenuncias);
-router.get('/viajantes/denuncias/individual', BoundaryAdmin.denunciaIndividual);
-router.get('/viajantes/denuncias/individual/cancelar', BoundaryAdmin.cancelarDenuncia);
-router.get('/viajantes/denuncias/individual/banir', BoundaryAdmin.banirDenuncia);
+router.get('/viajantes/denuncias/individual/:id', BoundaryAdmin.denunciaIndividual);
+router.get('/denuncias/individual/cancelar', BoundaryAdmin.cancelarDenuncia);
+router.get('/denuncias/individual/banir', BoundaryAdmin.banirDenuncia);
 
 // Gerenciar viajantes
 router.get('/viajantes/gerenciar', BoundaryAdmin.listarViajantes);

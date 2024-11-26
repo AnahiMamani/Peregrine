@@ -17,35 +17,38 @@
                         <!--div com as informacoes da denuncia individual-->
                         <div class="col rounded-4 container p-4 my-4" style="width: 10rem; height: 60vh;">
                             <!-- título da denuncia -->
-                            <h3 id="tituloDenuncia" class="text-start" style="color: #99067E">Pessoa sem noção!</h3><br>
+                            <h3 id="tituloDenuncia" class="text-start" style="color: #99067E">{{denuncia.A05_TITULO}}
+                            </h3><br>
 
                             <!-- texto descritivo da denuncia -->
-                            <p id="descricaoDenuncia" style="font-size: 1.3rem; text-align: justify;">Usuária Fulana de
-                                tal roubou meu salgadinho no meio da viagem de ida ao destino, postou fotos feias e
-                                roncava demais!</p>
+                            <p id="descricaoDenuncia" style="font-size: 1.3rem; text-align: justify;">
+                                {{denuncia.A05_DESCRICAO}}</p>
 
+                            <p id="dateDenuncia" style="font-size: 1.3rem; text-align: justify;"><b>Data da denuncia:
+                                </b>
+                                &nbsp; {{denuncia.A05_DATA}}</p>
                             <div class="row">
                                 <div class="col">
                                     &nbsp;
                                 </div>
                             </div>
-                            <div class="row">
+                            {{!-- <div class="row">
                                 <div class="col">
                                     &nbsp;
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- texto descritivo da denuncia -->
                             <p id="nameDenunciada" style="font-size: 1.3rem; text-align: justify;"><b>Usuária
-                                    denunciada: </b> &nbsp; Adriana Silva e Silva</p>
+                                    denunciada: </b> &nbsp; {{denuncia.A02_NOME_DENUNCIADO}}</p>
 
                             <!-- texto descritivo da denuncia -->
                             <p id="nameViagem" style="font-size: 1.3rem; text-align: justify;"><b>Nome da viagem: </b>
-                                &nbsp; Reveillon em Copacabana</p>
+                                &nbsp; {{denuncia.A03_TITULO}} </p>
 
                             <!-- texto descritivo da denuncia -->
-                            <p id="dateDenuncia" style="font-size: 1.3rem; text-align: justify;"><b>Data da viagem: </b>
-                                &nbsp; 31/12/2023</p>
+                            <p id="dateViagem" style="font-size: 1.3rem; text-align: justify;"><b>Data da viagem: </b>
+                                &nbsp; {{denuncia.A03_DATA_IDA}} - {{denuncia.A03_DATA_VOLTA}} </p>
 
                             <div class="row">
                                 <div class="col">
@@ -62,13 +65,14 @@
                             <div class="row d-flex justify-content-between">
                                 <!-- botao para cancelar denuncia -->
                                 <div class="col-md-4 d-flex align-items-end">
-                                    <button type="submit" class="btn btn-primary w-75 bg-success">Cancelar
+                                    <button data-id="{{denuncia.A02_ID_DENUNCIANTE}}" data-id-denuncia="{{denuncia.A05_ID}}" type="submit" class="btn btn-primary w-75 bg-success">Cancelar
                                         denúncia</button>
                                 </div>
 
                                 <!-- botao para banir usuário -->
                                 <div class="col-md-4 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary w-75 bg-danger">Banir usuária</button>
+                                    <button data-id="{{denuncia.A02_ID_DENUNCIADO}}" data-id-denuncia="{{denuncia.A05_ID}}"
+                                        type="submit" class="btn btn-primary w-75 btn-danger">Banir usuária</button>
                                 </div>
                             </div>
                         </div>
@@ -79,5 +83,193 @@
         </div>
     </div>
 </div>
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner">
+        <img src="/images/loading.png" alt="Carregando...">
+    </div>
+</div>
+{{!--
+<script src="/scripts/a_denunciaVisualizarIndividual.js"></script> --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const banirButtons = document.querySelectorAll('.btn-danger'); // Botões de banir
 
-<script src="/scripts/a_denunciaVisualizarIndividual.js"></script>
+        // Adicionar evento de clique para cada botão
+        banirButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const userId = this.getAttribute('data-id');
+                const denunciaId = this.getAttribute('data-id-denuncia'); // Captura o ID da denúncia
+                showConfirmBox(userId, denunciaId);
+            });
+        });
+
+        // Função para mostrar a caixa de confirmação
+        function showConfirmBox(userId, denunciaId) {
+            const overlay = document.createElement('div');
+            overlay.className = 'confirm-overlay';
+
+            const confirmBox = document.createElement('div');
+            confirmBox.className = 'confirm-box';
+
+            confirmBox.innerHTML = `
+            <h4>Você tem certeza que deseja banir esta Viajante?</h4>
+            <p>Essa ação não poderá ser desfeita. A Viajante será banida permanentemente.</p>
+            <div class="confirm-buttons">
+                <button class="btn btn-secondary" id="cancelar">Voltar</button>
+                <button class="btn btn-danger" id="confirmarBanimento">Sim, banir Viajante</button>
+            </div>
+        `;
+
+            overlay.appendChild(confirmBox);
+            document.body.appendChild(overlay);
+
+            // Ação para o botão de cancelar
+            document.getElementById('cancelar').addEventListener('click', function () {
+                document.body.removeChild(overlay);
+            });
+
+            // Ação para o botão de confirmar
+            document.getElementById('confirmarBanimento').addEventListener('click', function () {
+                banirUsuario(userId, denunciaId, overlay);
+            });
+        }
+
+        // Função para banir o usuário
+        function banirUsuario(userId, denunciaId, overlay) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) loadingOverlay.style.display = 'flex';
+
+            fetch(`/control/aceitarDenuncia/${userId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: userId, denunciaId: denunciaId }) // Inclui o ID da denúncia
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/denuncias/individual/banir';
+                    } else {
+                        alert('Erro ao banir a usuária.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar requisição:', error);
+                    alert('Erro na comunicação com o servidor.');
+                })
+                .finally(() => {
+                    if (loadingOverlay) loadingOverlay.style.display = 'none';
+                    document.body.removeChild(overlay);
+                });
+        }
+    });
+
+document.addEventListener('DOMContentLoaded', function () {
+        const banirButtons = document.querySelectorAll('.bg-success'); // Botões de banir
+
+        // Adicionar evento de clique para cada botão
+        banirButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const userId = this.getAttribute('data-id');
+                const denunciaId = this.getAttribute('data-id-denuncia'); // Captura o ID da denúncia
+                showConfirmBox(userId, denunciaId);
+            });
+        });
+
+        // Função para mostrar a caixa de confirmação
+        function showConfirmBox(userId, denunciaId) {
+            const overlay = document.createElement('div');
+            overlay.className = 'confirm-overlay';
+
+            const confirmBox = document.createElement('div');
+            confirmBox.className = 'confirm-box';
+
+            confirmBox.innerHTML = `
+            <h4>Você tem certeza que deseja cancelar esta denuncia?</h4>
+            <p>Essa ação não poderá ser desfeita. A Denunciante será notificada.</p>
+            <div class="confirm-buttons">
+                <button class="btn btn-secondary" id="cancelar">Voltar</button>
+                <button class="btn btn-danger" id="confirmarBanimento">Sim, cancelar denuncia.</button>
+            </div>
+        `;
+
+            overlay.appendChild(confirmBox);
+            document.body.appendChild(overlay);
+
+            // Ação para o botão de cancelar
+            document.getElementById('cancelar').addEventListener('click', function () {
+                document.body.removeChild(overlay);
+            });
+
+            // Ação para o botão de confirmar
+            document.getElementById('confirmarBanimento').addEventListener('click', function () {
+                banirUsuario(userId, denunciaId, overlay);
+            });
+        }
+
+        // Função para banir o usuário
+        function banirUsuario(userId, denunciaId, overlay) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) loadingOverlay.style.display = 'flex';
+
+            fetch(`/control/cancelarDenuncia/${userId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: userId, denunciaId: denunciaId }) // Inclui o ID da denúncia
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/denuncias/individual/cancelar';
+                    } else {
+                        alert('Erro ao banir a usuária.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar requisição:', error);
+                    alert('Erro na comunicação com o servidor.');
+                })
+                .finally(() => {
+                    if (loadingOverlay) loadingOverlay.style.display = 'none';
+                    document.body.removeChild(overlay);
+                });
+        }
+    });
+
+</script>
+<style>
+    /* Estilo para o overlay de carregamento */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        display: none;
+        /* Oculto inicialmente */
+    }
+
+    /* Estilo para a imagem de carregamento */
+    .spinner img {
+        width: 80px;
+        /* Tamanho da imagem */
+        height: 80px;
+        animation: spin 1s linear infinite;
+        /* Animação de rotação */
+    }
+
+    /* Animação de rotação */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>

@@ -97,7 +97,8 @@ module.exports = {
                 A02_ID_DENUNCIADO: idPessoaDenunciada,
                 A02_ID_DENUNCIANTE: req.session.user?.id, // ID do denunciante
                 A03_ID: viagemId,  // ID da viagem
-                A05_DATA: new Date() // Data atual
+                A05_DATA: new Date(), // Data atual
+                A05_STATUS: 'PENDENTE'
             });
 
             // Redirecionar para a página de "denúncia concluída"

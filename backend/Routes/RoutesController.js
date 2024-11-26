@@ -11,11 +11,13 @@ const { criarOuAtualizarAvaliacao } = require('../Controllers/ControllerAvaliaca
 router.post("/CadastrarAdmin", ControllerAdmin.cadastroAdmin);
 router.post('/deleteAdmin/:id', ControllerAdmin.deleteAdmin);
 router.post('/AprovandoViajantes', ControllerAdmin.aprovandoViajantes);
+router.post('/aceitarDenuncia/:id', ControllerAdmin.aceitarDenuncia);
+router.post('/cancelarDenuncia/:id', ControllerAdmin.cancelarDenuncia);
+router.post('/deleteViajante/:id', ControllerAdmin.deleteViajante);
 
 //Contorller Viajante
 router.post('/CadastroViajante', ControllerViajante.cadastroViajante);
 router.post('/UploadDocumentos', ControllerViajante.uploadDocumentos);
-router.post('/deleteViajante/:id', ControllerAdmin.deleteViajante);
 router.post('/editarPerfil', ControllerViajante.editarPerfil);
 router.post('/AtualizarSenhaPerfil', ControllerViajante.atualizarSenhaPerfil);
 router.post('/AtualizarEmailPerfil', ControllerViajante.atualizarEmail);

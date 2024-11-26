@@ -7,87 +7,103 @@
                 <!-- container principal -->
                 <main class="container">
                     <h1 style="color: #99067E">Denúncias</h1>
-                    <br>
-                    <!-- div de cantos arredondados-->
-                    <!-- nesta div, "overflow-y: auto" adiciona rolagem vertical se necessário e "height: 70vh" define a altura máxima da caixa das denúncias-->
-                    <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
-                        style="height: 70vh; overflow-y: auto;">
-
-                        <!-- coluna que contêm o ID -->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 10rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">ID</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="idDenuncia">562</p><br>
-                            <br>
-                            <p id="idDenuncia">562</p><br>
-                            <br>
-                            <p id="idDenuncia">562</p><br>
-                            <br>
-                            <p id="idDenuncia">562</p><br>
-                        </div>
-
-                        <!-- coluna que contém o nome da usuária denunciada -->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Denunciada</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                            <br>
-                            <p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                            <br>
-                            <p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                            <br>
-                            <p id="nameDenunciada">Adriana Silva e Silva</p><br>
-                        </div>
-
-                        <!-- coluna que contém a data da denúncia -->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 15rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Data</h4>
-                                </div>
-                            </div>
-
-                            <br>
-                            <p id="dateDenuncia">31/12/2023</p><br>
-                            <br>
-                            <p id="dateDenuncia">31/12/2023</p><br>
-                            <br>
-                            <p id="dateDenuncia">31/12/2023</p><br>
-                            <br>
-                            <p id="dateDenuncia">31/12/2023</p><br>
-                        </div>
-
-                        <!-- coluna que contém os botoes para exibir os detalhes da denuncia -->
-                        <div class="col-md-4 rounded-4 container p-4 my-4" style="width: 20rem; height: 60vh;">
-                            <div class="row">
-                                <div class="col">
-                                    <h4 style="text-transform: uppercase;">Ação</h4>
-                                </div>
-                            </div>
-
-                            <a id="verificarDenuncia" href="/viajantes/denuncias/individual"
-                                class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                            <a id="verificarDenuncia" href="/viajantes/denuncias/individual"
-                                class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                            <a id="verificarDenuncia" href="/viajantes/denuncias/individual"
-                                class="btn btn-primary btn-lg w-100">Verificar</a><br>
-                            <a id="verificarDenuncia" href="/viajantes/denuncias/individual"
-                                class="btn btn-primary btn-lg w-100">Verificar</a><br>
+                    <div class="container p-4">
+                        <!-- div para barra de pesquisa de usuário administrador -->
+                        <div class="row mb-3 align-items-center justify-content-center w-100" style="height: 30px;">
+                            <form class="input-group w-75 h-10" id="searchForm" action="/viajantes/denuncias" method="GET">
+                                <input type="text" class="form-control w-50 m-0" id="searchInput" name="query"
+                                    placeholder="Buscar por ID ou Email" value="{{query}}">
+                                <button class="btn btn-primary w-25 m-0" type="submit">Buscar</button>
+                            </form>
                         </div>
                     </div>
-                </main>
-
+                    <br>
+                    <!-- div de cantos arredondados-->
+                    <!-- nesta div, "overflow-y: auto" adiciona rolagem vertical se necessário e "height: 60vh" define a altura máxima da caixa das denúncias-->
+                    <div class="row d-flex align-items-center justify-content-center text-center rounded-4 border border-2 border-secondary container"
+                        style="height: 60vh; overflow-y: auto;padding-right: 3rem;padding-left: 3rem;">
+                        {{#if buscaRealizada}}
+                        {{#if usuarios.length}}
+                        <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
+                            <thead style="position: sticky; top: 0; background-color: white; z-index: 1; height: 5rem;">
+                                <tr>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">DENUNCIADA</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">DATA</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each usuarios}}
+                                <tr id="user-{{this.A05_ID}}">
+                                    <td>{{this.A05_ID}}</td>
+                                    <td name="email">{{this.A02_NOME_DENUNCIADO}}</td>
+                                    <td name="email">{{this.A05_DATA}}</td>
+                                    <td>
+                                        <a href="/viajantes/denuncias/individual/{{this.A05_ID}}"><button class="btn btn-primary btn-danger btn-lg w-100"
+                                            data-id="">Verificar</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{else}}
+                        <p>Nenhum denuncia encontrado.</p>
+                        {{/if}}
+                        {{else}}
+                        <table class="col-md-4 rounded-4 container p-4" style="width: 90rem; height: 19vh;">
+                            <thead style="position: sticky; top: 0; background-color: white; z-index: 1;height: 5rem;">
+                                <tr>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">ID</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">DENUNCIADA</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">DATA</h4>
+                                    </th>
+                                    <th>
+                                        <h4 style="text-transform: uppercase;">AÇÃO</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each usuarios}}
+                                <tr id="user-{{this.A05_ID}}">
+                                    <td>{{this.A05_ID}}</td>
+                                    <td name="email">{{this.A02_NOME_DENUNCIADO}}</td>
+                                    <td name="email">{{this.A05_DATA}}</td>
+                                    <td>
+                                        <a href="/viajantes/denuncias/individual/{{this.A05_ID}}"><button class="btn btn-primary btn-danger btn-lg w-100"
+                                            data-id="">Verificar</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{/if}}
+                    </div>
+                </main> 
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+    if (this.value === '') {
+        document.getElementById('searchForm').submit();
+    }
+});
+</script>
