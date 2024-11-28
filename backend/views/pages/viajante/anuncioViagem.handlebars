@@ -42,6 +42,10 @@
                         </div>
 
                         <div class="d-flex justify-content-between mt-3">
+                            {{#if (eq viagem.A03_STATUS "CONCLUIDA")}}
+                            <p style="margin-top: 70px; color: gray; font-weight: bold;">Esta viagem já foi concluída
+                            </p>
+                            {{else}}
                             <button class="btn btn-sm text-white rounded-pill"
                                 style="background-color: #99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;"
                                 data-bs-toggle="modal" data-bs-target="#modalAlterarViagem">Anúncio da viagem</button>
@@ -49,13 +53,43 @@
                             <a href="/viagem/alteracao/{{viagem.A03_ID}}" class="btn btn-sm text-white rounded-pill"
                                 style="background-color:#99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;">Alterar
                                 viagem</a>
+
+                            <!-- Botão "Concluir Viagem" -->
+                            <button class="btn btn-sm text-white rounded-pill"
+                                style="background-color: #99067E; border-color: #99067E; margin-top:70px; padding: 8px 15px; width: 200px;"
+                                id="btnConcluirViagem" data-bs-toggle="modal"
+                                data-bs-target="#modalConcluirViagem">Concluir Viagem</button>
+                            {{/if}}
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<!-- Modal para confirmar a conclusão da viagem -->
+<div class="modal fade" id="modalConcluirViagem" tabindex="-1" aria-labelledby="modalConcluirViagemLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalConcluirViagemLabel">Deseja mesmo concluir a viagem?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ao concluir, sua viagem será marcada como concluída e não estará mais visível na área de pesquisa.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarConcluir">Sim, quero concluir minha
+                    viagem</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="modalAlterarViagem" tabindex="-1" aria-labelledby="modalAlterarViagemLabel"
@@ -98,6 +132,46 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnConcluirViagem = document.getElementById('btnConcluirViagem');
+        const btnConfirmarConcluir = document.getElementById('btnConfirmarConcluir');
+        const viagemId = "{{viagem.A03_ID}}"; // Pegando o ID da viagem da renderização
+
+        // Função para concluir a viagem
+        async function concluirViagem() {
+            try {
+                const response = await fetch(`/control/viagem/alterar-status/${viagemId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: 'CONCLUIDA' }),
+                });
+
+                if (response.ok) {
+                    // Se a viagem for concluída com sucesso, redireciona ou atualiza a página
+                    alert('A viagem foi concluída com sucesso!');
+                    window.location.reload(); // Atualiza a página após conclusão
+                } else {
+                    console.error('Erro ao concluir a viagem');
+                    alert('Houve um erro ao concluir a viagem. Tente novamente.');
+                }
+            } catch (error) {
+                console.error('Erro no servidor:', error);
+                alert('Houve um erro ao concluir a viagem. Tente novamente.');
+            }
+        }
+
+        // Evento para quando clicar no botão "Sim, quero concluir minha viagem"
+        btnConfirmarConcluir.addEventListener('click', () => {
+            concluirViagem(); // Chama a função para concluir a viagem
+            // Fecha o modal após a ação
+            const modal = new bootstrap.Modal(document.getElementById('modalConcluirViagem'));
+            modal.hide();
+        });
+    });
+
+
     document.addEventListener('DOMContentLoaded', () => {
         const toggle = document.getElementById('toggleViagemStatus');
         const viagemId = "{{viagem.A03_ID}}"; // Pegando o ID da viagem da renderização
