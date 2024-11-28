@@ -57,26 +57,39 @@ module.exports = {
             const viagemId = req.params.id; // Obter o ID da URL
             const userId = req.session?.user?.id; // Obter o ID do usuário da sessão
             console.log('User ID:', userId); // Verificar se o ID do usuário é recuperado corretamente
-
+    
+            const viagem = await Viagem.findOne({
+                where: { A03_ID: viagemId }, // Buscar a viagem pelo ID
+            });
+    
+            if (!viagem) {
+                return res.status(404).json({ message: 'Viagem não encontrada' });
+            }
+    
+            // Verificar se o usuário é a organizadora
+            if (viagem.A02_ID_ORGANIZADORA === userId) {
+                return res.status(400).json({ message: 'Você já é a organizadora da viagem. Edite sua viagem em "Minhas viagens" no seu perfil.' });
+            }
+    
             const viajante = await Viajante.findOne({
                 where: { A01_ID: userId }, // O campo correto é A01_ID
                 include: { model: Usuario, attributes: ['A01_ID'] },
             });
-
+    
             if (!viajante) {
                 console.log('Viajante não encontrado'); // Depuração
                 return res.status(404).json({ message: 'Viajante não encontrado' });
             }
-
+    
             const viajanteId = viajante.A02_ID;
             console.log('Viajante ID:', viajanteId); // Verificar o ID do viajante
-
+    
             // Adiciona o registro na tabela ViajanteViagem
             await ViajanteViagem.create({
                 A02_ID: viajanteId,
                 A03_ID: viagemId,
             }, { transaction });
-
+    
             await transaction.commit(); // Confirma a transação
             res.status(200).json({ message: 'Inscrição realizada com sucesso!' });
         } catch (error) {
@@ -84,7 +97,8 @@ module.exports = {
             console.error('Erro ao adicionar viagem:', error);
             res.status(500).json({ message: 'Erro ao realizar inscrição na viagem' });
         }
-    },
+    }
+    ,
     denuncia: async (req, res) => {
         const { tituloDenuncia, descricaoDenuncia, idPessoaDenunciada } = req.body;
         const viagemId = req.params.id;

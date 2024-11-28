@@ -3,10 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const path = require("path");
+const { create } = require("express-handlebars"); // Importa a função 'create' para configurar helpers
 
 // Inicialização da aplicação
 const app = express();
-const exphbs = require("express-handlebars").engine;
 
 // Configurações de Rotas
 const indexRoutes = require("./Routes/Routes");              // Rotas das views
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Configuração do Handlebars como engine de template
-app.engine("handlebars", exphbs({
+const hbs = create({
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "views/layouts"),
     partialsDir: path.join(__dirname, "views/partials"),
@@ -33,7 +33,13 @@ app.engine("handlebars", exphbs({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true  // Permite acessar métodos também
-    }}));
+    },
+    helpers: {
+        eq: (a, b) => a === b // Define o helper "eq"
+    }
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 

@@ -233,21 +233,20 @@
         });
     });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const btnInscreverViagem = document.getElementById('confirmaInscreverViagem');
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const btnInscreverViagem = document.getElementById('confirmaInscreverViagem');
+    btnInscreverViagem.addEventListener('click', (event) => {
+        event.preventDefault(); // Previne o comportamento padrão do botão
 
-        btnInscreverViagem.addEventListener('click', (event) => {
-            event.preventDefault(); // Previne o comportamento padrão do botão (evita o recarregamento da página)
-
-            // Cria a estrutura HTML da janela de confirmação
-            const overlay = document.createElement('div');
-            overlay.id = 'confirmOverlay';
-            overlay.className = 'confirm-overlay';
-            overlay.innerHTML = `
+        // Cria a estrutura do modal de confirmação
+        const overlay = document.createElement('div');
+        overlay.id = 'confirmOverlay';
+        overlay.className = 'confirm-overlay';
+        overlay.innerHTML = `
             <div class="confirm-box">
                 <h4>Você confirma sua inscrição nessa viagem?</h4>
-                <p>Ao concordar você será direcionada para o grupo externo da viagem (moderado e sob responsabilidade da organizadora, sem intervenção do Peregrine)</p>
+                <p>Ao concordar, você será direcionado para o grupo externo da viagem (moderado e sob responsabilidade da organizadora, sem intervenção do Peregrine)</p>
                 <div class="confirm-buttons">
                     <button class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
                     <button class="btn btn-primary btn-confirmar-sim">Sim, partiu viajar!</button>
@@ -255,39 +254,84 @@
             </div>
         `;
 
-            // Adiciona a janela ao body
-            document.body.appendChild(overlay);
+        // Adiciona a janela ao body
+        document.body.appendChild(overlay);
 
-            // Fecha a janela ao clicar no botão "Não, quero voltar"
-            overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
-                document.body.removeChild(overlay);
-            });
+        // Fecha o modal ao clicar em "Não, quero voltar"
+        overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+            document.body.removeChild(overlay);
+        });
 
-            // Redireciona para adicionar viagem no back-end ao clicar no botão "Sim, partiu viajar!"
-            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
-                const viagemId = btnInscreverViagem.dataset.viagemId; // Obter o ID da viagem do botão
+        // Redireciona ao backend para adicionar a viagem ao clicar em "Sim, partiu viajar!"
+        overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
+            const viagemId = btnInscreverViagem.dataset.viagemId; // Obter o ID da viagem do botão
 
-                try {
-                    const response = await fetch(`/control/adicionar/${viagemId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
+            try {
+                const response = await fetch(`/control/adicionar/${viagemId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-                    if (response.ok) {
-                        window.location.href = '/viagem/inscricao/{{viagem.A03_ID}}'; // Redireciona ao concluir com sucesso
+                if (response.ok) {
+                    window.location.href = `/viagem/inscricao/{{viagem.A03_ID}}`; // Redireciona ao concluir com sucesso
+                } else {
+                    const errorData = await response.json();
+
+                    // Verifique se o erro é relacionado à duplicação de inscrição
+                    if (errorData.message && errorData.message.includes('Duplicate entry')) {
+                        // Modal para erro de chave duplicada (já inscrito na viagem)
+                        overlay.querySelector('.confirm-box').innerHTML = `
+                            <h4>Ops! Acho que você já se inscreveu nesta viagem!</h4>
+                            <p>Por favor, verifique suas viagens inscritas.</p>
+                            <div class="confirm-buttons">
+                                <button class="btn btn-secondary btn-voltar2 btn-confirmar-nao">Voltar</button>
+                                <a href="/perfil/minhas-viagens-inscritas" class="btn btn-secondary btn-confirmar-sim">Minhas viagens inscritas</a>
+                            </div>
+                        `;
+
+                        // Fecha o modal ao clicar no botão "Voltar"
+                        overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
+                            document.body.removeChild(overlay);
+                        });
                     } else {
-                        const errorData = await response.json(); // Obtém os dados de erro
-                        alert(`Erro ao inscrever-se na viagem: ${errorData.message || 'Tente novamente.'}`);
-                    }
-                } catch (error) {
-                    console.error('Erro na requisição:', error);
-                    alert('Ocorreu um erro inesperado.');
-                }
-            });
+                        // Para qualquer outro erro, renderiza o modal de erro genérico de duplicação
+                        overlay.querySelector('.confirm-box').innerHTML = `
+                            <h4>Ops! Acho que você já se inscreveu nesta viagem!</h4>
+                            <p>${errorData.message || 'Tente novamente.'}</p>
+                            <div class="confirm-buttons">
+                                <button class="btn btn-secondary btn-voltar2 btn-confirmar-nao">Voltar</button>
+                                <a href="/perfil/minhas-viagens-inscritas" class="btn btn-secondary btn-confirmar-sim">Minhas viagens inscritas</a>
+                            </div>
+                        `;
 
+                        // Fecha o modal ao clicar no botão "Voltar"
+                        overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
+                            document.body.removeChild(overlay);
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao tentar inscrever-se:', error);
+                // Renderiza o modal genérico de erro, caso ocorra qualquer outro erro
+                overlay.querySelector('.confirm-box').innerHTML = `
+                    <h4>Ops! Acho que você já se inscreveu nesta viagem!</h4>
+                    <p>Por favor, tente novamente mais tarde.</p>
+                    <div class="confirm-buttons">
+                        <button class="btn btn-secondary btn-voltar2 btn-confirmar-nao">Voltar</button>
+                        <a href="/perfil/minhas-viagens-inscritas" class="btn btn-secondary btn-confirmar-sim">Minhas viagens inscritas</a>
+                    </div>
+                `;
+
+                // Fecha o modal ao clicar no botão "Voltar"
+                overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
+                    document.body.removeChild(overlay);
+                });
+            }
         });
     });
+});
+
 
 </script>

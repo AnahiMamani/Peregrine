@@ -652,6 +652,7 @@ module.exports = {
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
                 viagem: {
+                    A03_STATUS: viagem.A03_STATUS,
                     A03_ID: viagem.A03_ID,
                     A03_TITULO: viagem.A03_TITULO,
                     A03_SUBTITULO: viagem.A03_SUBTITULO,

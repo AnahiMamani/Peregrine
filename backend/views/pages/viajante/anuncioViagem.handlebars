@@ -57,7 +57,7 @@
     </div>
 </main>
 
-<!-- Modal Alterar Viagem -->
+<!-- Modal -->
 <div class="modal fade" id="modalAlterarViagem" tabindex="-1" aria-labelledby="modalAlterarViagemLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -67,78 +67,75 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="d-flex align-items-center">
-                    <!-- Toggle Pause -->
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="togglePause"
-                            style="width: 50px; height: 25px;">
-                        <label class="form-check-label" for="togglePause"></label>
-                    </div>
-                    <span class="ms-3">
-                        <p> Pausar anúncio. (Ao habilitar esta opção, a viagem deixará de ser visível para as usuárias
-                            do site.)</p>
-                    </span>
-
-                    <!-- Toggle Start -->
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="toggleStart"
-                            style="width: 50px; height: 25px;">
-                        <label class="form-check-label" for="toggleStart"></label>
-                    </div>
-                    <span class="ms-3">
-                        <p> Ative o anúncio. (Ao habilitar esta opção, a viagem voltará a ser visível para as usuárias
-                            do site.)</p>
-                    </span>
+                <!-- Alternar o status da viagem -->
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="toggleViagemStatus" {{#if (eq
+                        viagem.A03_STATUS "ATIVADA" )}} checked {{/if}}>
+                    <label class="form-check-label" for="toggleViagemStatus">
+                        {{#if (eq viagem.A03_STATUS "ATIVADA")}}
+                        <strong>Viagem está ativada:</strong> Isso significa que a viagem está ativa e visível para os
+                        viajantes interessados. Caso queira pausar ou desativar a viagem, basta deslizar o botão para
+                        desativar.
+                        {{else}}
+                        <strong>Viagem está desativada:</strong> Isso significa que a viagem está inativa e não está
+                        visível para os viajantes. Para reativá-la, deslize o botão para ativar.
+                        {{/if}}
+                    </label>
                 </div>
+                <!-- Orientação sobre o estado -->
+                <p class="mt-3">O estado atual da sua viagem está indicado acima.</p>
+                <p class="mt-2"><strong>Importante:</strong> Alterar o estado no botão de ativação/desativação atualiza
+                    automaticamente o status da viagem no sistema.</p>
             </div>
-
+            <div class="modal-footer">
+                <button style="background-color: #99067E; border-color: #99067E;" type="button"
+                    class="btn btn-secondary" data-bs-dismiss="modal">
+                    Fechar
+                </button>
+            </div>
         </div>
     </div>
 </div>
+
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const togglePause = document.getElementById("togglePause");
-    const toggleStart = document.getElementById("toggleStart");
-    const viagemId = window.location.pathname.split("/").pop(); // Extrai o ID da URL
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('toggleViagemStatus');
+        const viagemId = "{{viagem.A03_ID}}"; // Pegando o ID da viagem da renderização
+        const label = document.querySelector('label[for="toggleViagemStatus"]'); // Obtendo o label para alterar o texto
 
-    // Função para enviar o novo status para o servidor
-    const sendStatusChange = async (novoStatus) => {
-        try {
-            const response = await fetch(`/control/viagem/toggle-status/${viagemId}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ novoStatus }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data.message); // Exibe mensagem de sucesso
-                alert(`Status da viagem alterado para: ${data.novoStatus}`);
-            } else {
-                console.error("Erro ao alterar o status da viagem");
-                alert("Erro ao alterar o status da viagem");
-            }
-        } catch (error) {
-            console.error("Erro ao realizar a requisição:", error);
-            alert("Erro ao realizar a requisição");
+        // Inicializar o texto baseado no status da viagem
+        const statusInicial = "{{viagem.A03_STATUS}}"; // Pega o status inicial da viagem
+        if (statusInicial === "ATIVADA") {
+            label.innerHTML = "<strong>Viagem está ativada:</strong> Isso significa que a viagem está ativa e visível para os viajantes interessados. Caso queira pausar ou desativar a viagem, basta deslizar o botão para desativar.";
+            toggle.checked = true;
+        } else {
+            label.innerHTML = "<strong>Viagem está desativada:</strong> Isso significa que a viagem está inativa e não está visível para os viajantes. Para reativá-la, deslize o botão para ativar.";
+            toggle.checked = false;
         }
-    };
 
-    // Evento do togglePause (Pausar anúncio)
-    if (togglePause) {
-        togglePause.addEventListener("change", () => {
-            const novoStatus = togglePause.checked ? "DESATIVADA" : "ATIVADA";
-            sendStatusChange(novoStatus);
+        toggle.addEventListener('change', async () => {
+            const novoStatus = toggle.checked ? "ATIVADA" : "DESATIVADA";
+
+            try {
+                const response = await fetch(`/control/viagem/alterar-status/${viagemId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: novoStatus })
+                });
+
+                if (response.ok) {
+                    // Atualiza o texto do label com base no novo status
+                    label.innerHTML = novoStatus === "ATIVADA"
+                        ? "<strong>Viagem está ativada:</strong> Isso significa que a viagem está ativa e visível para os viajantes interessados. Caso queira pausar ou desativar a viagem, basta deslizar o botão para desativar."
+                        : "<strong>Viagem está desativada:</strong> Isso significa que a viagem está inativa e não está visível para os viajantes. Para reativá-la, deslize o botão para ativar.";
+                } else {
+                    console.error('Erro ao atualizar status da viagem');
+                }
+            } catch (error) {
+                console.error('Erro no servidor:', error);
+            }
         });
-    }
-
-    // Evento do toggleStart (Ativar anúncio)
-    if (toggleStart) {
-        toggleStart.addEventListener("change", () => {
-            const novoStatus = toggleStart.checked ? "ATIVADA" : "DESATIVADA";
-            sendStatusChange(novoStatus);
-        });
-    }
-});
-
+    });
 </script>
