@@ -572,53 +572,71 @@ module.exports = {
     
     renderDenuncia: async (req, res) => {
         const viagemId = req.params.id;
+        const usuarioId = req.session.user?.id;
     
         try {
             // Passo 1: Buscar os IDs dos viajantes associados à viagem
             const viajantesNaViagem = await ViagemViajante.findAll({
                 where: { A03_ID: viagemId },
-                attributes: ['A02_ID'] // Apenas pegamos os IDs dos viajantes
+                attributes: ['A02_ID'] // IDs dos viajantes
             });
     
-            // Extraindo apenas os IDs dos viajantes
+            // Extrair os IDs dos viajantes
             const idsViajantes = viajantesNaViagem.map(v => v.A02_ID);
     
-            if (idsViajantes.length === 0) {
-                // Se não houver viajantes associados à viagem, renderiza sem dados
+            // Passo 2: Buscar o organizador da viagem
+            const viagem = await Viagem.findOne({
+                where: { A03_ID: viagemId },
+                attributes: ['A02_ID_ORGANIZADORA'] // ID do organizador
+            });
+    
+            if (!viagem) {
+                return res.status(404).send('Viagem não encontrada.');
+            }
+    
+            // Adicionar o organizador à lista de IDs (se ainda não estiver)
+            if (!idsViajantes.includes(viagem.A02_ID_ORGANIZADORA)) {
+                idsViajantes.push(viagem.A02_ID_ORGANIZADORA);
+            }
+    
+            // Passo 3: Remover o usuário logado da lista
+            const idsFiltrados = idsViajantes.filter(id => id !== usuarioId);
+    
+            if (idsFiltrados.length === 0) {
                 return res.render('pages/viajante/Denúncias/denunciaViagem', {
                     title: 'Denúncia',
                     logoPath: '/images/logo.ico',
                     user: req.session.user,
-                    viagemId: viagemId, // Passando o viagemId para o front-end
-                    pessoasNaViagem: [] // Nenhum viajante associado
+                    viagemId: viagemId,
+                    pessoasNaViagem: [] // Nenhum viajante disponível
                 });
             }
     
-            // Passo 2: Buscar os detalhes dos viajantes na tabela Viajante
-            const viajantesDetalhes = await Viajante.findAll({
-                where: { A02_ID: idsViajantes },
-                attributes: ['A02_ID', 'A02_NOME'] // Pegamos o nome e o ID
+            // Passo 4: Buscar os detalhes das pessoas restantes
+            const pessoasDetalhes = await Viajante.findAll({
+                where: { A02_ID: idsFiltrados },
+                attributes: ['A02_ID', 'A02_NOME'] // Nome e ID
             });
     
             // Organizar os dados para enviar ao front-end
-            const pessoasNaViagem = viajantesDetalhes.map(v => ({
+            const pessoasNaViagem = pessoasDetalhes.map(v => ({
                 id: v.A02_ID,
                 nome: v.A02_NOME
             }));
     
-            // Renderizar a página com os dados obtidos
+            // Passo 5: Renderizar a página
             res.render('pages/viajante/Denúncias/denunciaViagem', {
                 title: 'Denúncia',
                 logoPath: '/images/logo.ico',
                 user: req.session.user,
-                viagemId: viagemId, // Passando o viagemId para o front-end
+                viagemId: viagemId,
                 pessoasNaViagem: pessoasNaViagem
             });
         } catch (error) {
             console.error('Erro ao buscar viajantes na viagem:', error);
             res.status(500).send('Erro ao carregar os dados da denúncia.');
         }
-    },    
+    },        
     renderDenunciaConcluida: (req, res) => {
         res.render('pages/viajante/Denúncias/denunciaConcluida', {
             title: 'Denúncia concluída',
