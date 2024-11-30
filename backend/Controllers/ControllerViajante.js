@@ -222,6 +222,11 @@ module.exports = {
             if (celular) updates.A02_CELULAR = celular;
             if (descricao) updates.A02_DESCRICAO = descricao;
 
+            // Verifica se há um arquivo para upload
+            if (req.file) {
+                console.log(`Foto do perfil atualizada para o usuário ${viajante}`);
+            }
+
             if (Object.keys(updates).length > 0) {
                 await Viajante.update(updates, { where: { A02_ID: viajante } });
             }
@@ -382,30 +387,30 @@ module.exports = {
     updateAvaliacao: async (req, res) => {
         const avaliadorId = req.session?.user?.id;
         const { organizadoraId, nota } = req.body;
-    
+
         try {
             // Validação da nota
             if (nota < 1 || nota > 5) {
                 return res.status(400).json({ error: 'Nota inválida. Deve estar entre 1 e 5.' });
             }
-    
+
             // Verifica se o avaliado existe
             const avaliado = await Viajante.findOne({ where: { A02_ID: organizadoraId } });
             if (!avaliado) {
                 return res.status(404).json({ error: 'Viajante avaliado não encontrado.' });
             }
-    
+
             // Verifica se o avaliador existe
             const avaliador = await Viajante.findOne({ where: { A02_ID: avaliadorId } });
             if (!avaliador) {
                 return res.status(404).json({ error: 'Viajante avaliador não encontrado.' });
             }
-    
+
             // Busca avaliação existente
             const avaliacaoExistente = await Avaliacao.findOne({
                 where: { A02_ID: organizadoraId, Avaliador_ID: avaliadorId }
             });
-    
+
             if (avaliacaoExistente) {
                 // Atualiza a nota existente
                 avaliacaoExistente.A06_NOTA = nota;
@@ -418,28 +423,28 @@ module.exports = {
                     A06_NOTA: nota
                 });
             }
-    
+
             // Recalcula a média
             const avaliacoes = await Avaliacao.findAll({
                 where: { A02_ID: organizadoraId },
                 attributes: [[sequelize.fn('AVG', sequelize.col('A06_NOTA')), 'media']],
                 raw: true
             });
-    
+
             const novaNotaMedia = parseFloat(avaliacoes[0].media) || 0;
-    
+
             // Atualiza o viajante avaliado
             await avaliado.update({
                 A02_NOTA: novaNotaMedia
             });
-    
+
             res.status(200).json({ message: 'Avaliação registrada com sucesso!' });
         } catch (error) {
             console.error('Erro ao atualizar a avaliação:', error);
             res.status(500).json({ error: 'Erro ao registrar a avaliação. Tente novamente mais tarde.' });
         }
     },
-    
+
     alterarViagem: async (req, res) => {
         const {
             linkgrupo,

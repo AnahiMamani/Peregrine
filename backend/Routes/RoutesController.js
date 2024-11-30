@@ -6,6 +6,7 @@ const ControllerAdmin = require("../Controllers/ControllerAdmin");
 const ControllerViagem = require("../Controllers/ControllerViagem");
 const { criarOuAtualizarAvaliacao } = require('../Controllers/ControllerAvaliacao');
 const Viagem = require('../models/Viagem_03')
+const upload = require('../config/multer');
 
 //Contorller Administrador
 router.post("/CadastrarAdmin", ControllerAdmin.cadastroAdmin);
@@ -18,7 +19,7 @@ router.post('/deleteViajante/:id', ControllerAdmin.deleteViajante);
 //Contorller Viajante
 router.post('/CadastroViajante', ControllerViajante.cadastroViajante);
 router.post('/UploadDocumentos', ControllerViajante.uploadDocumentos);
-router.post('/editarPerfil', ControllerViajante.editarPerfil);
+router.post('/editarPerfil', upload.single('fotoPerfil'), ControllerViajante.editarPerfil);
 router.post('/AtualizarSenhaPerfil', ControllerViajante.atualizarSenhaPerfil);
 router.post('/AtualizarEmailPerfil', ControllerViajante.atualizarEmail);
 router.post('/deletarViajante', ControllerViajante.deleteViajante);

@@ -7,6 +7,9 @@ const { create } = require("express-handlebars"); // Importa a função 'create'
 
 // Inicialização da aplicação
 const app = express();
+app.use('/uploads', express.static(path.join(__dirname, "../uploads/viajantes")));
+// Configuração para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 // Configurações de Rotas
 const indexRoutes = require("./Routes/Routes");              // Rotas das views
@@ -43,8 +46,6 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 
-// Configuração para servir arquivos estáticos
-app.use(express.static(path.join(__dirname, "../frontend/public")));
 
 // Definição das rotas
 app.use("/", indexRoutes);            // Rotas das views principais

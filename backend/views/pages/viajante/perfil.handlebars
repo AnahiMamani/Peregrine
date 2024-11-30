@@ -13,8 +13,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-
-
+                            <!-- Caminho corrigido para a imagem de perfil -->
+                            <img src="/uploads/{{user.id}}/perfil/perfil.jpg" alt="Foto de Perfil"
+                                class="rounded-circle"
+                                style="width: 100px; height: 100px; object-fit: cover; margin-right: 20px;">
                             <div>
                                 <h4 style="color: #99067E; font-weight: bold;">
                                     {{#if user.apelido}}
@@ -28,10 +30,14 @@
                                 </p>
                             </div>
                         </div>
-                        <p style="margin-top: 20px;">{{user.descricao}}</p>
+                        <p style="margin-top: 20px;">{{user.id}}{{user.descricao}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<script>
+                console.log("User ID:", user.id);
+
+</script>
