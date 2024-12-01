@@ -3,7 +3,7 @@ const router = express.Router();
 const BoundaryAdmin = require('../Boundary/BoundaryAdmin');
 const BoundaryViajante = require('../Boundary/BoundaryViajante');
 const BoundaryUsuario = require('../Boundary/BoundaryUsuario');
-
+const verificarUsuarioLogado = require('../Middleware/verificandoLogin')
 // Nota: Controles/Boundary -> Routes -> Server.js
 const { gerarRelatorioViagens } = require('../Controllers/relatorioController');
 
@@ -86,14 +86,14 @@ router.get('/perfil/excluir-perfil', BoundaryViajante.renderUsuarioExcluir);
 
 // Viagem
 // router.get('/viagem', BoundaryViajante.renderPesquisaViagem);
-router.get('/viagem/resultados', BoundaryViajante.renderPesquisaViagemResultados);
-router.get('/viagem/detalhes/:id', BoundaryViajante.renderViagemDetalhes);
-router.get('/viagem/inscricao/:id', BoundaryViajante.renderInscricaoConcluida);
-router.get('/viagem/planejamento', BoundaryViajante.renderPlanejarViagem);
-router.get('/viagem/criada', BoundaryViajante.renderPlanejamentoConcluido);
-router.get('/viagem/alteracao/:id', BoundaryViajante.renderAlterarViagem);
-router.get('/viagem/exclusao-concluida', BoundaryViajante.renderExcluirViagemConcluido);
-router.get('/viagem/alteracao-concluida', BoundaryViajante.renderAlterarViagemConcluido);
+router.get('/viagem/resultados',verificarUsuarioLogado, BoundaryViajante.renderPesquisaViagemResultados);
+router.get('/viagem/detalhes/:id',verificarUsuarioLogado, BoundaryViajante.renderViagemDetalhes);
+router.get('/viagem/inscricao/:id',verificarUsuarioLogado, BoundaryViajante.renderInscricaoConcluida);
+router.get('/viagem/planejamento',verificarUsuarioLogado, BoundaryViajante.renderPlanejarViagem);
+router.get('/viagem/criada', verificarUsuarioLogado, BoundaryViajante.renderPlanejamentoConcluido);
+router.get('/viagem/alteracao/:id',verificarUsuarioLogado, BoundaryViajante.renderAlterarViagem);
+router.get('/viagem/exclusao-concluida',verificarUsuarioLogado, BoundaryViajante.renderExcluirViagemConcluido);
+router.get('/viagem/alteracao-concluida',verificarUsuarioLogado, BoundaryViajante.renderAlterarViagemConcluido);
 
 // Cadastro de usuário
 router.get('/cadastro', BoundaryUsuario.renderCadastro);

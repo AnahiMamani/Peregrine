@@ -75,11 +75,6 @@ module.exports = {
     renderViagensConcluidas: async (req, res) => {
         try {
             const userId = req.session.user?.id;
-
-            if (!userId) {
-                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
-            }
-
             // Passo 1: Busca os dados do viajante
             const viajante = await Viajante.findOne({
                 where: { A01_ID: userId }
@@ -145,10 +140,6 @@ module.exports = {
         try {
             const userId = req.session.user?.id;
 
-            if (!userId) {
-                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
-            }
-
             // Passo 1: Busca os dados do viajante
             const viajante = await Viajante.findOne({
                 where: { A01_ID: userId }
@@ -213,11 +204,6 @@ module.exports = {
     renderViagensInscritas: async (req, res) => {
         try {
             const userId = req.session.user?.id;
-
-            if (!userId) {
-                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
-            }
-
             // Passo 1: Busca os dados do viajante
             const viajante = await Viajante.findOne({
                 where: { A01_ID: userId }
@@ -282,11 +268,6 @@ module.exports = {
     renderPerfil: async (req, res) => {
         try {
             const userId = req.session.user?.id;
-    
-            if (!userId) {
-                return res.redirect('/login'); // Redireciona para o login se o usuário não estiver logado
-            }
-
             // Busca os dados da viajante
             const viajante = await Viajante.findOne({
                 where: { A01_ID: userId }
