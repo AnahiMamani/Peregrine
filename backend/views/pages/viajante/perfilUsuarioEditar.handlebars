@@ -11,71 +11,74 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex align-items">
-                            <div class="container mt-4">
-                                <h3>Editar Perfil</h3>
-                                <form action="/control/editarPerfil" method="post" enctype="multipart/form-data">
-                                    <!-- Container da foto de perfil -->
-                                    <div style="position: relative; width: 100px; height: 100px; margin-right: 20px;">
-                                        <!-- A imagem será atualizada dinamicamente aqui -->
-                                        <img id="perfilPreview" src="/images/perfil.jpg" alt="Foto de Perfil"
-                                            class="rounded-circle"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"
-                                            style="position: absolute; bottom: 5px; right: 5px; background-color: white; border-radius: 50%; padding: 5px;">
-                                            <img src="/images/icone_editar_foto.png" alt="Ícone de editar foto"
-                                                style="width: 20px; height: 20px;">
-                                        </a>
-                                    </div>
+                        <form class="d-flex align-items" action="/control/editarPerfil" method="post"
+                            enctype="multipart/form-data">
+                            <!-- Container da foto de perfil -->
+                            <div style="position: relative; width: 100px; height: 100px; margin-right: 20px;">
+                                <!-- A imagem será atualizada dinamicamente aqui -->
+                                <img id="perfilPreview" src="/images/perfil.jpg" alt="Foto de Perfil"
+                                    class="rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"
+                                    style="position: absolute; bottom: 5px; right: 5px; background-color: white; border-radius: 50%; padding: 5px;">
+                                    <img src="/images/icone_editar_foto.png" alt="Ícone de editar foto"
+                                        style="width: 20px; height: 20px;">
+                                </a>
+                            </div>
 
-                                    <!-- Modal de upload -->
-                                    <div class="modal fade" id="uploadModal" tabindex="-1"
-                                        aria-labelledby="uploadModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="uploadModalLabel">Alterar Foto do Perfil
-                                                    </h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Fechar"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="file" name="fotoPerfil" class="form-control"
-                                                        id="fotoPerfil" accept="image/*">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        id="cancelButton">Cancelar</button>
-                                                    <button type="button" class="btn btn-primary"
-                                                        data-bs-dismiss="modal"
-                                                        style="background-color: #99067E; border-color: #99067E"
-                                                        id="saveButton">Salvar</button>
-                                                </div>
+                            <!-- Modal de upload -->
+                            <div class="modal fade" id="uploadModal" tabindex="-6" aria-labelledby="uploadModalLabel"
+                                aria-hidden="true" data-bs-backdrop="static">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="uploadModalLabel">Alterar Foto do Perfil
+                                            </h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="file" name="fotoPerfil" class="form-control" id="fotoPerfil"
+                                                accept="image/*">
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <div class="d-flex" style="width: 20rem;">
+                                                <button type="button"
+                                                style="font-size: 20px;font-weight: 400;width: 30rem;  border-radius: 50px; margin-right: 1rem;"
+                                                id="cancelButton">Cancelar</button>
+                                                <button type="button" data-bs-dismiss="modal"
+                                                    style="font-size: 20px;font-weight: 400;    width: 30rem;  border-radius: 50px;    border: none;    justify-content: center;background-color: #99067E; border-color: #99067E"
+                                                    id="saveButton">Salvar</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Apelido</label>
-                                        <input name="apelido" type="text" class="form-control" id="name"
-                                            placeholder="{{user.nome}}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="celular" class="form-label">Celular</label>
-                                        <input name="celular" type="tel" class="form-control" id="celular"
-                                            placeholder="{{user.celular}}" pattern="\(\d{2}\) \d{5}-\d{4}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="description" class="form-label">Bio</label>
-                                        <textarea name="descricao" class="form-control" id="description" rows="3"
-                                            placeholder="{{user.descricao}}"></textarea>
-                                    </div>
-                                    <button style="background-color: #99067E; color:white;" type="submit"
-                                        class="btn btn-primary">Salvar</button>
-                                </form>
-                                <a href="/perfil"><button style="background-color: #868585; color:white;" type="submit"
-                                        class="btn btn-primary">Cancelar</button></a>
+                                </div>
                             </div>
-                        </div>
+                            <div class="container mt-4">
+                                <h3>Editar Perfil</h3>
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Apelido</label>
+                                    <input name="apelido" type="text" class="form-control" id="name"
+                                        placeholder="{{user.nome}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="celular" class="form-label">Celular</label>
+                                    <input name="celular" type="tel" class="form-control" id="celular"
+                                        placeholder="{{user.celular}}" pattern="\(\d{2}\) \d{5}-\d{4}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Bio</label>
+                                    <textarea name="descricao" class="form-control" id="description" rows="1"
+                                        placeholder="{{user.descricao}}"></textarea>
+                                </div>
+                                <div class="d-flex" style="width: 20rem;">
+                                    <button style="background-color: #99067E; color:white;" type="submit"
+                                        class="btn btn-primary me-2">Salvar</button>
+                                    <button onclick="window.location.href='/perfil'"
+                                        style="background-color: #868585; color:white;" type="submit"
+                                        class="btn btn-primary">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -83,7 +86,7 @@
     </div>
 </main>
 <script>
-// Captura o evento de mudança do input de arquivo
+    // Captura o evento de mudança do input de arquivo
     document.getElementById('fotoPerfil').addEventListener('change', function (event) {
         const file = event.target.files[0];
         if (file) {
@@ -100,8 +103,8 @@
     document.getElementById('cancelButton').addEventListener('click', function () {
         document.getElementById('fotoPerfil').value = '';
         document.getElementById('perfilPreview').src = '/images/perfil.jpg'; // Retorna à imagem original
-        var modal = bootstrap.Modal.getInstance(document.getElementById('uploadModal')); 
-        modal.hide(); 
+        var modal = bootstrap.Modal.getInstance(document.getElementById('uploadModal'));
+        modal.hide();
     });
 
     document.getElementById('saveButton').addEventListener('click', function () {

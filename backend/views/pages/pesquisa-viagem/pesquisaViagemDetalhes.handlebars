@@ -18,7 +18,8 @@
                 &nbsp;
             </div>
         </div>
-        <div class="card-body d-flex align-items-center justify-content-end" style="margin-left: 48vw;">
+        <div id="perfilCompletoOrganizadora" name="perfilCompletoOrganizadora"
+            class="card-body d-flex align-items-center justify-content-end" style="margin-left: 48vw;">
             <!-- Texto da organizadora -->
             <div class="my-2 text-end">
                 <h4 id="nomeOrganizadora" name="nomeOrganizadora"
@@ -35,9 +36,10 @@
             </div>
 
             <!-- Imagem de perfil -->
-            {{!-- <img id="perfilOrganizadora" name="perfilOrganizadora" src="/images/perfil.jpg" alt="Foto de Perfil"
+            <img id="perfilOrganizadora" name="perfilOrganizadora"
+                src="/uploads/{{viagem.A03_ORGANIZADORA}}/perfil/perfil.jpg" alt="Foto de Perfil"
                 class="rounded-circle border border-3 border-light"
-                style="cursor: pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px;"> --}}
+                style="cursor: pointer; width: 150px; height: 150px; object-fit: cover; margin-left: 20px;">
         </div>
 
         <div class="row">
@@ -195,7 +197,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const btnPerfilOrganizadora = document.getElementById('nomeOrganizadora');
+        const btnPerfilOrganizadora = document.getElementById('perfilCompletoOrganizadora');
 
         btnPerfilOrganizadora.addEventListener('click', () => {
             // Cria a estrutura HTML da janela de confirmação
@@ -204,6 +206,7 @@
             overlay.className = 'confirm-overlay';
             overlay.innerHTML = `
             <div class="card-body confirm-box">
+                <img id="perfilOrganizadora" name="perfilOrganizadora" src="/uploads/{{viagem.A03_ORGANIZADORA}}/perfil/perfil.jpg" alt="Foto de Perfil" class="rounded-circle border border-3 border-light" style="cursor:pointer; width: 150px; height: 150px; object-fit: cover; margin-right: 20px;">
                 <div class="my-2">
                     <h4 class="text-center" style="font-weight: bold;">
                     {{#if viagem.A02_APELIDO}}
@@ -217,8 +220,14 @@
                     </p>
                 </div>
                 <p class="text-justify">{{viagem.A02_DESCRICAO}}</p>
+                <button class="btn btn-primary btn-confirmar-entendi w-50">Ok, entendi!</button>
+
             </div>
         `;
+        // Fecha a janela ao clicar no botão "Ok,entendi"
+        overlay.querySelector('.btn-confirmar-entendi').addEventListener('click', () => {
+            document.body.removeChild(overlay);
+        });
 
             // Adiciona a janela ao body
             document.body.appendChild(overlay);
@@ -233,17 +242,17 @@
         });
     });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const btnInscreverViagem = document.getElementById('confirmaInscreverViagem');
+    document.addEventListener('DOMContentLoaded', () => {
+        const btnInscreverViagem = document.getElementById('confirmaInscreverViagem');
 
-    btnInscreverViagem.addEventListener('click', (event) => {
-        event.preventDefault(); // Previne o comportamento padrão do botão
+        btnInscreverViagem.addEventListener('click', (event) => {
+            event.preventDefault(); // Previne o comportamento padrão do botão
 
-        // Cria a estrutura do modal de confirmação
-        const overlay = document.createElement('div');
-        overlay.id = 'confirmOverlay';
-        overlay.className = 'confirm-overlay';
-        overlay.innerHTML = `
+            // Cria a estrutura do modal de confirmação
+            const overlay = document.createElement('div');
+            overlay.id = 'confirmOverlay';
+            overlay.className = 'confirm-overlay';
+            overlay.innerHTML = `
             <div class="confirm-box">
                 <h4>Você confirma sua inscrição nessa viagem?</h4>
                 <p>Ao concordar, você será direcionado para o grupo externo da viagem (moderado e sob responsabilidade da organizadora, sem intervenção do Peregrine)</p>
@@ -254,35 +263,35 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Adiciona a janela ao body
-        document.body.appendChild(overlay);
+            // Adiciona a janela ao body
+            document.body.appendChild(overlay);
 
-        // Fecha o modal ao clicar em "Não, quero voltar"
-        overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
-            document.body.removeChild(overlay);
-        });
+            // Fecha o modal ao clicar em "Não, quero voltar"
+            overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
 
-        // Redireciona ao backend para adicionar a viagem ao clicar em "Sim, partiu viajar!"
-        overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
-            const viagemId = btnInscreverViagem.dataset.viagemId; // Obter o ID da viagem do botão
+            // Redireciona ao backend para adicionar a viagem ao clicar em "Sim, partiu viajar!"
+            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
+                const viagemId = btnInscreverViagem.dataset.viagemId; // Obter o ID da viagem do botão
 
-            try {
-                const response = await fetch(`/control/adicionar/${viagemId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+                try {
+                    const response = await fetch(`/control/adicionar/${viagemId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
 
-                if (response.ok) {
-                    window.location.href = `/viagem/inscricao/{{viagem.A03_ID}}`; // Redireciona ao concluir com sucesso
-                } else {
-                    const errorData = await response.json();
+                    if (response.ok) {
+                        window.location.href = `/viagem/inscricao/{{viagem.A03_ID}}`; // Redireciona ao concluir com sucesso
+                    } else {
+                        const errorData = await response.json();
 
-                    // Verifique se o erro é relacionado à duplicação de inscrição
-                    if (errorData.message && errorData.message.includes('Duplicate entry')) {
-                        // Modal para erro de chave duplicada (já inscrito na viagem)
-                        overlay.querySelector('.confirm-box').innerHTML = `
+                        // Verifique se o erro é relacionado à duplicação de inscrição
+                        if (errorData.message && errorData.message.includes('Duplicate entry')) {
+                            // Modal para erro de chave duplicada (já inscrito na viagem)
+                            overlay.querySelector('.confirm-box').innerHTML = `
                             <h4>Ops! Acho que você já se inscreveu nesta viagem!</h4>
                             <p>Por favor, verifique suas viagens inscritas.</p>
                             <div class="confirm-buttons">
@@ -291,13 +300,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         `;
 
-                        // Fecha o modal ao clicar no botão "Voltar"
-                        overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
-                            document.body.removeChild(overlay);
-                        });
-                    } else {
-                        // Para qualquer outro erro, renderiza o modal de erro genérico de duplicação
-                        overlay.querySelector('.confirm-box').innerHTML = `
+                            // Fecha o modal ao clicar no botão "Voltar"
+                            overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
+                                document.body.removeChild(overlay);
+                            });
+                        } else {
+                            // Para qualquer outro erro, renderiza o modal de erro genérico de duplicação
+                            overlay.querySelector('.confirm-box').innerHTML = `
                             <h4>Ops! Acho que você já se inscreveu nesta viagem!</h4>
                             <p>${errorData.message || 'Tente novamente.'}</p>
                             <div class="confirm-buttons">
@@ -306,16 +315,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         `;
 
-                        // Fecha o modal ao clicar no botão "Voltar"
-                        overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
-                            document.body.removeChild(overlay);
-                        });
+                            // Fecha o modal ao clicar no botão "Voltar"
+                            overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
+                                document.body.removeChild(overlay);
+                            });
+                        }
                     }
-                }
-            } catch (error) {
-                console.error('Erro ao tentar inscrever-se:', error);
-                // Renderiza o modal genérico de erro, caso ocorra qualquer outro erro
-                overlay.querySelector('.confirm-box').innerHTML = `
+                } catch (error) {
+                    console.error('Erro ao tentar inscrever-se:', error);
+                    // Renderiza o modal genérico de erro, caso ocorra qualquer outro erro
+                    overlay.querySelector('.confirm-box').innerHTML = `
                     <h4>Ops! Acho que você já se inscreveu nesta viagem!</h4>
                     <p>Por favor, tente novamente mais tarde.</p>
                     <div class="confirm-buttons">
@@ -324,14 +333,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
-                // Fecha o modal ao clicar no botão "Voltar"
-                overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
-                    document.body.removeChild(overlay);
-                });
-            }
+                    // Fecha o modal ao clicar no botão "Voltar"
+                    overlay.querySelector('.btn-voltar2').addEventListener('click', () => {
+                        document.body.removeChild(overlay);
+                    });
+                }
+            });
         });
     });
-});
 
 
 </script>
