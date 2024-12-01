@@ -1,0 +1,134 @@
+- BottomNavigation
+data class BottomNavItem
+
+fun BottomNavItem
+-datasourse
+/Authentication
+class Authentication
+fun cadastroAluno
+fun loginAluno
+fun verificarUsuarioLogado(Flow<Boolean>)
+
+/AuthenticationCPS
+class AuthenticationCPS
+fun cadastroCps(
+       // nome: String,
+        email: String,
+        senha: String,
+        id: String,
+        codigoEtec: String,
+        listenerAuth: ListenerAuth
+    )
+fun verificarUsuarioLogado(Flow<Boolean>)
+/COmentarioData
+data class ComentariosData(
+    val nome: String,
+    val apelido: String,
+    val fotoPerfil: String,
+    val comentario: String,
+)
+/NovaPublicacao
+class NovaPublicacao
+fun reconhecerUsuario(listenerPublicacao:ListenerPublicacao)
+/PostagemDate
+data class PostagemData(
+    val fotoPerfil: String,
+    val nomeAutor: String,
+    val rm: String,
+    val cpsID:String,
+    val apelidoAutor: String,
+    val textoPostagem: String,
+    val imagensPost: List<String>,
+    val tituloPost: String,
+    val turmasMarcadas: List<String>,
+    val idPostagem: String,
+    var curtidas:Int,
+)
+/UserDate
+object UserData {
+    var rmEncontrado: String = ""
+    var cpsIDEncontrado: String = ""
+    var nomeEncontrado: String = ""
+    var turmaEncontrada: String = ""
+    var imagemUrl: String = ""
+    var UID: String = ""
+    var emailEncontrado: String = ""
+    var apelidoUsuario: String = ""
+fun setUserData
+fun updateUrl
+fun setApelido
+/LayoutProntos
+fun loadImage
+fun loadCoil
+fun OutlinedEmail
+fun OutlinedSenha
+fun OutlinedRegistro
+fun BotaoEscolha
+fun CheckBoxPersonalizada
+fun BotaoRegistrar
+fun TextDuasCores
+fun AlertDialogPersonalizado
+fun BottomNavigationBar
+fun drawerPersonalizado
+fun arrowVoltar
+fun layoutComentarios
+fun comentariosLoad
+fun boxComentario
+fun previewLayouts
+/Postagens
+fun Postagem
+fun curtirPublicacao
+fun downloadFotosReacao
+fun checarEstado
+/AuthhRepositorio
+fun cadastro
+fun login
+fun verificarUsuarioLogado()
+/AuthhRepoisitorioCPS
+class AuthRepositorioCPS
+fun cpsCadastro
+fun verificarUsuarioLogado()
+/PublicacaoRepositorio
+class PublicacaoRepositorio
+fun encontrandoUsuario
+/turmasItem
+data class turmasItem(
+    val title: String,
+    var isSelected: Boolean,
+)
+/AuthViewModel
+class AuthViewModel
+fun cadastro
+fun login
+fun verificarUsuarioLogado
+/AuthViewMOdelCPS
+class AuthViewModelCPS
+fun cpsCadastro
+fun verificarUsuarioLogado()
+/PublicacaoViewModel
+class PublicacaoViewModel
+fun usuarioEncontrado
+
+VIEWS
+/index
+fun INdex
+fun ListaDePostagens
+/login
+fun Login
+fun redefinirSenha
+fun mensagemRedefinir
+/profile
+fun Profile
+fun SelecionarImageProfile
+funinserirApelido
+/publicar
+fun Publicar
+fun SelecionarImagem
+fun CriarPublicacao
+fun adicionarTurma
+/registrar
+fun Registrar
+/RefistroAluno
+fun registroAluno
+/RegistroCPS
+fun ReegistoCPS
