@@ -185,6 +185,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const btnCriarViagem = document.getElementById('confirmaPlanejarViagem');
         const confirmOverlay = document.getElementById('confirmOverlay');
+        const descricaoViagemInput = document.getElementById('descricaoViagem');
 
         // Quando clicar no botão "Criar viagem"
         btnCriarViagem.addEventListener('click', () => {
@@ -198,6 +199,9 @@
 
         // Quando clicar em "Sim, publicar"
         document.querySelector('.btn-confirmar-sim').addEventListener('click', () => {
+            // Substituir quebras de linha por <br> no conteúdo da descrição
+            descricaoViagemInput.value = descricaoViagemInput.value.replace(/\n/g, '<br>');
+            
             // Submete o formulário
             document.querySelector('form').submit();
         });

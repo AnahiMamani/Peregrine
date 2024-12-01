@@ -145,7 +145,8 @@
 
         <!-- o botão abaixo abre uma janela no js para confirmação da alteração da viagem-->
         <div class="d-flex align-items-center justify-content-center">
-            <button type="button" class="btn btn-primary" id="confirmaalteracao" style="width: 20rem;">Salvar alterações</button>
+            <button type="button" class="btn btn-primary" id="confirmaalteracao" style="width: 20rem;">Salvar
+                alterações</button>
         </div>
         <div class="d-flex align-items-center justify-content-center">
             <a id="exclusao" class="linkcadastro"
@@ -158,18 +159,19 @@
 {{> footer }}
 <!-- link bootstrap icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
-{{!-- <script src="/scripts/excluirViagem.js"></script> --}}
+{{!--
+<script src="/scripts/excluirViagem.js"></script> --}}
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Seleciona o botão de excluir viagem pelo ID correto
-    const btnExcluirViagem = document.getElementById('exclusao');
+    document.addEventListener('DOMContentLoaded', () => {
+        // Seleciona o botão de excluir viagem pelo ID correto
+        const btnExcluirViagem = document.getElementById('exclusao');
 
-    btnExcluirViagem.addEventListener('click', () => {
-        // Cria a estrutura HTML da janela de confirmação
-        const overlay = document.createElement('div');
-        overlay.id = 'confirmOverlay';
-        overlay.className = 'confirm-overlay';
-        overlay.innerHTML = `
+        btnExcluirViagem.addEventListener('click', () => {
+            // Cria a estrutura HTML da janela de confirmação
+            const overlay = document.createElement('div');
+            overlay.id = 'confirmOverlay';
+            overlay.className = 'confirm-overlay';
+            overlay.innerHTML = `
             <div class="confirm-box">
                 <h4>Você tem certeza que deseja excluir a viagem?</h4>
                 <p>Essa ação não poderá ser desfeita.</p>
@@ -180,42 +182,42 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Adiciona a janela ao body
-        document.body.appendChild(overlay);
+            // Adiciona a janela ao body
+            document.body.appendChild(overlay);
 
-        // Fecha a janela ao clicar no botão "Não, quero voltar"
-        overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
-            document.body.removeChild(overlay);
-        });
+            // Fecha a janela ao clicar no botão "Não, quero voltar"
+            overlay.querySelector('.btn-confirmar-nao').addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
 
-        // Envia requisição de exclusão ao clicar no botão "Sim, excluir viagem"
-        overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
-            const viagemId = /* Aqui você pega o ID da viagem dinamicamente, talvez do próprio URL */
-                window.location.pathname.split('/')[2]; // Exemplo: obtém o ID da URL '/viagem/alterar/16'
+            // Envia requisição de exclusão ao clicar no botão "Sim, excluir viagem"
+            overlay.querySelector('.btn-confirmar-sim').addEventListener('click', async () => {
+                const viagemId = /* Aqui você pega o ID da viagem dinamicamente, talvez do próprio URL */
+                    window.location.pathname.split('/')[2]; // Exemplo: obtém o ID da URL '/viagem/alterar/16'
 
-            try {
-                // Fazendo requisição DELETE
-                const response = await fetch(`/control/viagem-delete/{{viagem.A03_ID}}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
+                try {
+                    // Fazendo requisição DELETE
+                    const response = await fetch(`/control/viagem-delete/{{viagem.A03_ID}}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        window.location.href = '/viagem/exclusao-concluida';
+                    } else {
+                        alert('Erro ao excluir a viagem');
+                        document.body.removeChild(overlay);
                     }
-                });
-
-                if (response.ok) {
-                    window.location.href = '/viagem/exclusao-concluida';
-                } else {
+                } catch (error) {
                     alert('Erro ao excluir a viagem');
+                    console.error(error);
                     document.body.removeChild(overlay);
                 }
-            } catch (error) {
-                alert('Erro ao excluir a viagem');
-                console.error(error);
-                document.body.removeChild(overlay);
-            }
+            });
         });
     });
-});
 
 
 
@@ -229,14 +231,14 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.id = 'confirmOverlay';
             overlay.className = 'confirm-overlay';
             overlay.innerHTML = `
-                <div class="confirm-box">
-                    <h4>Deseja salvar alterações?</h4>
-                    <div class="confirm-buttons">
-                        <button class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
-                        <button class="btn btn-primary btn-confirmar-sim">Sim, salvar</button>
-                    </div>
+            <div class="confirm-box">
+                <h4>Deseja salvar alterações?</h4>
+                <div class="confirm-buttons">
+                    <button class="btn btn-secondary btn-confirmar-nao">Não, quero voltar</button>
+                    <button class="btn btn-primary btn-confirmar-sim">Sim, salvar</button>
                 </div>
-            `;
+            </div>
+        `;
 
             // Adiciona a janela ao body
             document.body.appendChild(overlay);
@@ -251,6 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Captura os valores do formulário
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
+
+                // Substitui quebras de linha por <br> no campo de descrição
+                if (data.descricaoViagem) {
+                    data.descricaoViagem = data.descricaoViagem.replace(/\n/g, '<br>');
+                }
 
                 try {
                     const response = await fetch('/control/viagem-update/{{viagem.A03_ID}}', {
@@ -275,4 +282,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
 </script>
