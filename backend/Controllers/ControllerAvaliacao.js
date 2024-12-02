@@ -34,9 +34,16 @@ const atualizarNotaViajante = async (organizadoraId) => {
 // Função para criar ou atualizar uma avaliação
 const criarOuAtualizarAvaliacao = async (req, res) => {
     const { organizadoraId, nota } = req.body;
-    const avaliadorId = req.session?.user?.id;
+    const userId = req.session?.user?.id;
 
     try {
+
+        const avaliador = await Viajante.findOne({
+            where: { A01_ID: userId } // O campo correto é A01_ID
+        });
+
+        const avaliadorId = avaliador.A02_ID;
+
         if (nota < 1 || nota > 5) {
             return res.status(400).json({ error: 'Nota inválida. Deve estar entre 1 e 5.' });
         }

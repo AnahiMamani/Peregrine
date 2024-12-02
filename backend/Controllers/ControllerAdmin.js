@@ -113,16 +113,17 @@ module.exports = {
             });
 
             // mudando status da conta
-            await Usuario.update(
+            const [affectedRows] = await Usuario.update(
                 { A01_STATUS: 'INATIVO' },
                 { where: { A01_ID: userId } }
             );
-
-            if (result > 0) {
+            
+            if (affectedRows > 0) {
                 res.status(200).send('Administrador deletado com sucesso.');
             } else {
                 res.status(404).send('Administrador não encontrado.');
             }
+            
         } catch (error) {
             console.error('Erro ao deletar administrador:', error);
             res.status(500).send('Erro no servidor ao deletar administrador.');

@@ -19,6 +19,11 @@ module.exports = {
                 return res.render('pages/login', { error: 'Usuário não encontrado. Verifique o email e tente novamente.' });
             }
     
+            // Verifica o status do usuário
+            if (user.A01_STATUS !== 'ATIVO') {
+                return res.render('pages/login', { error: 'Sua conta não está ativa. Entre em contato com o suporte.' });
+            }
+    
             // Verifica a senha
             const senhaCorreta = await bcrypt.compare(senha, user.A01_SENHA);
             if (!senhaCorreta) {
@@ -65,7 +70,7 @@ module.exports = {
             req.session.user = {
                 apelido: viajante.A02_APELIDO,
                 celular: viajante.A02_CELULAR,
-                descricao: viajante.A02_DESCRICAO || 'Nenhuma descrção adicionada',
+                descricao: viajante.A02_DESCRICAO || 'Nenhuma descrição adicionada',
                 nota: viajante.A02_NOTA || 'N/A',
                 aprovacao: viajante.A02_APROVADA,
                 id: user.A01_ID,
@@ -80,7 +85,7 @@ module.exports = {
             console.error('Erro ao realizar o login:', error);
             return res.render('pages/login', { error: 'Erro ao realizar o login. Tente novamente mais tarde.' });
         }
-    },
+    },    
     
     logout: (req, res) => {
         req.session.destroy((err) => {

@@ -102,14 +102,20 @@ module.exports = {
     denuncia: async (req, res) => {
         const { tituloDenuncia, descricaoDenuncia, idPessoaDenunciada } = req.body;
         const viagemId = req.params.id;
+        const userId = req.session?.user?.id;
 
         try {
+            const denunciarte = await Viajante.findOne({
+                where: { A01_ID: userId } // O campo correto é A01_ID
+            });
+    
+            const denuncianteID = denunciarte.A02_ID;
             // Criação da denúncia no banco de dados
             await Denuncia.create({
                 A05_TITULO: tituloDenuncia,
                 A05_DESCRICAO: descricaoDenuncia,
                 A02_ID_DENUNCIADO: idPessoaDenunciada,
-                A02_ID_DENUNCIANTE: req.session.user?.id, // ID do denunciante
+                A02_ID_DENUNCIANTE: denuncianteID, // ID do denunciante
                 A03_ID: viagemId,  // ID da viagem
                 A05_DATA: new Date(), // Data atual
                 A05_STATUS: 'PENDENTE'
